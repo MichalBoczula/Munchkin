@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Munchkin.APP", "Munchkin.APP.csproj", "{05AE9639-E97B-4C7D-93D7-C5E67BA0EA66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Munchkin.Model", "..\Munchkin.Model\Munchkin.Model.csproj", "{6617127D-8CA9-4458-9060-508B640423E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Munchkin.Model", "..\Munchkin.Model\Munchkin.Model.csproj", "{6617127D-8CA9-4458-9060-508B640423E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Munchkin.BL", "..\Munchkin.BL\Munchkin.BL.csproj", "{E02F9731-34F7-4AA0-8FCB-ACA918B50D24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{6617127D-8CA9-4458-9060-508B640423E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6617127D-8CA9-4458-9060-508B640423E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6617127D-8CA9-4458-9060-508B640423E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E02F9731-34F7-4AA0-8FCB-ACA918B50D24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E02F9731-34F7-4AA0-8FCB-ACA918B50D24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E02F9731-34F7-4AA0-8FCB-ACA918B50D24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E02F9731-34F7-4AA0-8FCB-ACA918B50D24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

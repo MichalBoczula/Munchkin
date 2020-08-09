@@ -7,18 +7,15 @@ namespace Munchkin.Model.Character
     public class Character
     {
         public int Id { get; }
-        public string Name { get; }
-        public Build Build { get; }
-        public RaceBase Race { get; }
-        public ProficiencyBase Proficiency { get; }
+        public string Name { get; set; }
+        public Build Build { get; set; }
+        public RaceBase Race { get; set; }
+        public ProficiencyBase Proficiency { get; set; }
         public int Level { get; }
         public int Power { get; set; }
 
-        public Character(string name, Build build, RaceBase race)
+        public Character()
         {
-            Name = name;
-            Build = build;
-            Race = race;
             Level = 1;
         }
 

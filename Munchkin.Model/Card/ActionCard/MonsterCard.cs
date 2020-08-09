@@ -6,7 +6,6 @@ namespace Munchkin.Model.Card.ActionCard
 {
     public class MonsterCard : ActionCardBase
     {
-        public ActionCardType ActionCardType { get; set; }
         public int Power { get; set; }
 
         public MonsterCard(string name, CardType cardType) : base(name, cardType)

@@ -5,19 +5,19 @@ using System.Text;
 
 namespace Munchkin.Model.Character.Hero.Proficiency
 {
-    public class PriestProfiency : ProficiencyBase, IPriestAction
+    public class MageProficiency : ProficiencyBase, IMageAction
     {
-        public PriestProfiency()
+        public MageProficiency()
         {
-            Name = "Priest";
+            Name = "Mage";
         }
 
-        public List<CardGameBase> BeStrongerAganistUndead()
+        public List<CardGameBase> FleeSpell()
         {
             throw new NotImplementedException();
         }
 
-        public CardGameBase RestoreCard()
+        public List<CardGameBase> CharmSpell()
         {
             throw new NotImplementedException();
         }

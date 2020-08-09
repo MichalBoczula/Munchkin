@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Munchkin.Model.Character.Hero.Proficiency
 {
-    public class WarriorProfiency : ProficiencyBase, IWarriorAction
+    public class WarriorProficiency : ProficiencyBase, IWarriorAction
     {
-        public WarriorProfiency()
+        public WarriorProficiency()
         {
             Name = "Warrior";
         }

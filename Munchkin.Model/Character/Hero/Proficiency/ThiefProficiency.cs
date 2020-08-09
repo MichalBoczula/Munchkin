@@ -1,23 +1,22 @@
-﻿using Munchkin.Model.Character.Action;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Munchkin.Model.Character.Hero.Proficiency
 {
-    public class MageProfiency : ProficiencyBase, IMageAction
+    public class ThiefProficiency : ProficiencyBase, IThiefAction
     {
-        public MageProfiency()
+        public ThiefProficiency()
         {
-            Name = "Mage";
+            Name = "Thief";
         }
 
-        public List<CardGameBase> FleeSpell()
+        public CardGameBase StealCard()
         {
             throw new NotImplementedException();
         }
 
-        public List<CardGameBase> CharmSpell()
+        public bool BackStab()
         {
             throw new NotImplementedException();
         }
