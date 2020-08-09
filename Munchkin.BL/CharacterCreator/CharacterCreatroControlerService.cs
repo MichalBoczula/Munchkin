@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Munchkin.BL.CharacterCreator
 {
-    public class CharacterCreatroControler
+    public class CharacterCreatroControlerService
     {
         public void CreateCharacter()
         {

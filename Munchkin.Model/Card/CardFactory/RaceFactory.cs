@@ -8,7 +8,7 @@ namespace Munchkin.Model.Card.CardFactory
 {
     public class RaceFactory
     {
-        public  CardGameBase MakeRaceCard(RaceType cardType)
+        public RaceCard MakeRaceCard(RaceType cardType)
         {
             var elf = new Elf("elf");
             var dwarf = new Dwarf("dwarf");
@@ -23,7 +23,7 @@ namespace Munchkin.Model.Card.CardFactory
                 RaceType.HumaRace => new RaceCard("human card", CardType.Action, human),
                 _ => null
             };
-            return null;
+            return result;
         }
     }
 

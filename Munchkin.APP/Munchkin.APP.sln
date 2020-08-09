@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Munchkin.APP", "Munchkin.AP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Munchkin.Model", "..\Munchkin.Model\Munchkin.Model.csproj", "{6617127D-8CA9-4458-9060-508B640423E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Munchkin.BL", "..\Munchkin.BL\Munchkin.BL.csproj", "{E02F9731-34F7-4AA0-8FCB-ACA918B50D24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Munchkin.BL", "..\Munchkin.BL\Munchkin.BL.csproj", "{E02F9731-34F7-4AA0-8FCB-ACA918B50D24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Munchkin.Tests", "..\Munchkin.Tests\Munchkin.Tests.csproj", "{3517FF75-2CC4-4697-958F-E98CA2897493}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{E02F9731-34F7-4AA0-8FCB-ACA918B50D24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E02F9731-34F7-4AA0-8FCB-ACA918B50D24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E02F9731-34F7-4AA0-8FCB-ACA918B50D24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3517FF75-2CC4-4697-958F-E98CA2897493}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3517FF75-2CC4-4697-958F-E98CA2897493}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3517FF75-2CC4-4697-958F-E98CA2897493}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3517FF75-2CC4-4697-958F-E98CA2897493}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

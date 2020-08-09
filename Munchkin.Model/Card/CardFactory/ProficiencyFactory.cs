@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Munchkin.Model.Card.CardFactory
 {
-    public class ProficiencyFactory
+    public class ProficiencyFactory 
     {
-        public CardGameBase MakeRaceCard(ProfiencyType cardType)
+        public ProficiencyCard MakeRaceCard(ProfiencyType cardType)
         {
             var mage = new MageProficiency();
             var priest = new PriestProficiency();
@@ -22,9 +22,10 @@ namespace Munchkin.Model.Card.CardFactory
                 ProfiencyType.Priest => new ProficiencyCard("priest card", CardType.Action, priest),
                 ProfiencyType.Thief => new ProficiencyCard("thief card", CardType.Action, thief),
                 ProfiencyType.Warrior => new ProficiencyCard("warrior card", CardType.Action, warrior),
-                _ => new ProficiencyCard("noOne card", CardType.Action, noOne),
+                ProfiencyType.NoOne => new ProficiencyCard("noOne card", CardType.Action, noOne),
+                _=> null
             };
-            return null;
+            return result;
         }
     }
 
@@ -33,7 +34,8 @@ namespace Munchkin.Model.Card.CardFactory
         Mage,
         Priest,
         Thief,
-        Warrior
+        Warrior,
+        NoOne
     }
 }
 
