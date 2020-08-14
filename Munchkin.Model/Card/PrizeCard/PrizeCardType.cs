@@ -1,4 +1,4 @@
-﻿namespace Munchkin.Model.Card.ItemCard
+﻿namespace Munchkin.Model.Card.PrizeCard
 {
     public enum PrizeCardType
     {

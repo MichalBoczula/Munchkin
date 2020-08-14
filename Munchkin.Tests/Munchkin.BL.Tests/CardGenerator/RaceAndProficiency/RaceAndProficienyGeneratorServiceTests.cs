@@ -1,4 +1,4 @@
-﻿using Munchkin.BL.CardGenerator.RaceAndProficiency;
+﻿using Munchkin.BL.CardGenerator.ActionCard.RaceAndProficiency;
 using Munchkin.Model.Character.Hero.Proficiency;
 using Munchkin.Model.Character.Hero.Race;
 using System;

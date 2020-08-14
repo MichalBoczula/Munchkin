@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Munchkin.BL.CardGenerator.RaceAndProficiency
+namespace Munchkin.BL.CardGenerator.ActionCard.RaceAndProficiency
 {
     public class RaceAndProficienyGeneratorService
     {
