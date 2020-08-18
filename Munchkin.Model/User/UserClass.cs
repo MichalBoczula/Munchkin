@@ -8,7 +8,9 @@ namespace Munchkin.Model
     public class UserClass
     {
         public int Id { get; set; }
-        public Character.Character Character { get; set; }
+        public string Name { get; set; }
+        public UserAvatar UserAvatar{ get; set; }
         public List<CardGameBase> Deck { get; set; }
+        public bool IsDeckInicialize = false;
     }
 }

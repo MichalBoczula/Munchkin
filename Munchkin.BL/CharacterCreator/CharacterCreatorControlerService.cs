@@ -26,25 +26,32 @@ namespace Munchkin.BL.CharacterCreator
             _initialCreationStack = _stackCardGeneratorService.GenerateInitialCreationStack();
         }
 
-        public Character CreateCharacter()
+        public UserAvatar CreateCharacter(UserClass user, RaceCard raceCard, ProficiencyCard proficiencyCard)
         {
-            var character = new Character()
-            {
-                Race = DrawRaceCard().Race,
-                Proficiency = DrawProficiencyCard().Proficiency
-            };
-
+            var character = new UserAvatar();
+            raceCard.SpecialEffect(user);
+            proficiencyCard.SpecialEffect(user);
             return character;
         }
 
+        public UserClass CreateCharacter()
+        {
+            UserClass user = new UserClass() { UserAvatar = new UserAvatar()};
+            var raceCard = DrawRaceCard();
+            var proficiencyCard = DrawProficiencyCard();
+            raceCard.SpecialEffect(user);
+            proficiencyCard.SpecialEffect(user);
+            return user;
+        }
 
-        private RaceCard DrawRaceCard()
+
+        public RaceCard DrawRaceCard()
         {
             return _initialCreationStack
                 .Races[_drawCardService.RandomRaceCard()];
         }
 
-        private ProficiencyCard DrawProficiencyCard()
+        public ProficiencyCard DrawProficiencyCard()
         {
             return _initialCreationStack
                 .Proficiencies[_drawCardService.RandomProficiencyCard()];

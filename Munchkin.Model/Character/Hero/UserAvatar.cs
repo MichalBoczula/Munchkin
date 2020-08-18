@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Munchkin.Model.Character
 {
-    public class Character
+    public class UserAvatar
     {
         public int Id { get; }
         public string Name { get; set; }
@@ -14,7 +14,7 @@ namespace Munchkin.Model.Character
         public int Level { get; }
         public int Power { get; set; }
 
-        public Character()
+        public UserAvatar()
         {
             Level = 1;
         }

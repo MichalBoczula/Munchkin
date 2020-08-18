@@ -18,18 +18,11 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType
         {
             try
             {
-                if(user.Character.Race == null)
-                {
-                    user.Character.Race = Race;
-                }
-                else
-                {
-                    Console.WriteLine($"Sorry Bro you have Race: {user.Character.Race}. In Munchkin there is NOT \"Each Race Movement\"");
-                }
+                user.UserAvatar.Race = Race;
             }
             catch(NullReferenceException)
             {
-                    Console.WriteLine("Class: RaceCard, Method: SpecialEffects, Message: User is null");
+                 Console.WriteLine("Class: RaceCard, Method: SpecialEffects, Message: User is null");
             }
         }
     }

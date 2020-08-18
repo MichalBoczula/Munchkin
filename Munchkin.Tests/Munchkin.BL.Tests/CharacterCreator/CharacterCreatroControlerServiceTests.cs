@@ -29,8 +29,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.CharacterCreator
             //Act
             var character = characterCreatroControlerService.CreateCharacter();
             //Assert
-            Assert.IsType<Elf>(character.Race);
-            Assert.IsType<MageProficiency>(character.Proficiency);
+            Assert.IsType<Elf>(character.UserAvatar.Race);
+            Assert.IsType<MageProficiency>(character.UserAvatar.Proficiency);
         }
 
         [Fact]
@@ -49,8 +49,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.CharacterCreator
             //Act
             var character = characterCreatroControlerService.CreateCharacter();
             //Assert
-            Assert.IsType<Dwarf>(character.Race);
-            Assert.IsType<NoOneProficiency>(character.Proficiency);
+            Assert.IsType<Dwarf>(character.UserAvatar.Race);
+            Assert.IsType<NoOneProficiency>(character.UserAvatar.Proficiency);
         }
 
         [Fact]
@@ -69,8 +69,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.CharacterCreator
             //Act
             var character = characterCreatroControlerService.CreateCharacter();
             //Assert
-            Assert.IsType<Halfling>(character.Race);
-            Assert.IsType<PriestProficiency>(character.Proficiency);
+            Assert.IsType<Halfling>(character.UserAvatar.Race);
+            Assert.IsType<PriestProficiency>(character.UserAvatar.Proficiency);
         }
 
         [Fact]
@@ -89,8 +89,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.CharacterCreator
             //Act
             var character = characterCreatroControlerService.CreateCharacter();
             //Assert
-            Assert.IsType<Human>(character.Race);
-            Assert.IsType<ThiefProficiency>(character.Proficiency);
+            Assert.IsType<Human>(character.UserAvatar.Race);
+            Assert.IsType<ThiefProficiency>(character.UserAvatar.Proficiency);
         }
 
         [Fact]
@@ -108,7 +108,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.CharacterCreator
             //Act
             var character = characterCreatroControlerService.CreateCharacter();
             //Assert
-            Assert.IsType<WarriorProficiency>(character.Proficiency);
+            Assert.IsType<WarriorProficiency>(character.UserAvatar.Proficiency);
         }
 
         [Fact]

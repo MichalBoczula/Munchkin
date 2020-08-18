@@ -18,7 +18,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType
         {
             try
             {
-                user.Character.Proficiency = Proficiency;
+                user.UserAvatar.Proficiency = Proficiency;
             }
             catch (NullReferenceException)
             {
