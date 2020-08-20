@@ -16,7 +16,6 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         public void DrawCardTest()
         {
             //Arrange
-            var user = new UserClass();
             var stackCardGenedratorService = new StackCardGeneratorService();
             var random = new Random();
             var drawCardService = new DrawCardService(random);

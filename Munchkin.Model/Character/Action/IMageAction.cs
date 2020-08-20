@@ -6,7 +6,7 @@ namespace Munchkin.Model.Character.Action
 {
     public interface IMageAction
     {
-        List<CardGameBase> FleeSpell();
-        List<CardGameBase> CharmSpell();
+        void FleeSpell(UserClass user, int num);
+        bool CharmSpell(UserClass user);
     }
 }
