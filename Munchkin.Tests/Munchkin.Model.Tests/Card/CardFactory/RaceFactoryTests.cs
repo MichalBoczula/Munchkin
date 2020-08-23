@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
+using FluentAssertions;
 
 namespace Munchkin.Tests.Munchkin.Model.Tests.Card.CardFactory
 {
@@ -22,15 +23,15 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.CardFactory
             var shouldBeHalfing = raceFactory.MakeRaceCard(RaceType.HalfingRace);
             //Assert
             //CardType
-            Assert.IsType<RaceCard>(shouldBeElf);
-            Assert.IsType<RaceCard>(shouldBeDwarf);
-            Assert.IsType<RaceCard>(shouldBeHuman);
-            Assert.IsType<RaceCard>(shouldBeHalfing);
+            shouldBeElf.Should().BeOfType<RaceCard>();
+            shouldBeDwarf.Should().BeOfType<RaceCard>();
+            shouldBeHuman.Should().BeOfType<RaceCard>();
+            shouldBeHalfing.Should().BeOfType<RaceCard>();
             //RaceType
-            Assert.IsType<Elf>(shouldBeElf.Race);
-            Assert.IsType<Dwarf>(shouldBeDwarf.Race);
-            Assert.IsType<Human>(shouldBeHuman.Race);
-            Assert.IsType<Halfling>(shouldBeHalfing.Race);
+            shouldBeElf.Race.Should().BeOfType<Elf>();
+            shouldBeDwarf.Race.Should().BeOfType<Dwarf>();
+            shouldBeHuman.Race.Should().BeOfType<Human>();
+            shouldBeHalfing.Race.Should().BeOfType<Halfling>();
         }
     }
 }

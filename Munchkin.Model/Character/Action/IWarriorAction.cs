@@ -6,6 +6,6 @@ namespace Munchkin.Model.Character.Action
 {
     public interface IWarriorAction
     {
-        List<CardGameBase> BeStronger();
+        void BeStronger(UserClass user, int cardToThrowId);
     }
 }

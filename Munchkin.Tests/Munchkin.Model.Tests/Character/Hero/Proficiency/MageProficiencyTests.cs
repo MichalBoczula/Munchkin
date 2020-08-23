@@ -15,7 +15,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
     public class MageProficiencyTests
     {
         [Fact]
-        public void FleeSpellTest()
+        public void FleeSpellSuccessTest()
         {
             //Arrange
             var stackCardGenedratorService = new StackCardGeneratorService();
@@ -31,33 +31,44 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             {
                 UserAvatar = avatar1
             };
-            
-            var mage2 = new MageProficiency();
-            var avatar2 = new UserAvatar()
-            {
-                Proficiency = mage2
-            };
-            var userWithOutCards = new UserClass()
-            {
-                UserAvatar = avatar2
-            };
             user1 = prizeStackController.DrawCardsForStartDeck(user1);
-            userWithOutCards = prizeStackController.DrawCardsForStartDeck(userWithOutCards);
-            userWithOutCards.Deck.Clear();
             //Act
-            user1.UserAvatar.Proficiency.FleeSpell(user1, 2);
-            userWithOutCards.UserAvatar.Proficiency.FleeSpell(userWithOutCards, 2);
+            user1.UserAvatar.Proficiency.FleeSpell(user1, 1);
+            user1.UserAvatar.Proficiency.FleeSpell(user1, 1);
+            user1.UserAvatar.Proficiency.FleeSpell(user1, 1);
             //Assert
-            //User1
-            user1.UserAvatar.FleeChances.Should().Be(5);
-            user1.Deck.Should().HaveCount(3);
-            //UserWithOutCards        
-            userWithOutCards.UserAvatar.FleeChances.Should().Be(3);
-            userWithOutCards.Deck.Should().HaveCount(0);
+            user1.UserAvatar.FleeChances.Should().Be(6);
+            user1.Deck.Should().HaveCount(2);
         }
 
         [Fact]
-        public void FleeSpellCastTwoTimesTest()
+        public void FleeSpellEmptyDecktTest()
+        {
+            //Arrange
+            var stackCardGenedratorService = new StackCardGeneratorService();
+            var random = new Random();
+            var drawCardService = new DrawCardService(random);
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
+            var mage1 = new MageProficiency();
+            var avatar1 = new UserAvatar()
+            {
+                Proficiency = mage1
+            };
+            var user1 = new UserClass()
+            {
+                UserAvatar = avatar1
+            };
+            user1 = prizeStackController.DrawCardsForStartDeck(user1);
+            user1.Deck.Clear();
+            //Act
+            user1.UserAvatar.Proficiency.FleeSpell(user1, 1);
+            //Assert
+            user1.UserAvatar.FleeChances.Should().Be(3);
+            user1.Deck.Should().HaveCount(0);
+        }
+
+        [Fact]
+        public void FleeSpellDeckIsNullTest()
         {
             //Arrange
             var stackCardGenedratorService = new StackCardGeneratorService();
@@ -73,18 +84,45 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             {
                 UserAvatar = avatar1
             };
-           
+            //Act
+            user.UserAvatar.Proficiency.FleeSpell(user, 1);
+            user.UserAvatar.Proficiency.FleeSpell(user, 1);
+            user.UserAvatar.Proficiency.FleeSpell(user, 1);
+            //Assert
+            user.UserAvatar.FleeChances.Should().Be(3);
+            user.Deck.Should().BeNull();
+        }
+
+        [Fact]
+        public void FleeSpellCastFourTimesTest()
+        {
+            //Arrange
+            var stackCardGenedratorService = new StackCardGeneratorService();
+            var random = new Random();
+            var drawCardService = new DrawCardService(random);
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
+            var mage1 = new MageProficiency();
+            var avatar1 = new UserAvatar()
+            {
+                Proficiency = mage1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = avatar1
+            };
             user = prizeStackController.DrawCardsForStartDeck(user);
             //Act
-            user.UserAvatar.Proficiency.FleeSpell(user, 2);
-            user.UserAvatar.Proficiency.FleeSpell(user, 2);
+            user.UserAvatar.Proficiency.FleeSpell(user, 1);
+            user.UserAvatar.Proficiency.FleeSpell(user, 1);
+            user.UserAvatar.Proficiency.FleeSpell(user, 1);
+            user.UserAvatar.Proficiency.FleeSpell(user, 1);
             //Assert
             user.UserAvatar.FleeChances.Should().Be(6);
             user.Deck.Should().HaveCount(2);
         }
 
         [Fact]
-        public void CharmSpellTest()
+        public void CharmSpellSuccessTest()
         {
             //Arrange
             var stackCardGenedratorService = new StackCardGeneratorService();
@@ -96,23 +134,42 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             {
                 Proficiency = mage
             };
-            var userWithRequiaredCards = new UserClass()
+            var user = new UserClass()
             {
                 UserAvatar = avatar
             };
-            var userWithOutRequiaredCards = new UserClass()
-            {
-                UserAvatar = avatar
-            };
-            userWithRequiaredCards = prizeStackController.DrawCardsForStartDeck(userWithRequiaredCards);
-            userWithOutRequiaredCards = prizeStackController.DrawCardsForStartDeck(userWithOutRequiaredCards);
-            userWithOutRequiaredCards.Deck.Clear();
+            user = prizeStackController.DrawCardsForStartDeck(user);
             //Act
-            var resultT = userWithRequiaredCards.UserAvatar.Proficiency.CharmSpell(userWithRequiaredCards);
-            var resultF = userWithOutRequiaredCards.UserAvatar.Proficiency.CharmSpell(userWithOutRequiaredCards);
+            var result = user.UserAvatar.Proficiency.CharmSpell(user);
             //Assert
-            resultT.Should().BeTrue();
-            resultF.Should().BeFalse();
+            result.Should().BeTrue();
+            user.Deck.Count.Should().Be(0);
+        }
+
+        [Fact]
+        public void CharmSpellFailTest()
+        {
+            //Arrange
+            var stackCardGenedratorService = new StackCardGeneratorService();
+            var random = new Random();
+            var drawCardService = new DrawCardService(random);
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
+            var mage = new MageProficiency();
+            var avatar = new UserAvatar()
+            {
+                Proficiency = mage
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = avatar
+            };
+            user = prizeStackController.DrawCardsForStartDeck(user);
+            user.Deck.Clear();
+            //Act
+            var result = user.UserAvatar.Proficiency.CharmSpell(user);
+            //Assert
+            result.Should().BeFalse();
+            user.Deck.Should().BeEmpty();
         }
     }
 }

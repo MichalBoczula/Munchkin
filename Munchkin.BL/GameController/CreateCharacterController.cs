@@ -53,27 +53,27 @@ namespace Munchkin.BL.GameController
             user.UserAvatar = new UserAvatar();
             Console.WriteLine(createInformationModel.Welcome(user));
             Console.WriteLine(createInformationModel.PressKeyMessage);
-            Console.ReadLine();
+            //Console.ReadLine();
 
             Console.WriteLine(createInformationModel.DrawCardRaceCard);
             var raceCard = characterCreatorControlerService.DrawRaceCard();
             Console.WriteLine(createInformationModel.ShowRaceInforamtion(raceCard));
             Console.WriteLine(createInformationModel.PressKeyMessage);
-            Console.ReadLine();
+            //Console.ReadLine();
             raceCard.SpecialEffect(user);
             Console.WriteLine(createInformationModel.PressKeyMessage);
-            Console.ReadLine();
+            //Console.ReadLine();
 
             Console.WriteLine(createInformationModel.DrawCardProficiencyCard);
             var proficiencyCard = characterCreatorControlerService.DrawProficiencyCard();
             Console.WriteLine(createInformationModel.ShowProficiencyInforamtion(proficiencyCard));
             Console.WriteLine(createInformationModel.PressKeyMessage);
-            Console.ReadLine();
+            //Console.ReadLine();
             proficiencyCard.SpecialEffect(user);
 
             Console.WriteLine(createInformationModel.BeginJourney);
             Console.WriteLine(createInformationModel.PressKeyMessage);
-            Console.ReadLine();
+            //Console.ReadLine();
 
             return user;
         }

@@ -7,70 +7,56 @@ namespace Munchkin.Model.Character.Hero.Proficiency
 {
     public class MageProficiency : ProficiencyBase, IMageAction
     {
-        private readonly InformationModelMageProficiency informationModel;
+        private readonly InformationModelMageProficiency _informationModel;
 
         public MageProficiency()
         {
             Name = "Mage";
-            informationModel = new InformationModelMageProficiency();
+            _informationModel = new InformationModelMageProficiency();
         }
 
-        public override void FleeSpell(UserClass user, int num)
+        public override void FleeSpell(UserClass user, int cardToThrowId)
         {
-            if (num > 3)
+            if (user.UserAvatar.HowManyCardsThrowToUseSkill < 3)
             {
-                Console.WriteLine(informationModel.WarningMaxCard());
-                //Console.ReadLine();
-            }
-            else if (num <= 0)
-            {
-                Console.WriteLine(informationModel.NotPossibleMsg());
-                return;
-            }
-            Console.WriteLine(informationModel.FleeSpellWelcomeMsg(user));
-
-            for (int i = 0; i < num; i++)
-            {
-                if (user.Deck.Count > 0)
+                if (user.Deck != null && user.Deck.Count > 0)
                 {
-                    //Console.ReadLine();
-                    if (ThrowOutCart(num, user))
+                    if (ThrowOutCart(cardToThrowId, user))
                     {
-                        user.UserAvatar.FleeChances += 1;
-                        Console.WriteLine(informationModel.PowerUpMsg(user));
+                        user.UserAvatar.HowManyCardsThrowToUseSkill++;
+                        user.UserAvatar.FleeChances++;
+                        Console.WriteLine(_informationModel.SuccessPowerUpFlee);
                         //Console.ReadLine();
-                        if (user.UserAvatar.FleeChances == 6)
-                        {
-                            Console.WriteLine(informationModel.MaxPowerUpMsg());
-                            //Console.ReadLine();
-                            return;
-                        }
                     }
                 }
                 else
                 {
-                    Console.WriteLine(informationModel.NotEnoughCardsMsg());
+                    Console.WriteLine(_informationModel.NotEnoughCards);
                     //Console.ReadLine();
-                    return;
                 }
             }
-
+            else
+            {
+                Console.WriteLine(_informationModel.SkillHasBeenUsedMaxTimes);
+                //Console.ReadLine();
+            }
         }
 
         public override bool CharmSpell(UserClass user)
         {
-            Console.WriteLine(informationModel.CastCharmSpell());
+            Console.WriteLine(_informationModel.CastCharmSpell());
             //Console.ReadLine();
             bool result;
             if (user.Deck.Count > 3)
             {
-                Console.WriteLine(informationModel.CharmSpellSuccess());
+                Console.WriteLine(_informationModel.CharmSpellSuccess());
+                user.Deck.Clear();
                 //Console.ReadLine();
                 result = true;
             }
             else
             {
-                Console.WriteLine(informationModel.CharmSpellfailure());
+                Console.WriteLine(_informationModel.CharmSpellfailure());
                 //Console.ReadLine();
                 result = false;
             }

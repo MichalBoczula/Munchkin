@@ -12,13 +12,13 @@ namespace Munchkin.Model.Card.CardFactory
     {
         public ItemCard CreateWeaponCard(string name)
         {
-            var thorsHammerRestrictions = new Dictionary<ProficiencyBase, bool>
+            var thorsHammerRestrictions = new Dictionary<bool, ProficiencyBase>
             {
-                { new WarriorProficiency(), true }
+                { true, new WarriorProficiency() }
             };
-            var khazaDumRestrictions = new Dictionary<RaceBase, bool>
+            var khazaDumRestrictions = new Dictionary<bool, RaceBase>
             {
-                { new Dwarf("dwarf"), true }
+                { true, new Dwarf("dwarf") }
             };
             var result = name switch
             {
@@ -34,13 +34,13 @@ namespace Munchkin.Model.Card.CardFactory
 
         public ItemCard CreateArmorCard(string name)
         {
-            var godsArmorRestrictions = new Dictionary<ProficiencyBase, bool>
+            var godsArmorRestrictions = new Dictionary<bool, ProficiencyBase>
             {
-                { new WarriorProficiency(), true }
+                { true, new WarriorProficiency()}
             };
-            var moiraRestrictions = new Dictionary<RaceBase, bool>
+            var moiraRestrictions = new Dictionary<bool, RaceBase>
             {
-                { new Dwarf("dwarf"), true }
+                { true, new Dwarf("dwarf") }
             };
             var result = name switch
             {
@@ -56,9 +56,9 @@ namespace Munchkin.Model.Card.CardFactory
 
         public ItemCard CreateBootsCard(string name)
         {
-            var magicBootsRestrictions = new Dictionary<ProficiencyBase, bool>
+            var magicBootsRestrictions = new Dictionary<bool, ProficiencyBase>
             {
-                { new MageProficiency(), true }
+                { true, new MageProficiency() }
             };
             var result = name switch
             {
@@ -74,17 +74,17 @@ namespace Munchkin.Model.Card.CardFactory
 
         public ItemCard CreateHelmetCard(string name)
         {
-            var thiefHoodieRestrictions = new Dictionary<ProficiencyBase, bool>
+            var thiefHoodieRestrictions = new Dictionary<bool, ProficiencyBase>
             {
-                { new ThiefProficiency(), true }
+                { true, new ThiefProficiency() }
             };
-            var wizardHat = new Dictionary<ProficiencyBase, bool>
+            var wizardHat = new Dictionary<bool, ProficiencyBase>
             {
-                { new MageProficiency(), true }
+                { true, new MageProficiency() }
             };
-            var elfGoldHelmet = new Dictionary<RaceBase, bool>
+            var elfGoldHelmet = new Dictionary<bool, RaceBase>
             {
-                { new Elf("elf"), true }
+                {  true, new Elf("elf")}
             };
             var result = name switch
             {

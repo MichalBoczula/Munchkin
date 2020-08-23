@@ -7,6 +7,7 @@ using Munchkin.BL.CardGenerator;
 using Munchkin.BL.CharacterCreator;
 using Munchkin.Model;
 using Munchkin.Model.Card.PrizeCard;
+using FluentAssertions;
 
 namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
 {
@@ -24,11 +25,11 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             var firstItem = prizeStackController.DrawCard();
             var secondItem = prizeStackController.DrawCard();
             //Assert
-            Assert.NotNull(firstItem);
-            Assert.NotNull(secondItem);
-            Assert.IsType<ItemCard>(firstItem);
-            Assert.IsType<ItemCard>(secondItem);
-            Assert.Equal(18, prizeStackController.PrizeStack.Deck.Count);
+            firstItem.Should().NotBeNull();
+            secondItem.Should().NotBeNull();
+            firstItem.Should().BeOfType<ItemCard>();
+            secondItem.Should().BeOfType<ItemCard>();
+            prizeStackController.PrizeStack.Deck.Should().HaveCount(18);
         }
 
         [Fact]
@@ -36,7 +37,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         {
             //Arrange
             var userBeforeDeckInicialize = new UserClass();
-            var userAfterDeckInicialize = new UserClass() { IsDeckInicialize = true};
+            var userAfterDeckInicialize = new UserClass() { IsDeckInicialize = true };
             var stackCardGenedratorService = new StackCardGeneratorService();
             var random = new Random();
             var drawCardService = new DrawCardService(random);
@@ -45,9 +46,9 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             userBeforeDeckInicialize = prizeStackController.DrawCardsForStartDeck(userBeforeDeckInicialize);
             userAfterDeckInicialize = prizeStackController.DrawCardsForStartDeck(userAfterDeckInicialize);
             //Assert
-            Assert.NotNull(userBeforeDeckInicialize.Deck);
-            Assert.True(userBeforeDeckInicialize.IsDeckInicialize);
-            Assert.Null(userAfterDeckInicialize.Deck);
+            userBeforeDeckInicialize.Deck.Should().NotBeNull();
+            userBeforeDeckInicialize.IsDeckInicialize.Should().BeTrue();
+            userAfterDeckInicialize.Deck.Should().BeNull();
         }
 
         [Fact]
@@ -64,8 +65,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             //Act
             user = prizeStackController.DrawCardPrizeCards(user, howMany2);
             //Assert
-            Assert.Equal(7, user.Deck.Count);
-            Assert.Equal(13, prizeStackController.PrizeStack.Deck.Count);
+            user.Deck.Should().HaveCount(7);
+            prizeStackController.PrizeStack.Deck.Should().HaveCount(13);
         }
     }
 }

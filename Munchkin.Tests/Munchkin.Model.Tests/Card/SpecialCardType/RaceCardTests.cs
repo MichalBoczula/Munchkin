@@ -1,4 +1,5 @@
-﻿using Munchkin.Model;
+﻿using FluentAssertions;
+using Munchkin.Model;
 using Munchkin.Model.Card.ActionCard.SpecialCardType;
 using Munchkin.Model.Character;
 using Munchkin.Model.Character.Hero.Race;
@@ -25,8 +26,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType
             //Act
             raceCard.SpecialEffect(userClass);
             //Assert
-            Assert.NotNull(userClass.UserAvatar.Race);
-            Assert.IsType<Elf>(userClass.UserAvatar.Race);
+            userClass.UserAvatar.Race.Should().NotBeNull();
+            userClass.UserAvatar.Race.Should().BeOfType<Elf>();
         }
     }
 }

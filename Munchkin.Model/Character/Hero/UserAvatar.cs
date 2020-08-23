@@ -15,41 +15,50 @@ namespace Munchkin.Model.Character
         public int Power { get; set; }
         public int FleeChances { get; set; }
         public int TempPower;
+        public bool WasBackstab;
+        public bool WasRob;
+        public int HowManyCardsThrowToUseSkill;
 
         public UserAvatar()
         {
             Level = 1;
             FleeChances = 3;
+            CountPower();
             TempPower = Power;
+            WasBackstab = false;
+            WasRob = false;
+            HowManyCardsThrowToUseSkill = 0;
         }
 
         public void CountPower()
         {
             Power = Level;
-            if (Build.Helmet != null)
+            if(Build != null)
             {
-                Power += Build.Helmet.Card.Power;
-            }
-            if(Build.LeftHandItem == null)
-            {
-                Power += Build.LeftHandItem.Card.Power;
-            }
-            if (Build.RightHandItem == null)
-            {
-                Power += Build.RightHandItem.Card.Power;
-            }
-            if (Build.Boots == null)
-            {
-                Power += Build.Boots.Card.Power;
-            }
-            if (Build.AdditionalItems != null && Build.AdditionalItems.Count > 0)
-            {
-                foreach(var item in Build.AdditionalItems)
+                if (Build.Helmet != null)
                 {
-                    Power += item.Card.Power;
+                    Power += Build.Helmet.Power;
+                }
+                if(Build.LeftHandItem == null)
+                {
+                    Power += Build.LeftHandItem.Power;
+                }
+                if (Build.RightHandItem == null)
+                {
+                    Power += Build.RightHandItem.Power;
+                }
+                if (Build.Boots == null)
+                {
+                    Power += Build.Boots.Power;
+                }
+                if (Build.AdditionalItems != null)
+                {
+                    foreach(var item in Build.AdditionalItems)
+                    {
+                        Power += item.Power;
+                    }
                 }
             }
-
         }
 
         public void IncreaseFleeChances()
@@ -62,17 +71,9 @@ namespace Munchkin.Model.Character
             FleeChances = 3;
             TempPower = Power;
             CountPower();
-        }
-
-        public void IncreaseTempPower(int num)
-        {
-            if(Build.SituationalItems != null && Build.SituationalItems.Count > 0)
-            {
-                foreach(var item in Build.SituationalItems)
-                {
-                    TempPower += item.Card.Power;
-                }
-            }
+            WasBackstab = false;
+            WasRob = false;
+            HowManyCardsThrowToUseSkill = 0;
         }
     }
 }

@@ -8,6 +8,7 @@ using Xunit;
 using Moq;
 using Munchkin.Model.Character.Hero.Race;
 using Munchkin.Model.Character.Hero.Proficiency;
+using FluentAssertions;
 
 namespace Munchkin.Tests.Munchkin.BL.Tests.CharacterCreator
 {
@@ -29,8 +30,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.CharacterCreator
             //Act
             var character = characterCreatroControlerService.CreateCharacter();
             //Assert
-            Assert.IsType<Elf>(character.UserAvatar.Race);
-            Assert.IsType<MageProficiency>(character.UserAvatar.Proficiency);
+            character.UserAvatar.Race.Should().BeOfType<Elf>();
+            character.UserAvatar.Proficiency.Should().BeOfType<MageProficiency>();
         }
 
         [Fact]
@@ -49,8 +50,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.CharacterCreator
             //Act
             var character = characterCreatroControlerService.CreateCharacter();
             //Assert
-            Assert.IsType<Dwarf>(character.UserAvatar.Race);
-            Assert.IsType<NoOneProficiency>(character.UserAvatar.Proficiency);
+            character.UserAvatar.Race.Should().BeOfType<Dwarf>();
+            character.UserAvatar.Proficiency.Should().BeOfType<NoOneProficiency>();
         }
 
         [Fact]
@@ -69,8 +70,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.CharacterCreator
             //Act
             var character = characterCreatroControlerService.CreateCharacter();
             //Assert
-            Assert.IsType<Halfling>(character.UserAvatar.Race);
-            Assert.IsType<PriestProficiency>(character.UserAvatar.Proficiency);
+            character.UserAvatar.Race.Should().BeOfType<Halfling>();
+            character.UserAvatar.Proficiency.Should().BeOfType<PriestProficiency>();
         }
 
         [Fact]
@@ -89,8 +90,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.CharacterCreator
             //Act
             var character = characterCreatroControlerService.CreateCharacter();
             //Assert
-            Assert.IsType<Human>(character.UserAvatar.Race);
-            Assert.IsType<ThiefProficiency>(character.UserAvatar.Proficiency);
+            character.UserAvatar.Race.Should().BeOfType<Human>();
+            character.UserAvatar.Proficiency.Should().BeOfType<ThiefProficiency>();
         }
 
         [Fact]
@@ -108,7 +109,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.CharacterCreator
             //Act
             var character = characterCreatroControlerService.CreateCharacter();
             //Assert
-            Assert.IsType<WarriorProficiency>(character.UserAvatar.Proficiency);
+            character.UserAvatar.Proficiency.Should().BeOfType<WarriorProficiency>();
         }
 
         [Fact]
@@ -123,8 +124,10 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.CharacterCreator
                  stackCardGeneratorService,
                  drawCardService);
             mockRandom.Setup(x => x.Next(4)).Returns(4);
-            //Act & Assert
-            Assert.Throws<ArgumentOutOfRangeException>(() => characterCreatroControlerService.CreateCharacter());
+            //Act
+            Action exception = () => characterCreatroControlerService.CreateCharacter();
+            //Assert
+            exception.Should().Throw<ArgumentOutOfRangeException>();
         }
 
     }

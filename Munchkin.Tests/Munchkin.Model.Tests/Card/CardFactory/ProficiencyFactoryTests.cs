@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
+using FluentAssertions;
 
 namespace Munchkin.Tests.Munchkin.Model.Tests.Card.CardFactory
 {
@@ -23,17 +24,17 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.CardFactory
             var shouldBeWarrior = proficiencyFactory.MakeRaceCard(ProfiencyType.Warrior);
             //Assert
             //CardType
-            Assert.IsType<ProficiencyCard>(shouldBeMage);
-            Assert.IsType<ProficiencyCard>(shouldBeNoOne);
-            Assert.IsType<ProficiencyCard>(shouldBePriest);
-            Assert.IsType<ProficiencyCard>(shouldBeThief);
-            Assert.IsType<ProficiencyCard>(shouldBeWarrior);
+            shouldBeMage.Should().BeOfType<ProficiencyCard>();
+            shouldBeNoOne.Should().BeOfType<ProficiencyCard>();
+            shouldBePriest.Should().BeOfType<ProficiencyCard>();
+            shouldBeThief.Should().BeOfType<ProficiencyCard>();
+            shouldBeWarrior.Should().BeOfType<ProficiencyCard>();
             //ProficiencyType
-            Assert.IsType<MageProficiency>(shouldBeMage.Proficiency);
-            Assert.IsType<NoOneProficiency>(shouldBeNoOne.Proficiency);
-            Assert.IsType<PriestProficiency>(shouldBePriest.Proficiency);
-            Assert.IsType<ThiefProficiency>(shouldBeThief.Proficiency);
-            Assert.IsType<WarriorProficiency>(shouldBeWarrior.Proficiency);
+            shouldBeMage.Proficiency.Should().BeOfType<MageProficiency>();
+            shouldBeNoOne.Proficiency.Should().BeOfType<NoOneProficiency>();
+            shouldBePriest.Proficiency.Should().BeOfType<PriestProficiency>();
+            shouldBeThief.Proficiency.Should().BeOfType<ThiefProficiency>();
+            shouldBeWarrior.Proficiency.Should().BeOfType<WarriorProficiency>();
         }
     }
 }

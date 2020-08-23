@@ -1,8 +1,10 @@
-﻿using Moq;
+﻿using FluentAssertions;
+using Moq;
 using Munchkin.BL.CardGenerator;
 using Munchkin.BL.CharacterCreator;
 using Munchkin.BL.GameController;
 using Munchkin.BL.InformationModel;
+using Munchkin.Model.Character;
 using Munchkin.Model.User;
 using System;
 using System.Collections.Generic;
@@ -28,12 +30,12 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             //Act
             var user = createCharacterController.CreateUser(name);
             //Assert
-            Assert.Equal(name, user.Name);
+            user.Name.Should().Be(name);
         }
 
         
-        [Fact(Skip = "Remember about comment Console.ReadLine in method Create User in CreateCharacterController before tests")]
-        //
+        //[Fact(Skip = "Remember about comment Console.ReadLine in method Create User in CreateCharacterController before tests")]
+        [Fact]
         public void CreateUserTests()
         {
             //Arrange
@@ -49,8 +51,9 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             //Act
             user = createCharacterController.CreateCharacter(user);
             //Assert
-            Assert.NotNull(user.UserAvatar.Race);
-            Assert.NotNull(user.UserAvatar.Proficiency);
+
+            user.UserAvatar.Race.Should().NotBeNull();
+            user.UserAvatar.Proficiency.Should().NotBeNull();
         }
     }
 }

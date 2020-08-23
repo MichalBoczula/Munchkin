@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using Munchkin.Model.Card.PrizeCard;
+using System.Collections.Generic;
 
 namespace Munchkin.Model.Character
 {
     public class Build
     {
         public int Id { get; set; }
-        public Item Helmet { get; set; }
-        public Item Armor { get; set; }
-        public Item Boots { get; set; }
-        public Item RightHandItem { get; set; }
-        public Item LeftHandItem { get; set; }
-        public List<Item> AdditionalItems { get; set; }
-        public List<Item> SituationalItems { get; set; }
-
+        public ItemCard Helmet { get; set; }
+        public ItemCard Armor { get; set; }
+        public ItemCard Boots { get; set; }
+        public ItemCard RightHandItem { get; set; }
+        public ItemCard LeftHandItem { get; set; }
+        public List<ItemCard> AdditionalItems { get; set; }
+        public List<ItemCard> SituationalItems { get; set; }
     }
 }

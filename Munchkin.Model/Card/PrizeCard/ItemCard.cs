@@ -9,8 +9,8 @@ namespace Munchkin.Model.Card.PrizeCard
     public class ItemCard : PrizeCardBase
     {
         public int Power { get; set; }
-        public Dictionary<RaceBase, bool> RaceRestriction { get; set; }
-        public Dictionary<ProficiencyBase, bool> ProficiencyRestriction { get; set; }
+        public Dictionary<bool, RaceBase> RaceRestriction { get; set; }
+        public Dictionary<bool, ProficiencyBase> ProficiencyRestriction { get; set; }
         public bool IsTwoHanded { get; set; }
         public ItemType ItemType { get; set; }
 
@@ -18,10 +18,10 @@ namespace Munchkin.Model.Card.PrizeCard
             CardType cardType,
             PrizeCardType prizeCardType,
             int power,
-            Dictionary<RaceBase, bool> raceRestriction,
+            Dictionary<bool, RaceBase> raceRestriction,
             bool isTwoHanded,
             ItemType itemType,
-            Dictionary<ProficiencyBase, bool> proficiencyRestriction) : base(name, cardType, prizeCardType)
+            Dictionary<bool, ProficiencyBase> proficiencyRestriction) : base(name, cardType, prizeCardType)
         {
             Power = power;
             RaceRestriction = raceRestriction;

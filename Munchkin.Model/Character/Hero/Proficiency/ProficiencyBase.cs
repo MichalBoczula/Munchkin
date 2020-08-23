@@ -1,4 +1,5 @@
-﻿using Munchkin.Model.Character.Action;
+﻿using Munchkin.Model.Card.PrizeCard;
+using Munchkin.Model.Character.Action;
 using Munchkin.Model.Character.Hero.Proficiency;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace Munchkin.Model.Character
 {
-    public abstract class ProficiencyBase : IBaseAction, IMageAction
+    public abstract class ProficiencyBase : IBaseAction, IMageAction, IThiefAction, IWarriorAction
     {
         private readonly InformationModelProficiencyBase informationModel = new InformationModelProficiencyBase();
 
@@ -48,7 +49,7 @@ namespace Munchkin.Model.Character
             throw new NotImplementedException();
         }
 
-        public virtual void FleeSpell(UserClass user, int num)
+        public virtual void FleeSpell(UserClass user, int cardToThrowId)
         {
             throw new NotImplementedException();
         }
@@ -91,6 +92,26 @@ namespace Munchkin.Model.Character
                 return false;
             }
             return true;
+        }
+
+        public virtual void StealCard(UserClass thief, UserClass victim, Random random)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual bool BackStab(UserClass victim, Random random)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int RollDice(Random random)
+        {
+            return random.Next(6) + 1;
+        }
+
+        public virtual void BeStronger(UserClass user, int cardToThrowId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

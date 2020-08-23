@@ -1,4 +1,5 @@
-﻿using Munchkin.BL.CardGenerator.ActionCard.RaceAndProficiency;
+﻿using FluentAssertions;
+using Munchkin.BL.CardGenerator.ActionCard.RaceAndProficiency;
 using Munchkin.Model.Character.Hero.Proficiency;
 using Munchkin.Model.Character.Hero.Race;
 using System;
@@ -26,10 +27,10 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.CardGenerator.RaceAndProficiency
             var races = _raceAndProficiency.GenerateRace();
             //Assert
             Assert.Collection(races,
-                              ele => Assert.IsType<Elf>(ele.Race),
-                              ele => Assert.IsType<Dwarf>(ele.Race),
-                              ele => Assert.IsType<Halfling>(ele.Race),
-                              ele => Assert.IsType<Human>(ele.Race));
+                              ele => ele.Race.Should().BeOfType<Elf>(),
+                              ele => ele.Race.Should().BeOfType<Dwarf>(),
+                              ele => ele.Race.Should().BeOfType<Halfling>(),
+                              ele => ele.Race.Should().BeOfType<Human>());
         }
 
         [Fact]
@@ -40,11 +41,11 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.CardGenerator.RaceAndProficiency
             var profs = _raceAndProficiency.GenerateProfiecy();
             //Assert
             Assert.Collection(profs,
-                              ele => Assert.IsType<MageProficiency>(ele.Proficiency),
-                              ele => Assert.IsType<NoOneProficiency>(ele.Proficiency),
-                              ele => Assert.IsType<PriestProficiency>(ele.Proficiency),
-                              ele => Assert.IsType<ThiefProficiency>(ele.Proficiency),
-                              ele => Assert.IsType<WarriorProficiency>(ele.Proficiency));
+                              ele => ele.Proficiency.Should().BeOfType<MageProficiency>(),
+                              ele => ele.Proficiency.Should().BeOfType<NoOneProficiency>(),
+                              ele => ele.Proficiency.Should().BeOfType<PriestProficiency>(),
+                              ele => ele.Proficiency.Should().BeOfType<ThiefProficiency>(),
+                              ele => ele.Proficiency.Should().BeOfType<WarriorProficiency>());
         }
     }
 }

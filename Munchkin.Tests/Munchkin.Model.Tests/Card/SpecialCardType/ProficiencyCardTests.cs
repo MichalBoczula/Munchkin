@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
+using FluentAssertions;
 
 namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType
 {
@@ -25,8 +26,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType
             //Act
             raceCard.SpecialEffect(userClass);
             //Assert
-            Assert.NotNull(userClass.UserAvatar.Proficiency);
-            Assert.IsType<MageProficiency>(userClass.UserAvatar.Proficiency);
+            userClass.UserAvatar.Proficiency.Should().NotBeNull();
+            userClass.UserAvatar.Proficiency.Should().BeOfType<MageProficiency>();
         }
     }
 }

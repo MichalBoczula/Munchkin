@@ -1,3 +1,4 @@
+using FluentAssertions;
 using Munchkin.BL.CardGenerator;
 using Munchkin.Model;
 using Munchkin.Model.Card.ActionCard.SpecialCardType;
@@ -18,10 +19,10 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.CardGenerator
             //Act
             var stack = generator.GenerateInitialCreationStack();
             //Assert
-            Assert.True(stack.Races is IList<RaceCard>);
-            Assert.True(stack.Proficiencies is IList<ProficiencyCard>);
-            Assert.Equal(4, stack.Races.Count);
-            Assert.Equal(5, stack.Proficiencies.Count);
+            stack.Races.Should().BeOfType<List<RaceCard>>();
+            stack.Proficiencies.Should().BeOfType<List<ProficiencyCard>>();
+            stack.Races.Should().HaveCount(4);
+            stack.Proficiencies.Should().HaveCount(5);
         }
 
         [Fact]
@@ -32,14 +33,14 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.CardGenerator
             //Act
             var stack = generator.GeneratePrizeStack();
             //Assert
-            Assert.True(stack.Weapons is IList<ItemCard>);
-            Assert.True(stack.Armors is IList<ItemCard>);
-            Assert.True(stack.Boots is IList<ItemCard>);
-            Assert.True(stack.Helmets is IList<ItemCard>);
-            Assert.Equal(5, stack.Weapons.Count);
-            Assert.Equal(5, stack.Armors.Count);
-            Assert.Equal(5, stack.Boots.Count);
-            Assert.Equal(5, stack.Helmets.Count);
+            stack.Weapons.Should().BeOfType<List<ItemCard>>();
+            stack.Armors.Should().BeOfType<List<ItemCard>>();
+            stack.Boots.Should().BeOfType<List<ItemCard>>();
+            stack.Helmets.Should().BeOfType<List<ItemCard>>();
+            stack.Weapons.Should().HaveCount(5);
+            stack.Armors.Should().HaveCount(5);
+            stack.Boots.Should().HaveCount(5);
+            stack.Helmets.Should().HaveCount(5);
         }
     }
 }

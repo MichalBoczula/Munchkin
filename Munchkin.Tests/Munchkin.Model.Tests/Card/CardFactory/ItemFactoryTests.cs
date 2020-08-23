@@ -1,4 +1,5 @@
-﻿using Munchkin.Model.Card.CardFactory;
+﻿using FluentAssertions;
+using Munchkin.Model.Card.CardFactory;
 using Munchkin.Model.Card.PrizeCard;
 using System;
 using System.Collections.Generic;
@@ -29,17 +30,17 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.CardFactory
             var shouldBeThorsHammer = _itemFactory.CreateWeaponCard("thorsHammer");
             //Assert
             //Name
-            Assert.Equal("sword2H", shouldBeSword2H.Name);
-            Assert.Equal("sword1H", sholudBeSword1H.Name);
-            Assert.Equal("khazaDumHammer", shouldBeKhazaDumHammer.Name);
-            Assert.Equal("axe", shouldBeAxe.Name);
-            Assert.Equal("thorsHammer", shouldBeThorsHammer.Name);
+            shouldBeSword2H.Name.Should().Be("sword2H");
+            sholudBeSword1H.Name.Should().Be("sword1H");
+            shouldBeKhazaDumHammer.Name.Should().Be("khazaDumHammer");
+            shouldBeAxe.Name.Should().Be("axe");
+            shouldBeThorsHammer.Name.Should().Be("thorsHammer");
             //Type
-            Assert.Equal(ItemType.Weapon, shouldBeSword2H.ItemType);
-            Assert.Equal(ItemType.Weapon, sholudBeSword1H.ItemType);
-            Assert.Equal(ItemType.Weapon, shouldBeKhazaDumHammer.ItemType);
-            Assert.Equal(ItemType.Weapon, shouldBeAxe.ItemType);
-            Assert.Equal(ItemType.Weapon, shouldBeThorsHammer.ItemType);
+            shouldBeSword2H.ItemType.Should().Be(ItemType.Weapon);
+            sholudBeSword1H.ItemType.Should().Be(ItemType.Weapon);
+            shouldBeKhazaDumHammer.ItemType.Should().Be(ItemType.Weapon);
+            shouldBeAxe.ItemType.Should().Be(ItemType.Weapon);
+            shouldBeThorsHammer.ItemType.Should().Be(ItemType.Weapon);
         }
 
         [Fact]
@@ -54,17 +55,17 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.CardFactory
             var godsArmor = _itemFactory.CreateArmorCard("godsArmor");
             //Assert
             //Name
-            Assert.Equal("leatherArmor", leatherArmor.Name);
-            Assert.Equal("robe", robe.Name);
-            Assert.Equal("moiraArmor", moiraArmor.Name);
-            Assert.Equal("plateArmor", plateArmor.Name);
-            Assert.Equal("godsArmor", godsArmor.Name);
+            leatherArmor.Name.Should().Be("leatherArmor");
+            robe.Name.Should().Be("robe");
+            moiraArmor.Name.Should().Be("moiraArmor");
+            plateArmor.Name.Should().Be("plateArmor");
+            godsArmor.Name.Should().Be("godsArmor");
             //Type
-            Assert.Equal(ItemType.Armor, leatherArmor.ItemType);
-            Assert.Equal(ItemType.Armor, robe.ItemType);
-            Assert.Equal(ItemType.Armor, moiraArmor.ItemType);
-            Assert.Equal(ItemType.Armor, plateArmor.ItemType);
-            Assert.Equal(ItemType.Armor, godsArmor.ItemType);
+            leatherArmor.ItemType.Should().Be(ItemType.Armor);
+            robe.ItemType.Should().Be(ItemType.Armor);
+            moiraArmor.ItemType.Should().Be(ItemType.Armor);
+            plateArmor.ItemType.Should().Be(ItemType.Armor);
+            godsArmor.ItemType.Should().Be(ItemType.Armor);
         }
 
         [Fact]
@@ -79,17 +80,17 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.CardFactory
             var normalBoot = _itemFactory.CreateBootsCard("normalBoot");
             //Assert
             //Name
-            Assert.Equal("bootsOfHaste", bootsOfHaste.Name);
-            Assert.Equal("plateBoots", plateBoots.Name);
-            Assert.Equal("dragonSkinsSandal", dragonSkinsSandal.Name);
-            Assert.Equal("magicBoots", magicBoots.Name);
-            Assert.Equal("normalBoot", normalBoot.Name);
+            bootsOfHaste.Name.Should().Be("bootsOfHaste");
+            plateBoots.Name.Should().Be("plateBoots");
+            dragonSkinsSandal.Name.Should().Be("dragonSkinsSandal");
+            magicBoots.Name.Should().Be("magicBoots");
+            normalBoot.Name.Should().Be("normalBoot");
             //Type
-            Assert.Equal(ItemType.Boots, bootsOfHaste.ItemType);
-            Assert.Equal(ItemType.Boots, plateBoots.ItemType);
-            Assert.Equal(ItemType.Boots, dragonSkinsSandal.ItemType);
-            Assert.Equal(ItemType.Boots, magicBoots.ItemType);
-            Assert.Equal(ItemType.Boots, normalBoot.ItemType);
+            bootsOfHaste.ItemType.Should().Be(ItemType.Boots);
+            plateBoots.ItemType.Should().Be(ItemType.Boots);
+            dragonSkinsSandal.ItemType.Should().Be(ItemType.Boots);
+            magicBoots.ItemType.Should().Be(ItemType.Boots);
+            normalBoot.ItemType.Should().Be(ItemType.Boots);
         }
 
         [Fact]
@@ -104,17 +105,17 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.CardFactory
             var leatherHelmet = _itemFactory.CreateHelmetCard("leatherHelmet");
             //Assert
             //Name
-            Assert.Equal("thiefHoodie", thiefHoodie.Name);
-            Assert.Equal("wizardHat", wizardHat.Name);
-            Assert.Equal("elfGoldHelmet", elfGoldHelmet.Name);
-            Assert.Equal("plateHelmet", plateHelmet.Name);
-            Assert.Equal("leatherHelmet", leatherHelmet.Name);
+            thiefHoodie.Name.Should().Be("thiefHoodie");
+            wizardHat.Name.Should().Be("wizardHat");
+            elfGoldHelmet.Name.Should().Be("elfGoldHelmet");
+            plateHelmet.Name.Should().Be("plateHelmet");
+            leatherHelmet.Name.Should().Be("leatherHelmet");
             //Type
-            Assert.Equal(ItemType.Helmet, thiefHoodie.ItemType);
-            Assert.Equal(ItemType.Helmet, wizardHat.ItemType);
-            Assert.Equal(ItemType.Helmet, elfGoldHelmet.ItemType);
-            Assert.Equal(ItemType.Helmet, plateHelmet.ItemType);
-            Assert.Equal(ItemType.Helmet, leatherHelmet.ItemType);
+            thiefHoodie.ItemType.Should().Be(ItemType.Helmet);
+            wizardHat.ItemType.Should().Be(ItemType.Helmet);
+            elfGoldHelmet.ItemType.Should().Be(ItemType.Helmet);
+            plateHelmet.ItemType.Should().Be(ItemType.Helmet);
+            leatherHelmet.ItemType.Should().Be(ItemType.Helmet);
         }
     }
 }
