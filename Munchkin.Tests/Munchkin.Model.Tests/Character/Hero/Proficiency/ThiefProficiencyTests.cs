@@ -6,7 +6,9 @@ using Moq;
 using Munchkin.BL.CardGenerator;
 using Munchkin.BL.CharacterCreator;
 using Munchkin.BL.GameController;
+using Munchkin.BL.Helper;
 using Munchkin.Model;
+using Munchkin.Model.Card.PrizeCard;
 using Munchkin.Model.Character;
 using Munchkin.Model.Character.Hero.Proficiency;
 using Xunit;
@@ -18,44 +20,266 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
         [Fact]
         public void StealHelmetSuccessTest()
         {
+            //Arrange
+            var stackCardGenedratorService = new StackCardGeneratorService();
+            var random = new Random();
+            var mockRandom = new Mock<Random>();
+            mockRandom.Setup(x => x.Next(6)).Returns(4);
+            var mockTestReadLine = new Mock<TestReadLine>();
+            mockTestReadLine.Setup(x => x.GetNextString()).Returns("1");
+            var drawCardService = new DrawCardService(random);
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
+            var thief = new ThiefProficiency();
+            var userAvatar = new UserAvatar()
+            {
+                Proficiency = thief
+            };
+            var thiefChar = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
 
+            var mage = new MageProficiency();
+            var userAvatarVictim = new UserAvatar()
+            {
+                Proficiency = mage,
+                Build = new Build()
+            };
+            var victim = new UserClass()
+            {
+                UserAvatar = userAvatarVictim
+            };
+            var itemToSteal = new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null);
+            victim.UserAvatar.Build.Helmet = itemToSteal;
+            victim = prizeStackController.DrawCardsForStartDeck(victim);
+            victim.Deck.Clear();
+            thiefChar = prizeStackController.DrawCardsForStartDeck(thiefChar);
+            thiefChar.Deck.Clear();
+            //Act
+            thief.StealCard(thiefChar, victim, mockRandom.Object, mockTestReadLine.Object);
+            //Assert
+            thiefChar.Deck.Should().HaveCount(1);
+            thiefChar.Deck[0].Should().BeSameAs(itemToSteal);
+            victim.UserAvatar.Build.Helmet.Should().BeNull();
         }
 
         [Fact]
         public void StealArmorSuccessTest()
         {
+            //Arrange
+            var stackCardGenedratorService = new StackCardGeneratorService();
+            var random = new Random();
+            var mockRandom = new Mock<Random>();
+            mockRandom.Setup(x => x.Next(6)).Returns(4);
+            var mockTestReadLine = new Mock<TestReadLine>();
+            mockTestReadLine.Setup(x => x.GetNextString()).Returns("2");
+            var drawCardService = new DrawCardService(random);
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
+            var thief = new ThiefProficiency();
+            var userAvatar = new UserAvatar()
+            {
+                Proficiency = thief
+            };
+            var thiefChar = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
 
+            var mage = new MageProficiency();
+            var userAvatarVictim = new UserAvatar()
+            {
+                Proficiency = mage,
+                Build = new Build()
+            };
+            var victim = new UserClass()
+            {
+                UserAvatar = userAvatarVictim
+            };
+            var itemToSteal = new ItemCard("leatherArmor", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Armor, null);
+            victim.UserAvatar.Build.Helmet = new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null);
+            victim.UserAvatar.Build.Armor = itemToSteal;
+            victim = prizeStackController.DrawCardsForStartDeck(victim);
+            victim.Deck.Clear();
+            thiefChar = prizeStackController.DrawCardsForStartDeck(thiefChar);
+            thiefChar.Deck.Clear();
+            //Act
+            thief.StealCard(thiefChar, victim, mockRandom.Object, mockTestReadLine.Object);
+            //Assert
+            thiefChar.Deck.Should().HaveCount(1);
+            thiefChar.Deck[0].Should().BeSameAs(itemToSteal);
+            victim.UserAvatar.Build.Helmet.Should().NotBeNull();
+            victim.UserAvatar.Build.Armor.Should().BeNull();
         }
 
         [Fact]
         public void StealBootsSuccessTest()
         {
+            //Arrange
+            var stackCardGenedratorService = new StackCardGeneratorService();
+            var random = new Random();
+            var mockRandom = new Mock<Random>();
+            mockRandom.Setup(x => x.Next(6)).Returns(4);
+            var mockTestReadLine = new Mock<TestReadLine>();
+            mockTestReadLine.Setup(x => x.GetNextString()).Returns("3");
+            var drawCardService = new DrawCardService(random);
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
+            var thief = new ThiefProficiency();
+            var userAvatar = new UserAvatar()
+            {
+                Proficiency = thief
+            };
+            var thiefChar = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
 
+            var mage = new MageProficiency();
+            var userAvatarVictim = new UserAvatar()
+            {
+                Proficiency = mage,
+                Build = new Build()
+            };
+            var victim = new UserClass()
+            {
+                UserAvatar = userAvatarVictim
+            };
+            var itemToSteal = new ItemCard("normalBoot", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null);
+            victim.UserAvatar.Build.Helmet = new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null);
+            victim.UserAvatar.Build.Armor = new ItemCard("leatherArmor", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Armor, null);
+            victim.UserAvatar.Build.Boots = itemToSteal;
+            victim = prizeStackController.DrawCardsForStartDeck(victim);
+            victim.Deck.Clear();
+            thiefChar = prizeStackController.DrawCardsForStartDeck(thiefChar);
+            thiefChar.Deck.Clear();
+            //Act
+            thief.StealCard(thiefChar, victim, mockRandom.Object, mockTestReadLine.Object);
+            //Assert
+            thiefChar.Deck.Should().HaveCount(1);
+            thiefChar.Deck[0].Should().BeSameAs(itemToSteal);
+            victim.UserAvatar.Build.Boots.Should().BeNull();
+            victim.UserAvatar.Build.Helmet.Should().NotBeNull();
+            victim.UserAvatar.Build.Armor.Should().NotBeNull();
         }
 
         [Fact]
         public void StealLeftHandItemSuccessTest()
         {
+            //Arrange
+            var stackCardGenedratorService = new StackCardGeneratorService();
+            var random = new Random();
+            var mockRandom = new Mock<Random>();
+            mockRandom.Setup(x => x.Next(6)).Returns(4);
+            var mockTestReadLine = new Mock<TestReadLine>();
+            mockTestReadLine.Setup(x => x.GetNextString()).Returns("4");
+            var drawCardService = new DrawCardService(random);
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
+            var thief = new ThiefProficiency();
+            var userAvatar = new UserAvatar()
+            {
+                Proficiency = thief
+            };
+            var thiefChar = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+
+            var mage = new MageProficiency();
+            var userAvatarVictim = new UserAvatar()
+            {
+                Proficiency = mage,
+                Build = new Build()
+            };
+            var victim = new UserClass()
+            {
+                UserAvatar = userAvatarVictim
+            };
+            var itemToSteal = new ItemCard("sword1H", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null);
+            victim.UserAvatar.Build.Helmet = new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null);
+            victim.UserAvatar.Build.Armor = new ItemCard("leatherArmor", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Armor, null);
+            victim.UserAvatar.Build.Boots = new ItemCard("normalBoot", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null);
+            victim.UserAvatar.Build.LeftHandItem = itemToSteal;
+            victim = prizeStackController.DrawCardsForStartDeck(victim);
+            victim.Deck.Clear();
+            thiefChar = prizeStackController.DrawCardsForStartDeck(thiefChar);
+            thiefChar.Deck.Clear();
+            //Act
+            thief.StealCard(thiefChar, victim, mockRandom.Object, mockTestReadLine.Object);
+            //Assert
+            thiefChar.Deck.Should().HaveCount(1);
+            thiefChar.Deck[0].Should().BeSameAs(itemToSteal);
+            victim.UserAvatar.Build.LeftHandItem.Should().BeNull();
+            victim.UserAvatar.Build.Helmet.Should().NotBeNull();
+            victim.UserAvatar.Build.Armor.Should().NotBeNull();
+            victim.UserAvatar.Build.Boots.Should().NotBeNull();
 
         }
 
         [Fact]
         public void StealRightHandItemSuccessTest()
         {
+            //Arrange
+            var stackCardGenedratorService = new StackCardGeneratorService();
+            var random = new Random();
+            var mockRandom = new Mock<Random>();
+            mockRandom.Setup(x => x.Next(6)).Returns(4);
+            var mockTestReadLine = new Mock<TestReadLine>();
+            mockTestReadLine.Setup(x => x.GetNextString()).Returns("5");
+            var drawCardService = new DrawCardService(random);
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
+            var thief = new ThiefProficiency();
+            var userAvatar = new UserAvatar()
+            {
+                Proficiency = thief
+            };
+            var thiefChar = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
 
+            var mage = new MageProficiency();
+            var userAvatarVictim = new UserAvatar()
+            {
+                Proficiency = mage,
+                Build = new Build()
+            };
+            var victim = new UserClass()
+            {
+                UserAvatar = userAvatarVictim
+            };
+            var itemToSteal = new ItemCard("axe", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Weapon, null);
+            victim.UserAvatar.Build.Helmet = new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null);
+            victim.UserAvatar.Build.Armor = new ItemCard("leatherArmor", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Armor, null);
+            victim.UserAvatar.Build.Boots = new ItemCard("normalBoot", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null);
+            victim.UserAvatar.Build.LeftHandItem = new ItemCard("sword1H", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null);
+            victim.UserAvatar.Build.RightHandItem = itemToSteal;
+            victim = prizeStackController.DrawCardsForStartDeck(victim);
+            victim.Deck.Clear();
+            thiefChar = prizeStackController.DrawCardsForStartDeck(thiefChar);
+            thiefChar.Deck.Clear();
+            //Act
+            thief.StealCard(thiefChar, victim, mockRandom.Object, mockTestReadLine.Object);
+            //Assert
+            thiefChar.Deck.Should().HaveCount(1);
+            thiefChar.Deck[0].Should().BeSameAs(itemToSteal);
+            victim.UserAvatar.Build.RightHandItem.Should().BeNull();
+            victim.UserAvatar.Build.Helmet.Should().NotBeNull();
+            victim.UserAvatar.Build.Armor.Should().NotBeNull();
+            victim.UserAvatar.Build.Boots.Should().NotBeNull();
+            victim.UserAvatar.Build.LeftHandItem.Should().NotBeNull();
         }
 
-        [Fact]
-        public void StealAdditionalItemSuccessTest()
-        {
+        //[Fact]
+        //public void StealAdditionalItemSuccessTest()
+        //{
+        //    Assert.False("" == " ");
+        //}
 
-        }
-
-        [Fact]
-        public void StealFailTest()
-        {
-
-        }
+        //[Fact]
+        //public void StealFailTest()
+        //{
+        //.Returns(new Queue<int>(new[] { 0, 1, 1, 1 }).Dequeue);
+        //    Assert.False("" == " ");
+        //}
 
         [Fact]
         public void BackStabSuccessTest()
@@ -153,6 +377,14 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             firstBackStab.Should().BeTrue();
             secondBackStab.Should().BeFalse();
             victim.UserAvatar.TempPower.Should().Be(-1);
+        }
+    }
+
+    public class TestReadLine : ReadLineOverride
+    {
+        public override string GetNextString()
+        {
+            return "";
         }
     }
 }

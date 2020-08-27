@@ -1,4 +1,5 @@
-﻿using Munchkin.Model.Card.PrizeCard;
+﻿using Munchkin.BL.Helper;
+using Munchkin.Model.Card.PrizeCard;
 using Munchkin.Model.Character.Action;
 using Munchkin.Model.Character.Hero.Proficiency;
 using System;
@@ -94,7 +95,7 @@ namespace Munchkin.Model.Character
             return true;
         }
 
-        public virtual void StealCard(UserClass thief, UserClass victim, Random random)
+        public virtual void StealCard(UserClass thief, UserClass victim, Random random, ReadLineOverride readLine)
         {
             throw new NotImplementedException();
         }

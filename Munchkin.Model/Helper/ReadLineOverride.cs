@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Munchkin.Model.Character.Hero.Proficiency
+namespace Munchkin.BL.Helper
 {
     public class ReadLineOverride
     {

@@ -36,6 +36,7 @@ namespace Munchkin.Model.Card.PrizeCard
         Helmet,
         Armor,
         Boots,
-        Weapon
+        Weapon,
+        Additional
     }
 }

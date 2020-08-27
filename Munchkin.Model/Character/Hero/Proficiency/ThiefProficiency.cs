@@ -1,4 +1,5 @@
-﻿using Munchkin.Model.Card.PrizeCard;
+﻿using Munchkin.BL.Helper;
+using Munchkin.Model.Card.PrizeCard;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,20 +9,18 @@ namespace Munchkin.Model.Character.Hero.Proficiency
     public class ThiefProficiency : ProficiencyBase, IThiefAction
     {
         private readonly InformationModelThiefProficiency _informationModelThiefProficiency;
-        private readonly ReadLineOverride _readLineOverride;
 
         public ThiefProficiency()
         {
             Name = "Thief";
             _informationModelThiefProficiency = new InformationModelThiefProficiency();
-            _readLineOverride = new ReadLineOverride();
         }
 
-        public override void StealCard(UserClass thief, UserClass victim, Random random)
+        public override void StealCard(UserClass thief, UserClass victim, Random random, ReadLineOverride readLine)
         {
             if (!victim.UserAvatar.WasRob)
             {
-                if (victim.Deck.Count > 0 && victim.Deck != null)
+                if (victim.UserAvatar.Build != null)
                 {
                     var num = RollDice(random);
                     if (num > 4)
@@ -33,7 +32,7 @@ namespace Munchkin.Model.Character.Hero.Proficiency
                         while (true)
                         {
                             Console.WriteLine(_informationModelThiefProficiency.StealWelcomeMsg(information));
-                            if (!Int32.TryParse(_readLineOverride.GetNextString(), out choice))
+                            if (!Int32.TryParse(readLine.GetNextString(), out choice))
                             {
                                 Console.WriteLine(_informationModelThiefProficiency.StealInvalidInput);
                                 //Console.ReadLine();
