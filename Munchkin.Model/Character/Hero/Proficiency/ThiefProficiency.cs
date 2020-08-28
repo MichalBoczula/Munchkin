@@ -20,6 +20,7 @@ namespace Munchkin.Model.Character.Hero.Proficiency
         {
             if (!victim.UserAvatar.WasRob)
             {
+                victim.UserAvatar.WasRob = true;
                 if (victim.UserAvatar.Build != null)
                 {
                     var num = RollDice(random);
@@ -38,6 +39,7 @@ namespace Munchkin.Model.Character.Hero.Proficiency
                                 //Console.ReadLine();
                                 continue;
                             }
+
                             if(choice > information.ItemCount || choice < 0)
                             {
                                 Console.WriteLine(_informationModelThiefProficiency.InvalidNumber(information));
@@ -48,8 +50,7 @@ namespace Munchkin.Model.Character.Hero.Proficiency
                                 break;
                             }
                         }
-                        var item = MoveItemFromVictimToThief(thief, victim, choice);
-                        thief.Deck.Add(item);
+                        MoveItemFromVictimToThief(thief, victim, choice);
                         Console.WriteLine(_informationModelThiefProficiency.StealSuccessfully);
                         //Console.ReadLine();
                     }
@@ -62,14 +63,13 @@ namespace Munchkin.Model.Character.Hero.Proficiency
             }
         }
 
-        public ItemCard MoveItemFromVictimToThief(UserClass thief, UserClass victim, int choice)
+        public void MoveItemFromVictimToThief(UserClass thief, UserClass victim, int choice)
         {
             ItemCard stolen = null;
             if (choice > 5)
             {
-                var item = victim.UserAvatar.Build.AdditionalItems[choice - 6];
-                victim.UserAvatar.Build.AdditionalItems.Remove(item);
-                thief.Deck.Add(item);
+                stolen = victim.UserAvatar.Build.AdditionalItems[choice - 6];
+                victim.UserAvatar.Build.AdditionalItems.Remove(stolen);
             }
             else
             {
@@ -97,7 +97,7 @@ namespace Munchkin.Model.Character.Hero.Proficiency
                         break;
                 }
             }
-            return stolen;
+            thief.Deck.Add(stolen);
         }
 
         public override bool BackStab(UserClass victim, Random random)
