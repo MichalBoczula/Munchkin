@@ -11,13 +11,13 @@ namespace Munchkin.Model.Character
         public Build Build { get; set; }
         public RaceBase Race { get; set; }
         public ProficiencyBase Proficiency { get; set; }
-        public int Level { get; }
+        public int Level { get; set; }
         public int Power { get; set; }
         public int FleeChances { get; set; }
-        public int TempPower;
-        public bool WasBackstab;
-        public bool WasRob;
-        public int HowManyCardsThrowToUseSkill;
+        public int TempPower { get; set; }
+        public bool WasBackstab { get; set; }
+        public bool WasRob { get; set; }
+        public int HowManyCardsThrowToUseSkill { get; set; }
 
         public UserAvatar()
         {
@@ -33,37 +33,33 @@ namespace Munchkin.Model.Character
         public void CountPower()
         {
             Power = Level;
-            if(Build != null)
+            if (Build != null)
             {
                 if (Build.Helmet != null)
                 {
                     Power += Build.Helmet.Power;
                 }
-                if(Build.LeftHandItem == null)
+                if (Build.LeftHandItem != null)
                 {
                     Power += Build.LeftHandItem.Power;
                 }
-                if (Build.RightHandItem == null)
+                if (Build.RightHandItem != null)
                 {
                     Power += Build.RightHandItem.Power;
                 }
-                if (Build.Boots == null)
+                if (Build.Boots != null)
                 {
                     Power += Build.Boots.Power;
                 }
                 if (Build.AdditionalItems != null)
                 {
-                    foreach(var item in Build.AdditionalItems)
+                    foreach (var item in Build.AdditionalItems)
                     {
                         Power += item.Power;
                     }
                 }
+                TempPower = Power;
             }
-        }
-
-        public void IncreaseFleeChances()
-        {
-            FleeChances += 1;
         }
 
         public void EndTurn()

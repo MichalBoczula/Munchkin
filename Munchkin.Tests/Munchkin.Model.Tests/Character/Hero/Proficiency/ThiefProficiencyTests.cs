@@ -305,7 +305,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             victim.UserAvatar.Build.Armor = new ItemCard("leatherArmor", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Armor, null);
             victim.UserAvatar.Build.Boots = new ItemCard("normalBoot", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null);
             victim.UserAvatar.Build.LeftHandItem = new ItemCard("sword1H", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null);
-            victim.UserAvatar.Build.RightHandItem = new ItemCard("axe", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Weapon, null); ;
+            victim.UserAvatar.Build.RightHandItem = new ItemCard("axe", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Weapon, null);
             victim.UserAvatar.Build.AdditionalItems = new List<ItemCard>()
             {
                 new ItemCard("healthPotion", CardType.Prize, PrizeCardType.Additional, 4, null, false, ItemType.Additional, null),
