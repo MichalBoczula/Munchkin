@@ -31,14 +31,15 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             {
                 UserAvatar = userAvatar
             };
-            var lhand = new ItemCard("sword1H", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null);
-            var rhand = new ItemCard("axe", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Weapon, null);
+            var lhand = new ItemCard("sword1H", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null, 300);
+            var rhand = new ItemCard("axe", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Weapon, null, 300);
             user.UserAvatar.Build.LeftHandItem = lhand;
             user.UserAvatar.Build.RightHandItem = rhand;
             //Act
             tombTumb.SpecialPower(game, user);
             tombTumb.DeadEnd(game, user);
             //Assert
+            tombTumb.NumberOfPrizes.Should().Be(1);
             tombTumb.Power.Should().Be(2);
             user.UserAvatar.Build.LeftHandItem.Should().BeNull();
             user.UserAvatar.Build.RightHandItem.Should().BeNull();

@@ -12,8 +12,10 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         public TomTumb(string name, CardType cardType) : base(name, cardType)
         {
             Power = 2;
+            NumberOfPrizes = 1;
+            HowManyLevels = 1;
         }
-
+        
         public override void DeadEnd(Game game, UserClass user)
         {
             if (user.UserAvatar.Build.LeftHandItem != null)
@@ -38,11 +40,6 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
             {
                 Power += 3;
             }
-        }
-
-        public override int GetNumberOfPrizes()
-        {
-            return 1;
         }
     }
 }

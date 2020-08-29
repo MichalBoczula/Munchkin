@@ -11,6 +11,7 @@ using Munchkin.Model;
 using Munchkin.Model.Card.PrizeCard;
 using Munchkin.Model.Character;
 using Munchkin.Model.Character.Hero.Proficiency;
+using Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters;
 using Xunit;
 
 namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
@@ -49,7 +50,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             {
                 UserAvatar = userAvatarVictim
             };
-            var itemToSteal = new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null);
+            var itemToSteal = new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null, 300);
             victim.UserAvatar.Build.Helmet = itemToSteal;
             victim = prizeStackController.DrawCardsForStartDeck(victim);
             victim.Deck.Clear();
@@ -95,8 +96,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             {
                 UserAvatar = userAvatarVictim
             };
-            var itemToSteal = new ItemCard("leatherArmor", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Armor, null);
-            victim.UserAvatar.Build.Helmet = new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null);
+            var itemToSteal = new ItemCard("leatherArmor", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Armor, null, 300);
+            victim.UserAvatar.Build.Helmet = new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null, 300);
             victim.UserAvatar.Build.Armor = itemToSteal;
             victim = prizeStackController.DrawCardsForStartDeck(victim);
             victim.Deck.Clear();
@@ -143,9 +144,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             {
                 UserAvatar = userAvatarVictim
             };
-            var itemToSteal = new ItemCard("normalBoot", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null);
-            victim.UserAvatar.Build.Helmet = new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null);
-            victim.UserAvatar.Build.Armor = new ItemCard("leatherArmor", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Armor, null);
+            var itemToSteal = new ItemCard("normalBoot", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null, 300);
+            victim.UserAvatar.Build.Helmet = new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null, 300);
+            victim.UserAvatar.Build.Armor = new ItemCard("leatherArmor", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Armor, null, 300);
             victim.UserAvatar.Build.Boots = itemToSteal;
             victim = prizeStackController.DrawCardsForStartDeck(victim);
             victim.Deck.Clear();
@@ -193,10 +194,10 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             {
                 UserAvatar = userAvatarVictim
             };
-            var itemToSteal = new ItemCard("sword1H", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null);
-            victim.UserAvatar.Build.Helmet = new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null);
-            victim.UserAvatar.Build.Armor = new ItemCard("leatherArmor", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Armor, null);
-            victim.UserAvatar.Build.Boots = new ItemCard("normalBoot", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null);
+            var itemToSteal = new ItemCard("sword1H", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null, 300);
+            victim.UserAvatar.Build.Helmet = new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null, 300);
+            victim.UserAvatar.Build.Armor = new ItemCard("leatherArmor", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Armor, null, 300);
+            victim.UserAvatar.Build.Boots = new ItemCard("normalBoot", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null, 300);
             victim.UserAvatar.Build.LeftHandItem = itemToSteal;
             victim = prizeStackController.DrawCardsForStartDeck(victim);
             victim.Deck.Clear();
@@ -246,11 +247,11 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             {
                 UserAvatar = userAvatarVictim
             };
-            var itemToSteal = new ItemCard("axe", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Weapon, null);
-            victim.UserAvatar.Build.Helmet = new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null);
-            victim.UserAvatar.Build.Armor = new ItemCard("leatherArmor", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Armor, null);
-            victim.UserAvatar.Build.Boots = new ItemCard("normalBoot", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null);
-            victim.UserAvatar.Build.LeftHandItem = new ItemCard("sword1H", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null);
+            var itemToSteal = new ItemCard("axe", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Weapon, null, 300);
+            victim.UserAvatar.Build.Helmet = new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null, 300);
+            victim.UserAvatar.Build.Armor = new ItemCard("leatherArmor", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Armor, null, 300);
+            victim.UserAvatar.Build.Boots = new ItemCard("normalBoot", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null, 300);
+            victim.UserAvatar.Build.LeftHandItem = new ItemCard("sword1H", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null, 300);
             victim.UserAvatar.Build.RightHandItem = itemToSteal;
             victim = prizeStackController.DrawCardsForStartDeck(victim);
             victim.Deck.Clear();
@@ -300,18 +301,18 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             {
                 UserAvatar = userAvatarVictim
             };
-            var itemToSteal = new ItemCard("manaPotion", CardType.Prize, PrizeCardType.Additional, 2, null, false, ItemType.Additional, null);
-            victim.UserAvatar.Build.Helmet = new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null);
-            victim.UserAvatar.Build.Armor = new ItemCard("leatherArmor", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Armor, null);
-            victim.UserAvatar.Build.Boots = new ItemCard("normalBoot", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null);
-            victim.UserAvatar.Build.LeftHandItem = new ItemCard("sword1H", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null);
-            victim.UserAvatar.Build.RightHandItem = new ItemCard("axe", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Weapon, null);
+            var itemToSteal = new ItemCard("manaPotion", CardType.Prize, PrizeCardType.Additional, 2, null, false, ItemType.Additional, null, 300);
+            victim.UserAvatar.Build.Helmet = new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null, 300);
+            victim.UserAvatar.Build.Armor = new ItemCard("leatherArmor", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Armor, null, 300);
+            victim.UserAvatar.Build.Boots = new ItemCard("normalBoot", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null, 300);
+            victim.UserAvatar.Build.LeftHandItem = new ItemCard("sword1H", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null, 300);
+            victim.UserAvatar.Build.RightHandItem = new ItemCard("axe", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Weapon, null, 300);
             victim.UserAvatar.Build.AdditionalItems = new List<ItemCard>()
             {
-                new ItemCard("healthPotion", CardType.Prize, PrizeCardType.Additional, 4, null, false, ItemType.Additional, null),
+                new ItemCard("healthPotion", CardType.Prize, PrizeCardType.Additional, 4, null, false, ItemType.Additional, null, 300),
                 itemToSteal,
-                new ItemCard("testItem", CardType.Prize, PrizeCardType.Additional, 1, null, false, ItemType.Additional, null),
-                new ItemCard("something", CardType.Prize, PrizeCardType.Additional, 0, null, false, ItemType.Additional, null),
+                new ItemCard("testItem", CardType.Prize, PrizeCardType.Additional, 1, null, false, ItemType.Additional, null, 300),
+                new ItemCard("something", CardType.Prize, PrizeCardType.Additional, 0, null, false, ItemType.Additional, null, 300),
             };
             victim = prizeStackController.DrawCardsForStartDeck(victim);
             victim.Deck.Clear();
@@ -362,7 +363,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             {
                 UserAvatar = userAvatarVictim
             };
-            var itemToSteal = new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null);
+            var itemToSteal = new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null, 300);
             victim.UserAvatar.Build.Helmet = itemToSteal;
             victim = prizeStackController.DrawCardsForStartDeck(victim);
             victim.Deck.Clear();
@@ -409,8 +410,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             {
                 UserAvatar = userAvatarVictim
             };
-            var itemToSteal = new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null);
-            var secondItem = new ItemCard("leatherArmor", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Armor, null);
+            var itemToSteal = new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null, 300);
+            var secondItem = new ItemCard("leatherArmor", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Armor, null, 300);
             victim.UserAvatar.Build.Helmet = itemToSteal;
             victim.UserAvatar.Build.Armor = secondItem;
             victim = prizeStackController.DrawCardsForStartDeck(victim);
@@ -524,14 +525,6 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             firstBackStab.Should().BeTrue();
             secondBackStab.Should().BeFalse();
             victim.UserAvatar.TempPower.Should().Be(-1);
-        }
-    }
-
-    public class TestReadLine : ReadLineOverride
-    {
-        public override string GetNextString()
-        {
-            return "";
         }
     }
 }

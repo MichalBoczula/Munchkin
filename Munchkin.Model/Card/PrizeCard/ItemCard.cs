@@ -13,21 +13,24 @@ namespace Munchkin.Model.Card.PrizeCard
         public Dictionary<bool, ProficiencyBase> ProficiencyRestriction { get; set; }
         public bool IsTwoHanded { get; set; }
         public ItemType ItemType { get; set; }
+        public int Price { get; set; }
 
         public ItemCard(string name,
-            CardType cardType,
-            PrizeCardType prizeCardType,
-            int power,
-            Dictionary<bool, RaceBase> raceRestriction,
-            bool isTwoHanded,
-            ItemType itemType,
-            Dictionary<bool, ProficiencyBase> proficiencyRestriction) : base(name, cardType, prizeCardType)
+                        CardType cardType,
+                        PrizeCardType prizeCardType,
+                        int power,
+                        Dictionary<bool, RaceBase> raceRestriction,
+                        bool isTwoHanded,
+                        ItemType itemType,
+                        Dictionary<bool, ProficiencyBase> proficiencyRestriction,
+                        int price) : base(name, cardType, prizeCardType)
         {
             Power = power;
             RaceRestriction = raceRestriction;
             IsTwoHanded = isTwoHanded;
             ItemType = itemType;
             ProficiencyRestriction = proficiencyRestriction;
+            Price = price;
         }
     }
 

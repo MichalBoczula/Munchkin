@@ -30,7 +30,6 @@ namespace Munchkin.APP
             //var name = createCharacterController.ReadName();
             //var user = createCharacterController.CreateUser(name);
             //user = createCharacterController.CreateCharacter(user);
-
         }
     }
 }

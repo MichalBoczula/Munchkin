@@ -22,11 +22,11 @@ namespace Munchkin.Model.Card.CardFactory
             };
             var result = name switch
             {
-                "sword2H" => new ItemCard("sword2H", CardType.Prize, PrizeCardType.Item, 5, null, true, ItemType.Weapon, null),
-                "sword1H" => new ItemCard("sword1H", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null),
-                "khazaDumHammer" => new ItemCard("khazaDumHammer", CardType.Prize, PrizeCardType.Item, 3, khazaDumRestrictions, true, ItemType.Weapon, null),
-                "axe" => new ItemCard("axe", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Weapon, null),
-                "thorsHammer" => new ItemCard("thorsHammer", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, thorsHammerRestrictions),
+                "sword2H" => new ItemCard("sword2H", CardType.Prize, PrizeCardType.Item, 5, null, true, ItemType.Weapon, null, 300),
+                "sword1H" => new ItemCard("sword1H", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null, 300),
+                "khazaDumHammer" => new ItemCard("khazaDumHammer", CardType.Prize, PrizeCardType.Item, 3, khazaDumRestrictions, true, ItemType.Weapon, null, 300),
+                "axe" => new ItemCard("axe", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Weapon, null, 300),
+                "thorsHammer" => new ItemCard("thorsHammer", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, thorsHammerRestrictions, 300),
                 _ => null
             };
             return result;
@@ -44,11 +44,11 @@ namespace Munchkin.Model.Card.CardFactory
             };
             var result = name switch
             {
-                "leatherArmor" => new ItemCard("leatherArmor", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Armor, null),
-                "robe" => new ItemCard("robe", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Armor, null),
-                "moiraArmor" => new ItemCard("moiraArmor", CardType.Prize, PrizeCardType.Item, 3, moiraRestrictions, false, ItemType.Armor, null),
-                "plateArmor" => new ItemCard("plateArmor", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Armor, null),
-                "godsArmor" => new ItemCard("godsArmor", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Armor, godsArmorRestrictions),
+                "leatherArmor" => new ItemCard("leatherArmor", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Armor, null, 300),
+                "robe" => new ItemCard("robe", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Armor, null, 300), 
+                "moiraArmor" => new ItemCard("moiraArmor", CardType.Prize, PrizeCardType.Item, 3, moiraRestrictions, false, ItemType.Armor, null, 300),
+                "plateArmor" => new ItemCard("plateArmor", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Armor, null, 300),
+                "godsArmor" => new ItemCard("godsArmor", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Armor, godsArmorRestrictions, 300),
                 _ => null
             };
             return result;
@@ -62,11 +62,11 @@ namespace Munchkin.Model.Card.CardFactory
             };
             var result = name switch
             {
-                "bootsOfHaste" => new ItemCard("bootsOfHaste", CardType.Prize, PrizeCardType.Item, 5, null, true, ItemType.Boots, null),
-                "plateBoots" => new ItemCard("plateBoots", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null),
-                "dragonSkinsSandal" => new ItemCard("dragonSkinsSandal", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Boots, null),
-                "magicBoots" => new ItemCard("magicBoots", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Boots, magicBootsRestrictions),
-                "normalBoot" => new ItemCard("normalBoot", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null),
+                "bootsOfHaste" => new ItemCard("bootsOfHaste", CardType.Prize, PrizeCardType.Item, 5, null, true, ItemType.Boots, null, 300),
+                "plateBoots" => new ItemCard("plateBoots", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null, 300),
+                "dragonSkinsSandal" => new ItemCard("dragonSkinsSandal", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Boots, null, 300),
+                "magicBoots" => new ItemCard("magicBoots", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Boots, magicBootsRestrictions, 300),
+                "normalBoot" => new ItemCard("normalBoot", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null, 300),
                 _ => null
             };
             return result;
@@ -88,11 +88,11 @@ namespace Munchkin.Model.Card.CardFactory
             };
             var result = name switch
             {
-                "thiefHoodie" => new ItemCard("thiefHoodie", CardType.Prize, PrizeCardType.Item, 5, null, true, ItemType.Helmet, thiefHoodieRestrictions),
-                "wizardHat" => new ItemCard("wizardHat", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, wizardHat),
-                "elfGoldHelmet" => new ItemCard("elfGoldHelmet", CardType.Prize, PrizeCardType.Item, 3, elfGoldHelmet, true, ItemType.Helmet, null),
-                "plateHelmet" => new ItemCard("plateHelmet", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Helmet, null),
-                "leatherHelmet" => new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null),
+                "thiefHoodie" => new ItemCard("thiefHoodie", CardType.Prize, PrizeCardType.Item, 5, null, true, ItemType.Helmet, thiefHoodieRestrictions, 300),
+                "wizardHat" => new ItemCard("wizardHat", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, wizardHat, 300),
+                "elfGoldHelmet" => new ItemCard("elfGoldHelmet", CardType.Prize, PrizeCardType.Item, 3, elfGoldHelmet, true, ItemType.Helmet, null, 300),
+                "plateHelmet" => new ItemCard("plateHelmet", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Helmet, null, 300),
+                "leatherHelmet" => new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null, 300),
                 _ => null
             };
             return result;

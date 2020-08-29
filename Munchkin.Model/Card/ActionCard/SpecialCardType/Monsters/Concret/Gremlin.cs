@@ -12,6 +12,8 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         public Gremlin(string name, CardType cardType) : base(name, cardType)
         {
             Power = 1;
+            NumberOfPrizes = 1;
+            HowManyLevels = 1;
         }
 
         public override void DeadEnd(Game game, UserClass user)
@@ -30,11 +32,6 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
             {
                 user.UserAvatar.TempPower -= item.Power;
             }
-        }
-
-        public override int GetNumberOfPrizes()
-        {
-            return 1;
         }
 
         public ItemCard FindTheMostPowerfulItem(UserClass user)

@@ -18,6 +18,7 @@ namespace Munchkin.Model.Character
         public bool WasBackstab { get; set; }
         public bool WasRob { get; set; }
         public int HowManyCardsThrowToUseSkill { get; set; }
+        public NerfType Nerfs { get; set; }
 
         public UserAvatar()
         {
@@ -28,6 +29,7 @@ namespace Munchkin.Model.Character
             WasBackstab = false;
             WasRob = false;
             HowManyCardsThrowToUseSkill = 0;
+            Nerfs = new NerfType();
         }
 
         public void CountPower()
@@ -58,18 +60,51 @@ namespace Munchkin.Model.Character
                         Power += item.Power;
                     }
                 }
+                if (Nerfs.Power.Count > 0)
+                {
+                    foreach (var ele in Nerfs.Power)
+                    {
+                        Power -= ele;
+                    }
+                }
                 TempPower = Power;
+            }
+        }
+
+        public void CountFleeChances()
+        {
+            FleeChances = 3;
+            if (Nerfs.FleeChances.Count > 0)
+            {
+                foreach (var ele in Nerfs.FleeChances)
+                {
+                    FleeChances -= ele;
+                }
             }
         }
 
         public void EndTurn()
         {
-            FleeChances = 3;
-            TempPower = Power;
+            CountFleeChances();
             CountPower();
+            TempPower = Power;
             WasBackstab = false;
             WasRob = false;
             HowManyCardsThrowToUseSkill = 0;
+        }
+    }
+
+    public class NerfType
+    {
+        public List<int> Power { get; set; }
+        public List<int> FleeChances { get; set; }
+        public bool BrokenLegs { get; set; }
+
+        public NerfType()
+        {
+            Power = new List<int>();
+            FleeChances = new List<int>();
+            BrokenLegs = false;
         }
     }
 }

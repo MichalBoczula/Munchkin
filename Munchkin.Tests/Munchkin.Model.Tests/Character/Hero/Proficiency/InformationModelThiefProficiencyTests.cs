@@ -33,11 +33,11 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
                 UserAvatar = userAvatar
             };
 
-            thiefChar.UserAvatar.Build.Armor = new ItemCard("leatherArmor", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Armor, null);
-            thiefChar.UserAvatar.Build.Helmet = new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null);
-            thiefChar.UserAvatar.Build.Boots = new ItemCard("normalBoot", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null);
-            thiefChar.UserAvatar.Build.LeftHandItem = new ItemCard("sword1H", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null);
-            thiefChar.UserAvatar.Build.RightHandItem = new ItemCard("axe", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Weapon, null);
+            thiefChar.UserAvatar.Build.Armor = new ItemCard("leatherArmor", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Armor, null, 300);
+            thiefChar.UserAvatar.Build.Helmet = new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null, 300);
+            thiefChar.UserAvatar.Build.Boots = new ItemCard("normalBoot", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null, 300);
+            thiefChar.UserAvatar.Build.LeftHandItem = new ItemCard("sword1H", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null, 300);
+            thiefChar.UserAvatar.Build.RightHandItem = new ItemCard("axe", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Weapon, null, 300);
 
             //Act
             var result = informationModelThiefProficiency.ShowItemsToSteal(thiefChar.UserAvatar.Build);
@@ -71,10 +71,10 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             };
             var additionalItems = new List<ItemCard>()
             {
-                new ItemCard("healthPotion", CardType.Prize, PrizeCardType.Additional, 4, null, false, ItemType.Additional, null),
-                new ItemCard("manaPotion", CardType.Prize, PrizeCardType.Additional, 2, null, false, ItemType.Additional, null),
-                new ItemCard("testItem", CardType.Prize, PrizeCardType.Additional, 1, null, false, ItemType.Additional, null),
-                new ItemCard("something", CardType.Prize, PrizeCardType.Additional, 0, null, false, ItemType.Additional, null),
+                new ItemCard("healthPotion", CardType.Prize, PrizeCardType.Additional, 4, null, false, ItemType.Additional, null, 300),
+                new ItemCard("manaPotion", CardType.Prize, PrizeCardType.Additional, 2, null, false, ItemType.Additional, null, 300),
+                new ItemCard("testItem", CardType.Prize, PrizeCardType.Additional, 1, null, false, ItemType.Additional, null, 300),
+                new ItemCard("something", CardType.Prize, PrizeCardType.Additional, 0, null, false, ItemType.Additional, null, 300),
             };
             thiefChar.UserAvatar.Build.AdditionalItems = additionalItems;
             //Act
@@ -112,10 +112,10 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             };
             var additionalItems = new List<ItemCard>()
             {
-                new ItemCard("healthPotion", CardType.Prize, PrizeCardType.Additional, 4, null, false, ItemType.Additional, null),
-                new ItemCard("manaPotion", CardType.Prize, PrizeCardType.Additional, 2, null, false, ItemType.Additional, null),
+                new ItemCard("healthPotion", CardType.Prize, PrizeCardType.Additional, 4, null, false, ItemType.Additional, null, 300),
+                new ItemCard("manaPotion", CardType.Prize, PrizeCardType.Additional, 2, null, false, ItemType.Additional, null, 300),
             };
-            thiefChar.UserAvatar.Build.LeftHandItem = new ItemCard("khazaDumHammer", CardType.Prize, PrizeCardType.Item, 3, khazaDumRestrictions, true, ItemType.Weapon, null);
+            thiefChar.UserAvatar.Build.LeftHandItem = new ItemCard("khazaDumHammer", CardType.Prize, PrizeCardType.Item, 3, khazaDumRestrictions, true, ItemType.Weapon, null, 300);
             thiefChar.UserAvatar.Build.AdditionalItems = additionalItems;
             //Act
             var result = informationModelThiefProficiency.ShowItemsToSteal(thiefChar.UserAvatar.Build);

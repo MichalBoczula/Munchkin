@@ -1,5 +1,4 @@
 ﻿using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Abstract;
-using Munchkin.Model.Character.Hero.Proficiency;
 using Munchkin.Model.User;
 using System;
 using System.Collections.Generic;
@@ -7,9 +6,9 @@ using System.Text;
 
 namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
 {
-    public class Sirens : MonsterCardBase
+    public class Scarabs : MonsterCardBase
     {
-        public Sirens(string name, CardType cardType) : base(name, cardType)
+        public Scarabs(string name, CardType cardType) : base(name, cardType)
         {
             Power = 1;
             NumberOfPrizes = 1;
@@ -18,19 +17,15 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
 
         public override void DeadEnd(Game game, UserClass user)
         {
-            if(user.UserAvatar.Build.Helmet != null)
-            {
-                var item = user.UserAvatar.Build.Helmet;
-                user.UserAvatar.Build.Helmet = null;
-                game.DestroyedPrizeCards.Add(item);
-            }
+            user.UserAvatar.Nerfs.Power.Add(2);
+            user.UserAvatar.Nerfs.FleeChances.Add(1);
         }
 
         public override void SpecialPower(Game game, UserClass user)
         {
-            if(user.UserAvatar.Proficiency != null && user.UserAvatar.Proficiency is WarriorProficiency)
+            if(user.UserAvatar.Build.Boots != null)
             {
-                Power += 5;
+                Power += 3;
             }
         }
     }

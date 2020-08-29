@@ -33,6 +33,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             //Act
             sirens.SpecialPower(game, user);
             //Assert
+            sirens.NumberOfPrizes.Should().Be(1);
             sirens.Power.Should().Be(6);
         }
 
@@ -72,7 +73,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             {
                 UserAvatar = userAvatar
             };
-            var helmet = new ItemCard("leatherArmor", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Armor, null);
+            var helmet = new ItemCard("leatherArmor", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Armor, null, 300);
             user.UserAvatar.Build.Helmet = helmet; 
             //Act
             sirens.DeadEnd(game, user);
@@ -98,7 +99,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             {
                 UserAvatar = userAvatar
             };
-            var boots = new ItemCard("normalBoot", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null);
+            var boots = new ItemCard("normalBoot", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null, 300);
             user.UserAvatar.Build.Boots = boots;
             //Act
             sirens.DeadEnd(game, user);

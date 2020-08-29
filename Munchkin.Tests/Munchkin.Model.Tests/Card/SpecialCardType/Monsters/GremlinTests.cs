@@ -26,13 +26,14 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             {
                 UserAvatar = userAvatar
             };
-            var theMostPowerfulItem = new ItemCard("sword1H", CardType.Prize, PrizeCardType.Item, 4, null, false, ItemType.Weapon, null);
+            var theMostPowerfulItem = new ItemCard("sword1H", CardType.Prize, PrizeCardType.Item, 4, null, false, ItemType.Weapon, null, 300);
             user.UserAvatar.Build.LeftHandItem = theMostPowerfulItem;
-            user.UserAvatar.Build.RightHandItem = new ItemCard("axe", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Weapon, null);
+            user.UserAvatar.Build.RightHandItem = new ItemCard("axe", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Weapon, null, 300);
             user.UserAvatar.CountPower();
             //Act
             var result = gremlin.FindTheMostPowerfulItem(user);
             //Assert
+            gremlin.NumberOfPrizes.Should().Be(1);
             gremlin.Power.Should().Be(1);
             user.UserAvatar.TempPower.Should().Be(8);
             result.Should().BeSameAs(theMostPowerfulItem);
@@ -52,14 +53,15 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             {
                 UserAvatar = userAvatar
             };
-            var theMostPowerfulItem = new ItemCard("sword1H", CardType.Prize, PrizeCardType.Item, 4, null, false, ItemType.Weapon, null);
+            var theMostPowerfulItem = new ItemCard("sword1H", CardType.Prize, PrizeCardType.Item, 4, null, false, ItemType.Weapon, null, 300);
             user.UserAvatar.Build.LeftHandItem = theMostPowerfulItem;
-            user.UserAvatar.Build.RightHandItem = new ItemCard("axe", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Weapon, null);
+            user.UserAvatar.Build.RightHandItem = new ItemCard("axe", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Weapon, null, 300);
             user.UserAvatar.CountPower();
             //Act
             gremlin.SpecialPower(game, user);
             //Assert
             user.UserAvatar.TempPower.Should().Be(4);
+            gremlin.NumberOfPrizes.Should().Be(1);
         }
 
         [Fact]
@@ -98,9 +100,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             {
                 UserAvatar = userAvatar
             };
-            var theMostPowerfulItem = new ItemCard("sword1H", CardType.Prize, PrizeCardType.Item, 4, null, false, ItemType.Weapon, null);
+            var theMostPowerfulItem = new ItemCard("sword1H", CardType.Prize, PrizeCardType.Item, 4, null, false, ItemType.Weapon, null, 300);
             user.UserAvatar.Build.LeftHandItem = theMostPowerfulItem;
-            user.UserAvatar.Build.RightHandItem = new ItemCard("axe", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Weapon, null);
+            user.UserAvatar.Build.RightHandItem = new ItemCard("axe", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Weapon, null, 300);
             //Act
             gremlin.DeadEnd(game, user);
             user.UserAvatar.EndTurn();
