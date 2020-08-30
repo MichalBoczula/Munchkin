@@ -102,7 +102,6 @@ namespace Munchkin.Model.Character
             }
         }
 
-
         public void EndTurn()
         {
             CountFleeChances();
