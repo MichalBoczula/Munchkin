@@ -19,6 +19,7 @@ namespace Munchkin.Model.Character
         public bool WasRob { get; set; }
         public int HowManyCardsThrowToUseSkill { get; set; }
         public NerfType Nerfs { get; set; }
+        public bool IsDied { get; set; }
 
         public UserAvatar()
         {
@@ -29,6 +30,7 @@ namespace Munchkin.Model.Character
             WasRob = false;
             HowManyCardsThrowToUseSkill = 0;
             Nerfs = new NerfType();
+            IsDied = false;
             CountPower();
         }
 
@@ -69,6 +71,10 @@ namespace Munchkin.Model.Character
                     Power -= ele;
                 }
             }
+            if (Nerfs.Wounded.Count == 1)
+            {
+                Power -= 2;
+            }
             TempPower = Power;
         }
 
@@ -82,7 +88,20 @@ namespace Munchkin.Model.Character
                     FleeChances -= ele;
                 }
             }
+            if (Nerfs.Wounded.Count == 1)
+            {
+                FleeChances -= 1;
+            }
         }
+
+        public void CheckWounds()
+        {
+            if (Nerfs.Wounded.Count == 2)
+            {
+                IsDied = true;
+            }
+        }
+
 
         public void EndTurn()
         {
@@ -92,6 +111,7 @@ namespace Munchkin.Model.Character
             WasBackstab = false;
             WasRob = false;
             HowManyCardsThrowToUseSkill = 0;
+            CheckWounds();
         }
     }
 
@@ -100,7 +120,11 @@ namespace Munchkin.Model.Character
         public List<int> Power { get; set; }
         public List<int> FleeChances { get; set; }
         public bool BrokenLegs { get; set; }
+        public bool BrokenRibs { get; set; }
+        public bool DamagedHead { get; set; }
         public List<bool> TornOffArms { get; set; }
+        public List<bool> Wounded { get; set; }
+        public List<bool> Poisoned { get; set; }
 
         public NerfType()
         {
@@ -108,6 +132,8 @@ namespace Munchkin.Model.Character
             FleeChances = new List<int>();
             BrokenLegs = false;
             TornOffArms = new List<bool>();
+            Wounded = new List<bool>();
+            Poisoned = new List<bool>();
         }
     }
 }
