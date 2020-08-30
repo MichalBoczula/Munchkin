@@ -12,6 +12,7 @@ using Munchkin.Model.Card.PrizeCard;
 using Munchkin.Model.Character;
 using Munchkin.Model.Character.Hero.Proficiency;
 using Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters;
+using Munchkin.Tests.Munchkin.Model.Tests.Helper;
 using Xunit;
 
 namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency

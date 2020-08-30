@@ -24,12 +24,12 @@ namespace Munchkin.Model.Character
         {
             Level = 1;
             FleeChances = 3;
-            CountPower();
             TempPower = Power;
             WasBackstab = false;
             WasRob = false;
             HowManyCardsThrowToUseSkill = 0;
             Nerfs = new NerfType();
+            CountPower();
         }
 
         public void CountPower()
@@ -60,15 +60,16 @@ namespace Munchkin.Model.Character
                         Power += item.Power;
                     }
                 }
-                if (Nerfs.Power.Count > 0)
-                {
-                    foreach (var ele in Nerfs.Power)
-                    {
-                        Power -= ele;
-                    }
-                }
-                TempPower = Power;
+
             }
+            if (Nerfs.Power.Count > 0)
+            {
+                foreach (var ele in Nerfs.Power)
+                {
+                    Power -= ele;
+                }
+            }
+            TempPower = Power;
         }
 
         public void CountFleeChances()
@@ -99,12 +100,14 @@ namespace Munchkin.Model.Character
         public List<int> Power { get; set; }
         public List<int> FleeChances { get; set; }
         public bool BrokenLegs { get; set; }
+        public List<bool> TornOffArms { get; set; }
 
         public NerfType()
         {
             Power = new List<int>();
             FleeChances = new List<int>();
             BrokenLegs = false;
+            TornOffArms = new List<bool>();
         }
     }
 }

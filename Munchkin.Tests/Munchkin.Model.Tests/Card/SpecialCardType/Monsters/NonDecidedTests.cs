@@ -7,6 +7,7 @@ using Munchkin.Model;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret;
 using Munchkin.Model.Character;
 using Munchkin.Model.User;
+using Munchkin.Tests.Munchkin.Model.Tests.Helper;
 using Xunit;
 
 namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
