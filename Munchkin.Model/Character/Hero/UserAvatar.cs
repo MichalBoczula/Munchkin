@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Munchkin.Model.Character.Hero.Proficiency;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -23,6 +24,8 @@ namespace Munchkin.Model.Character
 
         public UserAvatar()
         {
+            Proficiency = new NoOneProficiency();
+            Build = new Build();
             Level = 1;
             FleeChances = 3;
             TempPower = Power;
@@ -75,6 +78,13 @@ namespace Munchkin.Model.Character
             {
                 Power -= 2;
             }
+            if (Nerfs.Poisoned.Count > 0)
+            {
+                foreach (var ele in Nerfs.Poisoned)
+                {
+                    Power -= 1;
+                }
+            }
             TempPower = Power;
         }
 
@@ -94,6 +104,17 @@ namespace Munchkin.Model.Character
             }
         }
 
+        public void CheckPoison()
+        {
+            if(Nerfs.Poisoned.Count > 0)
+            {
+                foreach(var ele in Nerfs.Poisoned)
+                {
+                    Level -= 1;
+                }
+            }
+        }
+
         public void CheckWounds()
         {
             if (Nerfs.Wounded.Count == 2)
@@ -104,6 +125,7 @@ namespace Munchkin.Model.Character
 
         public void EndTurn()
         {
+            CheckPoison();
             CountFleeChances();
             CountPower();
             TempPower = Power;
