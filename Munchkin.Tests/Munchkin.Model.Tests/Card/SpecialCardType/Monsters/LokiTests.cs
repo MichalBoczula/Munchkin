@@ -1,66 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FluentAssertions;
-using Moq;
-using Munchkin.BL.Helper;
+﻿using FluentAssertions;
 using Munchkin.Model;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret;
 using Munchkin.Model.Card.PrizeCard;
 using Munchkin.Model.Character;
+using Munchkin.Model.Character.Hero.Proficiency;
 using Munchkin.Model.User;
-using Munchkin.Tests.Munchkin.Model.Tests.Helper;
+using System;
+using System.Collections.Generic;
+using System.Text;
 using Xunit;
 
 namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
 {
-    public class GoldenEggsGooseTests
+    public class LokiTests
     {
         [Fact]
-        public void SpecialPowerChooseOne()
+        public void SpecialPowerTest()
         {
             //Arrange
             var game = new Game();
-            var mockTestReadLine = new Mock<TestReadLine>();
-            mockTestReadLine.Setup(x => x.GetNextString()).Returns("1");
-            var goose = new GoldenEggsGoose("Goose", CardType.Action, mockTestReadLine.Object);
-            var userAvatar = new UserAvatar()
-            {
-                Build = new Build()
-            };
+            var loki = new Loki("Loki", CardType.Action);
+            var userAvatar = new UserAvatar();
             var user = new UserClass()
             {
                 UserAvatar = userAvatar
             };
             //Act
-            goose.SpecialPower(game, user);
+            loki.SpecialPower(game, user);
             //Assert
-            goose.HowManyLevels = 1;
-            goose.NumberOfPrizes = 0;
-        }
-
-
-        [Fact]
-        public void SpecialPowerChooseTwo()
-        {
-            //Arrange
-            var game = new Game();
-            var mockTestReadLine = new Mock<TestReadLine>();
-            mockTestReadLine.Setup(x => x.GetNextString()).Returns("2");
-            var goose = new GoldenEggsGoose("Goose", CardType.Action, mockTestReadLine.Object);
-            var userAvatar = new UserAvatar()
-            {
-                Build = new Build()
-            };
-            var user = new UserClass()
-            {
-                UserAvatar = userAvatar
-            };
-            //Act
-            goose.SpecialPower(game, user);
-            //Assert
-            goose.HowManyLevels = 0;
-            goose.NumberOfPrizes = 3;
+            loki.Power.Should().Be(14);
+            loki.NumberOfPrizes.Should().Be(4);
+            loki.HowManyLevels.Should().Be(1);
+            user.UserAvatar.Proficiency.Should().BeOfType<NoOneProficiency>();
         }
 
         [Fact]
@@ -68,8 +39,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var mockTestReadLine = new Mock<TestReadLine>();
-            var goldenEggsGoose = new GoldenEggsGoose("Golden Eggs Goose", CardType.Action, mockTestReadLine.Object);
+            var loki = new Loki("Loki", CardType.Action);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -79,8 +49,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
                 UserAvatar = userAvatar
             };
             //Act
-            goldenEggsGoose.DeadEnd(game, user);
+            loki.DeadEnd(game, user);
             //Assert
+            user.UserAvatar.Level.Should().Be(-1);
             game.DestroyedPrizeCards.Should().HaveCount(0);
         }
 
@@ -89,8 +60,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var mockTestReadLine = new Mock<TestReadLine>();
-            var goldenEggsGoose = new GoldenEggsGoose("Golden Eggs Goose", CardType.Action, mockTestReadLine.Object);
+            var loki = new Loki("Loki", CardType.Action);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -105,21 +75,21 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             user.UserAvatar.Build.Boots = new ItemCard("normalBoot", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null, 500);
             user.UserAvatar.Build.LeftHandItem = mostExp;
             //Act
-            goldenEggsGoose.DeadEnd(game, user);
+            loki.DeadEnd(game, user);
             //Assert
             game.DestroyedPrizeCards.Should().HaveCount(1);
             game.DestroyedPrizeCards.Should().Contain(mostExp);
             user.UserAvatar.Build.LeftHandItem.Should().BeNull();
+            user.UserAvatar.Level.Should().Be(-1);
         }
 
         [Fact]
         public void FindTheMostExpensiveTwoEqualsPriceItemTest()
         {
-
+           
             //Arrange
             var game = new Game();
-            var mockTestReadLine = new Mock<TestReadLine>();
-            var goldenEggsGoose = new GoldenEggsGoose("Golden Eggs Goose", CardType.Action, mockTestReadLine.Object);
+            var loki = new Loki("Loki", CardType.Action);
             var userAvatar = new UserAvatar();
             var user = new UserClass()
             {
@@ -131,18 +101,17 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             user.UserAvatar.Build.Boots = new ItemCard("normalBoot", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null, 500);
             user.UserAvatar.Build.LeftHandItem = new ItemCard("sword1H", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null, 300);
             //Act
-            var result = goldenEggsGoose.FindTheMostExpensiveItem(user);
+            var result = loki.FindTheMostExpensiveItem(user);
             //Assert
             result.Should().BeSameAs(mostExp);
         }
 
         [Fact]
         public void FindTheMostExpensiveDiffrentPriceItemTest()
-        {
+        {         
             //Arrange
             var game = new Game();
-            var mockTestReadLine = new Mock<TestReadLine>();
-            var goldenEggsGoose = new GoldenEggsGoose("Golden Eggs Goose", CardType.Action, mockTestReadLine.Object);
+            var loki = new Loki("Loki", CardType.Action);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -157,7 +126,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             user.UserAvatar.Build.Boots = new ItemCard("normalBoot", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null, 500);
             user.UserAvatar.Build.LeftHandItem = mostExp;
             //Act
-            var result = goldenEggsGoose.FindTheMostExpensiveItem(user);
+            var result = loki.FindTheMostExpensiveItem(user);
             //Assert
             result.Should().BeSameAs(mostExp);
         }
@@ -167,8 +136,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var mockTestReadLine = new Mock<TestReadLine>();
-            var goldenEggsGoose = new GoldenEggsGoose("Golden Eggs Goose", CardType.Action, mockTestReadLine.Object);
+            var loki = new Loki("Loki", CardType.Action);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -183,13 +151,12 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             user.UserAvatar.Build.Boots = new ItemCard("normalBoot", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null, 500);
             user.UserAvatar.Build.LeftHandItem = mostExp;
             //Act
-            var result = goldenEggsGoose.FindTheMostExpensiveItem(user);
-            goldenEggsGoose.DeleteMostExpensiveItem(game, user, result);
+            var result = loki.FindTheMostExpensiveItem(user);
+            loki.DeleteMostExpensiveItem(game, user, result);
             //Assert
             game.DestroyedPrizeCards.Should().HaveCount(1);
             game.DestroyedPrizeCards.Should().Contain(result);
             user.UserAvatar.Build.LeftHandItem.Should().BeNull();
         }
-
     }
 }
