@@ -79,6 +79,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             game.DestroyedPrizeCards.Should().HaveCount(1);
             game.DestroyedPrizeCards.Should().Contain(helmet);
             user.UserAvatar.Build.Helmet.Should().BeNull();
+            user.UserAvatar.Nerfs.DamagedHead.Should().BeTrue();
         }
 
         [Fact]
@@ -99,6 +100,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             minotaur.DeadEnd(game, user);
             //Assert
             game.DestroyedPrizeCards.Should().HaveCount(0);
+            user.UserAvatar.Nerfs.DamagedHead.Should().BeTrue();
         }
     }
 }

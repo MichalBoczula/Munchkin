@@ -23,6 +23,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
                 user.UserAvatar.Build.Helmet = null;
                 game.DestroyedPrizeCards.Add(item);
             }
+            user.UserAvatar.Nerfs.DamagedHead = true;
         }
 
         public override void SpecialPower(Game game, UserClass user)
