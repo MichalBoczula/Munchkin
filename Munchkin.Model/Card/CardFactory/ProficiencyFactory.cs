@@ -3,6 +3,7 @@ using Munchkin.Model.Card.ActionCard.SpecialCardType;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Munchkin.BL.Helper;
 
 namespace Munchkin.Model.Card.CardFactory
 {
@@ -12,7 +13,7 @@ namespace Munchkin.Model.Card.CardFactory
         {
             var mage = new MageProficiency();
             var priest = new PriestProficiency();
-            var thief = new ThiefProficiency();
+            var thief = new ThiefProficiency(new ReadLineOverride());
             var warrior = new WarriorProficiency();
             var noOne = new NoOneProficiency();
 

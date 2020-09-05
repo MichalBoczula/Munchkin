@@ -78,7 +78,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             quetzalcoatl.DeadEnd(game, user);
             //Assert
             user.UserAvatar.IsDied.Should().BeTrue();
-            user.Deck.Should().NotBeEmpty();
+            user.Deck.Count().Should().BeGreaterThan(0);
         }
 
         [Fact]
@@ -105,7 +105,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             //Assert
             //Assert
             user.UserAvatar.IsDied.Should().BeFalse();
-            user.Deck.Should().BeEmpty();
+            user.Deck.Count().Should().Be(0);
         }
     }
 }

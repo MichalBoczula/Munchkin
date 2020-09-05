@@ -19,7 +19,7 @@ namespace Munchkin.Model.Character.Hero.Proficiency
         {
             if (user.UserAvatar.HowManyCardsThrowToUseSkill < 3)
             {
-                if (user.Deck != null && user.Deck.Count > 0)
+                if (user.Deck != null && user.Deck.Count() > 0)
                 {
                     if (ThrowOutCart(cardToThrowId, user))
                     {

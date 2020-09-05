@@ -1,4 +1,5 @@
-﻿using Munchkin.Model.Card.PrizeCard;
+﻿using Munchkin.BL.Helper;
+using Munchkin.Model.Card.PrizeCard;
 using Munchkin.Model.Character;
 using Munchkin.Model.Character.Hero.Proficiency;
 using Munchkin.Model.Character.Hero.Race;
@@ -76,7 +77,7 @@ namespace Munchkin.Model.Card.CardFactory
         {
             var thiefHoodieRestrictions = new Dictionary<bool, ProficiencyBase>
             {
-                { true, new ThiefProficiency() }
+                { true, new ThiefProficiency(new ReadLineOverride()) }
             };
             var wizardHat = new Dictionary<bool, ProficiencyBase>
             {

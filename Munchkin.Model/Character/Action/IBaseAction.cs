@@ -6,7 +6,7 @@
         int RunAway();
         bool Fight();
         bool AskForHelp();
-        CardGameBase ThrowCard();
+        bool ThrowOutCart(int whichOne, UserClass user);
         CardGameBase UseCardFromDeck();
         bool TakeAction();
     }

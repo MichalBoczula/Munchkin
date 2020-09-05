@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Moq;
+using Munchkin.BL.Helper;
 using Munchkin.Model;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret;
 using Munchkin.Model.Card.PrizeCard;
@@ -19,10 +20,12 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void SpecialPowerThiefTest()
         {
             //Arrange
+            var mockReadLine = new Mock<ReadLineOverride>();
+            mockReadLine.Setup(x => x.GetNextString()).Returns("");
+            var thief = new ThiefProficiency(mockReadLine.Object);
             var game = new Game();
             var mockRandom = new Mock<Random>();
             var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Action, mockRandom.Object);
-            var thief = new ThiefProficiency();
             var userAvatar = new UserAvatar()
             {
                 Proficiency = thief

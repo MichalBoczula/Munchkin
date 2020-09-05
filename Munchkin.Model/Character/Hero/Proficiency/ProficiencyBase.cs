@@ -1,4 +1,6 @@
 ﻿using Munchkin.BL.Helper;
+using Munchkin.Model.Card.ActionCard;
+using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Abstract;
 using Munchkin.Model.Card.PrizeCard;
 using Munchkin.Model.Character.Action;
 using Munchkin.Model.Character.Hero.Proficiency;
@@ -14,6 +16,7 @@ namespace Munchkin.Model.Character
 
         public int Id { get; set; }
         public string Name { get; set; }
+        public ReadLineOverride readLineOverride { get; set; }
 
         public CardGameBase TakeCard()
         {
@@ -31,11 +34,6 @@ namespace Munchkin.Model.Character
         }
 
         public bool AskForHelp()
-        {
-            throw new NotImplementedException();
-        }
-
-        public CardGameBase ThrowCard()
         {
             throw new NotImplementedException();
         }
@@ -76,21 +74,44 @@ namespace Munchkin.Model.Character
             }
         }
 
-        protected bool ThrowOutCart(int whichOne, UserClass user)
+        public bool ThrowOutCart(int whichOne, UserClass user)
         {
-            var item = user.Deck[whichOne-1];
-            try
+            whichOne -= 1;
+            ItemCard item;
+            MonsterCardBase monster;
+            MagicCard magicCard;
+            if (whichOne < user.Deck.Items.Count)
             {
-                user.Deck.Remove(item);
+                item = user.Deck.Items[whichOne];
+                user.Deck.Items.Remove(item);
                 Console.WriteLine(informationModel.CardRemovedMsg());
-                //Console.ReadLine();
-
             }
-            catch (IndexOutOfRangeException)
+            else
             {
-                Console.WriteLine(informationModel.WrongNumberMsg());
-                //Console.ReadLine();
-                return false;
+                whichOne -= user.Deck.Items.Count;
+                if (whichOne < user.Deck.Monsters.Count)
+                {
+                    monster = user.Deck.Monsters[whichOne];
+                    user.Deck.Monsters.Remove(monster);
+                    Console.WriteLine(informationModel.CardRemovedMsg());
+                }
+                else
+                {
+                    whichOne -= user.Deck.Monsters.Count;
+                    if (whichOne < user.Deck.MagicCards.Count)
+                    {
+                        magicCard = user.Deck.MagicCards[whichOne];
+                        user.Deck.MagicCards.Remove(magicCard);
+                        Console.WriteLine(informationModel.CardRemovedMsg());
+                    }
+                    else
+                    {
+
+                        Console.WriteLine(informationModel.WrongNumberMsg());
+                        readLineOverride.GetNextString();
+                        return false;
+                    }
+                }
             }
             return true;
         }

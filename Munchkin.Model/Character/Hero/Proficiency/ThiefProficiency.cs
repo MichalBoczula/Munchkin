@@ -9,11 +9,13 @@ namespace Munchkin.Model.Character.Hero.Proficiency
     public class ThiefProficiency : ProficiencyBase, IThiefAction
     {
         private readonly InformationModelThiefProficiency _informationModelThiefProficiency;
+        private ReadLineOverride readLineOverride { get; set; }
 
-        public ThiefProficiency()
+        public ThiefProficiency(ReadLineOverride readLineOverride)
         {
             Name = "Thief";
             _informationModelThiefProficiency = new InformationModelThiefProficiency();
+            this.readLineOverride = readLineOverride;
         }
 
         public override void StealCard(UserClass thief, UserClass victim, Random random, ReadLineOverride readLine)
@@ -28,7 +30,7 @@ namespace Munchkin.Model.Character.Hero.Proficiency
                     {
                         var information = _informationModelThiefProficiency.ShowItemsToSteal(victim.UserAvatar.Build);
                         Console.WriteLine(information.ItemDescription);
-                        //Console.ReadLine();
+                        readLineOverride.GetNextString();
                         int choice;
                         while (true)
                         {
@@ -36,28 +38,28 @@ namespace Munchkin.Model.Character.Hero.Proficiency
                             if (!Int32.TryParse(readLine.GetNextString(), out choice))
                             {
                                 Console.WriteLine(_informationModelThiefProficiency.StealInvalidInput);
-                                //Console.ReadLine();
+                                readLineOverride.GetNextString();
                                 continue;
                             }
 
-                            if(choice > information.ItemCount || choice < 0)
+                            if (choice > information.ItemCount || choice < 0)
                             {
                                 Console.WriteLine(_informationModelThiefProficiency.InvalidNumber(information));
-                                //Console.ReadLine();
+                                readLineOverride.GetNextString();
                             }
-                            else if(choice <= information.ItemCount || choice > 0)
+                            else if (choice <= information.ItemCount || choice > 0)
                             {
                                 break;
                             }
                         }
                         MoveItemFromVictimToThief(thief, victim, choice);
                         Console.WriteLine(_informationModelThiefProficiency.StealSuccessfully);
-                        //Console.ReadLine();
+                        readLineOverride.GetNextString();
                     }
                     else
                     {
                         Console.WriteLine(_informationModelThiefProficiency.StealFail);
-                        //Console.ReadLine();
+                        readLineOverride.GetNextString();
                     }
                 }
             }
@@ -97,7 +99,7 @@ namespace Munchkin.Model.Character.Hero.Proficiency
                         break;
                 }
             }
-            thief.Deck.Add(stolen);
+            thief.Deck.Items.Add(stolen);
         }
 
         public override bool BackStab(UserClass victim, Random random)
@@ -107,7 +109,7 @@ namespace Munchkin.Model.Character.Hero.Proficiency
             if (!victim.UserAvatar.WasBackstab)
             {
                 Console.WriteLine(_informationModelThiefProficiency.BackStabMsg);
-                //Console.ReadLine();
+                readLineOverride.GetNextString();
                 var num = RollDice(random);
                 if (num > 3)
                 {
@@ -115,18 +117,18 @@ namespace Munchkin.Model.Character.Hero.Proficiency
                     result = true;
                     victim.UserAvatar.WasBackstab = true;
                     Console.WriteLine(_informationModelThiefProficiency.BackSuccessMsg);
-                    //Console.ReadLine();
+                    readLineOverride.GetNextString();
                 }
                 else
                 {
                     Console.WriteLine(_informationModelThiefProficiency.BackFailMsg);
-                    //Console.ReadLine();
+                    readLineOverride.GetNextString();
                 }
             }
             else
             {
                 Console.WriteLine(_informationModelThiefProficiency.CanNotBackStabTwoTimes);
-                //Console.ReadLine();
+                readLineOverride.GetNextString();
             }
             return result;
         }

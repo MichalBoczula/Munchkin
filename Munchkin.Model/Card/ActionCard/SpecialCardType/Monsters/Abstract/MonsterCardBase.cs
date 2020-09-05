@@ -17,9 +17,5 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Abstract
             ActionCardType = ActionCardType.Monster;
             Undead = false;
         }
-
-        public abstract void DeadEnd(Game game, UserClass user);
-
-        public abstract void SpecialPower(Game game, UserClass user);
     }
 }

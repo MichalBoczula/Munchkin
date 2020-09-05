@@ -1,4 +1,5 @@
 ﻿using Munchkin.BL.CharacterCreator;
+using Munchkin.BL.Helper;
 using Munchkin.BL.InformationModel;
 using Munchkin.Model;
 using Munchkin.Model.Character;
@@ -14,24 +15,28 @@ namespace Munchkin.BL.GameController
         private CreateInformationModel createInformationModel;
         private CharacterCreatorControlerService characterCreatorControlerService;
         private Game game;
+        private ReadLineOverride readLineOverride;
 
         public CreateCharacterController(
             CreateInformationModel createInformationModel,
             CharacterCreatorControlerService characterCreatorControlerService,
-            Game game)
+            Game game,
+            ReadLineOverride readLineOverride)
         {
             this.createInformationModel = createInformationModel;
             this.characterCreatorControlerService = characterCreatorControlerService;
             this.game = game;
+            this.readLineOverride = readLineOverride;
         }
 
         public string ReadName()
         {
+            var random = new Random();
             Console.WriteLine(createInformationModel.InputName);
             var name = Console.ReadLine();
             if (string.IsNullOrEmpty(name))
             {
-                name = "Nameless";
+                name = "Nameless" + random.Next(10) +1;
                 Console.WriteLine(createInformationModel.NameIsEmptyMessage());
             }
             Console.WriteLine(createInformationModel.ReturnNameMessage(name));
@@ -53,27 +58,28 @@ namespace Munchkin.BL.GameController
             user.UserAvatar = new UserAvatar();
             Console.WriteLine(createInformationModel.Welcome(user));
             Console.WriteLine(createInformationModel.PressKeyMessage);
-            //Console.ReadLine();
+            readLineOverride.GetNextString();
 
             Console.WriteLine(createInformationModel.DrawCardRaceCard);
             var raceCard = characterCreatorControlerService.DrawRaceCard();
             Console.WriteLine(createInformationModel.ShowRaceInforamtion(raceCard));
             Console.WriteLine(createInformationModel.PressKeyMessage);
-            //Console.ReadLine();
+            readLineOverride.GetNextString();
+
             raceCard.SpecialEffect(user);
             Console.WriteLine(createInformationModel.PressKeyMessage);
-            //Console.ReadLine();
+            readLineOverride.GetNextString();
 
             Console.WriteLine(createInformationModel.DrawCardProficiencyCard);
             var proficiencyCard = characterCreatorControlerService.DrawProficiencyCard();
             Console.WriteLine(createInformationModel.ShowProficiencyInforamtion(proficiencyCard));
             Console.WriteLine(createInformationModel.PressKeyMessage);
-            //Console.ReadLine();
+            readLineOverride.GetNextString();
             proficiencyCard.SpecialEffect(user);
 
             Console.WriteLine(createInformationModel.BeginJourney);
             Console.WriteLine(createInformationModel.PressKeyMessage);
-            //Console.ReadLine();
+            readLineOverride.GetNextString();
 
             return user;
         }
@@ -83,9 +89,15 @@ namespace Munchkin.BL.GameController
             throw new NotImplementedException();
         }
 
-        public UserClass DeleteCharacter()
+        public void DeleteCharacter(string name)
         {
-            throw new NotImplementedException();
+            foreach (var user in game.Users)
+            {
+                if (user.Name.ToLower().Equals(name.ToLower()))
+                {
+                    game.Users.Remove(user);
+                }
+            }
         }
     }
 }

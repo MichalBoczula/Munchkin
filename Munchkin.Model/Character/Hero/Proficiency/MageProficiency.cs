@@ -19,7 +19,7 @@ namespace Munchkin.Model.Character.Hero.Proficiency
         {
             if (user.UserAvatar.HowManyCardsThrowToUseSkill < 3)
             {
-                if (user.Deck != null && user.Deck.Count > 0)
+                if (user.Deck != null && user.Deck.Count()> 0)
                 {
                     if (ThrowOutCart(cardToThrowId, user))
                     {
@@ -47,7 +47,7 @@ namespace Munchkin.Model.Character.Hero.Proficiency
             Console.WriteLine(_informationModel.CastCharmSpell());
             //Console.ReadLine();
             bool result;
-            if (user.Deck.Count > 3)
+            if (user.Deck.Count() > 3)
             {
                 Console.WriteLine(_informationModel.CharmSpellSuccess());
                 user.Deck.Clear();

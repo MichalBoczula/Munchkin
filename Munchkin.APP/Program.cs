@@ -2,8 +2,10 @@
 using Munchkin.BL.CardGenerator.CardsStack;
 using Munchkin.BL.CharacterCreator;
 using Munchkin.BL.GameController;
+using Munchkin.BL.Helper;
 using Munchkin.BL.InformationModel;
 using Munchkin.Model;
+using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Abstract;
 using Munchkin.Model.Card.PrizeCard;
 using Munchkin.Model.Character;
 using Munchkin.Model.Character.Hero.Proficiency;
@@ -18,18 +20,26 @@ namespace Munchkin.APP
     {
         static void Main(string[] args)
         {
-            ////Arrange
-            //var game = new Game();
-            //var createInformationModel = new CreateInformationModel();
-            //var stackCardGeneratorService = new StackCardGeneratorService();
-            //var random = new Random();
-            //var drawCardService = new DrawCardService(random);
-            //var characterCreatorControlerService = new CharacterCreatorControlerService(stackCardGeneratorService, drawCardService);
-            //var createCharacterController = new CreateCharacterController(createInformationModel, characterCreatorControlerService, game);
-            ////Act
-            //var name = createCharacterController.ReadName();
-            //var user = createCharacterController.CreateUser(name);
-            //user = createCharacterController.CreateCharacter(user);
+            //Arrange
+            var random = new Random();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var characterCreatorControlerService = new CharacterCreatorControlerService(stackCardGeneratorService, drawCardService);
+
+            var game = new Game();
+            var readLineOverride = new ReadLineOverride();
+            var createInformationModel = new CreateInformationModel();
+            var createCharacterController = new CreateCharacterController(createInformationModel, characterCreatorControlerService, game, readLineOverride);
+            
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var gameFlowController = new GameFlowController(createCharacterController, game, readLineOverride, prizeStackController, stackCardGeneratorService);
+
+            //Act
+            //gameFlowController.CreateUsers();
+            //gameFlowController.CreateCharacters();
+            //gameFlowController.InitializeDeckForUsers();
+            gameFlowController.InitializeMonsterCards();
+            int num = 0; ;
         }
     }
 }

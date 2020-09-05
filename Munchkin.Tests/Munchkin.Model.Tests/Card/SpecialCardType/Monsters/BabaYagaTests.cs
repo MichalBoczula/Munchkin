@@ -55,7 +55,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             //Act
             babaYaga.DeadEnd(game, user);
             //Assert
-            user.Deck.Should().BeEmpty();
+            user.Deck.Count().Should().Be(0);
             user.Deck.Should().NotBeNull();
         }
     }

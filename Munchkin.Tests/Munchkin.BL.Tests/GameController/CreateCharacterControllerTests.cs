@@ -6,6 +6,7 @@ using Munchkin.BL.GameController;
 using Munchkin.BL.InformationModel;
 using Munchkin.Model.Character;
 using Munchkin.Model.User;
+using Munchkin.Tests.Munchkin.Model.Tests.Helper;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,18 +24,18 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             var createInformationModel = new CreateInformationModel();
             var stackCardGeneratorService = new StackCardGeneratorService();
             var random = new Random();
+            var mockTestReadLine = new Mock<TestReadLine>();
+            mockTestReadLine.Setup(x => x.GetNextString()).Returns("");
             var drawCardService = new DrawCardService(random);
             var characterCreatorControlerService = new CharacterCreatorControlerService(stackCardGeneratorService, drawCardService);
-            var createCharacterController = new CreateCharacterController(createInformationModel, characterCreatorControlerService, game);
+            var createCharacterController = new CreateCharacterController(createInformationModel, characterCreatorControlerService, game, mockTestReadLine.Object);
             var name = "Someone";
             //Act
             var user = createCharacterController.CreateUser(name);
             //Assert
             user.Name.Should().Be(name);
         }
-
         
-        //[Fact(Skip = "Remember about comment Console.ReadLine in method Create User in CreateCharacterController before tests")]
         [Fact]
         public void CreateUserTests()
         {
@@ -43,9 +44,11 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             var createInformationModel = new CreateInformationModel();
             var stackCardGeneratorService = new StackCardGeneratorService();
             var random = new Random();
+            var mockTestReadLine = new Mock<TestReadLine>();
+            mockTestReadLine.Setup(x => x.GetNextString()).Returns("");
             var drawCardService = new DrawCardService(random);
             var characterCreatorControlerService = new CharacterCreatorControlerService(stackCardGeneratorService, drawCardService);
-            var createCharacterController = new CreateCharacterController(createInformationModel, characterCreatorControlerService, game);
+            var createCharacterController = new CreateCharacterController(createInformationModel, characterCreatorControlerService, game, mockTestReadLine.Object);
             var name = "Someone";
             var user = createCharacterController.CreateUser(name);
             //Act

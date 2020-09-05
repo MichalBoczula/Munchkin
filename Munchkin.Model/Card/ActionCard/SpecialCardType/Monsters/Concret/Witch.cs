@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
+namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
 {
     public class Witch : MonsterCardBase
     {

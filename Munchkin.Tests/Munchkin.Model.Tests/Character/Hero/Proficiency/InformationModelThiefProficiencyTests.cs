@@ -12,6 +12,7 @@ using Munchkin.BL.CharacterCreator;
 using Moq;
 using Munchkin.Model.Card.PrizeCard;
 using Munchkin.Model.Character.Hero.Race;
+using Munchkin.BL.Helper;
 
 namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
 {
@@ -21,8 +22,10 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
         public void ShowItemsToStealFullBuild()
         {
             //Arrange
+            var mockReadLine = new Mock<ReadLineOverride>();
+            mockReadLine.Setup(x => x.GetNextString()).Returns("");
+            var thief = new ThiefProficiency(mockReadLine.Object);
             var informationModelThiefProficiency = new InformationModelThiefProficiency();
-            var thief = new ThiefProficiency();
             var userAvatar = new UserAvatar()
             {
                 Proficiency = thief,
@@ -55,8 +58,10 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
         public void ShowItemsToStealOnlyAdditionalItems()
         {
             //Arrange
+            var mockReadLine = new Mock<ReadLineOverride>();
+            mockReadLine.Setup(x => x.GetNextString()).Returns("");
+            var thief = new ThiefProficiency(mockReadLine.Object);
             var informationModelThiefProficiency = new InformationModelThiefProficiency();
-            var thief = new ThiefProficiency();
             var dwarf = new Dwarf("dwarf");
             var userAvatar = new UserAvatar()
             {
@@ -92,8 +97,10 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
         public void ShowItemsToStealMixedItems()
         {
             //Arrange
+            var mockReadLine = new Mock<ReadLineOverride>();
+            mockReadLine.Setup(x => x.GetNextString()).Returns("");
+            var thief = new ThiefProficiency(mockReadLine.Object);
             var informationModelThiefProficiency = new InformationModelThiefProficiency();
-            var thief = new ThiefProficiency();
             var dwarf = new Dwarf("dwarf");
             var userAvatar = new UserAvatar()
             {

@@ -8,6 +8,8 @@ using Munchkin.Model;
 using Munchkin.Model.User;
 using Munchkin.Model.Character;
 using Munchkin.Model.Character.Hero.Proficiency;
+using Munchkin.BL.Helper;
+using Moq;
 
 namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
 {
@@ -17,9 +19,11 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void SpecialPowerThiefTest()
         {
             //Arrange
+            var mockReadLine = new Mock<ReadLineOverride>();
+            mockReadLine.Setup(x => x.GetNextString()).Returns("");
+            var thief = new ThiefProficiency(mockReadLine.Object);
             var game = new Game();
             var furies = new Furies("Furies", CardType.Action);
-            var thief = new ThiefProficiency();
             var userAvatar = new UserAvatar()
             {
                 Proficiency = thief

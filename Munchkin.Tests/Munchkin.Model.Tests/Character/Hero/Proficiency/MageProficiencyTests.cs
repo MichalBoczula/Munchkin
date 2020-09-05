@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using FluentAssertions;
+using Moq;
 using Munchkin.BL.CardGenerator;
 using Munchkin.BL.CharacterCreator;
 using Munchkin.BL.GameController;
+using Munchkin.BL.Helper;
 using Munchkin.Model;
 using Munchkin.Model.Character;
 using Munchkin.Model.Character.Hero.Proficiency;
@@ -38,7 +40,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             user1.UserAvatar.Proficiency.FleeSpell(user1, 1);
             //Assert
             user1.UserAvatar.FleeChances.Should().Be(6);
-            user1.Deck.Should().HaveCount(2);
+            user1.Deck.Count().Should().Be(2);
         }
 
         [Fact]
@@ -64,7 +66,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             user1.UserAvatar.Proficiency.FleeSpell(user1, 1);
             //Assert
             user1.UserAvatar.FleeChances.Should().Be(3);
-            user1.Deck.Should().HaveCount(0);
+            user1.Deck.Count().Should().Be(0);
         }
 
         [Fact]
@@ -90,7 +92,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             user.UserAvatar.Proficiency.FleeSpell(user, 1);
             //Assert
             user.UserAvatar.FleeChances.Should().Be(3);
-            user.Deck.Should().BeNull();
+            user.Deck.Count().Should().Be(0);
         }
 
         [Fact]
@@ -101,7 +103,12 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             var random = new Random();
             var drawCardService = new DrawCardService(random);
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
-            var mage1 = new MageProficiency();
+            var mockReadLine = new Mock<ReadLineOverride>();
+            mockReadLine.Setup(x => x.GetNextString()).Returns("");
+            var mage1 = new MageProficiency()
+            {
+                readLineOverride = mockReadLine.Object
+            };
             var avatar1 = new UserAvatar()
             {
                 Proficiency = mage1
@@ -118,7 +125,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             user.UserAvatar.Proficiency.FleeSpell(user, 1);
             //Assert
             user.UserAvatar.FleeChances.Should().Be(6);
-            user.Deck.Should().HaveCount(2);
+            user.Deck.Count().Should().Be(2);
         }
 
         [Fact]
@@ -143,7 +150,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             var result = user.UserAvatar.Proficiency.CharmSpell(user);
             //Assert
             result.Should().BeTrue();
-            user.Deck.Count.Should().Be(0);
+            user.Deck.Count().Should().Be(0);
         }
 
         [Fact]
@@ -169,7 +176,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             var result = user.UserAvatar.Proficiency.CharmSpell(user);
             //Assert
             result.Should().BeFalse();
-            user.Deck.Should().BeEmpty();
+            user.Deck.Count().Should().Be(0);
         }
     }
 }

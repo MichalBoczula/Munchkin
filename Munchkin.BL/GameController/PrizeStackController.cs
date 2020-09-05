@@ -28,7 +28,7 @@ namespace Munchkin.BL.GameController
         {
             if(!user.IsDeckInicialize)
             {
-                var startedHand = new List<CardGameBase>
+                var startedHand = new List<ItemCard>
                 {
                     DrawCard(),
                     DrawCard(),
@@ -36,7 +36,7 @@ namespace Munchkin.BL.GameController
                     DrawCard(),
                     DrawCard()
                 };
-                user.Deck = startedHand;
+                user.Deck.Items.AddRange(startedHand);
                 user.IsDeckInicialize = true;           
             }
             else
@@ -61,7 +61,7 @@ namespace Munchkin.BL.GameController
                 var num = _drawCardService.RandomPrizeCard(PrizeStack.Deck.Count);
                 var item = PrizeStack.Deck[num];
                 PrizeStack.Deck.Remove(item);
-                user.Deck.Add(item);
+                user.Deck.Items.Add(item);
             }
             return user;
         }

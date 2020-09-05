@@ -23,6 +23,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
         public void StealHelmetSuccessTest()
         {
             //Arrange
+            var mockReadLine = new Mock<ReadLineOverride>();
+            mockReadLine.Setup(x => x.GetNextString()).Returns("");
+            var thief = new ThiefProficiency(mockReadLine.Object);
             var stackCardGenedratorService = new StackCardGeneratorService();
             var random = new Random();
             var mockRandom = new Mock<Random>();
@@ -31,7 +34,6 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             mockTestReadLine.Setup(x => x.GetNextString()).Returns("1");
             var drawCardService = new DrawCardService(random);
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
-            var thief = new ThiefProficiency();
             var userAvatar = new UserAvatar()
             {
                 Proficiency = thief
@@ -60,8 +62,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             //Act
             thief.StealCard(thiefChar, victim, mockRandom.Object, mockTestReadLine.Object);
             //Assert
-            thiefChar.Deck.Should().HaveCount(1);
-            thiefChar.Deck[0].Should().BeSameAs(itemToSteal);
+            thiefChar.Deck.Count().Should().Be(1);
+            thiefChar.Deck.Items[0].Should().BeSameAs(itemToSteal);
             victim.UserAvatar.Build.Helmet.Should().BeNull();
         }
 
@@ -69,6 +71,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
         public void StealArmorSuccessTest()
         {
             //Arrange
+            var mockReadLine = new Mock<ReadLineOverride>();
+            mockReadLine.Setup(x => x.GetNextString()).Returns("");
+            var thief = new ThiefProficiency(mockReadLine.Object);
             var stackCardGenedratorService = new StackCardGeneratorService();
             var random = new Random();
             var mockRandom = new Mock<Random>();
@@ -77,7 +82,6 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             mockTestReadLine.Setup(x => x.GetNextString()).Returns("2");
             var drawCardService = new DrawCardService(random);
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
-            var thief = new ThiefProficiency();
             var userAvatar = new UserAvatar()
             {
                 Proficiency = thief
@@ -107,8 +111,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             //Act
             thief.StealCard(thiefChar, victim, mockRandom.Object, mockTestReadLine.Object);
             //Assert
-            thiefChar.Deck.Should().HaveCount(1);
-            thiefChar.Deck[0].Should().BeSameAs(itemToSteal);
+            thiefChar.Deck.Count().Should().Be(1);
+            thiefChar.Deck.Items[0].Should().BeSameAs(itemToSteal);
             victim.UserAvatar.Build.Helmet.Should().NotBeNull();
             victim.UserAvatar.Build.Armor.Should().BeNull();
         }
@@ -117,6 +121,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
         public void StealBootsSuccessTest()
         {
             //Arrange
+            var mockReadLine = new Mock<ReadLineOverride>();
+            mockReadLine.Setup(x => x.GetNextString()).Returns("");
+            var thief = new ThiefProficiency(mockReadLine.Object);
             var stackCardGenedratorService = new StackCardGeneratorService();
             var random = new Random();
             var mockRandom = new Mock<Random>();
@@ -125,7 +132,6 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             mockTestReadLine.Setup(x => x.GetNextString()).Returns("3");
             var drawCardService = new DrawCardService(random);
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
-            var thief = new ThiefProficiency();
             var userAvatar = new UserAvatar()
             {
                 Proficiency = thief
@@ -156,8 +162,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             //Act
             thief.StealCard(thiefChar, victim, mockRandom.Object, mockTestReadLine.Object);
             //Assert
-            thiefChar.Deck.Should().HaveCount(1);
-            thiefChar.Deck[0].Should().BeSameAs(itemToSteal);
+            thiefChar.Deck.Count().Should().Be(1);
+            thiefChar.Deck.Items[0].Should().BeSameAs(itemToSteal);
             victim.UserAvatar.Build.Boots.Should().BeNull();
             victim.UserAvatar.Build.Helmet.Should().NotBeNull();
             victim.UserAvatar.Build.Armor.Should().NotBeNull();
@@ -175,7 +181,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             mockTestReadLine.Setup(x => x.GetNextString()).Returns("4");
             var drawCardService = new DrawCardService(random);
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
-            var thief = new ThiefProficiency();
+            var mockReadLine = new Mock<ReadLineOverride>();
+            mockReadLine.Setup(x => x.GetNextString()).Returns("");
+            var thief = new ThiefProficiency(mockReadLine.Object);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = thief
@@ -207,8 +215,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             //Act
             thief.StealCard(thiefChar, victim, mockRandom.Object, mockTestReadLine.Object);
             //Assert
-            thiefChar.Deck.Should().HaveCount(1);
-            thiefChar.Deck[0].Should().BeSameAs(itemToSteal);
+            thiefChar.Deck.Count().Should().Be(1);
+            thiefChar.Deck.Items[0].Should().BeSameAs(itemToSteal);
             victim.UserAvatar.Build.LeftHandItem.Should().BeNull();
             victim.UserAvatar.Build.Helmet.Should().NotBeNull();
             victim.UserAvatar.Build.Armor.Should().NotBeNull();
@@ -228,7 +236,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             mockTestReadLine.Setup(x => x.GetNextString()).Returns("5");
             var drawCardService = new DrawCardService(random);
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
-            var thief = new ThiefProficiency();
+            var mockReadLine = new Mock<ReadLineOverride>();
+            mockReadLine.Setup(x => x.GetNextString()).Returns("");
+            var thief = new ThiefProficiency(mockReadLine.Object);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = thief
@@ -261,8 +271,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             //Act
             thief.StealCard(thiefChar, victim, mockRandom.Object, mockTestReadLine.Object);
             //Assert
-            thiefChar.Deck.Should().HaveCount(1);
-            thiefChar.Deck[0].Should().BeSameAs(itemToSteal);
+            thiefChar.Deck.Count().Should().Be(1);
+            thiefChar.Deck.Items[0].Should().BeSameAs(itemToSteal);
             victim.UserAvatar.Build.RightHandItem.Should().BeNull();
             victim.UserAvatar.Build.Helmet.Should().NotBeNull();
             victim.UserAvatar.Build.Armor.Should().NotBeNull();
@@ -282,7 +292,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             mockTestReadLine.Setup(x => x.GetNextString()).Returns("7");
             var drawCardService = new DrawCardService(random);
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
-            var thief = new ThiefProficiency();
+            var mockReadLine = new Mock<ReadLineOverride>();
+            mockReadLine.Setup(x => x.GetNextString()).Returns("");
+            var thief = new ThiefProficiency(mockReadLine.Object);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = thief
@@ -322,8 +334,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             //Act
             thief.StealCard(thiefChar, victim, mockRandom.Object, mockTestReadLine.Object);
             //Assert
-            thiefChar.Deck.Should().HaveCount(1);
-            thiefChar.Deck[0].Should().BeSameAs(itemToSteal);
+            thiefChar.Deck.Count().Should().Be(1);
+            thiefChar.Deck.Items[0].Should().BeSameAs(itemToSteal);
             victim.UserAvatar.Build.RightHandItem.Should().NotBeNull();
             victim.UserAvatar.Build.Helmet.Should().NotBeNull();
             victim.UserAvatar.Build.Armor.Should().NotBeNull();
@@ -344,7 +356,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             mockTestReadLine.Setup(x => x.GetNextString()).Returns("1");
             var drawCardService = new DrawCardService(random);
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
-            var thief = new ThiefProficiency();
+            var mockReadLine = new Mock<ReadLineOverride>();
+            mockReadLine.Setup(x => x.GetNextString()).Returns("");
+            var thief = new ThiefProficiency(mockReadLine.Object);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = thief
@@ -373,9 +387,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             //Act
             thief.StealCard(thiefChar, victim, mockRandom.Object, mockTestReadLine.Object);
             //Assert
-            thiefChar.Deck.Should().HaveCount(0);
             victim.UserAvatar.Build.Helmet.Should().BeSameAs(itemToSteal);
             victim.UserAvatar.WasRob.Should().BeTrue();
+            thiefChar.Deck.Count().Should().Be(0);
         }
 
 
@@ -391,7 +405,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             mockTestReadLine.Setup(x => x.GetNextString()).Returns("1");
             var drawCardService = new DrawCardService(random);
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
-            var thief = new ThiefProficiency();
+            var mockReadLine = new Mock<ReadLineOverride>();
+            mockReadLine.Setup(x => x.GetNextString()).Returns("");
+            var thief = new ThiefProficiency(mockReadLine.Object);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = thief
@@ -423,8 +439,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             thief.StealCard(thiefChar, victim, mockRandom.Object, mockTestReadLine.Object);
             thief.StealCard(thiefChar, victim, mockRandom.Object, mockTestReadLine.Object);
             //Assert
-            thiefChar.Deck.Should().HaveCount(1);
-            thiefChar.Deck[0].Should().BeSameAs(itemToSteal);
+            thiefChar.Deck.Count().Should().Be(1);
+            thiefChar.Deck.Items[0].Should().BeSameAs(itemToSteal);
             victim.UserAvatar.Build.Helmet.Should().BeNull();
             victim.UserAvatar.Build.Armor.Should().BeSameAs(secondItem);
             victim.UserAvatar.WasRob.Should().BeTrue();
@@ -434,9 +450,11 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
         public void BackStabSuccessTest()
         {
             //Arrange
+            var mockReadLine = new Mock<ReadLineOverride>();
+            mockReadLine.Setup(x => x.GetNextString()).Returns("");
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(m => m.Next(6)).Returns(4);
-            var thief = new ThiefProficiency();
+            var thief = new ThiefProficiency(mockReadLine.Object);
             var avatar1 = new UserAvatar()
             {
                 Proficiency = thief
@@ -468,7 +486,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             //Arrange
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(m => m.Next(6)).Returns(1);
-            var thief = new ThiefProficiency();
+            var mockReadLine = new Mock<ReadLineOverride>();
+            mockReadLine.Setup(x => x.GetNextString()).Returns("");
+            var thief = new ThiefProficiency(mockReadLine.Object);
             var avatar1 = new UserAvatar()
             {
                 Proficiency = thief
@@ -500,7 +520,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             //Arrange
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(m => m.Next(6)).Returns(4);
-            var thief = new ThiefProficiency();
+            var mockReadLine = new Mock<ReadLineOverride>();
+            mockReadLine.Setup(x => x.GetNextString()).Returns("");
+            var thief = new ThiefProficiency(mockReadLine.Object);
             var avatar1 = new UserAvatar()
             {
                 Proficiency = thief

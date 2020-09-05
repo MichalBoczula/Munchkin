@@ -48,7 +48,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             //Assert
             userBeforeDeckInicialize.Deck.Should().NotBeNull();
             userBeforeDeckInicialize.IsDeckInicialize.Should().BeTrue();
-            userAfterDeckInicialize.Deck.Should().BeNull();
+            userAfterDeckInicialize.Deck.Count().Should().Be(0);
         }
 
         [Fact]
@@ -65,7 +65,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             //Act
             user = prizeStackController.DrawCardPrizeCards(user, howMany2);
             //Assert
-            user.Deck.Should().HaveCount(7);
+            user.Deck.Count().Should().Be(7);
             prizeStackController.PrizeStack.Deck.Should().HaveCount(13);
         }
     }

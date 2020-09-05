@@ -38,7 +38,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             user.UserAvatar.Proficiency.BeStronger(user, 1);
             //Assert
             user.UserAvatar.TempPower.Should().Be(4);
-            user.Deck.Should().HaveCount(2);
+            user.Deck.Count().Should().Be(2);
         }
 
         [Fact]
@@ -64,7 +64,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             user.UserAvatar.Proficiency.BeStronger(user, 1);
             //Assert
             user.UserAvatar.TempPower.Should().Be(1);
-            user.Deck.Should().BeEmpty();
+            user.Deck.Count().Should().Be(0);
         }
 
         [Fact]
@@ -88,7 +88,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             user.UserAvatar.Proficiency.BeStronger(user, 1);
             //Assert
             user.UserAvatar.TempPower.Should().Be(1);
-            user.Deck.Should().BeNull();
+            user.Deck.Count().Should().Be(0);
         }
 
         [Fact]
@@ -116,7 +116,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             user.UserAvatar.Proficiency.BeStronger(user, 1);
             //Assert
             user.UserAvatar.TempPower.Should().Be(4);
-            user.Deck.Should().HaveCount(2);
+            user.Deck.Count().Should().Be(2);
         }
     }
 }

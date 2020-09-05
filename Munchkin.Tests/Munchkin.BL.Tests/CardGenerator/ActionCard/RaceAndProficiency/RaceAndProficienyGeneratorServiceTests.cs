@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace Munchkin.Tests.Munchkin.BL.Tests.CardGenerator.RaceAndProficiency
+namespace Munchkin.Tests.Munchkin.BL.Tests.CardGenerator.CardStack.RaceAndProficiency
 {
     public class RaceAndProficienyGeneratorServiceTests
     {

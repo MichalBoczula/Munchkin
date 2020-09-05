@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Munchkin.Model;
+using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret;
 using Munchkin.Model.Character;
 using Munchkin.Model.User;
 using System;
