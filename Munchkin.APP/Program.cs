@@ -5,7 +5,9 @@ using Munchkin.BL.GameController;
 using Munchkin.BL.Helper;
 using Munchkin.BL.InformationModel;
 using Munchkin.Model;
+using Munchkin.Model.Card.ActionCard;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Abstract;
+using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret;
 using Munchkin.Model.Card.PrizeCard;
 using Munchkin.Model.Character;
 using Munchkin.Model.Character.Hero.Proficiency;
@@ -30,16 +32,16 @@ namespace Munchkin.APP
             var readLineOverride = new ReadLineOverride();
             var createInformationModel = new CreateInformationModel();
             var createCharacterController = new CreateCharacterController(createInformationModel, characterCreatorControlerService, game, readLineOverride);
-            
+
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
             var gameFlowController = new GameFlowController(createCharacterController, game, readLineOverride, prizeStackController, stackCardGeneratorService);
 
             //Act
-            //gameFlowController.CreateUsers();
-            //gameFlowController.CreateCharacters();
-            //gameFlowController.InitializeDeckForUsers();
+            gameFlowController.CreateUsers();
+            gameFlowController.CreateCharacters();
+            gameFlowController.InitializeDeckForUsers();
             gameFlowController.InitializeMonsterCards();
-            int num = 0; ;
+            int num = 0;
         }
     }
 }
