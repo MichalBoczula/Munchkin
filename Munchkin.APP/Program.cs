@@ -32,16 +32,18 @@ namespace Munchkin.APP
             var readLineOverride = new ReadLineOverride();
             var createInformationModel = new CreateInformationModel();
             var createCharacterController = new CreateCharacterController(createInformationModel, characterCreatorControlerService, game, readLineOverride);
+            var makeActionController = new MakeActionController(game);
 
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
-            var gameFlowController = new GameFlowController(createCharacterController, game, readLineOverride, prizeStackController, stackCardGeneratorService);
+            var gameFlowController = new GameFlowController(createCharacterController, game, readLineOverride,
+                                                            prizeStackController, stackCardGeneratorService,
+                                                            drawCardService, makeActionController);
 
             //Act
             gameFlowController.CreateUsers();
             gameFlowController.CreateCharacters();
             gameFlowController.InitializeDeckForUsers();
             gameFlowController.InitializeMonsterCards();
-            int num = 0;
         }
     }
 }
