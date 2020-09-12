@@ -19,7 +19,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var sirens = new Sirens("Sirens", CardType.Action);
+            var sirens = new Sirens("Sirens", CardType.Monster);
             var warrior = new WarriorProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -42,7 +42,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var sirens = new Sirens("Sirens", CardType.Action);
+            var sirens = new Sirens("Sirens", CardType.Monster);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -64,7 +64,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var sirens = new Sirens("Sirens", CardType.Action);
+            var sirens = new Sirens("Sirens", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -90,7 +90,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var sirens = new Sirens("Sirens", CardType.Action);
+            var sirens = new Sirens("Sirens", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()

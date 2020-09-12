@@ -17,7 +17,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void HowManyItemsShouldTrueTest()
         {
             //Arrange
-            var strangeDuck = new StrangeDuck("Strange Duck", CardType.Action);
+            var strangeDuck = new StrangeDuck("Strange Duck", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -41,7 +41,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void HowManyItemsShouldFalseTest()
         {
             //Arrange
-            var strangeDuck = new StrangeDuck("Strange Duck", CardType.Action);
+            var strangeDuck = new StrangeDuck("Strange Duck", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -63,7 +63,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var strangeDuck = new StrangeDuck("Strange Duck", CardType.Action);
+            var strangeDuck = new StrangeDuck("Strange Duck", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -88,7 +88,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var strangeDuck = new StrangeDuck("Strange Duck", CardType.Action);
+            var strangeDuck = new StrangeDuck("Strange Duck", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -112,7 +112,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var strangeDuck = new StrangeDuck("Strange Duck", CardType.Action);
+            var strangeDuck = new StrangeDuck("Strange Duck", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -148,7 +148,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var strangeDuck = new StrangeDuck("Strange Duck", CardType.Action);
+            var strangeDuck = new StrangeDuck("Strange Duck", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()

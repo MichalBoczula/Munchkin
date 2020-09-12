@@ -17,10 +17,10 @@ namespace Munchkin.Model.Card.CardFactory
 
             var result = cardType switch
             {
-                RaceType.ElfRace => new RaceCard("elf card", CardType.Action, elf),
-                RaceType.DwarfRace => new RaceCard("dwarf card", CardType.Action, dwarf),
-                RaceType.HalfingRace => new RaceCard("halfing card", CardType.Action, halfing),
-                RaceType.HumaRace => new RaceCard("human card", CardType.Action, human),
+                RaceType.ElfRace => new RaceCard("elf card", CardType.Initial, elf),
+                RaceType.DwarfRace => new RaceCard("dwarf card", CardType.Initial, dwarf),
+                RaceType.HalfingRace => new RaceCard("halfing card", CardType.Initial, halfing),
+                RaceType.HumaRace => new RaceCard("human card", CardType.Initial, human),
                 _ => null
             };
             return result;

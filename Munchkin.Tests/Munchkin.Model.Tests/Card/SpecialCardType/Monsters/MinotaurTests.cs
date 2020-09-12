@@ -18,7 +18,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var minotaur = new Minotaur("Minotaur", CardType.Action);
+            var minotaur = new Minotaur("Minotaur", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -42,7 +42,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var minotaur = new Minotaur("Minotaur", CardType.Action);
+            var minotaur = new Minotaur("Minotaur", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -62,7 +62,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var minotaur = new Minotaur("Minotaur", CardType.Action);
+            var minotaur = new Minotaur("Minotaur", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -87,7 +87,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var minotaur = new Minotaur("Minotaur", CardType.Action);
+            var minotaur = new Minotaur("Minotaur", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()

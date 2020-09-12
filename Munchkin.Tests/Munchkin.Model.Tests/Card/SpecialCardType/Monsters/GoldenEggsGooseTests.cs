@@ -23,7 +23,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var game = new Game();
             var mockTestReadLine = new Mock<TestReadLine>();
             mockTestReadLine.Setup(x => x.GetNextString()).Returns("1");
-            var goose = new GoldenEggsGoose("Goose", CardType.Action, mockTestReadLine.Object);
+            var goose = new GoldenEggsGoose("Goose", CardType.Monster, mockTestReadLine.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -47,7 +47,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var game = new Game();
             var mockTestReadLine = new Mock<TestReadLine>();
             mockTestReadLine.Setup(x => x.GetNextString()).Returns("2");
-            var goose = new GoldenEggsGoose("Goose", CardType.Action, mockTestReadLine.Object);
+            var goose = new GoldenEggsGoose("Goose", CardType.Monster, mockTestReadLine.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -69,7 +69,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             //Arrange
             var game = new Game();
             var mockTestReadLine = new Mock<TestReadLine>();
-            var goldenEggsGoose = new GoldenEggsGoose("Golden Eggs Goose", CardType.Action, mockTestReadLine.Object);
+            var goldenEggsGoose = new GoldenEggsGoose("Golden Eggs Goose", CardType.Monster, mockTestReadLine.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -90,7 +90,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             //Arrange
             var game = new Game();
             var mockTestReadLine = new Mock<TestReadLine>();
-            var goldenEggsGoose = new GoldenEggsGoose("Golden Eggs Goose", CardType.Action, mockTestReadLine.Object);
+            var goldenEggsGoose = new GoldenEggsGoose("Golden Eggs Goose", CardType.Monster, mockTestReadLine.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -119,7 +119,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             //Arrange
             var game = new Game();
             var mockTestReadLine = new Mock<TestReadLine>();
-            var goldenEggsGoose = new GoldenEggsGoose("Golden Eggs Goose", CardType.Action, mockTestReadLine.Object);
+            var goldenEggsGoose = new GoldenEggsGoose("Golden Eggs Goose", CardType.Monster, mockTestReadLine.Object);
             var userAvatar = new UserAvatar();
             var user = new UserClass()
             {
@@ -142,7 +142,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             //Arrange
             var game = new Game();
             var mockTestReadLine = new Mock<TestReadLine>();
-            var goldenEggsGoose = new GoldenEggsGoose("Golden Eggs Goose", CardType.Action, mockTestReadLine.Object);
+            var goldenEggsGoose = new GoldenEggsGoose("Golden Eggs Goose", CardType.Monster, mockTestReadLine.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -168,7 +168,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             //Arrange
             var game = new Game();
             var mockTestReadLine = new Mock<TestReadLine>();
-            var goldenEggsGoose = new GoldenEggsGoose("Golden Eggs Goose", CardType.Action, mockTestReadLine.Object);
+            var goldenEggsGoose = new GoldenEggsGoose("Golden Eggs Goose", CardType.Monster, mockTestReadLine.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()

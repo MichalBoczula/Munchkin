@@ -2,7 +2,10 @@
 {
     public enum CardType
     {
-        Action,
-        Prize
+        Monster,
+        Special,
+        Curse,
+        Prize,
+        Initial
     }
 }

@@ -17,7 +17,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var bloodyMary = new BloodyMary("Bloody Mary", CardType.Action);
+            var bloodyMary = new BloodyMary("Bloody Mary", CardType.Monster);
             var userAvatar = new UserAvatar();
             var user = new UserClass()
             {
@@ -41,7 +41,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var bloodyMary = new BloodyMary("Bloody Mary", CardType.Action);
+            var bloodyMary = new BloodyMary("Bloody Mary", CardType.Monster);
             var userAvatar = new UserAvatar();
             var user = new UserClass()
             {

@@ -13,7 +13,7 @@ namespace Munchkin.Model.User
         public List<PrizeCardBase> Prizes{ get; set; }
         public List<PrizeCardBase> DestroyedPrizeCards { get; set; }
         public List<ActionCardBase> ActionCards { get; set; }
-        public List<ActionCardBase> DefeatMonstersCards { get; set; }
+        public List<ActionCardBase> DestroyedActionCards { get; set; }
 
         public Game()
         {
@@ -21,7 +21,7 @@ namespace Munchkin.Model.User
             Prizes = new List<PrizeCardBase>();
             DestroyedPrizeCards = new List<PrizeCardBase>();
             ActionCards = new List<ActionCardBase>();
-            DefeatMonstersCards = new List<ActionCardBase>();
+            DestroyedActionCards = new List<ActionCardBase>();
         }
     }
 }

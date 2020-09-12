@@ -18,7 +18,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var cerber = new Cerber("Cerber", CardType.Action);
+            var cerber = new Cerber("Cerber", CardType.Monster);
             var priest = new PriestProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -41,7 +41,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var cerber = new Cerber("Cerber", CardType.Action);
+            var cerber = new Cerber("Cerber", CardType.Monster);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -64,7 +64,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var cerber = new Cerber("Cerber", CardType.Action);
+            var cerber = new Cerber("Cerber", CardType.Monster);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {

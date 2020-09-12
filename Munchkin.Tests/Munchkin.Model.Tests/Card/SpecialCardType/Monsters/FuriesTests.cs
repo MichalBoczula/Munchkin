@@ -23,7 +23,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             mockReadLine.Setup(x => x.GetNextString()).Returns("");
             var thief = new ThiefProficiency(mockReadLine.Object);
             var game = new Game();
-            var furies = new Furies("Furies", CardType.Action);
+            var furies = new Furies("Furies", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = thief
@@ -45,7 +45,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var furies = new Furies("Furies", CardType.Action);
+            var furies = new Furies("Furies", CardType.Monster);
             var warrior = new WarriorProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -68,7 +68,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var furies = new Furies("Furies", CardType.Action);
+            var furies = new Furies("Furies", CardType.Monster);
             var userAvatar = new UserAvatar();
             var user = new UserClass()
             {

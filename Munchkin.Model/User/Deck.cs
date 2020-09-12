@@ -11,13 +11,13 @@ namespace Munchkin.Model.User
     {
         public List<ItemCard> Items { get; set; }
         public List<MonsterCardBase> Monsters { get; set; }
-        public List<MagicCard> MagicCards { get; set; }
+        public List<ActionCardBase> MagicCards { get; set; }
 
         public Deck()
         {
             Items = new List<ItemCard>();
             Monsters = new List<MonsterCardBase>();
-            MagicCards = new List<MagicCard>();
+            MagicCards = new List<ActionCardBase>();
         }
 
         public  void Clear()

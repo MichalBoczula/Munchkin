@@ -18,7 +18,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var frozenGiant = new FrozenGiant("Frozen Giant", CardType.Prize);
+            var frozenGiant = new FrozenGiant("Frozen Giant", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -41,7 +41,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void SpecialPowerHalfingTest()
         {
             var game = new Game();
-            var frozenGiant = new FrozenGiant("Frozen Giant", CardType.Prize);
+            var frozenGiant = new FrozenGiant("Frozen Giant", CardType.Monster);
             var halfing = new Halfling("Halfling");
             var userAvatar = new UserAvatar()
             {
@@ -64,7 +64,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void SpecialPowerDiffrentRaceTest()
         {
             var game = new Game();
-            var frozenGiant = new FrozenGiant("Frozen Giant", CardType.Prize);
+            var frozenGiant = new FrozenGiant("Frozen Giant", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()

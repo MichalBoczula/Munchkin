@@ -18,7 +18,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var fenrir = new Fenrir("Fenrir", CardType.Action);
+            var fenrir = new Fenrir("Fenrir", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = new PriestProficiency()
@@ -40,7 +40,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var fenrir = new Fenrir("Fenrir", CardType.Action);
+            var fenrir = new Fenrir("Fenrir", CardType.Monster);
             var userAvatar = new UserAvatar();
             var user = new UserClass()
             {
@@ -59,7 +59,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var fenrir = new Fenrir("Fenrir", CardType.Action);
+            var fenrir = new Fenrir("Fenrir", CardType.Monster);
             var userAvatar = new UserAvatar();
             var user = new UserClass()
             {

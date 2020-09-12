@@ -19,11 +19,11 @@ namespace Munchkin.Model.Card.CardFactory
 
             var result = cardType switch
             {
-                ProfiencyType.Mage => new ProficiencyCard("mage card", CardType.Action, mage),
-                ProfiencyType.Priest => new ProficiencyCard("priest card", CardType.Action, priest),
-                ProfiencyType.Thief => new ProficiencyCard("thief card", CardType.Action, thief),
-                ProfiencyType.Warrior => new ProficiencyCard("warrior card", CardType.Action, warrior),
-                ProfiencyType.NoOne => new ProficiencyCard("noOne card", CardType.Action, noOne),
+                ProfiencyType.Mage => new ProficiencyCard("mage card", CardType.Initial, mage),
+                ProfiencyType.Priest => new ProficiencyCard("priest card", CardType.Initial, priest),
+                ProfiencyType.Thief => new ProficiencyCard("thief card", CardType.Initial, thief),
+                ProfiencyType.Warrior => new ProficiencyCard("warrior card", CardType.Initial, warrior),
+                ProfiencyType.NoOne => new ProficiencyCard("noOne card", CardType.Initial, noOne),
                 _=> null
             };
             return result;

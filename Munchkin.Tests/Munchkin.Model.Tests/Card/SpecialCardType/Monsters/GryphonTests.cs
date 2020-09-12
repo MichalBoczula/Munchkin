@@ -18,7 +18,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var gryphon = new Gryphon("Gryphon", CardType.Action);
+            var gryphon = new Gryphon("Gryphon", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -40,7 +40,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var gryphon = new Gryphon("Gryphon", CardType.Action);
+            var gryphon = new Gryphon("Gryphon", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -64,7 +64,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var gryphon = new Gryphon("Gryphon", CardType.Action);
+            var gryphon = new Gryphon("Gryphon", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -88,7 +88,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var gryphon = new Gryphon("Gryphon", CardType.Action);
+            var gryphon = new Gryphon("Gryphon", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()

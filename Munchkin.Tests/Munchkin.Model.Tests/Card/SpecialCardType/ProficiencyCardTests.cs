@@ -17,7 +17,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType
         {
             //Arrange
             var mage = new MageProficiency();
-            var raceCard = new ProficiencyCard("mage", CardType.Action, mage);
+            var raceCard = new ProficiencyCard("mage", CardType.Initial, mage);
             var userAvatar = new UserAvatar();
             var userClass = new UserClass()
             {

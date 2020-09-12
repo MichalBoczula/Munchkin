@@ -19,7 +19,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var mordredFallenKnight = new MordredFallenKnight("Mordred Fallen Knight", CardType.Action);
+            var mordredFallenKnight = new MordredFallenKnight("Mordred Fallen Knight", CardType.Monster);
             var proficiency = new WarriorProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -42,7 +42,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var mordredFallenKnight = new MordredFallenKnight("Mordred Fallen Knight", CardType.Action);
+            var mordredFallenKnight = new MordredFallenKnight("Mordred Fallen Knight", CardType.Monster);
             var priest = new PriestProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -65,7 +65,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var mordredFallenKnight = new MordredFallenKnight("Mordred Fallen Knight", CardType.Action);
+            var mordredFallenKnight = new MordredFallenKnight("Mordred Fallen Knight", CardType.Monster);
             var priest = new PriestProficiency();
             var userAvatar = new UserAvatar()
             {

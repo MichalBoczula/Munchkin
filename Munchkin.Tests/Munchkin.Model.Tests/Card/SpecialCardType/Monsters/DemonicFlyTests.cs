@@ -18,7 +18,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var demonicFly = new DemonicFly("Demonic Fly", CardType.Action);
+            var demonicFly = new DemonicFly("Demonic Fly", CardType.Monster);
             var elf = new Elf("elf");
             var userAvatar = new UserAvatar()
             {
@@ -42,7 +42,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var demonicFly = new DemonicFly("Demonic Fly", CardType.Action);
+            var demonicFly = new DemonicFly("Demonic Fly", CardType.Monster);
             var dwarf = new Dwarf("dwarf");
             var userAvatar = new UserAvatar()
             {
@@ -67,7 +67,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var demonicFly = new DemonicFly("Demonic Fly", CardType.Action);
+            var demonicFly = new DemonicFly("Demonic Fly", CardType.Monster);
             var elf = new Elf("elf");
             var userAvatar = new UserAvatar()
             {
@@ -89,7 +89,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var demonicFly = new DemonicFly("Demonic Fly", CardType.Action);
+            var demonicFly = new DemonicFly("Demonic Fly", CardType.Monster);
             var dwarf = new Dwarf("dwarf");
             var userAvatar = new UserAvatar()
             {

@@ -9,7 +9,7 @@ namespace Munchkin.Model.Character.Hero.Proficiency
     public class ThiefProficiency : ProficiencyBase, IThiefAction
     {
         private readonly InformationModelThiefProficiency _informationModelThiefProficiency;
-        private ReadLineOverride readLineOverride { get; set; }
+        private new ReadLineOverride readLineOverride { get; set; }
 
         public ThiefProficiency(ReadLineOverride readLineOverride)
         {

@@ -79,7 +79,7 @@ namespace Munchkin.Model.Character
             whichOne -= 1;
             ItemCard item;
             MonsterCardBase monster;
-            MagicCard magicCard;
+            ActionCardBase magicCard;
             if (whichOne < user.Deck.Items.Count)
             {
                 item = user.Deck.Items[whichOne];

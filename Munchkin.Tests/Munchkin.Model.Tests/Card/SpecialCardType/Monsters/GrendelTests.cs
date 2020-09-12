@@ -15,7 +15,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         {
             //Arrange
             var game = new Game();
-            var grendel = new Grendel("Grendel", CardType.Action);
+            var grendel = new Grendel("Grendel", CardType.Monster);
             var userAvatar = new UserAvatar();
             var user = new UserClass()
             {
@@ -34,7 +34,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         {
             //Arrange
             var game = new Game();
-            var grendel = new Grendel("Grendel", CardType.Action);
+            var grendel = new Grendel("Grendel", CardType.Monster);
             var userAvatar = new UserAvatar();
             var user = new UserClass()
             {

@@ -21,7 +21,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var quetzalcoatl = new Quetzalcoatl("Quetzalcoatl", CardType.Action);
+            var quetzalcoatl = new Quetzalcoatl("Quetzalcoatl", CardType.Monster);
             var userAvatar = new UserAvatar();
             var user = new UserClass()
             {
@@ -41,7 +41,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var quetzalcoatl = new Quetzalcoatl("Quetzalcoatl", CardType.Action);
+            var quetzalcoatl = new Quetzalcoatl("Quetzalcoatl", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = new PriestProficiency()
@@ -67,7 +67,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var drawCardService = new DrawCardService(random);
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
             var game = new Game();
-            var quetzalcoatl = new Quetzalcoatl("Quetzalcoatl", CardType.Action);
+            var quetzalcoatl = new Quetzalcoatl("Quetzalcoatl", CardType.Monster);
             var userAvatar = new UserAvatar();
             var user = new UserClass()
             {
@@ -90,7 +90,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var drawCardService = new DrawCardService(random);
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
             var game = new Game();
-            var quetzalcoatl = new Quetzalcoatl("Quetzalcoatl", CardType.Action);
+            var quetzalcoatl = new Quetzalcoatl("Quetzalcoatl", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = new PriestProficiency()

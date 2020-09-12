@@ -18,7 +18,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var kraken = new Kraken("Kraken", CardType.Action);
+            var kraken = new Kraken("Kraken", CardType.Monster);
             var userAvatar = new UserAvatar();
             var user = new UserClass()
             {
@@ -38,7 +38,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var kraken = new Kraken("Kraken", CardType.Action);
+            var kraken = new Kraken("Kraken", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Race = new Halfling("Halfing")
@@ -60,7 +60,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var kraken = new Kraken("Kraken", CardType.Action);
+            var kraken = new Kraken("Kraken", CardType.Monster);
             var userAvatar = new UserAvatar();
             var user = new UserClass()
             {

@@ -18,19 +18,25 @@ namespace Munchkin.BL.GameController
         private PrizeStackController prizeStackController;
         private GameFlowInformation gameFlowInformation;
         private StackCardGeneratorService stackCardGeneratorService;
+        private DrawCardService drawCardService;
+        private MakeActionController makeActionController;
 
         public GameFlowController(CreateCharacterController createCharacterController,
                                   Game game,
                                   ReadLineOverride readLineOverride,
                                   PrizeStackController prizeStackController,
-                                  StackCardGeneratorService stackCardGeneratorService)
+                                  StackCardGeneratorService stackCardGeneratorService,
+                                  DrawCardService drawCardService,
+                                  MakeActionController makeActionController)
         {
             this.createCharacterController = createCharacterController;
             this.game = game;
             this.readLineOverride = readLineOverride;
             this.prizeStackController = prizeStackController;
             this.stackCardGeneratorService = stackCardGeneratorService;
+            this.drawCardService = drawCardService;
             gameFlowInformation = new GameFlowInformation();
+            this.makeActionController = makeActionController;
         }
 
         public void CreateUsers()
@@ -101,6 +107,15 @@ namespace Munchkin.BL.GameController
         public void InitializeMonsterCards()
         {
             game.ActionCards.AddRange(stackCardGeneratorService.GenerateMonsterCards());
+            drawCardService.Shuffle(game.ActionCards);
+        }
+
+        public void PlayTheGame()
+        {
+            foreach (var user in game.Users)
+            {
+                makeActionController.OpenMisteryDoor(user, null);
+            }
         }
     }
 }

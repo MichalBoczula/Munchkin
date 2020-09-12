@@ -14,7 +14,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.CardFactory
         public void CreateWeaponCardTest()
         {
             //Arrange
-            var monsterFactory = new MonstersFactory();
+            var monsterFactory = new MonsterFactory();
             //Act
             var m1 = monsterFactory.CreateMonster(1);
             var m2 = monsterFactory.CreateMonster(2);

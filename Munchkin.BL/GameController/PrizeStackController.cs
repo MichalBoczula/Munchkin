@@ -22,6 +22,7 @@ namespace Munchkin.BL.GameController
             _drawCardService = drawCardService;
             _stackCardGeneratorService = stackCardGeneratorService;
             PrizeStack = _stackCardGeneratorService.GeneratePrizeStack();
+            _drawCardService.Shuffle(PrizeStack.Deck);
         }
 
         public UserClass DrawCardsForStartDeck(UserClass user)

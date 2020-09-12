@@ -18,7 +18,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var creeps = new Creeps("Creeps", CardType.Action);
+            var creeps = new Creeps("Creeps", CardType.Monster);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -43,7 +43,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var creeps = new Creeps("Creeps", CardType.Action);
+            var creeps = new Creeps("Creeps", CardType.Monster);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -65,7 +65,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var creeps = new Creeps("Creeps", CardType.Action);
+            var creeps = new Creeps("Creeps", CardType.Monster);
             var warrior = new WarriorProficiency();
             var userAvatar = new UserAvatar()
             {

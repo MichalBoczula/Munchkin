@@ -18,7 +18,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var shiva = new Shiva("Shiva", CardType.Action);
+            var shiva = new Shiva("Shiva", CardType.Monster);
             var userAvatar = new UserAvatar();
             var user = new UserClass()
             {
@@ -37,7 +37,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var shiva = new Shiva("Shiva", CardType.Action);
+            var shiva = new Shiva("Shiva", CardType.Monster);
             var userAvatar = new UserAvatar();
             var user = new UserClass()
             {
@@ -60,7 +60,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var shiva = new Shiva("Shiva", CardType.Action);
+            var shiva = new Shiva("Shiva", CardType.Monster);
             var userAvatar = new UserAvatar();
             var user = new UserClass()
             {
@@ -82,7 +82,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var shiva = new Shiva("Shiva", CardType.Action);
+            var shiva = new Shiva("Shiva", CardType.Monster);
             var userAvatar = new UserAvatar();
             var user = new UserClass()
             {

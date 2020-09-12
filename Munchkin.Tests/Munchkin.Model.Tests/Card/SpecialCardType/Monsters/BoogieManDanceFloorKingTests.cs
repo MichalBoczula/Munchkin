@@ -18,7 +18,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var boogieManDanceFloorKing = new BoogieManDanceFloorKing("Boogie Man Dance Floor King", CardType.Action);
+            var boogieManDanceFloorKing = new BoogieManDanceFloorKing("Boogie Man Dance Floor King", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -42,7 +42,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var boogieManDanceFloorKing = new BoogieManDanceFloorKing("Boogie Man Dance Floor King", CardType.Action);
+            var boogieManDanceFloorKing = new BoogieManDanceFloorKing("Boogie Man Dance Floor King", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -64,7 +64,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var boogieManDanceFloorKing = new BoogieManDanceFloorKing("Boogie Man Dance Floor King", CardType.Action);
+            var boogieManDanceFloorKing = new BoogieManDanceFloorKing("Boogie Man Dance Floor King", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -89,7 +89,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var boogieManDanceFloorKing = new BoogieManDanceFloorKing("Boogie Man Dance Floor King", CardType.Action);
+            var boogieManDanceFloorKing = new BoogieManDanceFloorKing("Boogie Man Dance Floor King", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()

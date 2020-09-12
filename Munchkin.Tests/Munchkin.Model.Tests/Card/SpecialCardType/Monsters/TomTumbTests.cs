@@ -19,7 +19,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var tombTumb = new TomTumb("Tom Tumb", CardType.Action);
+            var tombTumb = new TomTumb("Tom Tumb", CardType.Monster);
             var race = new Elf("elf");
             var userAvatar = new UserAvatar()
             {
@@ -53,7 +53,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var tombTumb = new TomTumb("Tom Tumb", CardType.Action);
+            var tombTumb = new TomTumb("Tom Tumb", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -77,7 +77,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var tombTumb = new TomTumb("Tom Tumb", CardType.Action);
+            var tombTumb = new TomTumb("Tom Tumb", CardType.Monster);
             var race = new Halfling("elf");
             var userAvatar = new UserAvatar()
             {

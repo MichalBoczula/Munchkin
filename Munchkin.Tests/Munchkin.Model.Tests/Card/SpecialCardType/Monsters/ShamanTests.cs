@@ -18,7 +18,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var shaman = new Shaman("Shaman", CardType.Action);
+            var shaman = new Shaman("Shaman", CardType.Monster);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -41,7 +41,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var shaman = new Shaman("Shaman", CardType.Action);
+            var shaman = new Shaman("Shaman", CardType.Monster);
             var priest = new PriestProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -64,7 +64,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var shaman = new Shaman("Shaman", CardType.Action);
+            var shaman = new Shaman("Shaman", CardType.Monster);
             var warrior = new WarriorProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -87,7 +87,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var shaman = new Shaman("Shaman", CardType.Action);
+            var shaman = new Shaman("Shaman", CardType.Monster);
             var warrior = new WarriorProficiency();
             var userAvatar = new UserAvatar()
             {

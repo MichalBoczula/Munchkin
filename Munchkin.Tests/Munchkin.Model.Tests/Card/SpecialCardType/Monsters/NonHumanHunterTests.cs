@@ -20,7 +20,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var nonHumanHunter = new NonHumanHunter("Non Human Hunter", CardType.Action);
+            var nonHumanHunter = new NonHumanHunter("Non Human Hunter", CardType.Monster);
             var human = new Human("human");
             var userAvatar = new UserAvatar()
             {
@@ -43,7 +43,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var nonHumanHunter = new NonHumanHunter("Non Human Hunter", CardType.Action);
+            var nonHumanHunter = new NonHumanHunter("Non Human Hunter", CardType.Monster);
             var elf = new Elf("elf");
             var userAvatar = new UserAvatar()
             {
@@ -65,7 +65,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var nonHumanHunter = new NonHumanHunter("Non Human Hunter", CardType.Action);
+            var nonHumanHunter = new NonHumanHunter("Non Human Hunter", CardType.Monster);
             var elf = new Elf("elf");
             var userAvatar = new UserAvatar()
             {
@@ -91,7 +91,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var nonHumanHunter = new NonHumanHunter("Non Human Hunter", CardType.Action);
+            var nonHumanHunter = new NonHumanHunter("Non Human Hunter", CardType.Monster);
             var elf = new Elf("elf");
             var userAvatar = new UserAvatar()
             {

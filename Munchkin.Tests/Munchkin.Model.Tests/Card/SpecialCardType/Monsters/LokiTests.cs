@@ -19,7 +19,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var loki = new Loki("Loki", CardType.Action);
+            var loki = new Loki("Loki", CardType.Monster);
             var userAvatar = new UserAvatar();
             var user = new UserClass()
             {
@@ -39,7 +39,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var loki = new Loki("Loki", CardType.Action);
+            var loki = new Loki("Loki", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -60,7 +60,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var loki = new Loki("Loki", CardType.Action);
+            var loki = new Loki("Loki", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -89,7 +89,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
            
             //Arrange
             var game = new Game();
-            var loki = new Loki("Loki", CardType.Action);
+            var loki = new Loki("Loki", CardType.Monster);
             var userAvatar = new UserAvatar();
             var user = new UserClass()
             {
@@ -111,7 +111,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {         
             //Arrange
             var game = new Game();
-            var loki = new Loki("Loki", CardType.Action);
+            var loki = new Loki("Loki", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -136,7 +136,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var loki = new Loki("Loki", CardType.Action);
+            var loki = new Loki("Loki", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()

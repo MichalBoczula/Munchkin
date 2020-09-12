@@ -18,7 +18,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var jackarey = new Jackarey("Jackarey", CardType.Action);
+            var jackarey = new Jackarey("Jackarey", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -42,7 +42,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var jackarey = new Jackarey("Jackarey", CardType.Action);
+            var jackarey = new Jackarey("Jackarey", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -70,7 +70,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var jackarey = new Jackarey("Jackarey", CardType.Action);
+            var jackarey = new Jackarey("Jackarey", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -97,7 +97,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var jackarey = new Jackarey("Jackarey", CardType.Action);
+            var jackarey = new Jackarey("Jackarey", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -125,7 +125,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var jackarey = new Jackarey("Jackarey", CardType.Action);
+            var jackarey = new Jackarey("Jackarey", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()

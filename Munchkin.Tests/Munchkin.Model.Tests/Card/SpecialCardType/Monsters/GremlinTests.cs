@@ -17,7 +17,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void FindTheMostPowerfulItem()
         {
             //Arrange
-            var gremlin = new Gremlin("Gremlin", CardType.Action);
+            var gremlin = new Gremlin("Gremlin", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -44,7 +44,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var gremlin = new Gremlin("Gremlin", CardType.Action);
+            var gremlin = new Gremlin("Gremlin", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -69,7 +69,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var gremlin = new Gremlin("Gremlin", CardType.Action);
+            var gremlin = new Gremlin("Gremlin", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -91,7 +91,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var gremlin = new Gremlin("Gremlin", CardType.Action);
+            var gremlin = new Gremlin("Gremlin", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -115,7 +115,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var gremlin = new Gremlin("Gremlin", CardType.Action);
+            var gremlin = new Gremlin("Gremlin", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()

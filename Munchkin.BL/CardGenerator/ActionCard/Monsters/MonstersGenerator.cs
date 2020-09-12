@@ -8,12 +8,12 @@ namespace Munchkin.BL.CardGenerator.ActionCard.Monsters
 {
     public class MonstersGenerator
     {
-        private readonly MonstersFactory _monstersFactory;
+        private readonly MonsterFactory _monstersFactory;
         private readonly HashSet<MonsterCardBase> _monsters;
 
         public MonstersGenerator()
         {
-            _monstersFactory = new MonstersFactory();
+            _monstersFactory = new MonsterFactory();
             _monsters = new HashSet<MonsterCardBase>();
         }
 

@@ -21,7 +21,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var game = new Game();
             var mockTestReadLine = new Mock<TestReadLine>();
             mockTestReadLine.Setup(x => x.GetNextString()).Returns("1");
-            var nonDecided = new NonDecided("non Decided", CardType.Action, mockTestReadLine.Object);
+            var nonDecided = new NonDecided("non Decided", CardType.Monster, mockTestReadLine.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -43,7 +43,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var game = new Game();
             var mockTestReadLine = new Mock<TestReadLine>();
             mockTestReadLine.Setup(x => x.GetNextString()).Returns("2");
-            var nonDecided = new NonDecided("non Decided", CardType.Action, mockTestReadLine.Object);
+            var nonDecided = new NonDecided("non Decided", CardType.Monster, mockTestReadLine.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -64,7 +64,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             //Arrange
             var game = new Game();
             var mockTestReadLine = new Mock<TestReadLine>();
-            var nonDecided = new NonDecided("non Decided", CardType.Action, mockTestReadLine.Object);
+            var nonDecided = new NonDecided("non Decided", CardType.Monster, mockTestReadLine.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()

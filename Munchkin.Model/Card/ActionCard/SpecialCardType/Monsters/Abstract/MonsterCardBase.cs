@@ -14,7 +14,6 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Abstract
 
         public MonsterCardBase(string name, CardType cardType) : base(name, cardType)
         {
-            ActionCardType = ActionCardType.Monster;
             Undead = false;
         }
     }

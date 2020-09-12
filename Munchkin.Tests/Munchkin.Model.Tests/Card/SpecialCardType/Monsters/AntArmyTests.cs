@@ -18,7 +18,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var antArmy = new AntArmy("Ant Army", CardType.Action);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster);
             var userAvatar = new UserAvatar();
             var user = new UserClass()
             {
@@ -38,7 +38,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var antArmy = new AntArmy("Ant Army", CardType.Action);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build =  new Build()
@@ -65,7 +65,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var antArmy = new AntArmy("Ant Army", CardType.Action);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()

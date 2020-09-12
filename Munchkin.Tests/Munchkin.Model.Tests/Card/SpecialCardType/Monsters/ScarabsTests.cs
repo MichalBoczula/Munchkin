@@ -18,7 +18,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var scarabs = new Scarabs("Scarabs", CardType.Action);
+            var scarabs = new Scarabs("Scarabs", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -44,7 +44,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var scarabs = new Scarabs("Scarabs", CardType.Action);
+            var scarabs = new Scarabs("Scarabs", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()
@@ -67,7 +67,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         {
             //Arrange
             var game = new Game();
-            var scarabs = new Scarabs("Scarabs", CardType.Action);
+            var scarabs = new Scarabs("Scarabs", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build()

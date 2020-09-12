@@ -25,7 +25,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var thief = new ThiefProficiency(mockReadLine.Object);
             var game = new Game();
             var mockRandom = new Mock<Random>();
-            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Action, mockRandom.Object);
+            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = thief
@@ -48,7 +48,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             //Arrange
             var game = new Game();
             var mockRandom = new Mock<Random>();
-            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Action, mockRandom.Object);
+            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -73,7 +73,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var game = new Game();
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(4);
-            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Action, mockRandom.Object);
+            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -100,7 +100,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var game = new Game();
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(4);
-            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Action, mockRandom.Object);
+            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -125,7 +125,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var game = new Game();
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(3);
-            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Action, mockRandom.Object);
+            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -152,7 +152,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var game = new Game();
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(4);
-            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Action, mockRandom.Object);
+            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -179,7 +179,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var game = new Game();
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(4);
-            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Action, mockRandom.Object);
+            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -204,7 +204,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var game = new Game();
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(3);
-            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Action, mockRandom.Object);
+            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -231,7 +231,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var game = new Game();
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(4);
-            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Action, mockRandom.Object);
+            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -258,7 +258,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var game = new Game();
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(4);
-            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Action, mockRandom.Object);
+            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -283,7 +283,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var game = new Game();
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(3);
-            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Action, mockRandom.Object);
+            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -310,7 +310,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var game = new Game();
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(4);
-            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Action, mockRandom.Object);
+            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -337,7 +337,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var game = new Game();
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(4);
-            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Action, mockRandom.Object);
+            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -362,7 +362,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var game = new Game();
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(3);
-            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Action, mockRandom.Object);
+            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -389,7 +389,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var game = new Game();
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(4);
-            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Action, mockRandom.Object);
+            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -416,7 +416,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var game = new Game();
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(4);
-            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Action, mockRandom.Object);
+            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -441,7 +441,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var game = new Game();
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(3);
-            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Action, mockRandom.Object);
+            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -468,7 +468,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var game = new Game();
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(4);
-            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Action, mockRandom.Object);
+            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -512,7 +512,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var game = new Game();
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(3);
-            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Action, mockRandom.Object);
+            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -551,7 +551,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var game = new Game();
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(4);
-            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Action, mockRandom.Object);
+            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {
@@ -583,7 +583,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var game = new Game();
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(3);
-            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Action, mockRandom.Object);
+            var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
             var mage = new MageProficiency();
             var userAvatar = new UserAvatar()
             {

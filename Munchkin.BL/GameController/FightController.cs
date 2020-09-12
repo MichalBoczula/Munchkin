@@ -6,5 +6,6 @@ namespace Munchkin.BL.GameController
 {
     public class FightController
     {
+
     }
 }

@@ -21,6 +21,7 @@ namespace Munchkin.Model.Character
         public int HowManyCardsThrowToUseSkill { get; set; }
         public NerfType Nerfs { get; set; }
         public bool IsDied { get; set; }
+        public Curses Curses;
 
         public UserAvatar()
         {
@@ -33,18 +34,27 @@ namespace Munchkin.Model.Character
             WasRob = false;
             HowManyCardsThrowToUseSkill = 0;
             Nerfs = new NerfType();
+            Curses = new Curses();
             IsDied = false;
             CountPower();
         }
 
         public void CountPower()
         {
-            Power = Level;
+            Power = 0;
             if (Build != null)
             {
                 if (Build.Helmet != null)
                 {
                     Power += Build.Helmet.Power;
+                }
+                if (Build.Armor != null)
+                {
+                    Power += Build.Armor.Power;
+                }
+                if (Build.Boots != null)
+                {
+                    Power += Build.Boots.Power;
                 }
                 if (Build.LeftHandItem != null)
                 {
@@ -54,10 +64,6 @@ namespace Munchkin.Model.Character
                 {
                     Power += Build.RightHandItem.Power;
                 }
-                if (Build.Boots != null)
-                {
-                    Power += Build.Boots.Power;
-                }
                 if (Build.AdditionalItems != null)
                 {
                     foreach (var item in Build.AdditionalItems)
@@ -65,8 +71,45 @@ namespace Munchkin.Model.Character
                         Power += item.Power;
                     }
                 }
-
             }
+            CheckPoison();
+            CheckWounds();
+            CheckNerfs();
+            CheckCurses();
+            Power += Level;
+            TempPower = Power;
+        }
+
+        public void CheckPoison()
+        {
+            if (Nerfs.Poisoned.Count > 2)
+            {
+                IsDied = true;
+            }
+            else
+            {
+                foreach (var ele in Nerfs.Poisoned)
+                {
+                    Power -= 1;
+                    Level -= 1;
+                }
+            }
+        }
+
+        public void CheckWounds()
+        {
+            if (Nerfs.Wounded.Count == 1)
+            {
+                Power -= 2;
+            }
+            else if (Nerfs.Wounded.Count > 1)
+            {
+                IsDied = true;
+            }
+        }
+
+        public void CheckNerfs()
+        {
             if (Nerfs.Power.Count > 0)
             {
                 foreach (var ele in Nerfs.Power)
@@ -74,18 +117,31 @@ namespace Munchkin.Model.Character
                     Power -= ele;
                 }
             }
-            if (Nerfs.Wounded.Count == 1)
+        }
+
+        public void CheckCurses()
+        {
+            if (Curses.NoDefence)
             {
-                Power -= 2;
+                GlatorsDontHaveDefence();
+                Curses.NoDefence = false;
             }
-            if (Nerfs.Poisoned.Count > 0)
+        }
+
+        public void GlatorsDontHaveDefence()
+        {
+            if (Build.Helmet != null)
             {
-                foreach (var ele in Nerfs.Poisoned)
-                {
-                    Power -= 1;
-                }
+                Power -= Build.Helmet.Power;
             }
-            TempPower = Power;
+            if (Build.Armor != null)
+            {
+                Power -= Build.Armor.Power;
+            }
+            if (Build.Boots != null)
+            {
+                Power -= Build.Boots.Power;
+            }
         }
 
         public void CountFleeChances()
@@ -95,6 +151,7 @@ namespace Munchkin.Model.Character
             {
                 foreach (var ele in Nerfs.FleeChances)
                 {
+                    if (FleeChances == 0) return;
                     FleeChances -= ele;
                 }
             }
@@ -103,58 +160,28 @@ namespace Munchkin.Model.Character
                 FleeChances -= 1;
             }
         }
+        
+        /// <summary>
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// All belowe is To Tests
+        /// All belowe is To Tests
+        /// All belowe is To Tests
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// </summary>
 
-        public void CheckPoison()
-        {
-            if(Nerfs.Poisoned.Count > 0)
-            {
-                foreach(var ele in Nerfs.Poisoned)
-                {
-                    Level -= 1;
-                }
-            }
-        }
-
-        public void CheckWounds()
-        {
-            if (Nerfs.Wounded.Count == 2)
-            {
-                IsDied = true;
-            }
-        }
 
         public void EndTurn()
         {
-            CheckPoison();
-            CountFleeChances();
             CountPower();
+            CountFleeChances();
             TempPower = Power;
             WasBackstab = false;
             WasRob = false;
             HowManyCardsThrowToUseSkill = 0;
-            CheckWounds();
-        }
-    }
-
-    public class NerfType
-    {
-        public List<int> Power { get; set; }
-        public List<int> FleeChances { get; set; }
-        public bool BrokenLegs { get; set; }
-        public bool BrokenRibs { get; set; }
-        public bool DamagedHead { get; set; }
-        public List<bool> TornOffArms { get; set; }
-        public List<bool> Wounded { get; set; }
-        public List<bool> Poisoned { get; set; }
-
-        public NerfType()
-        {
-            Power = new List<int>();
-            FleeChances = new List<int>();
-            BrokenLegs = false;
-            TornOffArms = new List<bool>();
-            Wounded = new List<bool>();
-            Poisoned = new List<bool>();
         }
     }
 }

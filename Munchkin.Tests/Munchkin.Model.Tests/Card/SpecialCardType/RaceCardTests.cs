@@ -17,7 +17,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType
         {
             //Arrange
             var elf = new Elf("elf");
-            var raceCard = new RaceCard("elf", CardType.Action, elf);
+            var raceCard = new RaceCard("elf", CardType.Initial, elf);
             var userAvatar = new UserAvatar();
             var userClass = new UserClass()
             {
