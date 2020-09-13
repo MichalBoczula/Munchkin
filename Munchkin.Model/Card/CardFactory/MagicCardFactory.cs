@@ -10,6 +10,8 @@ namespace Munchkin.Model.Card.CardFactory
     {
         public ActionCardBase CreateMagicCard(int num)
         {
+            var random = new Random();
+            
             ActionCardBase result = num switch
             {
                 1 => new PayToHaron("PayToHaron", CardType.Curse),
@@ -31,12 +33,16 @@ namespace Munchkin.Model.Card.CardFactory
                 17 => new ItIsTooHeavy("It Is Too Heavy", CardType.Curse),
                 18 => new FridayNightCurse("Friday Night Curse", CardType.Curse),
                 19 => new YouHaveAccident("You Have Accident", CardType.Curse),
-                20 => new LetsGoTogether("Lets Go Together", CardType.Curse),
-                21 => new MagicWind("Magic Wind", CardType.Curse),
-                22 => new Titan("Titan", CardType.Curse),
-                23 => new LikeAGod("Like A God", CardType.Curse),
-                24 => new Undead("Undead", CardType.Curse),
-                25 => new SecondLifeForMonster("Second Life For Monster", CardType.Curse),
+                20 => new LetsGoTogether("Lets Go Together", CardType.Special),
+                21 => new MagicWind("Magic Wind", CardType.Special),
+                22 => new Titan("Titan", CardType.Special),
+                23 => new LikeAGod("Like A God", CardType.Special),
+                24 => new Undead("Undead", CardType.Special),
+                25 => new SecondLifeForMonster("Second Life For Monster", CardType.Special),
+                26 => new Crook("Crook", CardType.Special),
+                27 => new Crook("Crook", CardType.Special),
+                28 => new ItemFairy("Item Fairy", CardType.Curse, random),
+                29 => new Gambling("Item Fairy", CardType.Curse, random),
                 _ => null
             };
             return result;
