@@ -35,8 +35,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             //Act
             goose.SpecialPower(game, user);
             //Assert
-            goose.HowManyLevels = 1;
-            goose.NumberOfPrizes = 0;
+            goose.HowManyLevels.Should().Be(1);
+            goose.NumberOfPrizes.Should().Be(0);
         }
 
 
@@ -59,8 +59,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             //Act
             goose.SpecialPower(game, user);
             //Assert
-            goose.HowManyLevels = 0;
-            goose.NumberOfPrizes = 3;
+            goose.HowManyLevels.Should().Be(0);
+            goose.NumberOfPrizes.Should().Be(3);
         }
 
         [Fact]
