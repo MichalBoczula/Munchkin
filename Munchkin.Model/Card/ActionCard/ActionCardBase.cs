@@ -32,6 +32,11 @@ namespace Munchkin.Model.Card.ActionCard
         {
 
         }
+
+        public virtual void CastSpecialSpell(UserClass? user, Game? game, Fight fight)
+        {
+
+        }
 #nullable disable
     }
 }

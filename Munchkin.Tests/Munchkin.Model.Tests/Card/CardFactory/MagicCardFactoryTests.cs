@@ -45,6 +45,11 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.CardFactory
             var m27 = magicCardFactory.CreateMagicCard(27);
             var m28 = magicCardFactory.CreateMagicCard(28);
             var m29 = magicCardFactory.CreateMagicCard(29);
+            var m30 = magicCardFactory.CreateMagicCard(30);
+            var m31 = magicCardFactory.CreateMagicCard(31);
+            var m32 = magicCardFactory.CreateMagicCard(32);
+            var m33 = magicCardFactory.CreateMagicCard(33);
+            var m34 = magicCardFactory.CreateMagicCard(34);
             //Assert
             m1.Should().BeOfType<PayToHaron>();
             m2.Should().BeOfType<ToTheArea>();
@@ -75,6 +80,11 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.CardFactory
             m27.Should().BeOfType<Crook>();
             m28.Should().BeOfType<ItemFairy>();
             m29.Should().BeOfType<Gambling>();
+            m30.Should().BeOfType<DrunkCurse>();
+            m31.Should().BeOfType<WhatAMess>();
+            m32.Should().BeOfType<AdditionalMonster>();
+            m33.Should().BeOfType<AdditionalMonster>();
+            m34.Should().BeOfType<AdditionalMonster>();
         }
     }
 }

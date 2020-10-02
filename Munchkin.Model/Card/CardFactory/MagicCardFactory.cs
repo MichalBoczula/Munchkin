@@ -1,4 +1,5 @@
-﻿using Munchkin.Model.Card.ActionCard;
+﻿using Munchkin.BL.Helper;
+using Munchkin.Model.Card.ActionCard;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace Munchkin.Model.Card.CardFactory
         public ActionCardBase CreateMagicCard(int num)
         {
             var random = new Random();
+            var readLine = new ReadLineOverride();
             
             ActionCardBase result = num switch
             {
@@ -42,7 +44,12 @@ namespace Munchkin.Model.Card.CardFactory
                 26 => new Crook("Crook", CardType.Special),
                 27 => new Crook("Crook", CardType.Special),
                 28 => new ItemFairy("Item Fairy", CardType.Curse, random),
-                29 => new Gambling("Item Fairy", CardType.Curse, random),
+                29 => new Gambling("Gambling", CardType.Curse, random),
+                30 => new DrunkCurse("Item Fairy", CardType.Curse, random),
+                31 => new WhatAMess("Item Fairy", CardType.Curse, random),
+                32 => new AdditionalMonster("AdditionalMonster", CardType.Special, readLine),
+                33 => new AdditionalMonster("AdditionalMonster", CardType.Special, readLine),
+                34 => new AdditionalMonster("AdditionalMonster", CardType.Special, readLine),
                 _ => null
             };
             return result;

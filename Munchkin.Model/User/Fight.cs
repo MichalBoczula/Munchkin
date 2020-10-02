@@ -10,5 +10,11 @@ namespace Munchkin.Model.User
     {
         public List<UserAvatar> Heros{ get; set; }
         public List<MonsterCardBase> Monsters{ get; set; }
+
+        public Fight()
+        {
+            Heros = new List<UserAvatar>();
+            Monsters = new List<MonsterCardBase>();
+        }
     }
 }
