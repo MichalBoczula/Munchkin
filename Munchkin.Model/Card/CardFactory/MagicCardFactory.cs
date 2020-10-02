@@ -25,7 +25,7 @@ namespace Munchkin.Model.Card.CardFactory
                 7 => new ForgotHowToFight("Damaged Head", CardType.Curse),
                 8 => new YouAreNoSkillBro("You Are No Skill Bro", CardType.Curse),
                 9 => new Unlucky("Unlucky", CardType.Curse),
-                10 => new GodIsAngry("Unlucky", CardType.Curse),
+                10 => new GodIsAngry("GodIsAngry", CardType.Curse),
                 11 => new LifeIsHard("Life Is Hard", CardType.Curse),
                 12 => new ItIsTooMuch("It Is Too Much", CardType.Curse),
                 13 => new YouMustToPayMorgage("You Must To Pay Morgage", CardType.Curse),

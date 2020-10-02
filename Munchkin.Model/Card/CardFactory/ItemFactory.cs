@@ -41,15 +41,19 @@ namespace Munchkin.Model.Card.CardFactory
             };
             var moiraRestrictions = new Dictionary<bool, RaceBase>
             {
-                { true, new Dwarf("dwarf") }
+                { true, new Dwarf("Dwarf") }
+            };
+            var elfGoldenArmor = new Dictionary<bool, RaceBase>
+            {
+                { true, new Elf("Elf") }
             };
             var result = name switch
             {
-                "leatherArmor" => new ItemCard("leatherArmor", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Armor, null, 300),
-                "robe" => new ItemCard("robe", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Armor, null, 300), 
-                "moiraArmor" => new ItemCard("moiraArmor", CardType.Prize, PrizeCardType.Item, 3, moiraRestrictions, false, ItemType.Armor, null, 300),
-                "plateArmor" => new ItemCard("plateArmor", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Armor, null, 300),
-                "godsArmor" => new ItemCard("godsArmor", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Armor, godsArmorRestrictions, 300),
+                "ElfGoldenArmor" => new ItemCard("ElfGoldenArmor", CardType.Prize, PrizeCardType.Item, 5, elfGoldenArmor, false, ItemType.Armor, null, 600),
+                "Robe" => new ItemCard("Robe", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Armor, null, 300), 
+                "PlateArmor" => new ItemCard("PlateArmor", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Armor, null, 300),
+                "MoiraArmor" => new ItemCard("MoiraArmor", CardType.Prize, PrizeCardType.Item, 4, moiraRestrictions, false, ItemType.Armor, null, 400),
+                "GodsArmor" => new ItemCard("GodsArmor", CardType.Prize, PrizeCardType.Item, 6, null, false, ItemType.Armor, godsArmorRestrictions, 600),
                 _ => null
             };
             return result;
@@ -57,17 +61,13 @@ namespace Munchkin.Model.Card.CardFactory
 
         public ItemCard CreateBootsCard(string name)
         {
-            var magicBootsRestrictions = new Dictionary<bool, ProficiencyBase>
-            {
-                { true, new MageProficiency() }
-            };
             var result = name switch
             {
-                "bootsOfHaste" => new ItemCard("bootsOfHaste", CardType.Prize, PrizeCardType.Item, 5, null, true, ItemType.Boots, null, 300),
-                "plateBoots" => new ItemCard("plateBoots", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null, 300),
-                "dragonSkinsSandal" => new ItemCard("dragonSkinsSandal", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Boots, null, 300),
-                "magicBoots" => new ItemCard("magicBoots", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Boots, magicBootsRestrictions, 300),
-                "normalBoot" => new ItemCard("normalBoot", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null, 300),
+                "BootsOfHaste" => new ItemCard("BootsOfHaste", CardType.Prize, PrizeCardType.Item, 2, null, true, ItemType.Boots, null, 200),
+                "GlassBoots" => new ItemCard("GlassBoots", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Boots, null, 300),
+                "DragonSkinsSandal" => new ItemCard("DragonSkinsSandal", CardType.Prize, PrizeCardType.Item, 4, null, true, ItemType.Boots, null, 600),
+                "MagicBoots" => new ItemCard("MagicBoots", CardType.Prize, PrizeCardType.Item, 4, null, true, ItemType.Boots, null, 500),
+                "NormalBoot" => new ItemCard("NormalBoot", CardType.Prize, PrizeCardType.Item, 1, null, false, ItemType.Boots, null, 100),
                 _ => null
             };
             return result;
@@ -75,25 +75,21 @@ namespace Munchkin.Model.Card.CardFactory
 
         public ItemCard CreateHelmetCard(string name)
         {
-            var thiefHoodieRestrictions = new Dictionary<bool, ProficiencyBase>
+            var ritualHelmetRestrictions = new Dictionary<bool, ProficiencyBase>
             {
-                { true, new ThiefProficiency(new ReadLineOverride()) }
+                { true, new PriestProficiency() }
             };
-            var wizardHat = new Dictionary<bool, ProficiencyBase>
+            var maskOfDeadRestrictions = new Dictionary<bool, ProficiencyBase>
             {
-                { true, new MageProficiency() }
-            };
-            var elfGoldHelmet = new Dictionary<bool, RaceBase>
-            {
-                {  true, new Elf("elf")}
+                { false, new PriestProficiency() }
             };
             var result = name switch
             {
-                "thiefHoodie" => new ItemCard("thiefHoodie", CardType.Prize, PrizeCardType.Item, 5, null, true, ItemType.Helmet, thiefHoodieRestrictions, 300),
-                "wizardHat" => new ItemCard("wizardHat", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, wizardHat, 300),
-                "elfGoldHelmet" => new ItemCard("elfGoldHelmet", CardType.Prize, PrizeCardType.Item, 3, elfGoldHelmet, true, ItemType.Helmet, null, 300),
-                "plateHelmet" => new ItemCard("plateHelmet", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Helmet, null, 300),
-                "leatherHelmet" => new ItemCard("leatherHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null, 300),
+                "RitualHelmet" => new ItemCard("RitualHelmet", CardType.Prize, PrizeCardType.Item, 4, null, false, ItemType.Helmet, ritualHelmetRestrictions, 500),
+                "WarHelmet" => new ItemCard("WarHelmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null, 400),
+                "MaskOfDead" => new ItemCard("MaskOfDead", CardType.Prize, PrizeCardType.Item, 4, null, false, ItemType.Helmet, maskOfDeadRestrictions, 600),
+                "LaurelWreath" => new ItemCard("LaurelWreath", CardType.Prize, PrizeCardType.Item, 1, null, false, ItemType.Helmet, null, 100),
+                "LeatherHelmet" => new ItemCard("LeatherHelmet", CardType.Prize, PrizeCardType.Item, 2, null, false, ItemType.Helmet, null, 300),
                 _ => null
             };
             return result;
