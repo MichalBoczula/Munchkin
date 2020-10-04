@@ -21,7 +21,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.CardGenerator.CardStack
                 weapons: itemCardGenerator.GenerateWeaponCards(),
                 armors: itemCardGenerator.GenerateArmorCards(),
                 boots: itemCardGenerator.GenerateBootsCards(),
-                helmets: itemCardGenerator.GenerateHelmetCards());
+                helmets: itemCardGenerator.GenerateHelmetCards(),
+                additional: itemCardGenerator.GenerateAdditionalCards());
             var areThereWeapons = prizeStack.Deck.Any(x => prizeStack.Weapons.Any(y => x == y));
             var areThereBoots = prizeStack.Deck.Any(x => prizeStack.Boots.Any(y => x == y));
             var areThereHelmets = prizeStack.Deck.Any(x => prizeStack.Helmets.Any(y => x == y));
@@ -31,7 +32,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.CardGenerator.CardStack
             areThereBoots.Should().BeTrue();
             areThereHelmets.Should().BeTrue();
             areThereWeapons.Should().BeTrue();
-            prizeStack.Deck.Should().HaveCount(20);
+            prizeStack.Deck.Should().HaveCount(36);
         }
     }
 }

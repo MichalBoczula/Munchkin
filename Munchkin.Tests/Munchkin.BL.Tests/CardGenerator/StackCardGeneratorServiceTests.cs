@@ -38,10 +38,11 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.CardGenerator
             stack.Armors.Should().BeOfType<List<ItemCard>>();
             stack.Boots.Should().BeOfType<List<ItemCard>>();
             stack.Helmets.Should().BeOfType<List<ItemCard>>();
-            stack.Weapons.Should().HaveCount(5);
+            stack.Weapons.Should().HaveCount(15);
             stack.Armors.Should().HaveCount(5);
             stack.Boots.Should().HaveCount(5);
             stack.Helmets.Should().HaveCount(5);
+            stack.Additional.Should().HaveCount(6);
         }
 
         [Fact]

@@ -11,23 +11,72 @@ namespace Munchkin.Model.Card.CardFactory
 {
     public class ItemFactory
     {
-        public ItemCard CreateWeaponCard(string name)
+        public ItemCard CreateHandsCard(string name)
         {
-            var thorsHammerRestrictions = new Dictionary<bool, ProficiencyBase>
+            var lambas = new Dictionary<bool, RaceBase>
+            {
+                { true, new Halfling("halfling") }
+            };
+            var excalibur = new Dictionary<bool, ProficiencyBase>
+            {
+                { false, new MageProficiency() }
+            };
+            var lighting = new Dictionary<bool, ProficiencyBase>
+            {
+                { true, new MageProficiency() }
+            };
+            var thorsHammer = new Dictionary<bool, ProficiencyBase>
             {
                 { true, new WarriorProficiency() }
             };
-            var khazaDumRestrictions = new Dictionary<bool, RaceBase>
+            var trident = new Dictionary<bool, RaceBase>
             {
-                { true, new Dwarf("dwarf") }
+                { false, new Halfling("halfling") }
+            };
+            var sooLongBow = new Dictionary<bool, RaceBase>
+            {
+                { false, new Dwarf("dwarf") }
             };
             var result = name switch
             {
-                "sword2H" => new ItemCard("sword2H", CardType.Prize, PrizeCardType.Item, 5, null, true, ItemType.Weapon, null, 300),
-                "sword1H" => new ItemCard("sword1H", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null, 300),
-                "khazaDumHammer" => new ItemCard("khazaDumHammer", CardType.Prize, PrizeCardType.Item, 3, khazaDumRestrictions, true, ItemType.Weapon, null, 300),
-                "axe" => new ItemCard("axe", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Weapon, null, 300),
-                "thorsHammer" => new ItemCard("thorsHammer", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, thorsHammerRestrictions, 300),
+                "MirrorShield" => new ItemCard("MirrorShield", CardType.Prize, PrizeCardType.Item, 2, null, false, ItemType.Weapon, null, 400),
+                "Lambas" => new ItemCard("Lambas", CardType.Prize, PrizeCardType.Item, 5, lambas, true, ItemType.Weapon, null, 300),
+                "Excalibur" => new ItemCard("Excalibur", CardType.Prize, PrizeCardType.Item, 4, null, false, ItemType.Weapon, excalibur, 600),
+                "Graal" => new ItemCard("Graal", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null, 300),
+                "Egida" => new ItemCard("Egida", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null, 500),
+                "OrpheusHarp" => new ItemCard("OrpheusHarp", CardType.Prize, PrizeCardType.Item, 3, null, true, ItemType.Weapon, null, 300),
+                "PowerAxe" => new ItemCard("PowerAxe", CardType.Prize, PrizeCardType.Item, 4, null, true, ItemType.Weapon, null, 600),
+                "Lighting" => new ItemCard("Lighting", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, lighting, 100),
+                "Trident" => new ItemCard("Trident", CardType.Prize, PrizeCardType.Item, 3, trident, false, ItemType.Weapon, null, 300),
+                "MaceOfDestraction" => new ItemCard("MaceOfDestraction", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Weapon, null, 600),
+                "HerculesBow" => new ItemCard("HerculesBow", CardType.Prize, PrizeCardType.Item, 4, null, true, ItemType.Weapon, null, 700),
+                "SooLongBow" => new ItemCard("SooLongBow", CardType.Prize, PrizeCardType.Item, 3, sooLongBow, true, ItemType.Weapon, null, 400),
+                "MagicFagot" => new ItemCard("MagicFagot", CardType.Prize, PrizeCardType.Item, 4, null, true, ItemType.Weapon, null, 600),
+                "EsculapsStaff" => new ItemCard("EsculapsStaff", CardType.Prize, PrizeCardType.Item, 2, null, false, ItemType.Weapon, null, 500),
+                "ThorsHammer" => new ItemCard("ThorsHammer", CardType.Prize, PrizeCardType.Item, 6, null, false, ItemType.Weapon, thorsHammer, 700),
+                _ => null
+            };
+            return result;
+        }
+
+        public ItemCard CreateAdditionalItemCard(string name)
+        {
+            var cyberCoat = new Dictionary<bool, RaceBase>
+            {
+                { false, new Elf("elf") }
+            };
+            var betterDefenceSpray = new Dictionary<bool, ProficiencyBase>
+            {
+                { false, new WarriorProficiency() }
+            };
+            var result = name switch
+            {
+                "CyberCoat" => new ItemCard("CyberCoat", CardType.Prize, PrizeCardType.Item, 2, cyberCoat, false, ItemType.Additional, null, 300),
+                "GodsHelp" => new ItemCard("GodsHelp", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Additional, null, 0),
+                "BetterDefenceSpray" => new ItemCard("BetterDefenceSpray", CardType.Prize, PrizeCardType.Item, 4, null, false, ItemType.Additional, betterDefenceSpray, 400),
+                "RepairKit" => new ItemCard("RepairKit", CardType.Prize, PrizeCardType.Item, 1, null, false, ItemType.Additional, null, 200),
+                "Dog" => new ItemCard("Dog", CardType.Prize, PrizeCardType.Item, 1, null, false, ItemType.Additional, null, 100),
+                "Henchman" => new ItemCard("Henchman", CardType.Prize, PrizeCardType.Item, 2, null, false, ItemType.Additional, null, 500),
                 _ => null
             };
             return result;
@@ -50,7 +99,7 @@ namespace Munchkin.Model.Card.CardFactory
             var result = name switch
             {
                 "ElfGoldenArmor" => new ItemCard("ElfGoldenArmor", CardType.Prize, PrizeCardType.Item, 5, elfGoldenArmor, false, ItemType.Armor, null, 600),
-                "Robe" => new ItemCard("Robe", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Armor, null, 300), 
+                "Robe" => new ItemCard("Robe", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Armor, null, 300),
                 "PlateArmor" => new ItemCard("PlateArmor", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Armor, null, 300),
                 "MoiraArmor" => new ItemCard("MoiraArmor", CardType.Prize, PrizeCardType.Item, 4, moiraRestrictions, false, ItemType.Armor, null, 400),
                 "GodsArmor" => new ItemCard("GodsArmor", CardType.Prize, PrizeCardType.Item, 6, null, false, ItemType.Armor, godsArmorRestrictions, 600),

@@ -1,5 +1,6 @@
 ﻿using Munchkin.Model.Card.PrizeCard;
 using Munchkin.Model.Character;
+using Munchkin.Model.User;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -32,7 +33,13 @@ namespace Munchkin.Model.Card.PrizeCard
             ProficiencyRestriction = proficiencyRestriction;
             Price = price;
         }
+
+        public virtual void SpecialEffect(Fight fight)
+        {
+
+        }
     }
+
 
     public enum ItemType
     {

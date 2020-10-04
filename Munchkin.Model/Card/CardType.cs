@@ -4,6 +4,7 @@
     {
         Monster,
         Special,
+        Additional,
         Curse,
         Prize,
         Initial

@@ -39,7 +39,8 @@ namespace Munchkin.BL.CardGenerator
             prizeStack = new PrizeStack(weapons: _itemCardGenerator.GenerateWeaponCards(),
                                         armors: _itemCardGenerator.GenerateArmorCards(),
                                         boots: _itemCardGenerator.GenerateBootsCards(),
-                                        helmets: _itemCardGenerator.GenerateHelmetCards());
+                                        helmets: _itemCardGenerator.GenerateHelmetCards(),
+                                        additional: _itemCardGenerator.GenerateAdditionalCards());
             return prizeStack;
         }
 

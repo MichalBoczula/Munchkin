@@ -1,33 +1,27 @@
 ﻿using Munchkin.Model.Card.PrizeCard;
 using Munchkin.Model.Character;
+using Munchkin.Model.User;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Munchkin.Model.Card.PrizeCard
 {
-    public class SituationalItem : PrizeCardBase
+    public abstract class SituationalItem : ItemCard
     {
-        public int Power { get; set; }
-        public Dictionary<bool, RaceBase> RaceRestriction { get; set; }
-        public Dictionary<bool, ProficiencyBase> ProficiencyRestriction { get; set; }
-
         public SituationalItem(string name,
                                CardType cardType,
                                PrizeCardType prizeCardType,
                                int power,
                                Dictionary<bool, RaceBase> raceRestriction,
-                               Dictionary<bool, ProficiencyBase> proficiencyRestriction) 
-            : base(name, cardType, prizeCardType)
-        {
-            Power = power;
-            RaceRestriction = raceRestriction;
-            ProficiencyRestriction = proficiencyRestriction;
-        }
-
-        public void SpecialEffect()
+                               bool isTwoHanded,
+                               ItemType itemType,
+                               Dictionary<bool, ProficiencyBase> proficiencyRestriction,
+                               int price) : base(name, cardType, prizeCardType, power, raceRestriction, isTwoHanded, itemType, proficiencyRestriction, price)
         {
 
         }
+
+        public override abstract void SpecialEffect(Fight fight);
     }
 }
