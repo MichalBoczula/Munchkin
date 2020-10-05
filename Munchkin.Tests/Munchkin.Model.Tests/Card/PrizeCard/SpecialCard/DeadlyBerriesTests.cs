@@ -14,7 +14,7 @@ using Xunit;
 
 namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
 {
-    public class PoisonTests
+    public class DeadlyBerriesTests
     {
         [Fact]
         public void SpecialEffectHeroTest()
@@ -32,11 +32,13 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             fight.Monsters.Add(monster);
             var mock = new Mock<ReadLineOverride>();
             mock.Setup(x => x.GetNextString()).Returns("1");
-            var magicFlower = new Poison("Poison", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 100, mock.Object);
+            var deadlyBerries = new DeadlyBerries("DeadlyBerries", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 500, mock.Object);
             //Act
-            magicFlower.SpecialEffect(fight);
+            deadlyBerries.SpecialEffect(fight);
             //Assert
-            userClass.UserAvatar.Power.Should().Be(2);
+            userClass.UserAvatar.Power.Should().Be(3);
+            userClass.UserAvatar.Nerfs.Poisoned.Should().HaveCount(1);
+            userClass.UserAvatar.Nerfs.Poisoned[0].Should().Be(true);
         }
 
         [Fact]
@@ -58,9 +60,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             fight.Monsters.Add(monster);
             var mock = new Mock<ReadLineOverride>();
             mock.Setup(x => x.GetNextString()).Returns("2");
-            var magicFlower = new Poison("Poison", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 100, mock.Object);
+            var deadlyBerries = new DeadlyBerries("DeadlyBerries", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 500, mock.Object);
             //Act
-            magicFlower.SpecialEffect(fight);
+            deadlyBerries.SpecialEffect(fight);
             //Assert
             monster.Power.Should().Be(2);
         }
@@ -77,7 +79,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             };
             var userAvatar2 = new UserAvatar()
             {
-                Power = 3
+                Power = 4
             };
             userClass.UserAvatar = userAvatar;
             userClass2.UserAvatar = userAvatar2;
@@ -88,12 +90,15 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             fight.Monsters.Add(monster);
             var mock = new Mock<ReadLineOverride>();
             mock.Setup(x => x.GetNextString()).Returns("1");
-            var magicFlower = new Poison("Poison", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 100, mock.Object);
+            var deadlyBerries = new DeadlyBerries("DeadlyBerries", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 500, mock.Object);
             //Act
-            magicFlower.SpecialEffect(fight);
+            deadlyBerries.SpecialEffect(fight);
             //Assert
-            userClass.UserAvatar.Power.Should().Be(2);
-            userClass2.UserAvatar.Power.Should().Be(3);
+            userClass.UserAvatar.Power.Should().Be(3);
+            userClass.UserAvatar.Nerfs.Poisoned.Should().HaveCount(1);
+            userClass.UserAvatar.Nerfs.Poisoned[0].Should().Be(true);
+            userClass2.UserAvatar.Power.Should().Be(4);
+            userClass2.UserAvatar.Nerfs.Poisoned.Should().HaveCount(0);
         }
 
         [Fact]
@@ -120,9 +125,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             fight.Monsters.Add(monster2);
             var mock = new Mock<ReadLineOverride>();
             mock.Setup(x => x.GetNextString()).Returns("2");
-            var magicFlower = new Poison("Poison", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 100, mock.Object);
+            var deadlyBerries = new DeadlyBerries("DeadlyBerries", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 500, mock.Object);
             //Act
-            magicFlower.SpecialEffect(fight);
+            deadlyBerries.SpecialEffect(fight);
             //Assert
             monster.Power.Should().Be(5);
             monster2.Power.Should().Be(2);

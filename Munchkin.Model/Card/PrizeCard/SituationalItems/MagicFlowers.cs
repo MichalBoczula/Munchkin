@@ -1,4 +1,6 @@
 ﻿using Munchkin.BL.Helper;
+using Munchkin.Model;
+using Munchkin.Model.Card.PrizeCard;
 using Munchkin.Model.Character;
 using Munchkin.Model.User;
 using System;
@@ -7,11 +9,10 @@ using System.Text;
 
 namespace Munchkin.Model.Card.PrizeCard.SituationalItems
 {
-    public class Poison : SituationalItem
+    public class MagicFlowers : SituationalItem
     {
         private ReadLineOverride readLineOverride;
-
-        public Poison(string name, CardType cardType, PrizeCardType prizeCardType, int power, Dictionary<bool, RaceBase> raceRestriction, bool isTwoHanded, ItemType itemType, Dictionary<bool, ProficiencyBase> proficiencyRestriction, int price, ReadLineOverride readLineOverride) : base(name, cardType, prizeCardType, power, raceRestriction, isTwoHanded, itemType, proficiencyRestriction, price)
+        public MagicFlowers(string name, CardType cardType, PrizeCardType prizeCardType, int power, Dictionary<bool, RaceBase> raceRestriction, bool isTwoHanded, ItemType itemType, Dictionary<bool, ProficiencyBase> proficiencyRestriction, int price, ReadLineOverride readLineOverride) : base(name, cardType, prizeCardType, power, raceRestriction, isTwoHanded, itemType, proficiencyRestriction, price)
         {
             this.readLineOverride = readLineOverride;
         }
@@ -38,7 +39,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                                 {
                                     if (choice - 1 <= fight.Heros.Count - 1)
                                     {
-                                        fight.Heros[choice - 1].Power -= 3;
+                                        fight.Heros[choice - 1].Power += 2;
                                         return;
                                     }
                                     else
@@ -51,7 +52,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                         }
                         else
                         {
-                            fight.Heros[0].Power -= 3;
+                            fight.Heros[0].Power += 2;
                             return;
                         }
                     }
@@ -70,7 +71,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                                 {
                                     if (choice - 1 <= fight.Monsters.Count - 1)
                                     {
-                                        fight.Monsters[choice - 1].Power -= 3;
+                                        fight.Monsters[choice - 1].Power += 2;
                                         return;
                                     }
                                     else
@@ -83,7 +84,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                         }
                         else
                         {
-                            fight.Monsters[0].Power -= 3;
+                            fight.Monsters[0].Power += 2;
                             return;
                         }
                     }

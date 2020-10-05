@@ -7,11 +7,11 @@ using System.Text;
 
 namespace Munchkin.Model.Card.PrizeCard.SituationalItems
 {
-    public class Poison : SituationalItem
+    public class DeadlyBerries : SituationalItem
     {
         private ReadLineOverride readLineOverride;
 
-        public Poison(string name, CardType cardType, PrizeCardType prizeCardType, int power, Dictionary<bool, RaceBase> raceRestriction, bool isTwoHanded, ItemType itemType, Dictionary<bool, ProficiencyBase> proficiencyRestriction, int price, ReadLineOverride readLineOverride) : base(name, cardType, prizeCardType, power, raceRestriction, isTwoHanded, itemType, proficiencyRestriction, price)
+        public DeadlyBerries(string name, CardType cardType, PrizeCardType prizeCardType, int power, Dictionary<bool, RaceBase> raceRestriction, bool isTwoHanded, ItemType itemType, Dictionary<bool, ProficiencyBase> proficiencyRestriction, int price, ReadLineOverride readLineOverride) : base(name, cardType, prizeCardType, power, raceRestriction, isTwoHanded, itemType, proficiencyRestriction, price)
         {
             this.readLineOverride = readLineOverride;
         }
@@ -38,7 +38,8 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                                 {
                                     if (choice - 1 <= fight.Heros.Count - 1)
                                     {
-                                        fight.Heros[choice - 1].Power -= 3;
+                                        fight.Heros[choice - 1].Power -= 2;
+                                        fight.Heros[choice - 1].Nerfs.Poisoned.Add(true);
                                         return;
                                     }
                                     else
@@ -51,7 +52,8 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                         }
                         else
                         {
-                            fight.Heros[0].Power -= 3;
+                            fight.Heros[0].Power -= 2;
+                            fight.Heros[0].Nerfs.Poisoned.Add(true);
                             return;
                         }
                     }
