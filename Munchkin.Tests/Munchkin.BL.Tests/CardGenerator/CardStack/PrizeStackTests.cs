@@ -22,17 +22,22 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.CardGenerator.CardStack
                 armors: itemCardGenerator.GenerateArmorCards(),
                 boots: itemCardGenerator.GenerateBootsCards(),
                 helmets: itemCardGenerator.GenerateHelmetCards(),
-                additional: itemCardGenerator.GenerateAdditionalCards());
+                additional: itemCardGenerator.GenerateAdditionalCards(),
+                situational: itemCardGenerator.GenerateSituationalItemsCards());
             var areThereWeapons = prizeStack.Deck.Any(x => prizeStack.Weapons.Any(y => x == y));
             var areThereBoots = prizeStack.Deck.Any(x => prizeStack.Boots.Any(y => x == y));
             var areThereHelmets = prizeStack.Deck.Any(x => prizeStack.Helmets.Any(y => x == y));
             var areThereArmors = prizeStack.Deck.Any(x => prizeStack.Armors.Any(y => x == y));
+            var areThereAdditional = prizeStack.Deck.Any(x => prizeStack.Additional.Any(y => x == y));
+            var areThereSituational = prizeStack.Deck.Any(x => prizeStack.Situational.Any(y => x == y));
             //Assert
             areThereArmors.Should().BeTrue();
             areThereBoots.Should().BeTrue();
             areThereHelmets.Should().BeTrue();
             areThereWeapons.Should().BeTrue();
-            prizeStack.Deck.Should().HaveCount(36);
+            areThereAdditional.Should().BeTrue();
+            areThereSituational.Should().BeTrue();
+            prizeStack.Deck.Should().HaveCount(50);
         }
     }
 }

@@ -43,6 +43,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.CardGenerator
             stack.Boots.Should().HaveCount(5);
             stack.Helmets.Should().HaveCount(5);
             stack.Additional.Should().HaveCount(6);
+            stack.Situational.Should().HaveCount(14);
         }
 
         [Fact]

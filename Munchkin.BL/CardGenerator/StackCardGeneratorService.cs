@@ -40,7 +40,8 @@ namespace Munchkin.BL.CardGenerator
                                         armors: _itemCardGenerator.GenerateArmorCards(),
                                         boots: _itemCardGenerator.GenerateBootsCards(),
                                         helmets: _itemCardGenerator.GenerateHelmetCards(),
-                                        additional: _itemCardGenerator.GenerateAdditionalCards());
+                                        additional: _itemCardGenerator.GenerateAdditionalCards(),
+                                        situational: _itemCardGenerator.GenerateSituationalItemsCards());
             return prizeStack;
         }
 

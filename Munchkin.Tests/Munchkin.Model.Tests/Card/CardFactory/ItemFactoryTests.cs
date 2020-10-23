@@ -336,5 +336,116 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.CardFactory
             laurelWreath.Price.Should().Be(100);
             leatherHelmet.Price.Should().Be(300);
         }
+
+        [Fact]
+        public void SituationalItemTest()
+        {
+            //In contructor
+            //Act
+            var deadlyBerries = _itemFactory.CreateSituationalCard("DeadlyBerries");
+            var deadMark = _itemFactory.CreateSituationalCard("DeadMark");
+            var dionisiosWine = _itemFactory.CreateSituationalCard("DionisiosWine");
+            var fireBall = _itemFactory.CreateSituationalCard("FireBall");
+            var goldenApple = _itemFactory.CreateSituationalCard("GoldenApple");
+            var icePotion = _itemFactory.CreateSituationalCard("IcePotion");
+            var lightingStrike = _itemFactory.CreateSituationalCard("LightingStrike");
+            var magicFlowers = _itemFactory.CreateSituationalCard("MagicFlowers");
+            var mysteryPotion = _itemFactory.CreateSituationalCard("MysteryPotion");
+            var poison = _itemFactory.CreateSituationalCard("Poison");
+            var redBullDrink = _itemFactory.CreateSituationalCard("RedBullDrink");
+            var runeMark = _itemFactory.CreateSituationalCard("RuneMark");
+            var snowBall = _itemFactory.CreateSituationalCard("SnowBall");
+            var valhallasHorn = _itemFactory.CreateSituationalCard("ValhallasHorn");
+            //Assert
+            //Name
+            deadlyBerries.Name.Should().Be("DeadlyBerries");
+            deadMark.Name.Should().Be("DeadMark");
+            dionisiosWine.Name.Should().Be("DionisiosWine");
+            fireBall.Name.Should().Be("FireBall");
+            goldenApple.Name.Should().Be("GoldenApple");
+            icePotion.Name.Should().Be("IcePotion");
+            lightingStrike.Name.Should().Be("LightingStrike");
+            magicFlowers.Name.Should().Be("MagicFlowers");
+            mysteryPotion.Name.Should().Be("MysteryPotion");
+            poison.Name.Should().Be("Poison");
+            redBullDrink.Name.Should().Be("RedBullDrink");
+            runeMark.Name.Should().Be("RuneMark");
+            snowBall.Name.Should().Be("SnowBall");
+            valhallasHorn.Name.Should().Be("ValhallasHorn");
+            //Type
+            deadlyBerries.ItemType.Should().Be(ItemType.Sitiuational);
+            deadMark.ItemType.Should().Be(ItemType.Sitiuational);
+            dionisiosWine.ItemType.Should().Be(ItemType.Sitiuational);
+            fireBall.ItemType.Should().Be(ItemType.Sitiuational);
+            goldenApple.ItemType.Should().Be(ItemType.Sitiuational);
+            icePotion.ItemType.Should().Be(ItemType.Sitiuational);
+            lightingStrike.ItemType.Should().Be(ItemType.Sitiuational);
+            magicFlowers.ItemType.Should().Be(ItemType.Sitiuational);
+            mysteryPotion.ItemType.Should().Be(ItemType.Sitiuational);
+            poison.ItemType.Should().Be(ItemType.Sitiuational);
+            redBullDrink.ItemType.Should().Be(ItemType.Sitiuational);
+            runeMark.ItemType.Should().Be(ItemType.Sitiuational);
+            snowBall.ItemType.Should().Be(ItemType.Sitiuational);
+            valhallasHorn.ItemType.Should().Be(ItemType.Sitiuational);
+            //Restriction
+            deadlyBerries.RaceRestriction.Should().BeNull();
+            deadMark.RaceRestriction.Should().BeNull();
+            dionisiosWine.RaceRestriction.Should().BeNull();
+            fireBall.RaceRestriction.Should().BeNull();
+            goldenApple.RaceRestriction.Should().BeNull();
+            icePotion.RaceRestriction.Should().BeNull();
+            lightingStrike.RaceRestriction.Should().BeNull();
+            magicFlowers.RaceRestriction.Should().BeNull();
+            mysteryPotion.RaceRestriction.Should().BeNull();
+            poison.RaceRestriction.Should().BeNull();
+            redBullDrink.RaceRestriction.Should().BeNull();
+            runeMark.RaceRestriction.Should().BeNull();
+            snowBall.RaceRestriction.Should().BeNull();
+            valhallasHorn.RaceRestriction.Should().BeNull();
+            deadlyBerries.ProficiencyRestriction.Should().BeNull();
+            deadMark.ProficiencyRestriction.Should().BeNull();
+            dionisiosWine.ProficiencyRestriction.Should().BeNull();
+            fireBall.ProficiencyRestriction.Should().BeNull();
+            goldenApple.ProficiencyRestriction.Should().BeNull();
+            icePotion.ProficiencyRestriction.Should().BeNull();
+            lightingStrike.ProficiencyRestriction.Should().BeNull();
+            magicFlowers.ProficiencyRestriction.Should().BeNull();
+            mysteryPotion.ProficiencyRestriction.Should().BeNull();
+            poison.ProficiencyRestriction.Should().BeNull();
+            redBullDrink.ProficiencyRestriction.Should().BeNull();
+            runeMark.ProficiencyRestriction.Should().BeNull();
+            snowBall.ProficiencyRestriction.Should().BeNull();
+            valhallasHorn.ProficiencyRestriction.Should().BeNull();
+            //Power
+            deadlyBerries.Power.Should().Be(0);
+            deadMark.Power.Should().Be(0);
+            dionisiosWine.Power.Should().Be(0);
+            fireBall.Power.Should().Be(0);
+            goldenApple.Power.Should().Be(0);
+            icePotion.Power.Should().Be(0);
+            lightingStrike.Power.Should().Be(0);
+            magicFlowers.Power.Should().Be(0);
+            mysteryPotion.Power.Should().Be(0);
+            poison.Power.Should().Be(0);
+            redBullDrink.Power.Should().Be(0);
+            runeMark.Power.Should().Be(0);
+            snowBall.Power.Should().Be(0);
+            valhallasHorn.Power.Should().Be(0);
+            //Price
+            deadlyBerries.Price.Should().Be(500);
+            deadMark.Price.Should().Be(700);
+            dionisiosWine.Price.Should().Be(400);
+            fireBall.Price.Should().Be(400);
+            goldenApple.Price.Should().Be(500);
+            icePotion.Price.Should().Be(300);
+            lightingStrike.Price.Should().Be(500);
+            magicFlowers.Price.Should().Be(100);
+            mysteryPotion.Price.Should().Be(500);
+            poison.Price.Should().Be(100);
+            redBullDrink.Price.Should().Be(500);
+            runeMark.Price.Should().Be(400);
+            snowBall.Price.Should().Be(100);
+            valhallasHorn.Price.Should().Be(700);
+        }
     }
 }

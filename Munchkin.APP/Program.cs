@@ -9,6 +9,7 @@ using Munchkin.Model.Card.ActionCard;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Abstract;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret;
 using Munchkin.Model.Card.PrizeCard;
+using Munchkin.Model.Card.PrizeCard.SituationalItems;
 using Munchkin.Model.Character;
 using Munchkin.Model.Character.Hero.Proficiency;
 using Munchkin.Model.Character.Hero.Race;
@@ -41,9 +42,11 @@ namespace Munchkin.APP
 
             //Act
             gameFlowController.CreateUsers();
-            gameFlowController.CreateCharacters();
             gameFlowController.InitializeDeckForUsers();
             gameFlowController.InitializeMonsterCards();
+
+            var deckcontroller = new DeckController();
+            System.Console.WriteLine(deckcontroller.LookOnCard(game.Users[0]));
         }
     }
 }

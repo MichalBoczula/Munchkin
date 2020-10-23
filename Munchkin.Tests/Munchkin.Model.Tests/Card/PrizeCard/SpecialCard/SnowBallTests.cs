@@ -32,9 +32,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             fight.Monsters.Add(monster);
             var mock = new Mock<ReadLineOverride>();
             mock.Setup(x => x.GetNextString()).Returns("1");
-            var magicFlower = new SnowBall("SnowBall", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 100, mock.Object);
+            var snowBall = new SnowBall("SnowBall", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 100, mock.Object);
             //Act
-            magicFlower.SpecialEffect(fight);
+            snowBall.SpecialEffect(fight);
             //Assert
             userClass.UserAvatar.Power.Should().Be(4);
             userClass.UserAvatar.Nerfs.FleeChances.Should().HaveCount(1);

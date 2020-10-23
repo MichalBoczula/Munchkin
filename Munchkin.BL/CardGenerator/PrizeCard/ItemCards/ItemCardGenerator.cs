@@ -13,6 +13,7 @@ namespace Munchkin.BL.CardGenerator.PrizeCard.ItemCards
         private readonly List<ItemCard> _boots;
         private readonly List<ItemCard> _helmets;
         private readonly List<ItemCard> _additional;
+        private readonly List<ItemCard> _situational;
 
         public ItemCardGenerator()
         {
@@ -22,6 +23,7 @@ namespace Munchkin.BL.CardGenerator.PrizeCard.ItemCards
             _boots = new List<ItemCard>();
             _helmets = new List<ItemCard>();
             _additional = new List<ItemCard>();
+            _situational = new List<ItemCard>();
         }
 
         public List<ItemCard> GenerateWeaponCards()
@@ -118,6 +120,39 @@ namespace Munchkin.BL.CardGenerator.PrizeCard.ItemCards
             _additional.Add(Dog);
             _additional.Add(Henchman);
             return _additional;
+        }
+
+        public List<ItemCard> GenerateSituationalItemsCards()
+        {
+            var deadlyBerries = _itemFactory.CreateSituationalCard("DeadlyBerries");
+            var deadMark = _itemFactory.CreateSituationalCard("DeadMark");
+            var dionisiosWine = _itemFactory.CreateSituationalCard("DionisiosWine");
+            var fireBall = _itemFactory.CreateSituationalCard("FireBall");
+            var goldenApple = _itemFactory.CreateSituationalCard("GoldenApple");
+            var icePotion = _itemFactory.CreateSituationalCard("IcePotion");
+            var lightingStrike = _itemFactory.CreateSituationalCard("LightingStrike");
+            var magicFlowers = _itemFactory.CreateSituationalCard("MagicFlowers");
+            var mysteryPotion = _itemFactory.CreateSituationalCard("MysteryPotion");
+            var poison = _itemFactory.CreateSituationalCard("Poison");
+            var redBullDrink = _itemFactory.CreateSituationalCard("RedBullDrink");
+            var runeMark = _itemFactory.CreateSituationalCard("RuneMark");
+            var snowBall = _itemFactory.CreateSituationalCard("SnowBall");
+            var valhallasHorn = _itemFactory.CreateSituationalCard("ValhallasHorn");
+            _situational.Add(deadlyBerries);
+            _situational.Add(deadMark);
+            _situational.Add(dionisiosWine);
+            _situational.Add(fireBall);
+            _situational.Add(goldenApple);
+            _situational.Add(icePotion);
+            _situational.Add(lightingStrike);
+            _situational.Add(magicFlowers);
+            _situational.Add(mysteryPotion);
+            _situational.Add(poison);
+            _situational.Add(redBullDrink);
+            _situational.Add(runeMark);
+            _situational.Add(snowBall);
+            _situational.Add(valhallasHorn);
+            return _situational;
         }
     }
 }

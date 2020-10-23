@@ -1,5 +1,6 @@
 ﻿using Munchkin.BL.Helper;
 using Munchkin.Model.Card.PrizeCard;
+using Munchkin.Model.Card.PrizeCard.SituationalItems;
 using Munchkin.Model.Character;
 using Munchkin.Model.Character.Hero.Proficiency;
 using Munchkin.Model.Character.Hero.Race;
@@ -139,6 +140,31 @@ namespace Munchkin.Model.Card.CardFactory
                 "MaskOfDead" => new ItemCard("MaskOfDead", CardType.Prize, PrizeCardType.Item, 4, null, false, ItemType.Helmet, maskOfDeadRestrictions, 600),
                 "LaurelWreath" => new ItemCard("LaurelWreath", CardType.Prize, PrizeCardType.Item, 1, null, false, ItemType.Helmet, null, 100),
                 "LeatherHelmet" => new ItemCard("LeatherHelmet", CardType.Prize, PrizeCardType.Item, 2, null, false, ItemType.Helmet, null, 300),
+                _ => null
+            };
+            return result;
+        }
+
+        public ItemCard CreateSituationalCard(string name)
+        {
+            ReadLineOverride readLineOverride = new ReadLineOverride();
+            Random random = new Random();
+            SituationalItem result = name switch
+            {
+                "DeadlyBerries" => new DeadlyBerries("DeadlyBerries", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 500, readLineOverride),
+                "DeadMark" => new DeadMark("DeadMark", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 700),
+                "DionisiosWine" => new DionisiosWine("DionisiosWine", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 400, readLineOverride),
+                "FireBall" => new FireBall("FireBall", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 400),
+                "GoldenApple" => new GoldenApple("GoldenApple", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 500),
+                "IcePotion" => new IcePotion("IcePotion", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 300, readLineOverride),
+                "LightingStrike" => new LightingStrike("LightingStrike", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 500, readLineOverride),
+                "MagicFlowers" => new MagicFlowers("MagicFlowers", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 100, readLineOverride),
+                "MysteryPotion" => new MysteryPotion("MysteryPotion", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 500, random),
+                "Poison" => new Poison("Poison", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 100, readLineOverride),
+                "RedBullDrink" => new RedBullDrink("RedBullDrink", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 500, readLineOverride),
+                "RuneMark" => new RuneMark("RuneMark", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 400),
+                "SnowBall" => new SnowBall("SnowBall", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 100, readLineOverride),
+                "ValhallasHorn" => new ValhallasHorn("ValhallasHorn", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 700),
                 _ => null
             };
             return result;

@@ -16,13 +16,14 @@ namespace Munchkin.BL.CardGenerator.CardsStack
         public List<ItemCard> Situational;
         public List<ItemCard> Deck;
 
-        public PrizeStack(List<ItemCard> weapons, List<ItemCard> armors, List<ItemCard> boots, List<ItemCard> helmets, List<ItemCard> additional)
+        public PrizeStack(List<ItemCard> weapons, List<ItemCard> armors, List<ItemCard> boots, List<ItemCard> helmets, List<ItemCard> additional, List<ItemCard> situational)
         {
             Weapons = weapons;
             Armors = armors;
             Boots = boots;
             Helmets = helmets;
             Additional = additional;
+            Situational = situational;
 
             Deck = new List<ItemCard>();
             Deck.AddRange(Armors);
@@ -30,6 +31,7 @@ namespace Munchkin.BL.CardGenerator.CardsStack
             Deck.AddRange(Weapons);
             Deck.AddRange(Helmets);
             Deck.AddRange(Additional);
+            Deck.AddRange(Situational);
         }
     }
 }

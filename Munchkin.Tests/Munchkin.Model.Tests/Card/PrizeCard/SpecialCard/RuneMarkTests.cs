@@ -32,7 +32,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             };
             fight.Heros.Add(userClass.UserAvatar);
             fight.Monsters.Add(monster);
-            var runeMark = new RuneMark("Poison", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 400);
+            var runeMark = new RuneMark("RuneMark", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 400);
             //Act
             runeMark.SpecialEffect(fight);
             //Assert
