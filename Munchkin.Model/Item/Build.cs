@@ -19,6 +19,8 @@ namespace Munchkin.Model.Character
 
         public Build()
         {
+            AdditionalItems = new List<ItemCard>();
+            SituationalItems = new List<ItemCard>();
             IsItACrook = false;
         }
 

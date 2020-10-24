@@ -24,29 +24,29 @@ namespace Munchkin.APP
         static void Main(string[] args)
         {
             //Arrange
-            var random = new Random();
-            var drawCardService = new DrawCardService(random);
-            var stackCardGeneratorService = new StackCardGeneratorService();
-            var characterCreatorControlerService = new CharacterCreatorControlerService(stackCardGeneratorService, drawCardService);
+            //var random = new Random();
+            //var drawCardService = new DrawCardService(random);
+            //var stackCardGeneratorService = new StackCardGeneratorService();
+            //var characterCreatorControlerService = new CharacterCreatorControlerService(stackCardGeneratorService, drawCardService);
 
-            var game = new Game();
-            var readLineOverride = new ReadLineOverride();
-            var createInformationModel = new CreateInformationModel();
-            var createCharacterController = new CreateCharacterController(createInformationModel, characterCreatorControlerService, game, readLineOverride);
-            var makeActionController = new MakeActionController(game);
+            //var game = new Game();
+            //var readLineOverride = new ReadLineOverride();
+            //var createInformationModel = new CreateInformationModel();
+            //var createCharacterController = new CreateCharacterController(createInformationModel, characterCreatorControlerService, game, readLineOverride);
+            //var makeActionController = new MakeActionController(game);
 
-            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
-            var gameFlowController = new GameFlowController(createCharacterController, game, readLineOverride,
-                                                            prizeStackController, stackCardGeneratorService,
-                                                            drawCardService, makeActionController);
+            //var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            //var gameFlowController = new GameFlowController(createCharacterController, game, readLineOverride,
+            //                                                prizeStackController, stackCardGeneratorService,
+            //                                                drawCardService, makeActionController);
 
-            //Act
-            gameFlowController.CreateUsers();
-            gameFlowController.InitializeDeckForUsers();
-            gameFlowController.InitializeMonsterCards();
+            ////Act
+            //gameFlowController.CreateUsers();
+            //gameFlowController.InitializeDeckForUsers();
+            //gameFlowController.InitializeMonsterCards();
 
-            var deckcontroller = new DeckController();
-            System.Console.WriteLine(deckcontroller.LookOnCard(game.Users[0]));
+            //var deckController = new DeckController();
+
         }
     }
 }
