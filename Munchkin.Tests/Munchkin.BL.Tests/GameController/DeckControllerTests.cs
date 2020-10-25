@@ -3,10 +3,13 @@ using Moq;
 using Munchkin.BL.GameController;
 using Munchkin.BL.Helper;
 using Munchkin.Model;
+using Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards;
 using Munchkin.Model.Card.PrizeCard;
+using Munchkin.Model.Card.PrizeCard.SituationalItems;
 using Munchkin.Model.Character;
 using Munchkin.Model.Character.Hero.Proficiency;
 using Munchkin.Model.Character.Hero.Race;
+using Munchkin.Model.User;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -38,7 +41,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             };
             ItemCard card = new ItemCard("CyberCoat", CardType.Prize, PrizeCardType.Item, 2, cyberCoat, false, ItemType.Additional, null, 300);
             //Act
-            deckController.UseCardItemCard(user, card, null);
+            deckController.UseItemCard(user, card, null);
             //Assert
             user.UserAvatar.Build.AdditionalItems.Should().HaveCount(1);
             user.UserAvatar.Build.AdditionalItems[0].Should().BeSameAs(card);
@@ -65,7 +68,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             };
             ItemCard card = new ItemCard("CyberCoat", CardType.Prize, PrizeCardType.Item, 2, cyberCoat, false, ItemType.Additional, null, 300);
             //Act
-            deckController.UseCardItemCard(user, card, null);
+            deckController.UseItemCard(user, card, null);
             //Assert
             user.UserAvatar.Build.AdditionalItems.Should().HaveCount(0);
         }
@@ -91,7 +94,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             };
             ItemCard card = new ItemCard("CyberCoat", CardType.Prize, PrizeCardType.Item, 2, cyberCoat, false, ItemType.Additional, null, 300);
             //Act
-            deckController.UseCardItemCard(user, card, null);
+            deckController.UseItemCard(user, card, null);
             //Assert
             user.UserAvatar.Build.AdditionalItems.Should().HaveCount(0);
         }
@@ -117,7 +120,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             };
             ItemCard card = new ItemCard("CyberCoat", CardType.Prize, PrizeCardType.Item, 2, cyberCoat, false, ItemType.Additional, null, 300);
             //Act
-            deckController.UseCardItemCard(user, card, null);
+            deckController.UseItemCard(user, card, null);
             //Assert
             user.UserAvatar.Build.AdditionalItems.Should().HaveCount(1);
             user.UserAvatar.Build.AdditionalItems[0].Should().BeSameAs(card);
@@ -144,7 +147,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             };
             ItemCard card = new ItemCard("BetterDefenceSpray", CardType.Prize, PrizeCardType.Item, 4, null, false, ItemType.Additional, betterDefenceSpray, 400);
             //Act
-            deckController.UseCardItemCard(user, card, null);
+            deckController.UseItemCard(user, card, null);
             //Assert
             user.UserAvatar.Build.AdditionalItems.Should().HaveCount(1);
             user.UserAvatar.Build.AdditionalItems[0].Should().BeSameAs(card);
@@ -171,7 +174,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             };
             ItemCard card = new ItemCard("BetterDefenceSpray", CardType.Prize, PrizeCardType.Item, 4, null, false, ItemType.Additional, betterDefenceSpray, 400);
             //Act
-            deckController.UseCardItemCard(user, card, null);
+            deckController.UseItemCard(user, card, null);
             //Assert
             user.UserAvatar.Build.AdditionalItems.Should().HaveCount(0);
         }
@@ -197,7 +200,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             };
             ItemCard card = new ItemCard("BetterDefenceSpray", CardType.Prize, PrizeCardType.Item, 4, null, false, ItemType.Additional, betterDefenceSpray, 400);
             //Act
-            deckController.UseCardItemCard(user, card, null);
+            deckController.UseItemCard(user, card, null);
             //Assert
             user.UserAvatar.Build.AdditionalItems.Should().HaveCount(0);
         }
@@ -223,7 +226,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             };
             ItemCard card = new ItemCard("BetterDefenceSpray", CardType.Prize, PrizeCardType.Item, 4, null, false, ItemType.Additional, betterDefenceSpray, 400);
             //Act
-            deckController.UseCardItemCard(user, card, null);
+            deckController.UseItemCard(user, card, null);
             //Assert
             user.UserAvatar.Build.AdditionalItems.Should().HaveCount(1);
             user.UserAvatar.Build.AdditionalItems[0].Should().BeSameAs(card);
@@ -430,6 +433,392 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             //Assert
             result.Should().BeTrue();
         }
+        #endregion
+
+        #region UseCardItemCard
+        [Fact]
+        public void UseCardItemCardHelmetNullPathWithoutRestriction()
+        {
+            //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            var userAvatar = new UserAvatar();
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            ItemCard card = new ItemCard("CyberHelment", CardType.Prize, PrizeCardType.Item, 2, null, false, ItemType.Helmet, null, 300);
+            user.Deck.Items.Add(card);
+            var deckController = new DeckController(mockReadLineOverride.Object);
+            //Act
+            deckController.UseItemCard(user, card, null);
+            //Assert
+            user.UserAvatar.Build.Helmet.Should().BeSameAs(card);
+            user.Deck.Items.Should().BeEmpty();
+        }
+
+        [Fact]
+        public void UseCardItemCardHelmetNullPathWithRestriction()
+        {
+            //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            var userAvatar = new UserAvatar()
+            {
+                Race = new Elf("elf")
+            }; 
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var cyberCoat = new Dictionary<bool, RaceBase>
+            {
+                { false, new Elf("elf") }
+            };
+            ItemCard card = new ItemCard("CyberHelment", CardType.Prize, PrizeCardType.Item, 2, cyberCoat, false, ItemType.Helmet, null, 300);
+            user.Deck.Items.Add(card);
+            var deckController = new DeckController(mockReadLineOverride.Object);
+            //Act
+            deckController.UseItemCard(user, card, null);
+            //Assert
+            user.UserAvatar.Build.Helmet.Should().BeNull();
+            user.Deck.Items.Should().HaveCount(1);
+            user.Deck.Items[0].Should().BeSameAs(card);
+        }
+
+        [Fact]
+        public void UseCardItemCardHelmetChangePathChangeItems()
+        {
+            //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
+            var userAvatar = new UserAvatar()
+            {
+                Race = new Elf("elf")
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var cyberCoat = new Dictionary<bool, RaceBase>
+            {
+                { true, new Elf("elf") }
+            };
+            ItemCard card = new ItemCard("CyberHelment", CardType.Prize, PrizeCardType.Item, 2, cyberCoat, false, ItemType.Helmet, null, 300);
+            ItemCard oldHelmet = new ItemCard("OldHelmet", CardType.Prize, PrizeCardType.Item, 2, cyberCoat, false, ItemType.Helmet, null, 300);
+            user.UserAvatar.Build.Helmet = oldHelmet;
+            user.Deck.Items.Add(card);
+            var deckController = new DeckController(mockReadLineOverride.Object);
+            //Act
+            deckController.UseItemCard(user, card, null);
+            //Assert
+            user.UserAvatar.Build.Helmet.Should().BeSameAs(card);
+            user.Deck.Items.Should().HaveCount(1);
+            user.Deck.Items[0].Should().BeSameAs(oldHelmet);
+        }
+
+        [Fact]
+        public void UseCardItemCardHelmetChangePathDoNothing()
+        {
+            //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("2");
+            var userAvatar = new UserAvatar()
+            {
+                Race = new Elf("elf")
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var cyberCoat = new Dictionary<bool, RaceBase>
+            {
+                { true, new Elf("elf") }
+            };
+            ItemCard card = new ItemCard("CyberHelment", CardType.Prize, PrizeCardType.Item, 2, cyberCoat, false, ItemType.Helmet, null, 300);
+            ItemCard oldHelmet = new ItemCard("OldHelmet", CardType.Prize, PrizeCardType.Item, 2, cyberCoat, false, ItemType.Helmet, null, 300);
+            user.UserAvatar.Build.Helmet = oldHelmet;
+            user.Deck.Items.Add(card);
+            var deckController = new DeckController(mockReadLineOverride.Object);
+            //Act
+            deckController.UseItemCard(user, card, null);
+            //Assert
+            user.UserAvatar.Build.Helmet.Should().BeSameAs(oldHelmet);
+            user.Deck.Items.Should().HaveCount(1);
+            user.Deck.Items[0].Should().BeSameAs(card);
+        }
+
+        [Fact]
+        public void UseCardItemCardArmorNullPathWithoutRestriction()
+        {
+            //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            var userAvatar = new UserAvatar();
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            ItemCard card = new ItemCard("CyberArmor", CardType.Prize, PrizeCardType.Item, 2, null, false, ItemType.Armor, null, 300);
+            user.Deck.Items.Add(card);
+            var deckController = new DeckController(mockReadLineOverride.Object);
+            //Act
+            deckController.UseItemCard(user, card, null);
+            //Assert
+            user.UserAvatar.Build.Armor.Should().BeSameAs(card);
+            user.Deck.Items.Should().BeEmpty();
+        }
+
+        [Fact]
+        public void UseCardItemCardArmorNullPathWithRestriction()
+        {
+            //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            var userAvatar = new UserAvatar()
+            {
+                Race = new Elf("elf")
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var cyberCoat = new Dictionary<bool, RaceBase>
+            {
+                { false, new Elf("elf") }
+            };
+            ItemCard card = new ItemCard("CyberArmor", CardType.Prize, PrizeCardType.Item, 2, cyberCoat, false, ItemType.Armor, null, 300);
+            user.Deck.Items.Add(card);
+            var deckController = new DeckController(mockReadLineOverride.Object);
+            //Act
+            deckController.UseItemCard(user, card, null);
+            //Assert
+            user.UserAvatar.Build.Armor.Should().BeNull();
+            user.Deck.Items.Should().HaveCount(1);
+            user.Deck.Items[0].Should().BeSameAs(card);
+        }
+
+        [Fact]
+        public void UseCardItemCardArmorChangePathChangeItems()
+        {
+            //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
+            var userAvatar = new UserAvatar()
+            {
+                Race = new Elf("elf")
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var cyberCoat = new Dictionary<bool, RaceBase>
+            {
+                { true, new Elf("elf") }
+            };
+            ItemCard card = new ItemCard("CyberArmor", CardType.Prize, PrizeCardType.Item, 2, cyberCoat, false, ItemType.Armor, null, 300);
+            ItemCard oldArmor = new ItemCard("OldArmor", CardType.Prize, PrizeCardType.Item, 2, cyberCoat, false, ItemType.Armor, null, 300);
+            user.UserAvatar.Build.Armor = oldArmor;
+            user.Deck.Items.Add(card);
+            var deckController = new DeckController(mockReadLineOverride.Object);
+            //Act
+            deckController.UseItemCard(user, card, null);
+            //Assert
+            user.UserAvatar.Build.Armor.Should().BeSameAs(card);
+            user.Deck.Items.Should().HaveCount(1);
+            user.Deck.Items[0].Should().BeSameAs(oldArmor);
+        }
+
+        [Fact]
+        public void UseCardItemCardArmorChangePathDoNothing()
+        {
+            //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("2");
+            var userAvatar = new UserAvatar()
+            {
+                Race = new Elf("elf")
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var cyberCoat = new Dictionary<bool, RaceBase>
+            {
+                { true, new Elf("elf") }
+            };
+            ItemCard card = new ItemCard("CyberArmor", CardType.Prize, PrizeCardType.Item, 2, cyberCoat, false, ItemType.Armor, null, 300);
+            ItemCard oldArmor = new ItemCard("OldArmor", CardType.Prize, PrizeCardType.Item, 2, cyberCoat, false, ItemType.Armor, null, 300);
+            user.UserAvatar.Build.Armor = oldArmor;
+            user.Deck.Items.Add(card);
+            var deckController = new DeckController(mockReadLineOverride.Object);
+            //Act
+            deckController.UseItemCard(user, card, null);
+            //Assert
+            user.UserAvatar.Build.Armor.Should().BeSameAs(oldArmor);
+            user.Deck.Items.Should().HaveCount(1);
+            user.Deck.Items[0].Should().BeSameAs(card);
+        }
+
+        [Fact]
+        public void UseCardItemCardBootsNullPathWithoutRestriction()
+        {
+            //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            var userAvatar = new UserAvatar();
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            ItemCard card = new ItemCard("CyberBoots", CardType.Prize, PrizeCardType.Item, 2, null, false, ItemType.Boots, null, 300);
+            user.Deck.Items.Add(card);
+            var deckController = new DeckController(mockReadLineOverride.Object);
+            //Act
+            deckController.UseItemCard(user, card, null);
+            //Assert
+            user.UserAvatar.Build.Boots.Should().BeSameAs(card);
+            user.Deck.Items.Should().BeEmpty();
+        }
+
+        [Fact]
+        public void UseCardItemCardBootsNullPathWithRestriction()
+        {
+            //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            var userAvatar = new UserAvatar()
+            {
+                Race = new Elf("elf")
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var cyberCoat = new Dictionary<bool, RaceBase>
+            {
+                { false, new Elf("elf") }
+            };
+            ItemCard card = new ItemCard("CyberBoots", CardType.Prize, PrizeCardType.Item, 2, cyberCoat, false, ItemType.Boots, null, 300);
+            user.Deck.Items.Add(card);
+            var deckController = new DeckController(mockReadLineOverride.Object);
+            //Act
+            deckController.UseItemCard(user, card, null);
+            //Assert
+            user.UserAvatar.Build.Boots.Should().BeNull();
+            user.Deck.Items.Should().HaveCount(1);
+            user.Deck.Items[0].Should().BeSameAs(card);
+        }
+
+        [Fact]
+        public void UseCardItemCardBootsChangePathChangeItems()
+        {
+            //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
+            var userAvatar = new UserAvatar()
+            {
+                Race = new Elf("elf")
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var cyberCoat = new Dictionary<bool, RaceBase>
+            {
+                { true, new Elf("elf") }
+            };
+            ItemCard card = new ItemCard("CyberBoots", CardType.Prize, PrizeCardType.Item, 2, cyberCoat, false, ItemType.Boots, null, 300);
+            ItemCard oldBoots = new ItemCard("OldBoots", CardType.Prize, PrizeCardType.Item, 2, cyberCoat, false, ItemType.Boots, null, 300);
+            user.UserAvatar.Build.Boots = oldBoots;
+            user.Deck.Items.Add(card);
+            var deckController = new DeckController(mockReadLineOverride.Object);
+            //Act
+            deckController.UseItemCard(user, card, null);
+            //Assert
+            user.UserAvatar.Build.Boots.Should().BeSameAs(card);
+            user.Deck.Items.Should().HaveCount(1);
+            user.Deck.Items[0].Should().BeSameAs(oldBoots);
+        }
+
+        [Fact]
+        public void UseCardItemCardBootsChangePathDoNothing()
+        {
+            //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("2");
+            var userAvatar = new UserAvatar()
+            {
+                Race = new Elf("elf")
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var cyberCoat = new Dictionary<bool, RaceBase>
+            {
+                { true, new Elf("elf") }
+            };
+            ItemCard card = new ItemCard("CyberBoots", CardType.Prize, PrizeCardType.Item, 2, cyberCoat, false, ItemType.Boots, null, 300);
+            ItemCard oldBoots = new ItemCard("OldBoots", CardType.Prize, PrizeCardType.Item, 2, cyberCoat, false, ItemType.Boots, null, 300);
+            user.UserAvatar.Build.Boots = oldBoots;
+            user.Deck.Items.Add(card);
+            var deckController = new DeckController(mockReadLineOverride.Object);
+            //Act
+            deckController.UseItemCard(user, card, null);
+            //Assert
+            user.UserAvatar.Build.Boots.Should().BeSameAs(oldBoots);
+            user.Deck.Items.Should().HaveCount(1);
+            user.Deck.Items[0].Should().BeSameAs(card);
+        }
+        #endregion
+
+        #region UseSituationalItems
+        [Fact]
+        public void UseSituationalItemsThereIsNoFight()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var userAvatar = new UserAvatar()
+            {
+                Power = 5
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var deckController = new DeckController(mock.Object);
+            var dionisiosWine = new DionisiosWine("DionisiosWine", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 400, mock.Object);
+            //Act
+            deckController.UseSituationalItems(dionisiosWine, null);
+            //Assert
+            user.UserAvatar.Power.Should().Be(5);
+            user.UserAvatar.FleeChances.Should().Be(3);
+        }
+
+        [Fact]
+        public void UseSituationalItemsWithFight()
+        {
+            ///Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var userAvatar = new UserAvatar()
+            {
+                Power = 5
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var deckController = new DeckController(mock.Object);
+            var fight = new Fight();
+            fight.Heros.Add(user.UserAvatar);
+            var dionisiosWine = new DionisiosWine("DionisiosWine", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 400, mock.Object);
+            //Act
+            deckController.UseSituationalItems(dionisiosWine, fight);
+            //Assert
+            user.UserAvatar.Power.Should().Be(8);
+            user.UserAvatar.FleeChances.Should().Be(1);
+        }
+        #endregion
+
+        #region SetWeapon
+
         #endregion
     }
 }

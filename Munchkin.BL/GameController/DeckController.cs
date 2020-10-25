@@ -131,7 +131,7 @@ namespace Munchkin.BL.GameController
             return strBuilder.ToString();
         }
 #nullable enable
-        public void UseCardItemCard(UserClass user, ItemCard card, Fight? fight)
+        public void UseItemCard(UserClass user, ItemCard card, Fight? fight)
         {
             if (card.ItemType == ItemType.Helmet)
             {
@@ -144,7 +144,7 @@ namespace Munchkin.BL.GameController
                     }
                     else
                     {
-                        while(true)
+                        while (true)
                         {
                             System.Console.WriteLine("You have equipped helment.\n");
                             System.Console.WriteLine($"To equip: Name: { card.Name}, Power: { card.Power} \n");
@@ -159,11 +159,13 @@ namespace Munchkin.BL.GameController
                                     user.Deck.Items.Add(user.UserAvatar.Build.Helmet);
                                     user.UserAvatar.Build.Helmet = card;
                                     _readLineOverride.GetNextString();
+                                    break;
                                 }
                                 else if (result == 2)
                                 {
                                     System.Console.WriteLine("You did not change item. Press enter to continue");
                                     _readLineOverride.GetNextString();
+                                    break;
                                 }
                                 else
                                 {
@@ -211,11 +213,13 @@ namespace Munchkin.BL.GameController
                                     user.Deck.Items.Add(user.UserAvatar.Build.Armor);
                                     user.UserAvatar.Build.Armor = card;
                                     _readLineOverride.GetNextString();
+                                    break;
                                 }
                                 else if (result == 2)
                                 {
                                     System.Console.WriteLine("You did not change item. Press enter to continue");
                                     _readLineOverride.GetNextString();
+                                    break;
                                 }
                                 else
                                 {
@@ -263,11 +267,13 @@ namespace Munchkin.BL.GameController
                                     user.Deck.Items.Add(user.UserAvatar.Build.Boots);
                                     user.UserAvatar.Build.Boots = card;
                                     _readLineOverride.GetNextString();
+                                    break;
                                 }
                                 else if (result == 2)
                                 {
                                     System.Console.WriteLine("You did not change item. Press enter to continue");
                                     _readLineOverride.GetNextString();
+                                    break;
                                 }
                                 else
                                 {
@@ -295,16 +301,7 @@ namespace Munchkin.BL.GameController
             }
             else if (card.ItemType == ItemType.Additional)
             {
-                if (CheckRestriction(user, card))
-                {
-                    UseAdditionalItems(user, card);
-                }
-                else
-                {
-                    System.Console.WriteLine("You can not use this item. Press enter to continue");
-                    _readLineOverride.GetNextString();
-                }
-
+                UseAdditionalItems(user, card);
             }
             else if (card.ItemType == ItemType.Sitiuational)
             {
@@ -313,7 +310,7 @@ namespace Munchkin.BL.GameController
         }
 #nullable disable
 
-        private void UseSituationalItems(ItemCard card, Fight? fight)
+        public void UseSituationalItems(ItemCard card, Fight? fight)
         {
             if (fight == null)
             {
@@ -326,7 +323,7 @@ namespace Munchkin.BL.GameController
             }
         }
 
-        private void SetWeapon(UserClass user, ItemCard card)
+        public void SetWeapon(UserClass user, ItemCard card)
         {
             if (user.UserAvatar.Build.LeftHandItem is null && user.UserAvatar.Build.RightHandItem is null)
             {
@@ -504,6 +501,8 @@ namespace Munchkin.BL.GameController
 
         public bool CheckRestriction(UserClass user, ItemCard card)
         {
+            if (card.RaceRestriction == null && card.ProficiencyRestriction == null) return true;
+
             if (card.RaceRestriction != null)
             {
                 if (card.RaceRestriction.TryGetValue(true, out RaceBase value))
