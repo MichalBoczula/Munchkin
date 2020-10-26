@@ -9,61 +9,56 @@ namespace Munchkin.BL.GameController
 {
     public class MakeActionController
     {
-        public Game game;
-        public bool IsFirstTime;
-        public bool IsFight;
+        public Game Game;
+        public GameAction GameAction;
+        public FightController FightController{ get; set; }
 
-        public MakeActionController(Game game)
+        public MakeActionController(Game game, FightController fightController)
         {
-            this.game = game;
-            IsFirstTime = true;
-            IsFight = false;
+            Game = game;
+            GameAction = new GameAction();
+            FightController = fightController;
         }
 
-        public void OpenMisteryDoor(UserClass user, MonsterCardBase monster)
+        public void OpenMisteryDoor(UserClass user)
         {
-            if (IsFirstTime)
+            if (GameAction.IsFirstTime)
             {
-                IsFirstTime = false;
-                var action = game.ActionCards[0];
+                GameAction.IsFirstTime = false;
+                var action = Game.ActionCards[0];
                 if (action.CardType is CardType.Monster)
                 {
-                    IsFight = true;
-                    //Fight
+                    GameAction.IsFight = true;
+                    var fight = new Fight();
+                    fight.Heros.Add(user.UserAvatar);
+                    fight.Monsters.Add((MonsterCardBase)action);
                 }
-                else if (action.CardType is CardType.Special)
-                {
-                    user.Deck.MagicCards.Add(action);
-                }
-                else
-                {
-                    action.CastSpecialSpell(user, monster, game);
-                }
-                game.ActionCards.Remove(action);
-                game.DestroyedActionCards.Add(action);
+                
+                Game.ActionCards.Remove(action);
+                Game.DestroyedActionCards.Add(action);
             }
-            else
-            {
-                IsFirstTime = false;
-                var action = game.ActionCards[0];
-                if (action.CardType is CardType.Monster)
-                {
-                    IsFight = true;
-                    //Fight
-                }
-                else
-                {
-                    user.Deck.MagicCards.Add(action);
-                }
-                game.ActionCards.Remove(action);
-                game.DestroyedActionCards.Add(action);
-            }
+            //else
+            //{
+            //    IsFirstTime = false;
+            //    var action = Game.ActionCards[0];
+            //    if (action.CardType is CardType.Monster)
+            //    {
+            //        IsFight = true;
+            //        //Fight
+            //    }
+            //    else
+            //    {
+            //        user.Deck.MagicCards.Add(action);
+            //    }
+            //    Game.ActionCards.Remove(action);
+            //    Game.DestroyedActionCards.Add(action);
+            //}
 
-            if (!IsFight)
-            {
-                IsFight = true;
-                OpenMisteryDoor(user, monster);
-            }
+            //if (!IsFight)
+            //{
+            //    IsFight = true;
+            //    OpenMisteryDoor(user, monster);
+            //}
         }
     }
 }

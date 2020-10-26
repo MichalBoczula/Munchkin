@@ -114,7 +114,7 @@ namespace Munchkin.BL.GameController
         {
             foreach (var user in game.Users)
             {
-                makeActionController.OpenMisteryDoor(user, null);
+                makeActionController.OpenMisteryDoor(user);
             }
         }
     }

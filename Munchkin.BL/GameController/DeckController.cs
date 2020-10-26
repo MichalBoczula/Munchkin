@@ -325,12 +325,25 @@ namespace Munchkin.BL.GameController
 
         public void SetWeapon(UserClass user, ItemCard card)
         {
+            if (!CheckRestriction(user, card))
+            {
+                System.Console.WriteLine($"You can not use weapon: {card.Name}, because has restriction. Press enter to continue...");
+                _readLineOverride.GetNextString();
+                return;
+            }
+
             if (user.UserAvatar.Build.LeftHandItem is null && user.UserAvatar.Build.RightHandItem is null)
             {
+                System.Console.WriteLine($"You equipped weapon: {card.Name} in left hand. Press enter to continue...");
+                _readLineOverride.GetNextString();
+                user.Deck.Items.Remove(card);
                 user.UserAvatar.Build.LeftHandItem = card;
             }
             else if (user.UserAvatar.Build.LeftHandItem != null && user.UserAvatar.Build.RightHandItem == null && !card.IsTwoHanded)
             {
+                System.Console.WriteLine($"You equipped weapon: {card.Name} in right hand. Press enter to continue...");
+                _readLineOverride.GetNextString();
+                user.Deck.Items.Remove(card);
                 user.UserAvatar.Build.RightHandItem = card;
             }
             else if (user.UserAvatar.Build.LeftHandItem != null && card.IsTwoHanded
@@ -343,14 +356,23 @@ namespace Munchkin.BL.GameController
                     Int32.TryParse(_readLineOverride.GetNextString(), out int num);
                     if (num == 1)
                     {
-                        var lhand = user.UserAvatar.Build.LeftHandItem;
-                        var rhand = user.UserAvatar.Build.RightHandItem;
-                        user.Deck.Items.Add(lhand);
-                        user.Deck.Items.Add(rhand);
-                        user.UserAvatar.Build.RightHandItem = null;
-                        user.UserAvatar.Build.LeftHandItem = card;
-                        System.Console.WriteLine("You changed weapon. Press enter to continue...");
-                        _readLineOverride.GetNextString();
+                        if(user.UserAvatar.Build.LeftHandItem != null)
+                        {
+                            user.Deck.Items.Add(user.UserAvatar.Build.LeftHandItem);
+                            user.UserAvatar.Build.LeftHandItem = card;
+                            user.Deck.Items.Remove(card);
+                            System.Console.WriteLine($"You changed weapon to: {card.Name}. Press enter to continue...");
+                            _readLineOverride.GetNextString();
+                        }
+                        else if (user.UserAvatar.Build.RightHandItem != null)
+                        {
+                            user.Deck.Items.Add(user.UserAvatar.Build.RightHandItem);
+                            user.UserAvatar.Build.RightHandItem = null;
+                            user.UserAvatar.Build.LeftHandItem = card;
+                            user.Deck.Items.Remove(card);
+                            System.Console.WriteLine($"You changed weapon to: {card.Name}. Press enter to continue...");
+                            _readLineOverride.GetNextString();
+                        }
                         break;
                     }
                     else if (num == 2)
@@ -385,18 +407,20 @@ namespace Munchkin.BL.GameController
                                 var lhand = user.UserAvatar.Build.LeftHandItem;
                                 user.Deck.Items.Add(lhand);
                                 user.UserAvatar.Build.LeftHandItem = card;
+                                user.Deck.Items.Remove(card);
                                 System.Console.WriteLine("You changed weapon. Press enter to continue...");
                                 _readLineOverride.GetNextString();
-                                break;
+                                return;
                             }
                             else if (result == 2)
                             {
                                 var rhand = user.UserAvatar.Build.RightHandItem;
                                 user.Deck.Items.Add(rhand);
                                 user.UserAvatar.Build.RightHandItem = card;
+                                user.Deck.Items.Remove(card);
                                 System.Console.WriteLine("You changed weapon. Press enter to continue...");
                                 _readLineOverride.GetNextString();
-                                break;
+                                return;
                             }
                             else
                             {
@@ -409,7 +433,7 @@ namespace Munchkin.BL.GameController
                     {
                         System.Console.WriteLine("You kept old weapons. Press enter to continue...");
                         _readLineOverride.GetNextString();
-                        break;
+                        return;
                     }
                     else
                     {
@@ -420,7 +444,7 @@ namespace Munchkin.BL.GameController
             }
         }
 
-        private void UseAdditionalItems(UserClass user, ItemCard card)
+        public void UseAdditionalItems(UserClass user, ItemCard card)
         {
             if (card.RaceRestriction == null && card.ProficiencyRestriction == null)
             {

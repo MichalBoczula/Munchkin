@@ -464,7 +464,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             var userAvatar = new UserAvatar()
             {
                 Race = new Elf("elf")
-            }; 
+            };
             var user = new UserClass()
             {
                 UserAvatar = userAvatar
@@ -818,6 +818,262 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         #endregion
 
         #region SetWeapon
+        [Fact]
+        public void SetWeaponBothHandsNullWithoutRestrictionOneHanded()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var userAvatar = new UserAvatar();
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var deckController = new DeckController(mock.Object);
+            var weapon = new ItemCard("MaceOfDestraction", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Weapon, null, 600);
+            user.Deck.Items.Add(weapon);
+            //Act
+            deckController.SetWeapon(user, weapon);
+            //Assert
+            user.UserAvatar.Build.LeftHandItem.Should().BeSameAs(weapon);
+            user.Deck.Items.Should().BeEmpty();
+        }
+
+        [Fact]
+        public void SetWeaponBothHandsNullWithRaceRestrictionOneHanded()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var userAvatar = new UserAvatar()
+            {
+                Race = new Elf("elf")
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var deckController = new DeckController(mock.Object);
+            var maceOfDestraction = new Dictionary<bool, RaceBase>
+            {
+                { true, new Elf("elf") }
+            };
+            var weapon = new ItemCard("MaceOfDestraction", CardType.Prize, PrizeCardType.Item, 5, maceOfDestraction, false, ItemType.Weapon, null, 600);
+            user.Deck.Items.Add(weapon);
+            //Act
+            deckController.SetWeapon(user, weapon);
+            //Assert
+            user.UserAvatar.Build.LeftHandItem.Should().BeSameAs(weapon);
+            user.Deck.Items.Should().BeEmpty();
+        }
+
+        [Fact]
+        public void SetWeaponBothHandsNullWithProficiencyRestrictionOneHanded()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var userAvatar = new UserAvatar()
+            {
+                Proficiency = new WarriorProficiency()
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var deckController = new DeckController(mock.Object);
+            var maceOfDestraction = new Dictionary<bool, ProficiencyBase>
+            {
+                { true, new WarriorProficiency() }
+            };
+            var weapon = new ItemCard("MaceOfDestraction", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Weapon, maceOfDestraction, 600);
+            user.Deck.Items.Add(weapon);
+            //Act
+            deckController.SetWeapon(user, weapon);
+            //Assert
+            user.UserAvatar.Build.LeftHandItem.Should().BeSameAs(weapon);
+            user.Deck.Items.Should().BeEmpty();
+        }
+
+        [Fact]
+        public void SetWeaponLeftHandOccupiedWithoutRestrictionOneHanded()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var userAvatar = new UserAvatar();
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var deckController = new DeckController(mock.Object);
+            var weapon = new ItemCard("MaceOfDestraction", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Weapon, null, 600);
+            var secondWeapon = new ItemCard("SecondSword", CardType.Prize, PrizeCardType.Item, 2, null, false, ItemType.Weapon, null, 200);
+            user.UserAvatar.Build.LeftHandItem = weapon;
+            user.Deck.Items.Add(secondWeapon);
+            //Act
+            deckController.SetWeapon(user, secondWeapon);
+            //Assert
+            user.UserAvatar.Build.LeftHandItem.Should().BeSameAs(weapon);
+            user.UserAvatar.Build.RightHandItem.Should().BeSameAs(secondWeapon);
+            user.Deck.Items.Should().BeEmpty();
+        }
+
+        [Fact]
+        public void SetWeaponLeftHandOccupiedWithoutRestrictionTwoHanded()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var userAvatar = new UserAvatar();
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var deckController = new DeckController(mock.Object);
+            var weapon = new ItemCard("MaceOfDestraction", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Weapon, null, 600);
+            var secondWeapon = new ItemCard("SecondSword", CardType.Prize, PrizeCardType.Item, 2, null, true, ItemType.Weapon, null, 200);
+            user.UserAvatar.Build.LeftHandItem = weapon;
+            user.Deck.Items.Add(secondWeapon);
+            //Act
+            deckController.SetWeapon(user, secondWeapon);
+            //Assert
+            user.UserAvatar.Build.LeftHandItem.Should().BeSameAs(secondWeapon);
+            user.UserAvatar.Build.RightHandItem.Should().BeNull();
+            user.Deck.Items.Should().HaveCount(1);
+            user.Deck.Items[0].Should().Be(weapon);
+        }
+
+        [Fact]
+        public void SetWeaponRightHandOccupiedWithoutRestrictionTwoHanded()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var userAvatar = new UserAvatar();
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var deckController = new DeckController(mock.Object);
+            var weapon = new ItemCard("MaceOfDestraction", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Weapon, null, 600);
+            var secondWeapon = new ItemCard("SecondSword", CardType.Prize, PrizeCardType.Item, 2, null, true, ItemType.Weapon, null, 200);
+            user.UserAvatar.Build.RightHandItem = weapon;
+            user.Deck.Items.Add(secondWeapon);
+            //Act
+            deckController.SetWeapon(user, secondWeapon);
+            //Assert
+            user.UserAvatar.Build.LeftHandItem.Should().BeSameAs(secondWeapon);
+            user.UserAvatar.Build.RightHandItem.Should().BeNull();
+            user.Deck.Items.Should().HaveCount(1);
+            user.Deck.Items[0].Should().Be(weapon);
+        }
+
+        [Fact]
+        public void SetWeaponKeepOldWeapondWithoutRestrictionTwoHanded()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("2");
+            var userAvatar = new UserAvatar();
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var deckController = new DeckController(mock.Object);
+            var weapon = new ItemCard("MaceOfDestraction", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Weapon, null, 600);
+            var secondWeapon = new ItemCard("SecondSword", CardType.Prize, PrizeCardType.Item, 2, null, true, ItemType.Weapon, null, 200);
+            user.UserAvatar.Build.LeftHandItem = weapon;
+            user.Deck.Items.Add(secondWeapon);
+            //Act
+            deckController.SetWeapon(user, secondWeapon);
+            //Assert
+            user.UserAvatar.Build.LeftHandItem.Should().BeSameAs(weapon);
+            user.UserAvatar.Build.RightHandItem.Should().BeNull();
+            user.Deck.Items.Should().HaveCount(1);
+            user.Deck.Items[0].Should().Be(secondWeapon);
+        }
+
+        [Fact]
+        public void SetWeaponBothHandsOccupiedWithoutRestrictionOneHandedChangeInLeftHand()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var userAvatar = new UserAvatar();
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var deckController = new DeckController(mock.Object);
+            var weapon = new ItemCard("MaceOfDestraction", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Weapon, null, 600);
+            var secondWeapon = new ItemCard("SecondSword", CardType.Prize, PrizeCardType.Item, 2, null, false, ItemType.Weapon, null, 200);
+            var toChange = new ItemCard("NewSword", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null, 300);
+            user.UserAvatar.Build.LeftHandItem = weapon;
+            user.UserAvatar.Build.RightHandItem = secondWeapon;
+            user.Deck.Items.Add(toChange);
+            //Act
+            deckController.SetWeapon(user, toChange);
+            //Assert
+            user.UserAvatar.Build.LeftHandItem.Should().BeSameAs(toChange);
+            user.UserAvatar.Build.RightHandItem.Should().BeSameAs(secondWeapon);
+            user.Deck.Items.Should().HaveCount(1);
+            user.Deck.Items[0].Should().Be(weapon);
+        }
+
+        [Fact]
+        public void SetWeaponBothHandsOccupiedWithoutRestrictionOneHandedChangeInRightHand()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "1", "2", "0" }).Dequeue);
+            var userAvatar = new UserAvatar();
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var deckController = new DeckController(mock.Object);
+            var weapon = new ItemCard("MaceOfDestraction", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Weapon, null, 600);
+            var secondWeapon = new ItemCard("SecondSword", CardType.Prize, PrizeCardType.Item, 2, null, false, ItemType.Weapon, null, 200);
+            var toChange = new ItemCard("NewSword", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null, 300);
+            user.UserAvatar.Build.LeftHandItem = weapon;
+            user.UserAvatar.Build.RightHandItem = secondWeapon;
+            user.Deck.Items.Add(toChange);
+            //Act
+            deckController.SetWeapon(user, toChange);
+            //Assert
+            user.UserAvatar.Build.LeftHandItem.Should().BeSameAs(weapon);
+            user.UserAvatar.Build.RightHandItem.Should().BeSameAs(toChange);
+            user.Deck.Items.Should().HaveCount(1);
+            user.Deck.Items[0].Should().Be(secondWeapon);
+        }
+
+        [Fact]
+        public void SetWeaponBothHandsOccupiedWithoutRestrictionOneHandedDoNothing()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("2");
+            var userAvatar = new UserAvatar();
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var deckController = new DeckController(mock.Object);
+            var weapon = new ItemCard("MaceOfDestraction", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Weapon, null, 600);
+            var secondWeapon = new ItemCard("SecondSword", CardType.Prize, PrizeCardType.Item, 2, null, false, ItemType.Weapon, null, 200);
+            var toChange = new ItemCard("NewSword", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null, 300);
+            user.UserAvatar.Build.LeftHandItem = weapon;
+            user.UserAvatar.Build.RightHandItem = secondWeapon;
+            user.Deck.Items.Add(toChange);
+            //Act
+            deckController.SetWeapon(user, toChange);
+            //Assert
+            user.UserAvatar.Build.LeftHandItem.Should().BeSameAs(weapon);
+            user.UserAvatar.Build.RightHandItem.Should().BeSameAs(secondWeapon);
+            user.Deck.Items.Should().HaveCount(1);
+            user.Deck.Items[0].Should().Be(toChange);
+        }
 
         #endregion
     }
