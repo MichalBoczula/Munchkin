@@ -20,10 +20,11 @@ namespace Munchkin.Model.User
             MagicCards = new List<ActionCardBase>();
         }
 
-        public  void Clear()
+        public void Clear()
         {
             Items.Clear();
             Monsters.Clear();
+            MagicCards.Clear();
         }
 
         public int Count()

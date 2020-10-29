@@ -13,7 +13,7 @@ namespace Munchkin.BL.GameController
     {
         public Game Game;
         public GameAction GameAction;
-        public FightController FightController { get; set; }
+        public FightController FightController;
         public PrizeStackController PrizeStackController;
 
         public MakeActionController(Game game, FightController fightController)
