@@ -30,7 +30,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             {
                 Power = 5
             };
-            fight.Heros.Add(userClass.UserAvatar);
+            fight.Heros.Add(userClass);
             fight.Monsters.Add(monster);
             //Act
             var result = fightController.WhoWinFight(fight);
@@ -54,7 +54,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             {
                 Power = 5
             };
-            fight.Heros.Add(userClass.UserAvatar);
+            fight.Heros.Add(userClass);
             fight.Monsters.Add(monster);
             //Act
             var result = fightController.WhoWinFight(fight);
@@ -78,7 +78,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             {
                 Power = 5
             };
-            fight.Heros.Add(userClass.UserAvatar);
+            fight.Heros.Add(userClass);
             fight.Monsters.Add(monster);
             //Act
             var result = fightController.WhoWinFight(fight);
@@ -103,7 +103,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             {
                 Power = 5
             };
-            fight.Heros.Add(userClass.UserAvatar);
+            fight.Heros.Add(userClass);
             fight.Monsters.Add(monster);
             //Act
             var result = fightController.WhoWinFight(fight);
@@ -133,8 +133,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             {
                 Power = 5
             };
-            fight.Heros.Add(userClass.UserAvatar);
-            fight.Heros.Add(userClass2.UserAvatar);
+            fight.Heros.Add(userClass);
+            fight.Heros.Add(userClass2);
             fight.Monsters.Add(monster);
             //Act
             var result = fightController.WhoWinFight(fight);
@@ -162,7 +162,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             {
                 Power = 3
             };
-            fight.Heros.Add(userClass.UserAvatar);
+            fight.Heros.Add(userClass);
             fight.Monsters.Add(monster);
             fight.Monsters.Add(monster2);
             //Act
@@ -201,8 +201,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             {
                 Power = 2
             };
-            fight.Heros.Add(userClass.UserAvatar);
-            fight.Heros.Add(userClass2.UserAvatar);
+            fight.Heros.Add(userClass);
+            fight.Heros.Add(userClass2);
             fight.Monsters.Add(monster);
             fight.Monsters.Add(monster2);
             fight.Monsters.Add(monster3);
@@ -242,8 +242,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             {
                 Power = 2
             };
-            fight.Heros.Add(userClass.UserAvatar);
-            fight.Heros.Add(userClass2.UserAvatar);
+            fight.Heros.Add(userClass);
+            fight.Heros.Add(userClass2);
             fight.Monsters.Add(monster);
             fight.Monsters.Add(monster2);
             fight.Monsters.Add(monster3);
@@ -283,8 +283,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             {
                 Power = 2
             };
-            fight.Heros.Add(userClass.UserAvatar);
-            fight.Heros.Add(userClass2.UserAvatar);
+            fight.Heros.Add(userClass);
+            fight.Heros.Add(userClass2);
             fight.Monsters.Add(monster);
             fight.Monsters.Add(monster2);
             fight.Monsters.Add(monster3);
@@ -325,8 +325,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             {
                 Power = 2
             };
-            fight.Heros.Add(userClass.UserAvatar);
-            fight.Heros.Add(userClass2.UserAvatar);
+            fight.Heros.Add(userClass);
+            fight.Heros.Add(userClass2);
             fight.Monsters.Add(monster);
             fight.Monsters.Add(monster2);
             fight.Monsters.Add(monster3);
@@ -368,8 +368,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             {
                 Power = 2
             };
-            fight.Heros.Add(userClass.UserAvatar);
-            fight.Heros.Add(userClass2.UserAvatar);
+            fight.Heros.Add(userClass);
+            fight.Heros.Add(userClass2);
             fight.Monsters.Add(monster);
             fight.Monsters.Add(monster2);
             fight.Monsters.Add(monster3);

@@ -30,7 +30,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             {
                 Power = 5
             };
-            fight.Heros.Add(userClass.UserAvatar);
+            fight.Heros.Add(userClass);
             fight.Monsters.Add(monster);
             var runeMark = new RuneMark("RuneMark", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 400);
             //Act
@@ -59,7 +59,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             {
                 Power = 5
             };
-            fight.Heros.Add(userClass.UserAvatar);
+            fight.Heros.Add(userClass);
             fight.Monsters.Add(monster);
             fight.Monsters.Add(monster2);
             var runeMark = new RuneMark("Poison", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 400);

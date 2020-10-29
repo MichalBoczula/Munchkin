@@ -29,7 +29,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             {
                 Power = 5
             };
-            fight.Heros.Add(userClass.UserAvatar);
+            fight.Heros.Add(userClass);
             fight.Monsters.Add(monster);
             var deadMark = new DeadMark("DeadMark", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 700);
             //Act
@@ -62,8 +62,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             {
                 Power = 5
             };
-            fight.Heros.Add(userClass.UserAvatar);
-            fight.Heros.Add(userClass2.UserAvatar);
+            fight.Heros.Add(userClass);
+            fight.Heros.Add(userClass2);
             fight.Monsters.Add(monster);
             var deadMark = new DeadMark("DeadMark", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 700);
             //Act

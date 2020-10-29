@@ -37,8 +37,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             {
                 Power = 5
             };
-            fight.Heros.Add(userClass.UserAvatar);
-            fight.Heros.Add(userClass2.UserAvatar);
+            fight.Heros.Add(userClass);
+            fight.Heros.Add(userClass2);
             fight.Monsters.Add(monster);
             var mock = new Mock<ReadLineOverride>();
             mock.Setup(x => x.GetNextString()).Returns("1");
@@ -71,8 +71,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             {
                 Power = 5
             };
-            fight.Heros.Add(userClass.UserAvatar);
-            fight.Heros.Add(userClass2.UserAvatar);
+            fight.Heros.Add(userClass);
+            fight.Heros.Add(userClass2);
             fight.Monsters.Add(monster);
             var mock = new Mock<ReadLineOverride>();
             mock.Setup(x => x.GetNextString()).Returns("2");

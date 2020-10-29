@@ -8,12 +8,12 @@ namespace Munchkin.Model.User
 {
     public class Fight
     {
-        public List<UserAvatar> Heros{ get; set; }
+        public List<UserClass> Heros{ get; set; }
         public List<MonsterCardBase> Monsters{ get; set; }
 
         public Fight()
         {
-            Heros = new List<UserAvatar>();
+            Heros = new List<UserClass>();
             Monsters = new List<MonsterCardBase>();
         }
     }

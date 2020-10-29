@@ -17,7 +17,7 @@ namespace Munchkin.BL.GameController
             {
                 if (i <= fight.Heros.Count - 1)
                 {
-                    heroPower += fight.Heros[i].Power;
+                    heroPower += fight.Heros[i].UserAvatar.Power;
                 }
                 if (i <= fight.Monsters.Count - 1)
                 {
@@ -33,7 +33,7 @@ namespace Munchkin.BL.GameController
             {
                 foreach(var hero in fight.Heros)
                 {
-                    if(!(hero.Proficiency is WarriorProficiency))
+                    if(!(hero.UserAvatar.Proficiency is WarriorProficiency))
                     {
                         return false;
                     }

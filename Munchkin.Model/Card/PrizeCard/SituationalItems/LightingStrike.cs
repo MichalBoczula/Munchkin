@@ -47,7 +47,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                                 {
                                     if (choice - 1 <= fight.Heros.Count - 1)
                                     {
-                                        fight.Heros[choice - 1].Power -= 4;
+                                        fight.Heros[choice - 1].UserAvatar.Power -= 4;
                                         return;
                                     }
                                     else
@@ -60,7 +60,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                         }
                         else
                         {
-                            fight.Heros[0].Power -= 4;
+                            fight.Heros[0].UserAvatar.Power -= 4;
                             return;
                         }
                     }

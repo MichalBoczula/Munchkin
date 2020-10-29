@@ -16,7 +16,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
         {
             foreach(var hero in fight.Heros)
             {
-                hero.Power += 2;
+                hero.UserAvatar.Power += 2;
             }
             foreach (var monster in fight.Monsters)
             {

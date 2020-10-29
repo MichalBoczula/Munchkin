@@ -16,8 +16,8 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
         {
             foreach(var hero in fight.Heros)
             {
-                hero.Power += 5;
-                hero.Nerfs.Poisoned.Add(true);
+                hero.UserAvatar.Power += 5;
+                hero.UserAvatar.Nerfs.Poisoned.Add(true);
             }
         }
     }

@@ -26,7 +26,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                     {
                         foreach(var hero in fight.Heros)
                         {
-                            hero.FleeChances = 0;
+                            hero.UserAvatar.FleeChances = 0;
                         }
                         return;
                     }
@@ -34,7 +34,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                     {
                         foreach (var hero in fight.Heros)
                         {
-                            hero.FleeChances = 6;
+                            hero.UserAvatar.FleeChances = 6;
                         }
                         return;
                     }

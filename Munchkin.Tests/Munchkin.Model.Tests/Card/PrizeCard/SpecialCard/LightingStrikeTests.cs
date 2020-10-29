@@ -28,7 +28,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             userClass.UserAvatar = userAvatar;
             var fight = new Fight();
             var monster = new AntArmy("Ant Army", CardType.Monster);
-            fight.Heros.Add(userClass.UserAvatar);
+            fight.Heros.Add(userClass);
             fight.Monsters.Add(monster);
             var mock = new Mock<ReadLineOverride>();
             mock.Setup(x => x.GetNextString()).Returns("1");
@@ -54,7 +54,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             {
                 Power = 5
             };
-            fight.Heros.Add(userClass.UserAvatar);
+            fight.Heros.Add(userClass);
             fight.Monsters.Add(monster);
             var mock = new Mock<ReadLineOverride>();
             mock.Setup(x => x.GetNextString()).Returns("2");
@@ -83,8 +83,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             userClass2.UserAvatar = userAvatar2;
             var fight = new Fight();
             var monster = new AntArmy("Ant Army", CardType.Monster);
-            fight.Heros.Add(userClass.UserAvatar);
-            fight.Heros.Add(userClass2.UserAvatar);
+            fight.Heros.Add(userClass);
+            fight.Heros.Add(userClass2);
             fight.Monsters.Add(monster);
             var mock = new Mock<ReadLineOverride>();
             mock.Setup(x => x.GetNextString()).Returns("1");
@@ -115,7 +115,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             {
                 Power = 5
             };
-            fight.Heros.Add(userClass.UserAvatar);
+            fight.Heros.Add(userClass);
             fight.Monsters.Add(monster);
             fight.Monsters.Add(monster2);
             var mock = new Mock<ReadLineOverride>();

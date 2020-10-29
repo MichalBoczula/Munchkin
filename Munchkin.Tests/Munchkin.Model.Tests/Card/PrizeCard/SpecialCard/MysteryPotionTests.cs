@@ -25,7 +25,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             };
             userClass.UserAvatar = userAvatar;
             var fight = new Fight();
-            fight.Heros.Add(userClass.UserAvatar);
+            fight.Heros.Add(userClass);
             var mock = new Mock<Random>();
             mock.Setup(x => x.Next(It.IsAny<int>())).Returns(0);
             var mysteryPotion = new MysteryPotion("MysteryPotion", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 500, mock.Object);
@@ -46,7 +46,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             };
             userClass.UserAvatar = userAvatar;
             var fight = new Fight();
-            fight.Heros.Add(userClass.UserAvatar);
+            fight.Heros.Add(userClass);
             var mock = new Mock<Random>();
             mock.Setup(x => x.Next(It.IsAny<int>())).Returns(1);
             var mysteryPotion = new MysteryPotion("MysteryPotion", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 500, mock.Object);
@@ -76,8 +76,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             var mock = new Mock<Random>();
             mock.Setup(x => x.Next(It.IsAny<int>())).Returns(0);
             var mysteryPotion = new MysteryPotion("MysteryPotion", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 500, mock.Object);
-            fight.Heros.Add(userClass.UserAvatar);
-            fight.Heros.Add(userClass2.UserAvatar);
+            fight.Heros.Add(userClass);
+            fight.Heros.Add(userClass2);
             //Act
             mysteryPotion.SpecialEffect(fight);
             //Assert
@@ -105,8 +105,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             var mock = new Mock<Random>();
             mock.Setup(x => x.Next(It.IsAny<int>())).Returns(1);
             var mysteryPotion = new MysteryPotion("MysteryPotion", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 500, mock.Object);
-            fight.Heros.Add(userClass.UserAvatar);
-            fight.Heros.Add(userClass2.UserAvatar);
+            fight.Heros.Add(userClass);
+            fight.Heros.Add(userClass2);
             //Act
             mysteryPotion.SpecialEffect(fight);
             //Assert

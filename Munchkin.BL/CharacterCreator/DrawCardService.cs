@@ -25,6 +25,7 @@ namespace Munchkin.BL.CharacterCreator
         {
             return _random.Next(5);
         }
+
         public int RandomPrizeCard(int cardId)
         {
             return _random.Next(cardId);

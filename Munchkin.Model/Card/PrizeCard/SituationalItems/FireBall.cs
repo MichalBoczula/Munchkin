@@ -18,12 +18,12 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
             var boost = 3;
             foreach(var hero in fight.Heros)
             {
-                if(hero.Proficiency is MageProficiency)
+                if(hero.UserAvatar.Proficiency is MageProficiency)
                 {
                     boost = 6;
                 }
             }
-            fight.Heros[0].Power += boost;
+            fight.Heros[0].UserAvatar.Power += boost;
         }
     }
 }

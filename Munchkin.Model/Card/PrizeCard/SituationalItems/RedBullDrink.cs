@@ -38,8 +38,8 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                                 {
                                     if (choice - 1 <= fight.Heros.Count - 1)
                                     {
-                                        fight.Heros[choice - 1].Power += 2;
-                                        fight.Heros[choice - 1].FleeChances += 1;
+                                        fight.Heros[choice - 1].UserAvatar.Power += 2;
+                                        fight.Heros[choice - 1].UserAvatar.FleeChances += 1;
                                         return;
                                     }
                                     else
@@ -52,8 +52,8 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                         }
                         else
                         {
-                            fight.Heros[0].Power += 2;
-                            fight.Heros[0].FleeChances += 1;
+                            fight.Heros[0].UserAvatar.Power += 2;
+                            fight.Heros[0].UserAvatar.FleeChances += 1;
                             return;
                         }
                     }
@@ -75,7 +75,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                                         fight.Monsters[choice - 1].Power += 2;
                                         foreach (var hero in fight.Heros)
                                         {
-                                            hero.FleeChances -= 1;
+                                            hero.UserAvatar.FleeChances -= 1;
                                         }
                                         return;
                                     }
@@ -92,7 +92,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                             fight.Monsters[0].Power += 2;
                             foreach (var hero in fight.Heros)
                             {
-                                hero.FleeChances -= 1;
+                                hero.UserAvatar.FleeChances -= 1;
                             }
                             return;
                         }

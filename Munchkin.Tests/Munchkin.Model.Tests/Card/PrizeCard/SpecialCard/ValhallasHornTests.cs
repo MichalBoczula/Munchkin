@@ -31,7 +31,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             {
                 Power = 5
             };
-            fight.Heros.Add(userClass.UserAvatar);
+            fight.Heros.Add(userClass);
             fight.Monsters.Add(monster);
             var valhallasHorn = new ValhallasHorn(" ValhallasHorn", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 700);
             //Act
@@ -66,8 +66,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             {
                 Power = 6
             };
-            fight.Heros.Add(userClass.UserAvatar);
-            fight.Heros.Add(userClass2.UserAvatar);
+            fight.Heros.Add(userClass);
+            fight.Heros.Add(userClass2);
             fight.Monsters.Add(monster);
             fight.Monsters.Add(monster2);
             var valhallasHorn = new ValhallasHorn(" ValhallasHorn", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 700);

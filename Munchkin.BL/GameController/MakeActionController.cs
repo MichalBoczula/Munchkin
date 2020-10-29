@@ -1,5 +1,6 @@
 ﻿using Munchkin.Model;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Abstract;
+using Munchkin.Model.Card.PrizeCard;
 using Munchkin.Model.Character;
 using Munchkin.Model.User;
 using System;
@@ -13,12 +14,21 @@ namespace Munchkin.BL.GameController
         public Game Game;
         public GameAction GameAction;
         public FightController FightController { get; set; }
+        public PrizeStackController PrizeStackController;
 
         public MakeActionController(Game game, FightController fightController)
         {
             Game = game;
             GameAction = new GameAction();
             FightController = fightController;
+        }
+
+        public MakeActionController(Game game, FightController fightController, PrizeStackController prizeStackController)
+        {
+            Game = game;
+            GameAction = new GameAction();
+            FightController = fightController;
+            PrizeStackController = prizeStackController;
         }
 
         public void OpenMisteryDoor(UserClass user)
@@ -30,16 +40,17 @@ namespace Munchkin.BL.GameController
                 if (action.CardType is CardType.Monster)
                 {
                     GameAction.IsFight = true;
+                    action.SpecialPower(Game, user);
                     var fight = new Fight();
-                    fight.Heros.Add(user.UserAvatar);
+                    fight.Heros.Add(user);
                     fight.Monsters.Add((MonsterCardBase)action);
                     if (FightController.WhoWinFight(fight))
                     {
-
+                        GetPrizes(fight);
                     }
                     else
                     {
-
+                        DeadEnd(fight);
                     }
                 }
 
@@ -68,6 +79,56 @@ namespace Munchkin.BL.GameController
             //    IsFight = true;
             //    OpenMisteryDoor(user, monster);
             //}
+        }
+
+        public void DeadEnd(Fight fight)
+        {
+            foreach (var monster in fight.Monsters)
+            {
+                foreach (var hero in fight.Heros)
+                {
+                    monster.DeadEnd(Game, hero);
+                }
+            }
+        }
+
+        public void GetPrizes(Fight fight)
+        {
+            if (fight.Heros.Count == 1)
+            {
+                var prizes = 0;
+                foreach (var monster in fight.Monsters)
+                {
+                    prizes += monster.NumberOfPrizes;
+                }
+
+                while (prizes > 0)
+                {
+                    var card = PrizeStackController.DrawCard();
+                    fight.Heros[0].Deck.Items.Add(card);
+                    prizes--;
+                }
+            }
+            else if (fight.Heros.Count > 1)
+            {
+                var list = new List<ItemCard>();
+                var prizes = 0;
+                foreach (var monster in fight.Monsters)
+                {
+                    prizes += monster.NumberOfPrizes;
+                }
+
+                while (prizes > 0)
+                {
+                    foreach (var hero in fight.Heros)
+                    {
+                        if (prizes == 0) return;
+                        var card = PrizeStackController.DrawCard();
+                        hero.Deck.Items.Add(card);
+                        prizes--;
+                    }
+                }
+            }
         }
 
         public List<UserAvatar> AskForHelp()

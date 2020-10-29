@@ -47,6 +47,17 @@ namespace Munchkin.APP
 
             //var deckController = new DeckController();
 
+            var prizes = 5;
+            var users = 3;
+            if(prizes % users == 0)
+            {
+                System.Console.WriteLine(prizes/ users);
+            }
+            else
+            {
+                System.Console.WriteLine($"{prizes / users} + {prizes % users} = {(prizes / users) + (prizes % users)}");
+            }
+
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.MagicCard
             {
                 UserAvatar = userAvatar
             };
-            fight.Heros.Add(userAvatar);
+            fight.Heros.Add(user);
             var monster = new AntArmy("Ant Army", CardType.Monster);
             user.Deck.Monsters.Add(monster);
             //Act
@@ -54,7 +54,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.MagicCard
             {
                 UserAvatar = userAvatar
             };
-            fight.Heros.Add(userAvatar);
+            fight.Heros.Add(user);
             var monster = new AntArmy("Ant Army", CardType.Monster);
             var babaYaga = new BabaYaga("Baba Yaga", CardType.Monster);
             user.Deck.Monsters.Add(monster);

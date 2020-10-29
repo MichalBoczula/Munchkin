@@ -28,7 +28,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             };
             userClass.UserAvatar = userAvatar;
             var fight = new Fight();
-            fight.Heros.Add(userClass.UserAvatar);
+            fight.Heros.Add(userClass);
             var fireBall = new FireBall("FireBall", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 400);
             //Act
             fireBall.SpecialEffect(fight);
@@ -47,7 +47,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             };
             userClass.UserAvatar = userAvatar;
             var fight = new Fight();
-            fight.Heros.Add(userClass.UserAvatar);
+            fight.Heros.Add(userClass);
             var fireBall = new FireBall("FireBall", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 400);
             //Act
             fireBall.SpecialEffect(fight);
@@ -72,8 +72,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             userClass.UserAvatar = userAvatar;
             userClass2.UserAvatar = userAvatar2;
             var fight = new Fight();
-            fight.Heros.Add(userClass.UserAvatar);
-            fight.Heros.Add(userClass2.UserAvatar);
+            fight.Heros.Add(userClass);
+            fight.Heros.Add(userClass2);
             var fireBall = new FireBall("FireBall", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 400);
             //Act
             fireBall.SpecialEffect(fight);
@@ -100,8 +100,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             userClass.UserAvatar = userAvatar;
             userClass2.UserAvatar = userAvatar2;
             var fight = new Fight();
-            fight.Heros.Add(userClass.UserAvatar);
-            fight.Heros.Add(userClass2.UserAvatar);
+            fight.Heros.Add(userClass);
+            fight.Heros.Add(userClass2);
             var fireBall = new FireBall("FireBall", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 400);
             //Act
             fireBall.SpecialEffect(fight);

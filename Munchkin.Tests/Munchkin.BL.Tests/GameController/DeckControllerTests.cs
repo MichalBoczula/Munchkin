@@ -807,7 +807,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             };
             var deckController = new DeckController(mock.Object);
             var fight = new Fight();
-            fight.Heros.Add(user.UserAvatar);
+            fight.Heros.Add(user);
             var dionisiosWine = new DionisiosWine("DionisiosWine", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 400, mock.Object);
             //Act
             deckController.UseSituationalItems(dionisiosWine, fight);
