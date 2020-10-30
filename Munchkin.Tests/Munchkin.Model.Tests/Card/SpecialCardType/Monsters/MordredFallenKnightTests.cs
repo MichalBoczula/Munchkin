@@ -1,4 +1,6 @@
 ﻿using FluentAssertions;
+using Moq;
+using Munchkin.BL.Helper;
 using Munchkin.Model;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret;
 using Munchkin.Model.Card.PrizeCard;
@@ -18,9 +20,11 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void SpecialPowerWarriorTest()
         {
             //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
             var game = new Game();
             var mordredFallenKnight = new MordredFallenKnight("Mordred Fallen Knight", CardType.Monster);
-            var proficiency = new WarriorProficiency();
+            var proficiency = new WarriorProficiency(mockReadLineOverride.Object);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = proficiency
@@ -41,9 +45,11 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void SpecialPowerDiffrentProficiencyTest()
         {
             //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
             var game = new Game();
             var mordredFallenKnight = new MordredFallenKnight("Mordred Fallen Knight", CardType.Monster);
-            var priest = new PriestProficiency();
+            var priest = new PriestProficiency(mockReadLineOverride.Object);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = priest
@@ -64,9 +70,11 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void DeadEndTest()
         {
             //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
             var game = new Game();
             var mordredFallenKnight = new MordredFallenKnight("Mordred Fallen Knight", CardType.Monster);
-            var priest = new PriestProficiency();
+            var priest = new PriestProficiency(mockReadLineOverride.Object);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = priest

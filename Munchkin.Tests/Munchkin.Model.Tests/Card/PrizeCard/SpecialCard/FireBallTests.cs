@@ -21,10 +21,13 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
         {
             //Arrange
             var userClass = new UserClass();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
                 Power = 5,
-                Proficiency = new MageProficiency()
+                Proficiency = mage
             };
             userClass.UserAvatar = userAvatar;
             var fight = new Fight();
@@ -88,6 +91,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             //Arrange
             var userClass = new UserClass();
             var userClass2 = new UserClass();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
                 Power = 5
@@ -95,7 +101,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.PrizeCard.SpecialCard
             var userAvatar2 = new UserAvatar()
             {
                 Power = 4,
-                Proficiency = new MageProficiency()
+                Proficiency = mage
             };
             userClass.UserAvatar = userAvatar;
             userClass2.UserAvatar = userAvatar2;

@@ -44,9 +44,11 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void SpecialPowerDiffrentProficiencyTest()
         {
             //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
             var game = new Game();
             var furies = new Furies("Furies", CardType.Monster);
-            var warrior = new WarriorProficiency();
+            var warrior = new WarriorProficiency(mockReadLineOverride.Object);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = warrior

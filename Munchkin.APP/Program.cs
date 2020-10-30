@@ -6,6 +6,7 @@ using Munchkin.BL.Helper;
 using Munchkin.BL.InformationModel;
 using Munchkin.Model;
 using Munchkin.Model.Card.ActionCard;
+using Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Abstract;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret;
 using Munchkin.Model.Card.PrizeCard;
@@ -47,17 +48,31 @@ namespace Munchkin.APP
 
             //var deckController = new DeckController();
 
-            var prizes = 5;
-            var users = 3;
-            if(prizes % users == 0)
+            var readLineOverride = new ReadLineOverride();
+            var random = new Random();
+            var drawCard = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackGenerator = new PrizeStackController(drawCard, stackCardGeneratorService);
+            var warrior = new WarriorProficiency(readLineOverride);
+            var userAvatar = new UserAvatar()
             {
-                System.Console.WriteLine(prizes/ users);
-            }
-            else
+                Proficiency = warrior
+            };
+            var user = new UserClass()
             {
-                System.Console.WriteLine($"{prizes / users} + {prizes % users} = {(prizes / users) + (prizes % users)}");
-            }
-
+                UserAvatar = userAvatar
+            };
+            var monster = new AntArmy("Ant Army", CardType.Monster);
+            var magic = new BackToSchool("BackToSchool", CardType.Curse);
+            user = prizeStackGenerator.DrawCardsForStartDeck(user);
+            user.Deck.Items.RemoveAt(0);
+            user.Deck.Items.RemoveAt(0);
+            user.Deck.Items.RemoveAt(0);
+            user.Deck.Items.RemoveAt(0);
+            user.Deck.Monsters.Add(monster);
+            user.Deck.MagicCards.Add(magic);
+            var deckController = new DeckController(readLineOverride);
+            deckController.LookOnCard(user);
         }
     }
 }

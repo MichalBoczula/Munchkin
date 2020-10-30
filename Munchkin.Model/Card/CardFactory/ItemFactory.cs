@@ -14,21 +14,22 @@ namespace Munchkin.Model.Card.CardFactory
     {
         public ItemCard CreateHandsCard(string name)
         {
+            var readLineOverride = new ReadLineOverride();
             var lambas = new Dictionary<bool, RaceBase>
             {
                 { true, new Halfling("halfling") }
             };
             var excalibur = new Dictionary<bool, ProficiencyBase>
             {
-                { false, new MageProficiency() }
+                { false, new MageProficiency(readLineOverride) }
             };
             var lighting = new Dictionary<bool, ProficiencyBase>
             {
-                { true, new MageProficiency() }
+                { true, new MageProficiency(readLineOverride) }
             };
             var thorsHammer = new Dictionary<bool, ProficiencyBase>
             {
-                { true, new WarriorProficiency() }
+                { true, new WarriorProficiency(readLineOverride) }
             };
             var trident = new Dictionary<bool, RaceBase>
             {
@@ -62,13 +63,14 @@ namespace Munchkin.Model.Card.CardFactory
 
         public ItemCard CreateAdditionalItemCard(string name)
         {
+            var readLineOverride = new ReadLineOverride();
             var cyberCoat = new Dictionary<bool, RaceBase>
             {
                 { false, new Elf("elf") }
             };
             var betterDefenceSpray = new Dictionary<bool, ProficiencyBase>
             {
-                { false, new WarriorProficiency() }
+                { false, new WarriorProficiency(readLineOverride) }
             };
             var result = name switch
             {
@@ -85,9 +87,10 @@ namespace Munchkin.Model.Card.CardFactory
 
         public ItemCard CreateArmorCard(string name)
         {
+            var readLineOverride = new ReadLineOverride();
             var godsArmorRestrictions = new Dictionary<bool, ProficiencyBase>
             {
-                { true, new WarriorProficiency()}
+                { true, new WarriorProficiency(readLineOverride)}
             };
             var moiraRestrictions = new Dictionary<bool, RaceBase>
             {
@@ -125,13 +128,14 @@ namespace Munchkin.Model.Card.CardFactory
 
         public ItemCard CreateHelmetCard(string name)
         {
+            var readLineOverride = new ReadLineOverride();
             var ritualHelmetRestrictions = new Dictionary<bool, ProficiencyBase>
             {
-                { true, new PriestProficiency() }
+                { true, new PriestProficiency(readLineOverride) }
             };
             var maskOfDeadRestrictions = new Dictionary<bool, ProficiencyBase>
             {
-                { false, new PriestProficiency() }
+                { false, new PriestProficiency(readLineOverride) }
             };
             var result = name switch
             {

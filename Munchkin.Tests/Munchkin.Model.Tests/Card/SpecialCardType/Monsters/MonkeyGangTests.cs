@@ -49,7 +49,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var game = new Game();
             var mockRandom = new Mock<Random>();
             var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = mage
@@ -74,7 +76,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(4);
             var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build(),
@@ -101,7 +105,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(4);
             var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build(),
@@ -126,7 +132,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(3);
             var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build(),
@@ -153,7 +161,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(4);
             var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build(),
@@ -180,7 +190,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(4);
             var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build(),
@@ -205,7 +217,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(3);
             var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build(),
@@ -232,7 +246,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(4);
             var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build(),
@@ -259,7 +275,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(4);
             var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build(),
@@ -284,7 +302,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(3);
             var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build(),
@@ -311,7 +331,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(4);
             var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build(),
@@ -338,7 +360,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(4);
             var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build(),
@@ -363,7 +387,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(3);
             var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build(),
@@ -390,7 +416,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(4);
             var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build(),
@@ -417,7 +445,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(4);
             var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build(),
@@ -442,7 +472,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(3);
             var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build(),
@@ -469,7 +501,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(4);
             var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build(),
@@ -513,7 +547,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(3);
             var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build(),
@@ -552,7 +588,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(4);
             var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build(),
@@ -584,7 +622,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var mockRandom = new Mock<Random>();
             mockRandom.Setup(x => x.Next(6)).Returns(3);
             var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build(),

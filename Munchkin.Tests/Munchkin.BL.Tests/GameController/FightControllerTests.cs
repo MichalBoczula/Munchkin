@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
+using Moq;
 using Munchkin.BL.GameController;
+using Munchkin.BL.Helper;
 using Munchkin.Model;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret;
 using Munchkin.Model.Character;
@@ -90,13 +92,15 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         public void WhoWinFightHeroWinEqualPowerWarriorProficiencyTest()
         {
             //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
             var fight = new Fight();
             var fightController = new FightController();
             var userClass = new UserClass();
             var userAvatar = new UserAvatar()
             {
                 Power = 5,
-                Proficiency = new WarriorProficiency()
+                Proficiency = new WarriorProficiency(mockReadLineOverride.Object)
             };
             userClass.UserAvatar = userAvatar;
             var monster = new AntArmy("Ant Army", CardType.Monster)
@@ -298,6 +302,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         public void WhoWinFightManyHeroseAndMonsterMonstrsWinEqualPowerAndOneWarriorTest()
         {
             //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
             var fight = new Fight();
             var fightController = new FightController();
             var userClass = new UserClass();
@@ -305,7 +311,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             var userAvatar = new UserAvatar()
             {
                 Power = 5,
-                Proficiency = new WarriorProficiency()
+                Proficiency = new WarriorProficiency(mockReadLineOverride.Object)
             };
             var userAvatar2 = new UserAvatar()
             {
@@ -340,6 +346,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         public void WhoWinFightManyHeroseAndMonsterMonstrsWinEqualPowerAndOnlyWarriorsTest()
         {
             //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
             var fight = new Fight();
             var fightController = new FightController();
             var userClass = new UserClass();
@@ -347,12 +355,12 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             var userAvatar = new UserAvatar()
             {
                 Power = 5,
-                Proficiency = new WarriorProficiency()
+                Proficiency = new WarriorProficiency(mockReadLineOverride.Object)
             };
             var userAvatar2 = new UserAvatar()
             {
                 Power = 5,
-                Proficiency = new WarriorProficiency()
+                Proficiency = new WarriorProficiency(mockReadLineOverride.Object)
             };
             userClass.UserAvatar = userAvatar;
             userClass2.UserAvatar = userAvatar2;

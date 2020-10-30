@@ -11,10 +11,11 @@ namespace Munchkin.Model.Card.CardFactory
     {
         public ProficiencyCard MakeRaceCard(ProfiencyType cardType)
         {
-            var mage = new MageProficiency();
-            var priest = new PriestProficiency();
+            var readLineOverride = new ReadLineOverride();
+            var mage = new MageProficiency(readLineOverride);
+            var priest = new PriestProficiency(readLineOverride);
             var thief = new ThiefProficiency(new ReadLineOverride());
-            var warrior = new WarriorProficiency();
+            var warrior = new WarriorProficiency(readLineOverride);
             var noOne = new NoOneProficiency();
 
             var result = cardType switch

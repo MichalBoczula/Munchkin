@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using FluentAssertions;
+using Munchkin.BL.Helper;
+using Moq;
 
 namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType
 {
@@ -16,7 +18,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType
         public void SpecialEffectsTests()
         {
             //Arrange
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var raceCard = new ProficiencyCard("mage", CardType.Initial, mage);
             var userAvatar = new UserAvatar();
             var userClass = new UserClass()

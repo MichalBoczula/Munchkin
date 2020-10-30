@@ -1,7 +1,9 @@
 ﻿using FluentAssertions;
+using Moq;
 using Munchkin.BL.CardGenerator;
 using Munchkin.BL.CharacterCreator;
 using Munchkin.BL.GameController;
+using Munchkin.BL.Helper;
 using Munchkin.Model;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret;
 using Munchkin.Model.Character;
@@ -40,11 +42,13 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void SpecialPowerPriestTest()
         {
             //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
             var game = new Game();
             var quetzalcoatl = new Quetzalcoatl("Quetzalcoatl", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
-                Proficiency = new PriestProficiency()
+                Proficiency = new PriestProficiency(mock.Object)
             };
             var user = new UserClass()
             {
@@ -85,6 +89,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void DeadEndPriestTest()
         {
             //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
             var stackCardGenedratorService = new StackCardGeneratorService();
             var random = new Random();
             var drawCardService = new DrawCardService(random);
@@ -93,7 +99,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             var quetzalcoatl = new Quetzalcoatl("Quetzalcoatl", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
-                Proficiency = new PriestProficiency()
+                Proficiency = new PriestProficiency(mock.Object)
             };
             var user = new UserClass()
             {

@@ -1,7 +1,9 @@
-﻿using Munchkin.Model;
+﻿using Munchkin.BL.Helper;
+using Munchkin.Model;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Abstract;
 using Munchkin.Model.Card.PrizeCard;
 using Munchkin.Model.Character;
+using Munchkin.Model.Character.Hero.Proficiency;
 using Munchkin.Model.User;
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,9 @@ namespace Munchkin.BL.GameController
         public GameAction GameAction;
         public FightController FightController;
         public PrizeStackController PrizeStackController;
+        public Random Random;
+        public DeckController DeckController;
+        public ReadLineOverride ReadLineOverride;
 
         public MakeActionController(Game game, FightController fightController)
         {
@@ -29,6 +34,25 @@ namespace Munchkin.BL.GameController
             GameAction = new GameAction();
             FightController = fightController;
             PrizeStackController = prizeStackController;
+        }
+        public MakeActionController(Game game, FightController fightController, PrizeStackController prizeStackController, Random random)
+        {
+            Game = game;
+            GameAction = new GameAction();
+            FightController = fightController;
+            PrizeStackController = prizeStackController;
+            Random = random;
+        }
+
+        public MakeActionController(Game game, FightController fightController, PrizeStackController prizeStackController, Random random, DeckController deckController, ReadLineOverride readLineOverride)
+        {
+            Game = game;
+            GameAction = new GameAction();
+            FightController = fightController;
+            PrizeStackController = prizeStackController;
+            Random = random;
+            DeckController = deckController;
+            ReadLineOverride = readLineOverride;
         }
 
         public void OpenMisteryDoor(UserClass user)
@@ -46,6 +70,7 @@ namespace Munchkin.BL.GameController
                     fight.Monsters.Add((MonsterCardBase)action);
                     if (FightController.WhoWinFight(fight))
                     {
+                        Game.DestroyedActionCards.AddRange(fight.Monsters);
                         GetPrizes(fight);
                     }
                     else
@@ -136,17 +161,147 @@ namespace Munchkin.BL.GameController
             return null;
         }
 
-        public void UseSpecialPower()
+        public void UseSpecialPower(UserClass user)
         {
+            if (user.UserAvatar.Proficiency is WarriorProficiency)
+            {
+                while (true)
+                {
+                    System.Console.WriteLine("Throw card and be stronger");
+                    System.Console.WriteLine("How many cards to throw out?\n1. one\n2. Two\n3. Three");
+                    if (Int32.TryParse(ReadLineOverride.GetNextString(), out int result))
+                    {
+                        user.UserAvatar.Proficiency.BeStronger(user, result);
+                        break;
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("Choose number from 1 to 3. Press enter to continue...");
+                        ReadLineOverride.GetNextString();
+                    }
+                }
+                System.Console.WriteLine("You are much Stronger. Press enter to continue...");
+                ReadLineOverride.GetNextString();
+            }
+            else if (user.UserAvatar.Proficiency is MageProficiency)
+            {
+                while (true)
+                {
+                    System.Console.WriteLine("Choose which spell you want cast:\n1. Flee spell - move much faster\n2. Try charm a monster");
+                    if (Int32.TryParse(ReadLineOverride.GetNextString(), out int choice))
+                    {
+                        if (choice == 1)
+                        {
+                            while (true)
+                            {
+                                System.Console.WriteLine("How many cards to throw out?\n1. one\n2. Two\n3. Three");
+                                if (Int32.TryParse(ReadLineOverride.GetNextString(), out int result))
+                                {
+                                    user.UserAvatar.Proficiency.FleeSpell(user, result);
+                                    System.Console.WriteLine("You move much Faster. Press enter to continue...");
+                                    ReadLineOverride.GetNextString();
+                                    return;
+                                }
+                                else
+                                {
+                                    System.Console.WriteLine("Choose number from 1 to 3. Press enter to continue...");
+                                    ReadLineOverride.GetNextString();
+                                }
+                            }
+                        }
+                        else if (choice == 2)
+                        {
+                            user.UserAvatar.Proficiency.CharmSpell(user);
+                            System.Console.WriteLine("Press enter to continue...");
+                            ReadLineOverride.GetNextString();
+                            return;
+
+                        }
+                        else
+                        {
+                            System.Console.WriteLine("Choose first or second option");
+                            ReadLineOverride.GetNextString();
+                        }
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("Choose first or second option. Press enter to continue...");
+                        ReadLineOverride.GetNextString();
+                    }
+                }
+            }
+            else if (user.UserAvatar.Proficiency is PriestProficiency)
+            {
+
+            }
+            else if (user.UserAvatar.Proficiency is ThiefProficiency)
+            {
+                while (true)
+                {
+                    System.Console.WriteLine("Choose which spell you want cast:\n1. Backstab another user\n2. Try to steal an item");
+                    if (Int32.TryParse(ReadLineOverride.GetNextString(), out int choice))
+                    {
+                        //if (choice == 1)
+                        //{
+                        //    while (true)
+                        //    {
+
+                        //        System.Console.WriteLine("How many cards to throw out?\n1. one\n2. Two\n3. Three");
+                        //        if (Int32.TryParse(ReadLineOverride.GetNextString(), out int result))
+                        //        {
+                        //            user.UserAvatar.Proficiency.FleeSpell(user, result);
+                        //            System.Console.WriteLine("You move much Faster. Press enter to continue...");
+                        //            ReadLineOverride.GetNextString();
+                        //            return;
+                        //        }
+                        //        else
+                        //        {
+                        //            System.Console.WriteLine("Choose number from 1 to 3. Press enter to continue...");
+                        //            ReadLineOverride.GetNextString();
+                        //        }
+                        //    }
+                        //}
+                        //else if (choice == 2)
+                        //{
+                        //    user.UserAvatar.Proficiency.CharmSpell(user);
+                        //    System.Console.WriteLine("Press enter to continue...");
+                        //    ReadLineOverride.GetNextString();
+                        //    return;
+
+                        //}
+                        //else
+                        //{
+                        //    System.Console.WriteLine("Choose first or second option");
+                        //    ReadLineOverride.GetNextString();
+                        //}
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("Choose first or second option. Press enter to continue...");
+                        ReadLineOverride.GetNextString();
+                    }
+                }
+            }
+            else
+            {
+                System.Console.WriteLine("You don't have special power. Press enter to continue...");
+                ReadLineOverride.GetNextString();
+            }
         }
 
-        public bool Flee()
+        public bool Flee(UserClass user)
         {
+            var chance = user.UserAvatar.FleeChances + Random.Next(6) + 1;
+            if (chance >= 6)
+            {
+                return true;
+            }
             return false;
         }
 
-        public void UseSituationalCard()
+        public void UseSituationalCard(UserClass user)
         {
+            //Add Look on SituationalItems
         }
 
     }

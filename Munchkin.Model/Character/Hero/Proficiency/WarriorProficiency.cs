@@ -1,6 +1,9 @@
-﻿using Munchkin.Model.Character.Action;
+﻿using Munchkin.BL.Helper;
+using Munchkin.Model.Character.Action;
+using Munchkin.Model.Helper;
 using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
 using System.Text;
 
 namespace Munchkin.Model.Character.Hero.Proficiency
@@ -8,38 +11,40 @@ namespace Munchkin.Model.Character.Hero.Proficiency
     public class WarriorProficiency : ProficiencyBase, IWarriorAction
     {
         private readonly InformationModelWarriorProficiency _informationModelWarriorProficiency;
-
-        public WarriorProficiency()
+        private new ReadLineOverride readLineOverride { get; set; }
+        public WarriorProficiency(ReadLineOverride readLineOverride)
         {
             Name = "Warrior";
             _informationModelWarriorProficiency = new InformationModelWarriorProficiency();
+            this.readLineOverride = readLineOverride;
         }
 
-        public override void BeStronger(UserClass user, int cardToThrowId)
+        public override DestroyedCards BeStronger(UserClass user, int cardToThrow)
         {
+            var destroyedCards = new DestroyedCards();
             if (user.UserAvatar.HowManyCardsThrowToUseSkill < 3)
             {
                 if (user.Deck != null && user.Deck.Count() > 0)
                 {
-                    if (ThrowOutCart(cardToThrowId, user))
-                    {
-                        user.UserAvatar.HowManyCardsThrowToUseSkill++;
-                        user.UserAvatar.TempPower++;
-                        Console.WriteLine(_informationModelWarriorProficiency.Success);
-                        //Console.ReadLine();
-                    }
+                    //while (cardToThrow > 0)
+                    //{
+                    //    cardToThrow--;
+                    //}
                 }
                 else
                 {
                     Console.WriteLine(_informationModelWarriorProficiency.NotEnoughCards);
-                    //Console.ReadLine();
+                    readLineOverride.GetNextString();
+                    return destroyedCards;
                 }
             }
             else
             {
                 Console.WriteLine(_informationModelWarriorProficiency.SkillHasBeenUsedMaxTimes);
-                //Console.ReadLine();
+                readLineOverride.GetNextString();
+                return destroyedCards;
             }
+            return destroyedCards;
         }
     }
 }

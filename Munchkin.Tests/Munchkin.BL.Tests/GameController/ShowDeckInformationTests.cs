@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
+using Moq;
 using Munchkin.BL.GameController;
+using Munchkin.BL.Helper;
 using Munchkin.Model;
 using Munchkin.Model.Card.ActionCard;
 using Munchkin.Model.Card.ActionCard.SpecialCardType;
@@ -23,10 +25,12 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         public void CreateProficiencyRestrictionInformationTest()
         {
             //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
             var userInformationController = new UserInformationController();
             var thorsHammerRestrictions = new Dictionary<bool, ProficiencyBase>
             {
-                { true, new WarriorProficiency() }
+                { true, new WarriorProficiency(mockReadLineOverride.Object) }
             };
             var user = new UserClass();
             user.Deck.Items.Add(new ItemCard("thorsHammer", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, thorsHammerRestrictions, 300));

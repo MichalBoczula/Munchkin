@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Moq;
 using Munchkin.BL.CardGenerator;
 using Munchkin.BL.CharacterCreator;
 using Munchkin.BL.GameController;
@@ -208,6 +209,78 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             user.Deck.Items.Should().HaveCount(7);
             user2.Deck.Items.Should().HaveCount(6);
             user3.Deck.Items.Should().HaveCount(6);
+        }
+
+        [Fact]
+        public void FleeTestTrueEqualToSix()
+        {
+            //Arrange
+            var mockRandom = new Mock<Random>();
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar();
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var drawCardService = new DrawCardService(random);
+            var fightController = new FightController();
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, mockRandom.Object);
+            mockRandom.Setup(x => x.Next(6)).Returns(2);
+            //Act
+            var result = makeActionController.Flee(user);
+            //Assert
+            result.Should().BeTrue();
+        }
+
+        [Fact]
+        public void FleeTestFalse()
+        {
+            //Arrange
+            var mockRandom = new Mock<Random>();
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar();
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var drawCardService = new DrawCardService(random);
+            var fightController = new FightController();
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, mockRandom.Object);
+            mockRandom.Setup(x => x.Next(6)).Returns(1);
+            //Act
+            var result = makeActionController.Flee(user);
+            //Assert
+            result.Should().BeFalse();
+        }
+
+        [Fact]
+        public void FleeTestTrueMoreThanSix()
+        {
+            //Arrange
+            var mockRandom = new Mock<Random>();
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar();
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var drawCardService = new DrawCardService(random);
+            var fightController = new FightController();
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, mockRandom.Object);
+            mockRandom.Setup(x => x.Next(6)).Returns(3);
+            //Act
+            var result = makeActionController.Flee(user);
+            //Assert
+            result.Should().BeTrue();
         }
     }
 }

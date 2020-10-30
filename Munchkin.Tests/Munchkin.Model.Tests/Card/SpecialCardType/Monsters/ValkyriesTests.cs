@@ -1,4 +1,6 @@
 ﻿using FluentAssertions;
+using Moq;
+using Munchkin.BL.Helper;
 using Munchkin.Model;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret;
 using Munchkin.Model.Card.PrizeCard;
@@ -57,9 +59,11 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void SpecialPowerWithWaeponAnWarriorProficiencyTest()
         {
             //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
             var game = new Game();
             var valkyries = new Valkyries("Valkyries", CardType.Monster);
-            var warrior = new WarriorProficiency();
+            var warrior = new WarriorProficiency(mockReadLineOverride.Object);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = warrior
@@ -80,9 +84,11 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void FindTheMostPowerfulItemInBuildTest()
         {
             //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
             var game = new Game();
             var valkyries = new Valkyries("Valkyries", CardType.Monster);
-            var warrior = new WarriorProficiency();
+            var warrior = new WarriorProficiency(mockReadLineOverride.Object);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = warrior
@@ -105,9 +111,11 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void FindTheMostPowerfulItemInBuildNoItemsTest()
         {
             //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
             var game = new Game();
             var valkyries = new Valkyries("Valkyries", CardType.Monster);
-            var warrior = new WarriorProficiency();
+            var warrior = new WarriorProficiency(mockReadLineOverride.Object);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = warrior
@@ -126,9 +134,11 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void DeadEndTest()
         {
             //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
             var game = new Game();
             var valkyries = new Valkyries("Valkyries", CardType.Monster);
-            var warrior = new WarriorProficiency();
+            var warrior = new WarriorProficiency(mockReadLineOverride.Object);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = warrior
@@ -153,9 +163,11 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void DeadEndNoItemsTest()
         {
             //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
             var game = new Game();
             var valkyries = new Valkyries("Valkyries", CardType.Monster);
-            var warrior = new WarriorProficiency();
+            var warrior = new WarriorProficiency(mockReadLineOverride.Object);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = warrior

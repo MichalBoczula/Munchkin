@@ -135,7 +135,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             var deckController = new DeckController(mockReadLineOverride.Object);
             var userAvatar = new UserAvatar()
             {
-                Proficiency = new WarriorProficiency()
+                Proficiency = new WarriorProficiency(mockReadLineOverride.Object)
             };
             var user = new UserClass()
             {
@@ -143,7 +143,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             };
             var betterDefenceSpray = new Dictionary<bool, ProficiencyBase>
             {
-                { true, new WarriorProficiency() }
+                { true, new WarriorProficiency(mockReadLineOverride.Object) }
             };
             ItemCard card = new ItemCard("BetterDefenceSpray", CardType.Prize, PrizeCardType.Item, 4, null, false, ItemType.Additional, betterDefenceSpray, 400);
             //Act
@@ -162,7 +162,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             var deckController = new DeckController(mockReadLineOverride.Object);
             var userAvatar = new UserAvatar()
             {
-                Proficiency = new WarriorProficiency()
+                Proficiency = new WarriorProficiency(mockReadLineOverride.Object)
             };
             var user = new UserClass()
             {
@@ -170,7 +170,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             };
             var betterDefenceSpray = new Dictionary<bool, ProficiencyBase>
             {
-                { false, new WarriorProficiency() }
+                { false, new WarriorProficiency(mockReadLineOverride.Object) }
             };
             ItemCard card = new ItemCard("BetterDefenceSpray", CardType.Prize, PrizeCardType.Item, 4, null, false, ItemType.Additional, betterDefenceSpray, 400);
             //Act
@@ -186,9 +186,12 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             var mockReadLineOverride = new Mock<ReadLineOverride>();
             mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
             var deckController = new DeckController(mockReadLineOverride.Object);
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
-                Proficiency = new MageProficiency()
+                Proficiency = mage
             };
             var user = new UserClass()
             {
@@ -196,7 +199,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             };
             var betterDefenceSpray = new Dictionary<bool, ProficiencyBase>
             {
-                { true, new WarriorProficiency() }
+                { true, new WarriorProficiency(mockReadLineOverride.Object) }
             };
             ItemCard card = new ItemCard("BetterDefenceSpray", CardType.Prize, PrizeCardType.Item, 4, null, false, ItemType.Additional, betterDefenceSpray, 400);
             //Act
@@ -212,9 +215,12 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             var mockReadLineOverride = new Mock<ReadLineOverride>();
             mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
             var deckController = new DeckController(mockReadLineOverride.Object);
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
-                Proficiency = new MageProficiency()
+                Proficiency = mage
             };
             var user = new UserClass()
             {
@@ -222,7 +228,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             };
             var betterDefenceSpray = new Dictionary<bool, ProficiencyBase>
             {
-                { false, new WarriorProficiency() }
+                { false, new WarriorProficiency(mockReadLineOverride.Object) }
             };
             ItemCard card = new ItemCard("BetterDefenceSpray", CardType.Prize, PrizeCardType.Item, 4, null, false, ItemType.Additional, betterDefenceSpray, 400);
             //Act
@@ -339,9 +345,10 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         {
             //Arrange
             var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
             var userAvatar = new UserAvatar()
             {
-                Proficiency = new WarriorProficiency()
+                Proficiency = new WarriorProficiency(mockReadLineOverride.Object)
             };
             var user = new UserClass()
             {
@@ -349,7 +356,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             };
             var cyberCoat = new Dictionary<bool, ProficiencyBase>
             {
-                { true, new WarriorProficiency() }
+                { true, new WarriorProficiency(mockReadLineOverride.Object) }
             };
             ItemCard card = new ItemCard("CyberCoat", CardType.Prize, PrizeCardType.Item, 2, null, false, ItemType.Additional, cyberCoat, 300);
             var deckController = new DeckController(mockReadLineOverride.Object);
@@ -364,9 +371,12 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         {
             //Arrange
             var mockReadLineOverride = new Mock<ReadLineOverride>();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
-                Proficiency = new MageProficiency()
+                Proficiency = mage
             };
             var user = new UserClass()
             {
@@ -374,7 +384,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             };
             var cyberCoat = new Dictionary<bool, ProficiencyBase>
             {
-                { true, new WarriorProficiency() }
+                { true, new WarriorProficiency(mock.Object) }
             };
             ItemCard card = new ItemCard("CyberCoat", CardType.Prize, PrizeCardType.Item, 2, null, false, ItemType.Additional, cyberCoat, 300);
             var deckController = new DeckController(mockReadLineOverride.Object);
@@ -389,9 +399,10 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         {
             //Arrange
             var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
             var userAvatar = new UserAvatar()
             {
-                Proficiency = new WarriorProficiency()
+                Proficiency = new WarriorProficiency(mockReadLineOverride.Object)
             };
             var user = new UserClass()
             {
@@ -399,7 +410,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             };
             var cyberCoat = new Dictionary<bool, ProficiencyBase>
             {
-                { false, new WarriorProficiency() }
+                { false, new WarriorProficiency(mockReadLineOverride.Object) }
             };
             ItemCard card = new ItemCard("CyberCoat", CardType.Prize, PrizeCardType.Item, 2, null, false, ItemType.Additional, cyberCoat, 300);
             var deckController = new DeckController(mockReadLineOverride.Object);
@@ -414,6 +425,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         {
             //Arrange
             var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
             var userAvatar = new UserAvatar()
             {
                 Proficiency = new NoOneProficiency()
@@ -424,7 +436,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             };
             var cyberCoat = new Dictionary<bool, ProficiencyBase>
             {
-                { false, new WarriorProficiency() }
+                { false, new WarriorProficiency(mockReadLineOverride.Object) }
             };
             ItemCard card = new ItemCard("CyberCoat", CardType.Prize, PrizeCardType.Item, 2, null, false, ItemType.Additional, cyberCoat, 300);
             var deckController = new DeckController(mockReadLineOverride.Object);
@@ -875,7 +887,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             mock.Setup(x => x.GetNextString()).Returns("1");
             var userAvatar = new UserAvatar()
             {
-                Proficiency = new WarriorProficiency()
+                Proficiency = new WarriorProficiency(mock.Object)
             };
             var user = new UserClass()
             {
@@ -884,7 +896,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             var deckController = new DeckController(mock.Object);
             var maceOfDestraction = new Dictionary<bool, ProficiencyBase>
             {
-                { true, new WarriorProficiency() }
+                { true, new WarriorProficiency(mock.Object) }
             };
             var weapon = new ItemCard("MaceOfDestraction", CardType.Prize, PrizeCardType.Item, 5, null, false, ItemType.Weapon, maceOfDestraction, 600);
             user.Deck.Items.Add(weapon);

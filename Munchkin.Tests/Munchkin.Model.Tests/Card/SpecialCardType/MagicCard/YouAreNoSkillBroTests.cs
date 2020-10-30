@@ -1,4 +1,6 @@
 ﻿using FluentAssertions;
+using Moq;
+using Munchkin.BL.Helper;
 using Munchkin.Model;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards;
 using Munchkin.Model.Character;
@@ -19,9 +21,12 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.MagicCard
             //Arrange
             var game = new Game();
             var curse = new YouAreNoSkillBro("You Are No Skill Bro", CardType.Curse);
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
-                Proficiency = new MageProficiency()
+                Proficiency = mage
             };
             var user = new UserClass()
             {

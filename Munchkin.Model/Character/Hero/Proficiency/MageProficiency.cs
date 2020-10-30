@@ -1,4 +1,5 @@
-﻿using Munchkin.Model.Character.Action;
+﻿using Munchkin.BL.Helper;
+using Munchkin.Model.Character.Action;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,11 +9,13 @@ namespace Munchkin.Model.Character.Hero.Proficiency
     public class MageProficiency : ProficiencyBase, IMageAction
     {
         private readonly InformationModelMageProficiency _informationModel;
+        public new ReadLineOverride readLineOverride;
 
-        public MageProficiency()
+        public MageProficiency(ReadLineOverride readLineOverride)
         {
             Name = "Mage";
             _informationModel = new InformationModelMageProficiency();
+            this.readLineOverride = readLineOverride;
         }
 
         public override void FleeSpell(UserClass user, int cardToThrowId)
@@ -26,38 +29,38 @@ namespace Munchkin.Model.Character.Hero.Proficiency
                         user.UserAvatar.HowManyCardsThrowToUseSkill++;
                         user.UserAvatar.FleeChances++;
                         Console.WriteLine(_informationModel.SuccessPowerUpFlee);
-                        //Console.ReadLine();
+                        readLineOverride.GetNextString();
                     }
                 }
                 else
                 {
                     Console.WriteLine(_informationModel.NotEnoughCards);
-                    //Console.ReadLine();
+                    readLineOverride.GetNextString();
                 }
             }
             else
             {
                 Console.WriteLine(_informationModel.SkillHasBeenUsedMaxTimes);
-                //Console.ReadLine();
+                readLineOverride.GetNextString();
             }
         }
 
         public override bool CharmSpell(UserClass user)
         {
             Console.WriteLine(_informationModel.CastCharmSpell());
-            //Console.ReadLine();
+            readLineOverride.GetNextString();
             bool result;
             if (user.Deck.Count() > 3)
             {
                 Console.WriteLine(_informationModel.CharmSpellSuccess());
                 user.Deck.Clear();
-                //Console.ReadLine();
+                readLineOverride.GetNextString();
                 result = true;
             }
             else
             {
                 Console.WriteLine(_informationModel.CharmSpellfailure());
-                //Console.ReadLine();
+                readLineOverride.GetNextString();
                 result = false;
             }
             return result;

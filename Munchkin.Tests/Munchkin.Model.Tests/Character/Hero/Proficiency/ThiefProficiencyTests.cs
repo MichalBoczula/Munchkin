@@ -43,7 +43,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
                 UserAvatar = userAvatar
             };
 
-            var mage = new MageProficiency();
+            var readLineOverride = new ReadLineOverride();
+            var mage = new MageProficiency(readLineOverride);
             var userAvatarVictim = new UserAvatar()
             {
                 Proficiency = mage,
@@ -91,7 +92,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
                 UserAvatar = userAvatar
             };
 
-            var mage = new MageProficiency();
+            var readLineOverride = new ReadLineOverride();
+            var mage = new MageProficiency(readLineOverride);
             var userAvatarVictim = new UserAvatar()
             {
                 Proficiency = mage,
@@ -141,7 +143,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
                 UserAvatar = userAvatar
             };
 
-            var mage = new MageProficiency();
+            var readLineOverride = new ReadLineOverride();
+            var mage = new MageProficiency(readLineOverride);
             var userAvatarVictim = new UserAvatar()
             {
                 Proficiency = mage,
@@ -193,7 +196,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
                 UserAvatar = userAvatar
             };
 
-            var mage = new MageProficiency();
+            var readLineOverride = new ReadLineOverride();
+            var mage = new MageProficiency(readLineOverride);
             var userAvatarVictim = new UserAvatar()
             {
                 Proficiency = mage,
@@ -248,7 +252,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
                 UserAvatar = userAvatar
             };
 
-            var mage = new MageProficiency();
+            var readLineOverride = new ReadLineOverride();
+            var mage = new MageProficiency(readLineOverride);
             var userAvatarVictim = new UserAvatar()
             {
                 Proficiency = mage,
@@ -304,7 +309,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
                 UserAvatar = userAvatar
             };
 
-            var mage = new MageProficiency();
+            var readLineOverride = new ReadLineOverride();
+            var mage = new MageProficiency(readLineOverride);
             var userAvatarVictim = new UserAvatar()
             {
                 Proficiency = mage,
@@ -368,7 +374,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
                 UserAvatar = userAvatar
             };
 
-            var mage = new MageProficiency();
+            var readLineOverride = new ReadLineOverride();
+            var mage = new MageProficiency(readLineOverride);
             var userAvatarVictim = new UserAvatar()
             {
                 Proficiency = mage,
@@ -417,7 +424,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
                 UserAvatar = userAvatar
             };
 
-            var mage = new MageProficiency();
+            var readLineOverride = new ReadLineOverride();
+            var mage = new MageProficiency(readLineOverride);
             var userAvatarVictim = new UserAvatar()
             {
                 Proficiency = mage,
@@ -464,7 +472,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
                 UserAvatar = avatar1
             };
 
-            var mage2 = new MageProficiency();
+            var readLineOverride = new ReadLineOverride();
+            var mage2 = new MageProficiency(readLineOverride);
             var avatar2 = new UserAvatar()
             {
                 Proficiency = mage2
@@ -498,7 +507,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
                 UserAvatar = avatar1
             };
 
-            var mage2 = new MageProficiency();
+            var readLineOverride = new ReadLineOverride();
+            var mage2 = new MageProficiency(readLineOverride);
             var avatar2 = new UserAvatar()
             {
                 Proficiency = mage2
@@ -532,7 +542,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
                 UserAvatar = avatar1
             };
 
-            var mage2 = new MageProficiency();
+            var readLineOverride = new ReadLineOverride();
+            var mage2 = new MageProficiency(readLineOverride);
             var avatar2 = new UserAvatar()
             {
                 Proficiency = mage2

@@ -20,11 +20,13 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
         public void FleeSpellSuccessTest()
         {
             //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
             var stackCardGenedratorService = new StackCardGeneratorService();
             var random = new Random();
             var drawCardService = new DrawCardService(random);
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
-            var mage1 = new MageProficiency();
+            var mage1 = new MageProficiency(mock.Object);
             var avatar1 = new UserAvatar()
             {
                 Proficiency = mage1
@@ -47,11 +49,13 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
         public void FleeSpellEmptyDecktTest()
         {
             //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage1 = new MageProficiency(mock.Object);
             var stackCardGenedratorService = new StackCardGeneratorService();
             var random = new Random();
             var drawCardService = new DrawCardService(random);
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
-            var mage1 = new MageProficiency();
             var avatar1 = new UserAvatar()
             {
                 Proficiency = mage1
@@ -77,7 +81,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             var random = new Random();
             var drawCardService = new DrawCardService(random);
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
-            var mage1 = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage1 = new MageProficiency(mock.Object);
             var avatar1 = new UserAvatar()
             {
                 Proficiency = mage1
@@ -105,10 +111,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
             var mockReadLine = new Mock<ReadLineOverride>();
             mockReadLine.Setup(x => x.GetNextString()).Returns("");
-            var mage1 = new MageProficiency()
-            {
-                readLineOverride = mockReadLine.Object
-            };
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage1 = new MageProficiency(mock.Object);
             var avatar1 = new UserAvatar()
             {
                 Proficiency = mage1
@@ -136,10 +141,12 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             var random = new Random();
             var drawCardService = new DrawCardService(random);
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage1 = new MageProficiency(mock.Object);
             var avatar = new UserAvatar()
             {
-                Proficiency = mage
+                Proficiency = mage1
             };
             var user = new UserClass()
             {
@@ -161,10 +168,12 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             var random = new Random();
             var drawCardService = new DrawCardService(random);
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage1 = new MageProficiency(mock.Object);
             var avatar = new UserAvatar()
             {
-                Proficiency = mage
+                Proficiency = mage1
             };
             var user = new UserClass()
             {

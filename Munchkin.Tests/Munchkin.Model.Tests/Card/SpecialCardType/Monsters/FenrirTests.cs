@@ -1,4 +1,6 @@
 ﻿using FluentAssertions;
+using Moq;
+using Munchkin.BL.Helper;
 using Munchkin.Model;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret;
 using Munchkin.Model.Character;
@@ -17,11 +19,13 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void SpecialPowerPriestProficiencyTest()
         {
             //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
             var game = new Game();
             var fenrir = new Fenrir("Fenrir", CardType.Monster);
             var userAvatar = new UserAvatar()
             {
-                Proficiency = new PriestProficiency()
+                Proficiency = new PriestProficiency(mock.Object)
             };
             var user = new UserClass()
             {

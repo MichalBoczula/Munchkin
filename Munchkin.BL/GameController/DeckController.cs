@@ -20,49 +20,49 @@ namespace Munchkin.BL.GameController
 
         public void LookOnCard(UserClass user)
         {
-            System.Console.WriteLine(LookOnItemsCard(user));
-            System.Console.WriteLine(LookOnMonstersCard(user));
-            System.Console.WriteLine(LookOnMagicCardsCard(user));
+            int i = 1;
+            System.Console.WriteLine(LookOnItemsCard(user, ref i));
+            System.Console.WriteLine(LookOnMonstersCard(user, ref i));
+            System.Console.WriteLine(LookOnMagicCardsCard(user, ref i));
         }
-
-        public void ChooseCardType(UserClass user)
+        
+        public void ChooseCard(UserClass user)
         {
-            System.Console.WriteLine($"Input number from 1 to 3 to choose a card type. Press enter to continue...");
-            System.Console.WriteLine($"1. Items: quantity {user.Deck.Items.Count}");
-            System.Console.WriteLine($"2. Monsters: quantity {user.Deck.Monsters.Count}");
-            System.Console.WriteLine($"3. Magic: quantity {user.Deck.MagicCards.Count}");
-            if (Int32.TryParse(_readLineOverride.GetNextString(), out int num))
-            {
-                switch (num)
-                {
-                    case 1:
-                        System.Console.WriteLine(LookOnItemsCard(user));
-                        break;
-                    case 2:
-                        System.Console.WriteLine(LookOnMonstersCard(user));
-                        break;
-                    case 3:
-                        System.Console.WriteLine(LookOnMagicCardsCard(user));
-                        break;
-                    default:
-                        System.Console.WriteLine($"Choose number from 1 to 3. Press enter to continue...");
-                        _readLineOverride.GetNextString();
-                        break;
-                }
-            }
-            else
-            {
-                System.Console.WriteLine("Your input it is not a number. Try again. Press enter to continue...");
-                _readLineOverride.GetNextString();
-            }
+            //System.Console.WriteLine($"Input number from 1 to 3 to choose a card type. Press enter to continue...");
+            //System.Console.WriteLine($"1. Items: quantity {user.Deck.Items.Count}");
+            //System.Console.WriteLine($"2. Monsters: quantity {user.Deck.Monsters.Count}");
+            //System.Console.WriteLine($"3. Magic: quantity {user.Deck.MagicCards.Count}");
+            //if (Int32.TryParse(_readLineOverride.GetNextString(), out int num))
+            //{
+            //    switch (num)
+            //    {
+            //        case 1:
+            //            System.Console.WriteLine(LookOnItemsCard(user));
+            //            break;
+            //        case 2:
+            //            System.Console.WriteLine(LookOnMonstersCard(user));
+            //            break;
+            //        case 3:
+            //            System.Console.WriteLine(LookOnMagicCardsCard(user));
+            //            break;
+            //        default:
+            //            System.Console.WriteLine($"Choose number from 1 to 3. Press enter to continue...");
+            //            _readLineOverride.GetNextString();
+            //            break;
+            //    }
+            //}
+            //else
+            //{
+            //    System.Console.WriteLine("Your input it is not a number. Try again. Press enter to continue...");
+            //    _readLineOverride.GetNextString();
+            //}
         }
 
-        public string LookOnItemsCard(UserClass user)
+        public string LookOnItemsCard(UserClass user, ref int i)
         {
             StringBuilder strBuilder = new StringBuilder();
             strBuilder.Append("Items\n");
             strBuilder.Append("___________________________________________________________________\n");
-            int i = 1;
             foreach (var card in user.Deck.Items)
             {
                 strBuilder.Append($"{i}. ");
@@ -96,10 +96,9 @@ namespace Munchkin.BL.GameController
             return strBuilder.ToString();
         }
 
-        public string LookOnMagicCardsCard(UserClass user)
+        public string LookOnMagicCardsCard(UserClass user, ref int i)
         {
             StringBuilder strBuilder = new StringBuilder();
-            int i = 1;
             strBuilder.Append("Magic Cards\n");
             strBuilder.Append("___________________________________________________________________\n");
             foreach (var card in user.Deck.MagicCards)
@@ -113,10 +112,9 @@ namespace Munchkin.BL.GameController
             return strBuilder.ToString();
         }
 
-        public string LookOnMonstersCard(UserClass user)
+        public string LookOnMonstersCard(UserClass user, ref int i)
         {
             StringBuilder strBuilder = new StringBuilder();
-            int i = 1;
             strBuilder.Append("Monsters\n");
             strBuilder.Append("___________________________________________________________________\n");
             foreach (var card in user.Deck.Monsters)
@@ -308,7 +306,7 @@ namespace Munchkin.BL.GameController
                 UseSituationalItems(card, fight);
             }
         }
-#nullable disable
+
 
         public void UseSituationalItems(ItemCard card, Fight? fight)
         {
@@ -322,7 +320,7 @@ namespace Munchkin.BL.GameController
                 card.SpecialEffect(fight);
             }
         }
-
+#nullable disable
         public void SetWeapon(UserClass user, ItemCard card)
         {
             if (!CheckRestriction(user, card))

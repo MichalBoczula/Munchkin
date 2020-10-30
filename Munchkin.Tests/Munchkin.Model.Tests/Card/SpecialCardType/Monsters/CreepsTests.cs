@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using FluentAssertions;
+using Moq;
+using Munchkin.BL.Helper;
 using Munchkin.Model;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret;
 using Munchkin.Model.Character;
@@ -19,7 +21,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             //Arrange
             var game = new Game();
             var creeps = new Creeps("Creeps", CardType.Monster);
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = mage
@@ -44,7 +48,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             //Arrange
             var game = new Game();
             var creeps = new Creeps("Creeps", CardType.Monster);
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = mage
@@ -64,9 +70,11 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void SpecialPowerDiffrentProficiencyTests()
         {
             //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
             var game = new Game();
             var creeps = new Creeps("Creeps", CardType.Monster);
-            var warrior = new WarriorProficiency();
+            var warrior = new WarriorProficiency(mockReadLineOverride.Object);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = warrior

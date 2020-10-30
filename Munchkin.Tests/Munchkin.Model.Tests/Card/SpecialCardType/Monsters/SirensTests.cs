@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using FluentAssertions;
+using Moq;
+using Munchkin.BL.Helper;
 using Munchkin.Model;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret;
 using Munchkin.Model.Card.PrizeCard;
@@ -18,9 +20,11 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void SpecialPowerWarriorProficiencyTests()
         {
             //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
             var game = new Game();
             var sirens = new Sirens("Sirens", CardType.Monster);
-            var warrior = new WarriorProficiency();
+            var warrior = new WarriorProficiency(mockReadLineOverride.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build(),
@@ -43,7 +47,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             //Arrange
             var game = new Game();
             var sirens = new Sirens("Sirens", CardType.Monster);
-            var mage = new MageProficiency();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var mage = new MageProficiency(mock.Object);
             var userAvatar = new UserAvatar()
             {
                 Build = new Build(),

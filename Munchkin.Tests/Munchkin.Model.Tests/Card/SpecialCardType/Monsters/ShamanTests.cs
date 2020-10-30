@@ -1,4 +1,6 @@
 ﻿using FluentAssertions;
+using Moq;
+using Munchkin.BL.Helper;
 using Munchkin.Model;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret;
 using Munchkin.Model.Character;
@@ -19,7 +21,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             //Arrange
             var game = new Game();
             var shaman = new Shaman("Shaman", CardType.Monster);
-            var mage = new MageProficiency();
+            var readLineOverride = new ReadLineOverride();
+            var mage = new MageProficiency(readLineOverride);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = mage
@@ -40,9 +43,10 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void SpecialPowerPriestTest()
         {
             //Arrange
+            var readLineOverride = new ReadLineOverride();
             var game = new Game();
             var shaman = new Shaman("Shaman", CardType.Monster);
-            var priest = new PriestProficiency();
+            var priest = new PriestProficiency(readLineOverride);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = priest
@@ -63,9 +67,11 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void SpecialPowerDiffrenProficiencyTest()
         {
             //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
             var game = new Game();
             var shaman = new Shaman("Shaman", CardType.Monster);
-            var warrior = new WarriorProficiency();
+            var warrior = new WarriorProficiency(mockReadLineOverride.Object);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = warrior
@@ -86,9 +92,11 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void DeadEndTest()
         {
             //Arrange
+            var mockReadLineOverride = new Mock<ReadLineOverride>();
+            mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
             var game = new Game();
             var shaman = new Shaman("Shaman", CardType.Monster);
-            var warrior = new WarriorProficiency();
+            var warrior = new WarriorProficiency(mockReadLineOverride.Object);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = warrior
