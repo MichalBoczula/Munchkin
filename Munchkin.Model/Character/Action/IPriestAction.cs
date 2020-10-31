@@ -11,6 +11,6 @@ namespace Munchkin.Model.Character.Action
 #nullable enable
         DestroyedCards MakeMonsterAPet(UserClass user, Fight? fight);
 #nullable disable
-        void RestoreCard(Game game);
+        DestroyedCards RestorePrizeCard(UserClass user, Game game);
     }
 }

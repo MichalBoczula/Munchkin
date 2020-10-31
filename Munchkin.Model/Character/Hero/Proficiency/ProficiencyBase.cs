@@ -99,7 +99,7 @@ namespace Munchkin.Model.Character
         }
 #nullable disable
 
-        public virtual void RestoreCard(Game game)
+        public virtual DestroyedCards RestorePrizeCard(UserClass user, Game game)
         {
             throw new NotImplementedException();
         }
