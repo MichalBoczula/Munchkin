@@ -17,12 +17,12 @@ namespace Munchkin.Model.Character.Hero.Proficiency
 
         public string CharmSpellSuccess()
         {
-            return "Charm spell success. You have charmed monster.\n Press any key to continue...";
+            return "Instant kill spell success. You have killed monster.\n Press any key to continue...";
         }
 
         public string CharmSpellfailure()
         {
-            return "Charm spell failure. Moster ruch towards you!!!\n Press any key to continue...";
+            return "Instant kill failure. Moster rush towards you!!!\n Press any key to continue...";
         }
     }
 }

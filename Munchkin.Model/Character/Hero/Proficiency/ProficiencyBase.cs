@@ -21,12 +21,12 @@ namespace Munchkin.Model.Character
         public ReadLineOverride readLineOverride { get; set; }
 
 
-        public virtual void FleeSpell(UserClass user, int cardToThrowId)
+        public virtual void FleeSpell(UserClass user)
         {
             throw new NotImplementedException();
         }
 
-        public virtual bool CharmSpell(UserClass user)
+        public virtual bool InstantKill(UserClass user)
         {
             throw new NotImplementedException();
         }
@@ -88,7 +88,7 @@ namespace Munchkin.Model.Character
             return random.Next(6) + 1;
         }
 
-        public virtual DestroyedCards BeStronger(UserClass user, int cardToThrowId)
+        public virtual DestroyedCards BeStronger(UserClass user)
         {
             throw new NotImplementedException();
         }

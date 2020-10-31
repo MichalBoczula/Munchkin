@@ -7,6 +7,6 @@ namespace Munchkin.Model.Character.Action
 {
     public interface IWarriorAction
     {
-        DestroyedCards BeStronger(UserClass user, int cardToThrowId);
+        DestroyedCards BeStronger(UserClass user);
     }
 }

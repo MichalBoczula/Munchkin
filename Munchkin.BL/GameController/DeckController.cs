@@ -25,37 +25,24 @@ namespace Munchkin.BL.GameController
             System.Console.WriteLine(LookOnMonstersCard(user, ref i));
             System.Console.WriteLine(LookOnMagicCardsCard(user, ref i));
         }
-        
-        public void ChooseCard(UserClass user)
+
+        public int ChooseCard(UserClass user)
         {
-            //System.Console.WriteLine($"Input number from 1 to 3 to choose a card type. Press enter to continue...");
-            //System.Console.WriteLine($"1. Items: quantity {user.Deck.Items.Count}");
-            //System.Console.WriteLine($"2. Monsters: quantity {user.Deck.Monsters.Count}");
-            //System.Console.WriteLine($"3. Magic: quantity {user.Deck.MagicCards.Count}");
-            //if (Int32.TryParse(_readLineOverride.GetNextString(), out int num))
-            //{
-            //    switch (num)
-            //    {
-            //        case 1:
-            //            System.Console.WriteLine(LookOnItemsCard(user));
-            //            break;
-            //        case 2:
-            //            System.Console.WriteLine(LookOnMonstersCard(user));
-            //            break;
-            //        case 3:
-            //            System.Console.WriteLine(LookOnMagicCardsCard(user));
-            //            break;
-            //        default:
-            //            System.Console.WriteLine($"Choose number from 1 to 3. Press enter to continue...");
-            //            _readLineOverride.GetNextString();
-            //            break;
-            //    }
-            //}
-            //else
-            //{
-            //    System.Console.WriteLine("Your input it is not a number. Try again. Press enter to continue...");
-            //    _readLineOverride.GetNextString();
-            //}
+            LookOnCard(user);
+            if (Int32.TryParse(_readLineOverride.GetNextString(), out int num))
+            {
+                
+            }
+            else
+            {
+
+            }
+            
+
+
+
+
+            return 0;
         }
 
         public string LookOnItemsCard(UserClass user, ref int i)
@@ -354,7 +341,7 @@ namespace Munchkin.BL.GameController
                     Int32.TryParse(_readLineOverride.GetNextString(), out int num);
                     if (num == 1)
                     {
-                        if(user.UserAvatar.Build.LeftHandItem != null)
+                        if (user.UserAvatar.Build.LeftHandItem != null)
                         {
                             user.Deck.Items.Add(user.UserAvatar.Build.LeftHandItem);
                             user.UserAvatar.Build.LeftHandItem = card;

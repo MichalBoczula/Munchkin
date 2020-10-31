@@ -161,22 +161,46 @@ namespace Munchkin.BL.GameController
             return null;
         }
 
-        public void UseSpecialPower(UserClass user)
+#nullable enable
+        public void UseSpecialPower(UserClass user, Fight? fight)
         {
             if (user.UserAvatar.Proficiency is WarriorProficiency)
             {
                 while (true)
                 {
                     System.Console.WriteLine("Throw card and be stronger");
-                    System.Console.WriteLine("How many cards to throw out?\n1. one\n2. Two\n3. Three");
+                    System.Console.WriteLine("Do you want throw card to gain strenght?\n 1.Yes\n2.No");
                     if (Int32.TryParse(ReadLineOverride.GetNextString(), out int result))
                     {
-                        user.UserAvatar.Proficiency.BeStronger(user, result);
-                        break;
+                        if (result == 1)
+                        {
+                            var card = user.UserAvatar.Proficiency.BeStronger(user);
+                            if (card.DestroyedPrizeCards.Count > 0)
+                            {
+                                Game.DestroyedPrizeCards.Add(card.DestroyedPrizeCards[0]);
+                            }
+                            else
+                            {
+                                Game.DestroyedActionCards.Add(card.DestroyedActionCards[0]);
+                            }
+                            System.Console.WriteLine("Now you are stronger. Press enter to continue...");
+                            ReadLineOverride.GetNextString();
+                            break;
+                        }
+                        else if (result == 2)
+                        {
+                            System.Console.WriteLine("You didn't use skill. Press enter to continue...");
+                            ReadLineOverride.GetNextString();
+                        }
+                        else
+                        {
+                            System.Console.WriteLine("Choose option 1 or 2. Press enter to continue...");
+                            ReadLineOverride.GetNextString();
+                        }
                     }
                     else
                     {
-                        System.Console.WriteLine("Choose number from 1 to 3. Press enter to continue...");
+                        System.Console.WriteLine("Choose option 1 or 2. Press enter to continue...");
                         ReadLineOverride.GetNextString();
                     }
                 }
@@ -187,39 +211,44 @@ namespace Munchkin.BL.GameController
             {
                 while (true)
                 {
-                    System.Console.WriteLine("Choose which spell you want cast:\n1. Flee spell - move much faster\n2. Try charm a monster");
+                    System.Console.WriteLine("Choose which spell you want cast:\n1. Flee spell - move much faster\n2. Instant Kill monster\n3. Quit");
                     if (Int32.TryParse(ReadLineOverride.GetNextString(), out int choice))
                     {
                         if (choice == 1)
                         {
                             while (true)
                             {
-                                System.Console.WriteLine("How many cards to throw out?\n1. one\n2. Two\n3. Three");
-                                if (Int32.TryParse(ReadLineOverride.GetNextString(), out int result))
-                                {
-                                    user.UserAvatar.Proficiency.FleeSpell(user, result);
-                                    System.Console.WriteLine("You move much Faster. Press enter to continue...");
-                                    ReadLineOverride.GetNextString();
-                                    return;
-                                }
-                                else
-                                {
-                                    System.Console.WriteLine("Choose number from 1 to 3. Press enter to continue...");
-                                    ReadLineOverride.GetNextString();
-                                }
+                                //System.Console.WriteLine("How many cards to throw out?\n1. one\n2. Two\n3. Three");
+                                //if (Int32.TryParse(ReadLineOverride.GetNextString(), out int result))
+                                //{
+                                //    user.UserAvatar.Proficiency.FleeSpell(user);
+                                //    System.Console.WriteLine("You move much Faster. Press enter to continue...");
+                                //    ReadLineOverride.GetNextString();
+                                //    return;
+                                //}
+                                //else
+                                //{
+                                //    System.Console.WriteLine("Choose number from 1 to 3. Press enter to continue...");
+                                //    ReadLineOverride.GetNextString();
+                                //}
                             }
                         }
                         else if (choice == 2)
                         {
-                            user.UserAvatar.Proficiency.CharmSpell(user);
+                            user.UserAvatar.Proficiency.InstantKill(user);
                             System.Console.WriteLine("Press enter to continue...");
                             ReadLineOverride.GetNextString();
                             return;
 
                         }
+                        else if(choice == 3)
+                        {
+                            System.Console.WriteLine("You didn't cast a spell. Press enter to continue...");
+                            ReadLineOverride.GetNextString();
+                        }
                         else
                         {
-                            System.Console.WriteLine("Choose first or second option");
+                            System.Console.WriteLine("Choose option from 1 to 3. Press enter to continue...");
                             ReadLineOverride.GetNextString();
                         }
                     }
@@ -288,6 +317,7 @@ namespace Munchkin.BL.GameController
                 ReadLineOverride.GetNextString();
             }
         }
+#nullable enable
 
         public bool Flee(UserClass user)
         {
