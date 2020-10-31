@@ -22,7 +22,8 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
             //Arrange
             var mockReadLine = new Mock<ReadLineOverride>();
             mockReadLine.Setup(x => x.GetNextString()).Returns("");
-            var thief = new ThiefProficiency(mockReadLine.Object);
+            var random = new Random();
+            var thief = new ThiefProficiency(mockReadLine.Object, random);
             var game = new Game();
             var mockRandom = new Mock<Random>();
             var monkeyGang = new MonkeyGang("Monkey Gang", CardType.Monster, mockRandom.Object);

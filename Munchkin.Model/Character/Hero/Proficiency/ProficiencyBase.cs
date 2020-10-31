@@ -20,7 +20,6 @@ namespace Munchkin.Model.Character
         public string Name { get; set; }
         public ReadLineOverride readLineOverride { get; set; }
 
-
         public virtual DestroyedCards FleeSpell(UserClass user)
         {
             throw new NotImplementedException();
@@ -73,12 +72,12 @@ namespace Munchkin.Model.Character
             return true;
         }
 
-        public virtual void StealCard(UserClass thief, UserClass victim, Random random, ReadLineOverride readLine)
+        public virtual void StealCard(UserClass thief, UserClass victim)
         {
             throw new NotImplementedException();
         }
 
-        public virtual bool BackStab(UserClass victim, Random random)
+        public virtual bool BackStab(UserClass victim)
         {
             throw new NotImplementedException();
         }
@@ -100,7 +99,7 @@ namespace Munchkin.Model.Character
         }
 #nullable disable
 
-        public virtual void RestoreCard()
+        public virtual void RestoreCard(Game game)
         {
             throw new NotImplementedException();
         }

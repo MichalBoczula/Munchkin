@@ -18,10 +18,11 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         [Fact]
         public void SpecialPowerThiefTest()
         {
-            //Arrange
+            //Arrangezy
+            var random = new Random();
             var mockReadLine = new Mock<ReadLineOverride>();
             mockReadLine.Setup(x => x.GetNextString()).Returns("");
-            var thief = new ThiefProficiency(mockReadLine.Object);
+            var thief = new ThiefProficiency(mockReadLine.Object, random);
             var game = new Game();
             var furies = new Furies("Furies", CardType.Monster);
             var userAvatar = new UserAvatar()

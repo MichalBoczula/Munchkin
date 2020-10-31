@@ -23,9 +23,10 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
         {
             //Arrange
             var mockReadLine = new Mock<ReadLineOverride>();
+            var random = new Random();
             mockReadLine.Setup(x => x.GetNextString()).Returns("");
-            var thief = new ThiefProficiency(mockReadLine.Object);
             var informationModelThiefProficiency = new InformationModelThiefProficiency();
+            var thief = new ThiefProficiency(mockReadLine.Object, random);
             var userAvatar = new UserAvatar()
             {
                 Proficiency = thief,
@@ -59,8 +60,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
         {
             //Arrange
             var mockReadLine = new Mock<ReadLineOverride>();
+            var random = new Random();
             mockReadLine.Setup(x => x.GetNextString()).Returns("");
-            var thief = new ThiefProficiency(mockReadLine.Object);
+            var thief = new ThiefProficiency(mockReadLine.Object, random);
             var informationModelThiefProficiency = new InformationModelThiefProficiency();
             var dwarf = new Dwarf("dwarf");
             var userAvatar = new UserAvatar()
@@ -98,8 +100,9 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
         {
             //Arrange
             var mockReadLine = new Mock<ReadLineOverride>();
+            var random = new Random();
             mockReadLine.Setup(x => x.GetNextString()).Returns("");
-            var thief = new ThiefProficiency(mockReadLine.Object);
+            var thief = new ThiefProficiency(mockReadLine.Object, random);
             var informationModelThiefProficiency = new InformationModelThiefProficiency();
             var dwarf = new Dwarf("dwarf");
             var userAvatar = new UserAvatar()

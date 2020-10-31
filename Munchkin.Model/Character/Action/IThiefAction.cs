@@ -8,7 +8,7 @@ namespace Munchkin.Model.Character
 {
     public interface IThiefAction 
     {
-        void StealCard(UserClass thief, UserClass victim, Random random, ReadLineOverride readLine);
-        bool BackStab(UserClass victim, Random random);
+        void StealCard(UserClass thief, UserClass victim);
+        bool BackStab(UserClass victim);
     }
 }

@@ -10,15 +10,17 @@ namespace Munchkin.Model.Character.Hero.Proficiency
     {
         private readonly InformationModelThiefProficiency _informationModelThiefProficiency;
         private new ReadLineOverride readLineOverride { get; set; }
+        public Random random { get; set; }
 
-        public ThiefProficiency(ReadLineOverride readLineOverride)
+        public ThiefProficiency(ReadLineOverride readLineOverride, Random random)
         {
             Name = "Thief";
             _informationModelThiefProficiency = new InformationModelThiefProficiency();
             this.readLineOverride = readLineOverride;
+            this.random = random;
         }
 
-        public override void StealCard(UserClass thief, UserClass victim, Random random, ReadLineOverride readLine)
+        public override void StealCard(UserClass thief, UserClass victim)
         {
             if (!victim.UserAvatar.WasRob)
             {
@@ -35,7 +37,7 @@ namespace Munchkin.Model.Character.Hero.Proficiency
                         while (true)
                         {
                             Console.WriteLine(_informationModelThiefProficiency.StealWelcomeMsg(information));
-                            if (!Int32.TryParse(readLine.GetNextString(), out choice))
+                            if (!Int32.TryParse(readLineOverride.GetNextString(), out choice))
                             {
                                 Console.WriteLine(_informationModelThiefProficiency.StealInvalidInput);
                                 readLineOverride.GetNextString();
@@ -102,7 +104,7 @@ namespace Munchkin.Model.Character.Hero.Proficiency
             thief.Deck.Items.Add(stolen);
         }
 
-        public override bool BackStab(UserClass victim, Random random)
+        public override bool BackStab(UserClass victim)
         {
             bool result = false;
 
