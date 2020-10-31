@@ -1,7 +1,7 @@
 ﻿using Munchkin.BL.Helper;
 using Munchkin.Model.Character.Action;
+using Munchkin.Model.Helper;
 using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace Munchkin.Model.Character.Hero.Proficiency
@@ -39,28 +39,84 @@ namespace Munchkin.Model.Character.Hero.Proficiency
             return result;
         }
 
-        public override void FleeSpell(UserClass user)
+        public override DestroyedCards FleeSpell(UserClass user)
         {
+            var destroyedCards = new DestroyedCards();
             if (user.UserAvatar.HowManyCardsThrowToUseSkill < 3)
             {
-                if (user.Deck != null && user.Deck.Count()> 0)
+                if (user.Deck != null && user.Deck.Count() > 0)
                 {
-                        user.UserAvatar.HowManyCardsThrowToUseSkill++;
-                        user.UserAvatar.FleeChances++;
-                        Console.WriteLine(_informationModel.SuccessPowerUpFlee);
-                        readLineOverride.GetNextString();
+                    int i = 1;
+                    System.Console.WriteLine(LookOnItemsCard(user, ref i));
+                    System.Console.WriteLine(LookOnMagicCardsCard(user, ref i));
+                    System.Console.WriteLine(LookOnMonstersCard(user, ref i));
+
+                    while (true)
+                    {
+                        System.Console.WriteLine($"Choose card from 1 to {user.Deck.Count()}");
+                        if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
+                        {
+                            if (result > user.Deck.Items.Count)
+                            {
+                                result -= user.Deck.Items.Count;
+                                if (result > user.Deck.MagicCards.Count)
+                                {
+                                    result -= user.Deck.MagicCards.Count;
+                                    user.UserAvatar.HowManyCardsThrowToUseSkill++;
+                                    user.UserAvatar.FleeChances++;
+                                    var card = user.Deck.Monsters[result - 1];
+                                    destroyedCards.DestroyedActionCards.Add(card);
+                                    user.Deck.Monsters.RemoveAt(result - 1);
+                                    user.UserAvatar.HowManyCardsThrowToUseSkill++;
+                                    Console.WriteLine(_informationModel.SuccessPowerUpFlee);
+                                    readLineOverride.GetNextString();
+                                    break;
+                                }
+                                else
+                                {
+                                    user.UserAvatar.HowManyCardsThrowToUseSkill++;
+                                    user.UserAvatar.FleeChances++;
+                                    var card = user.Deck.MagicCards[result - 1];
+                                    destroyedCards.DestroyedActionCards.Add(card);
+                                    user.Deck.MagicCards.RemoveAt(result - 1);
+                                    Console.WriteLine(_informationModel.SuccessPowerUpFlee);
+                                    readLineOverride.GetNextString();
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                user.UserAvatar.HowManyCardsThrowToUseSkill++;
+                                user.UserAvatar.FleeChances++;
+                                var card = user.Deck.Items[result - 1];
+                                destroyedCards.DestroyedPrizeCards.Add(card);
+                                user.Deck.Items.RemoveAt(result - 1);
+                                Console.WriteLine(_informationModel.SuccessPowerUpFlee);
+                                readLineOverride.GetNextString();
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            System.Console.WriteLine($"Broo Choose card from 1 to {user.Deck.Count()}. Press enter to continue...");
+                            readLineOverride.GetNextString();
+                        }
+                    }
                 }
                 else
                 {
                     Console.WriteLine(_informationModel.NotEnoughCards);
                     readLineOverride.GetNextString();
+                    return destroyedCards;
                 }
             }
             else
             {
                 Console.WriteLine(_informationModel.SkillHasBeenUsedMaxTimes);
                 readLineOverride.GetNextString();
+                return destroyedCards;
             }
+            return destroyedCards;
         }
 
         public string LookOnItemsCard(UserClass user, ref int i)

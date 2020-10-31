@@ -218,30 +218,105 @@ namespace Munchkin.BL.GameController
                         {
                             while (true)
                             {
-                                //System.Console.WriteLine("How many cards to throw out?\n1. one\n2. Two\n3. Three");
-                                //if (Int32.TryParse(ReadLineOverride.GetNextString(), out int result))
-                                //{
-                                //    user.UserAvatar.Proficiency.FleeSpell(user);
-                                //    System.Console.WriteLine("You move much Faster. Press enter to continue...");
-                                //    ReadLineOverride.GetNextString();
-                                //    return;
-                                //}
-                                //else
-                                //{
-                                //    System.Console.WriteLine("Choose number from 1 to 3. Press enter to continue...");
-                                //    ReadLineOverride.GetNextString();
-                                //}
+                                System.Console.WriteLine("Throw card and be faster, it is easier to flee from monster");
+                                System.Console.WriteLine("Do you want throw card to move faster?\n 1.Yes\n2.No");
+                                if (Int32.TryParse(ReadLineOverride.GetNextString(), out int result))
+                                {
+                                    if (result == 1)
+                                    {
+                                        var card = user.UserAvatar.Proficiency.FleeSpell(user);
+                                        if (card.DestroyedPrizeCards.Count > 0)
+                                        {
+                                            Game.DestroyedPrizeCards.Add(card.DestroyedPrizeCards[0]);
+                                        }
+                                        else
+                                        {
+                                            Game.DestroyedActionCards.Add(card.DestroyedActionCards[0]);
+                                        }
+                                        System.Console.WriteLine("Now you are faster. Press enter to continue...");
+                                        ReadLineOverride.GetNextString();
+                                        break;
+                                    }
+                                    else if (result == 2)
+                                    {
+                                        System.Console.WriteLine("You didn't use skill. Press enter to continue...");
+                                        ReadLineOverride.GetNextString();
+                                    }
+                                    else
+                                    {
+                                        System.Console.WriteLine("Choose option 1 or 2. Press enter to continue...");
+                                        ReadLineOverride.GetNextString();
+                                    }
+                                }
+                                else
+                                {
+                                    System.Console.WriteLine("Choose option 1 or 2. Press enter to continue...");
+                                    ReadLineOverride.GetNextString();
+                                }
                             }
+                            System.Console.WriteLine("You are much Faster. Press enter to continue...");
+                            ReadLineOverride.GetNextString();
                         }
                         else if (choice == 2)
                         {
-                            user.UserAvatar.Proficiency.InstantKill(user);
-                            System.Console.WriteLine("Press enter to continue...");
-                            ReadLineOverride.GetNextString();
+                            if (fight != null)
+                            {
+                                var result = user.UserAvatar.Proficiency.InstantKill(user);
+                                if(result)
+                                {
+                                    if(fight.Monsters.Count == 0 )
+                                    {
+                                        fight.Monsters[0].Power = -999;
+                                    }
+                                    else
+                                    {
+                                        while(true)
+                                        {
+                                            System.Console.WriteLine("Choose which monster will be killed?");
+                                            int i = 1;
+                                            foreach (var monster in fight.Monsters)
+                                            {
+                                                System.Console.WriteLine($"{i}. {monster.Name}, Power: {monster.Power}");
+                                            }
+                                            if(Int32.TryParse(ReadLineOverride.GetNextString(), out int whichOne))
+                                            {
+                                                if(whichOne <= fight.Monsters.Count)
+                                                {
+                                                    fight.Monsters[whichOne - 1].Power = -999;
+                                                }
+                                                else
+                                                {
+                                                    System.Console.WriteLine($"Choose monster from 1 to {fight.Monsters.Count}. Press enter to continue...");
+                                                    ReadLineOverride.GetNextString();
+                                                }
+                                            }
+                                            else
+                                            {
+                                                System.Console.WriteLine($"Choose monster from 1 to {fight.Monsters.Count}. Press enter to continue...");
+                                                ReadLineOverride.GetNextString();
+                                            }
+                                        }
+                                        
+                                    }
+                                    System.Console.WriteLine("Monster is dying. Press enter to continue");
+                                    ReadLineOverride.GetNextString();
+                                }
+                                else
+                                {
+                                    System.Console.WriteLine("Spell didn't cast Press enter to continue...");
+                                    ReadLineOverride.GetNextString();
+                                }
+                                
+                            }
+                            else
+                            {
+                                System.Console.WriteLine("Use this spell when you will be fighting. Press enter to continue...");
+                                ReadLineOverride.GetNextString();
+                            }
                             return;
 
                         }
-                        else if(choice == 3)
+                        else if (choice == 3)
                         {
                             System.Console.WriteLine("You didn't cast a spell. Press enter to continue...");
                             ReadLineOverride.GetNextString();

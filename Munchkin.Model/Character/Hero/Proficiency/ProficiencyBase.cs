@@ -21,7 +21,7 @@ namespace Munchkin.Model.Character
         public ReadLineOverride readLineOverride { get; set; }
 
 
-        public virtual void FleeSpell(UserClass user)
+        public virtual DestroyedCards FleeSpell(UserClass user)
         {
             throw new NotImplementedException();
         }

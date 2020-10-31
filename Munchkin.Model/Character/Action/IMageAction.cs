@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Munchkin.Model.Helper;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,7 +7,7 @@ namespace Munchkin.Model.Character.Action
 {
     public interface IMageAction
     {
-        void FleeSpell(UserClass user);
+        DestroyedCards FleeSpell(UserClass user);
         bool InstantKill(UserClass user);
     }
 }
