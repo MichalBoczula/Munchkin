@@ -336,16 +336,85 @@ namespace Munchkin.BL.GameController
             }
             else if (user.UserAvatar.Proficiency is PriestProficiency)
             {
-                System.Console.WriteLine("Choose which spell you want cast:\n1. Flee spell - move much faster\n2. Instant Kill monster\n3. Quit");
-                if (Int32.TryParse(readLineOverride.GetNextString(), out int choice))
+                while (true)
                 {
-                    if (fight != null)
+                    System.Console.WriteLine("Choose which spell you want cast:\n1. Make monster your pet- monster is going to your Deck\n" +
+                        "2.Restore card - drop one card and get one from destroyed\n3. Quit");
+                    if (Int32.TryParse(readLineOverride.GetNextString(), out int choice))
                     {
+                        if (choice == 1)
+                        {
+                            if (fight != null)
+                            {
+                                var result = user.UserAvatar.Proficiency.MakeMonsterAPet(user, fight);
+                                if (result.DestroyedActionCards.Count > 0)
+                                {
+                                    game.DestroyedActionCards.AddRange(result.DestroyedActionCards);
+                                }
+                                if (result.DestroyedPrizeCards.Count > 0)
+                                {
+                                    game.DestroyedPrizeCards.AddRange(result.DestroyedPrizeCards);
 
+                                }
+                                if (result.DestroyedActionCards.Count + result.DestroyedPrizeCards.Count >= 3)
+                                {
+                                    System.Console.WriteLine("You made monster a pet use it carefully. Press enter to continue");
+                                    readLineOverride.GetNextString();
+                                    break;
+                                }
+                                else
+                                {
+                                    System.Console.WriteLine("You didn't make monster a pet. Press enter to continue");
+                                    readLineOverride.GetNextString();
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                System.Console.WriteLine("Currently no one is fighting, use this skill when is a fight. Press enter to continue");
+                                readLineOverride.GetNextString();
+                                break;
+                            }
+                        }
+                        else if (choice == 2)
+                        {
+                            var result = user.UserAvatar.Proficiency.RestorePrizeCard(user, game);
+                            if (result.DestroyedActionCards.Count > 0 || result.DestroyedPrizeCards.Count > 0)
+                            {
+                                if (game.DestroyedActionCards.Count > 0)
+                                {
+                                    game.DestroyedActionCards.AddRange(result.DestroyedActionCards);
+                                }
+                                if (game.DestroyedPrizeCards.Count > 0)
+                                {
+                                    game.DestroyedPrizeCards.AddRange(result.DestroyedPrizeCards);
+                                }
+
+                                System.Console.WriteLine("You restored a card. Press enter to continue");
+                                readLineOverride.GetNextString();
+                            }
+                            else
+                            {
+                                System.Console.WriteLine("You didn't restore a card. Press enter to continue");
+                                readLineOverride.GetNextString();
+                            }
+                            break;
+                        }
+                        else if (choice == 3)
+                        {
+                            System.Console.WriteLine("You didn't use a skill. Press enter to continue");
+                            readLineOverride.GetNextString();
+                            break;
+                        }
+                        else
+                        {
+                            System.Console.WriteLine("Choose option from 1 to 3. Press enter to continue");
+                            readLineOverride.GetNextString();
+                        }
                     }
                     else
                     {
-                        System.Console.WriteLine("Currently no one is fighting, use this skill when is a fight. Press enter to continue");
+                        System.Console.WriteLine("Choose option from 1 to 3. Press enter to continue");
                         readLineOverride.GetNextString();
                     }
                 }

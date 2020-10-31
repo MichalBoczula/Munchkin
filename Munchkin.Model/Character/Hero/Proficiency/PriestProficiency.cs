@@ -104,8 +104,6 @@ namespace Munchkin.Model.Character.Hero.Proficiency
                             if (result > user.Deck.MagicCards.Count)
                             {
                                 result -= user.Deck.MagicCards.Count;
-                                user.UserAvatar.HowManyCardsThrowToUseSkill++;
-                                user.UserAvatar.TempPower++;
                                 var card = user.Deck.Monsters[result - 1];
                                 destroyedCards.DestroyedActionCards.Add(card);
                                 user.Deck.Monsters.RemoveAt(result - 1);
@@ -116,8 +114,6 @@ namespace Munchkin.Model.Character.Hero.Proficiency
                             }
                             else
                             {
-                                user.UserAvatar.HowManyCardsThrowToUseSkill++;
-                                user.UserAvatar.TempPower++;
                                 var card = user.Deck.MagicCards[result - 1];
                                 destroyedCards.DestroyedActionCards.Add(card);
                                 user.Deck.MagicCards.RemoveAt(result - 1);
@@ -129,8 +125,6 @@ namespace Munchkin.Model.Character.Hero.Proficiency
                         }
                         else
                         {
-                            user.UserAvatar.HowManyCardsThrowToUseSkill++;
-                            user.UserAvatar.TempPower++;
                             var card = user.Deck.Items[result - 1];
                             destroyedCards.DestroyedPrizeCards.Add(card);
                             user.Deck.Items.RemoveAt(result - 1);
