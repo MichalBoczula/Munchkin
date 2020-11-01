@@ -40,11 +40,11 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void DeadEndTest()
         {
             //Arrange
+            var game = new Game();
             var stackCardGenedratorService = new StackCardGeneratorService();
             var random = new Random();
             var drawCardService = new DrawCardService(random);
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
-            var game = new Game();
             var babaYaga = new BabaYaga("Baba Yaga", CardType.Monster);
             var userAvatar = new UserAvatar();
             var user = new UserClass()

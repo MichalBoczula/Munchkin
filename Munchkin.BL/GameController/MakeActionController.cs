@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Munchkin.Model.Card.ActionCard.SpecialCardType;
+using Munchkin.BL.CharacterCreator;
 
 namespace Munchkin.BL.GameController
 {
@@ -21,6 +22,7 @@ namespace Munchkin.BL.GameController
         public Random random;
         public DeckController deckController;
         public ReadLineOverride readLineOverride;
+        private readonly DrawCardService _drawCardService;
 
         public MakeActionController(Game game, FightController fightController)
         {
@@ -45,7 +47,7 @@ namespace Munchkin.BL.GameController
             this.random = random;
         }
 
-        public MakeActionController(Game game, FightController fightController, PrizeStackController prizeStackController, Random random, DeckController deckController, ReadLineOverride readLineOverride)
+        public MakeActionController(Game game, FightController fightController, PrizeStackController prizeStackController, Random random, DeckController deckController, ReadLineOverride readLineOverride, DrawCardService drawCardService)
         {
             this.game = game;
             gameAction = new GameAction();
@@ -54,10 +56,80 @@ namespace Munchkin.BL.GameController
             this.random = random;
             this.deckController = deckController;
             this.readLineOverride = readLineOverride;
+            _drawCardService = drawCardService;
+        }
+
+        public MakeActionController(Game game, FightController fightController, PrizeStackController prizeStackController, DrawCardService drawCardService)
+        {
+            this.game = game;
+            gameAction = new GameAction();
+            this.fightController = fightController;
+            this.prizeStackController = prizeStackController;
+            _drawCardService = drawCardService;
+        }
+
+        public string LookOnMonstersCard(UserClass user, ref int i)
+        {
+            StringBuilder strBuilder = new StringBuilder();
+            strBuilder.Append("Monsters\n");
+            strBuilder.Append("___________________________________________________________________\n");
+            foreach (var card in user.Deck.Monsters)
+            {
+                strBuilder.Append($"{i}. ");
+                strBuilder.Append($"Name: {card.Name}, Power: {card.Power}, Undead: { card.Undead}, ");
+                strBuilder.Append($"Levels after fight: {card.HowManyLevels}");
+                strBuilder.Append($"Prizes: {card.NumberOfPrizes}");
+                strBuilder.Append(";\n");
+                i++;
+            }
+            return strBuilder.ToString();
+        }
+
+        public void FightWithYouMonster(UserClass user)
+        {
+            MonsterCardBase monster;
+            while (true)
+            {
+                int i = 1;
+                LookOnMonstersCard(user, ref i);
+                System.Console.WriteLine("Select monster to fight");
+                if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
+                {
+                    if (result <= user.Deck.Monsters.Count)
+                    {
+                        monster = user.Deck.Monsters[result - 1];
+                        break;
+                    }
+                    else
+                    {
+                        System.Console.WriteLine($"Choose number from 1 to {user.Deck.Monsters.Count}");
+                        readLineOverride.GetNextString();
+                    }
+                }
+                else
+                {
+                    System.Console.WriteLine($"Choose number from 1 to {user.Deck.Monsters.Count}");
+                    readLineOverride.GetNextString();
+                }
+            }
+            var fight = new Fight();
+            fight.Heros.Add(user);
+            fight.Monsters.Add(monster);
+            if (fightController.WhoWinFight(fight))
+            {
+                game.DestroyedActionCards.AddRange(fight.Monsters);
+                GetPrizes(fight);
+            }
+            else
+            {
+                game.DestroyedActionCards.AddRange(fight.Monsters);
+                DeadEnd(fight);
+            }
         }
 
         public void OpenMisteryDoor(UserClass user)
         {
+            CheckNumberOfActionCards();
             if (gameAction.IsFirstTime)
             {
                 gameAction.IsFirstTime = false;
@@ -72,10 +144,13 @@ namespace Munchkin.BL.GameController
                     if (fightController.WhoWinFight(fight))
                     {
                         game.DestroyedActionCards.AddRange(fight.Monsters);
+                        game.ActionCards.Remove(action);
                         GetPrizes(fight);
                     }
                     else
                     {
+                        game.DestroyedActionCards.AddRange(fight.Monsters);
+                        game.ActionCards.Remove(action);
                         DeadEnd(fight);
                     }
                 }
@@ -83,15 +158,17 @@ namespace Munchkin.BL.GameController
                 {
                     if (action.MagicCardType is MagicCardType.Hero || action.MagicCardType is MagicCardType.Crook)
                     {
-                        action.CastSpecialSpell(user, game, null);
+                        game.ActionCards.Remove(action);
+                        game.DestroyedActionCards.Add(action);
+                        action.CastSpecialSpell(user, null, game);
                     }
                     else
                     {
+                        game.ActionCards.Remove(action);
+                        game.DestroyedActionCards.Add(action);
                         user.Deck.MagicCards.Add(action);
                     }
                 }
-                game.ActionCards.Remove(action);
-                game.DestroyedActionCards.Add(action);
                 if (!gameAction.IsFight)
                 {
                     OpenMisteryDoor(user);
@@ -102,34 +179,24 @@ namespace Munchkin.BL.GameController
                 var action = game.ActionCards[0];
                 if (action.CardType is CardType.Monster)
                 {
-                    gameAction.IsFight = true;
-                    action.SpecialPower(game, user);
-                    var fight = new Fight();
-                    fight.Heros.Add(user);
-                    fight.Monsters.Add((MonsterCardBase)action);
-                    if (fightController.WhoWinFight(fight))
-                    {
-                        game.DestroyedActionCards.AddRange(fight.Monsters);
-                        GetPrizes(fight);
-                    }
-                    else
-                    {
-                        DeadEnd(fight);
-                    }
+                    game.ActionCards.Remove(action);
+                    user.Deck.Monsters.Add((MonsterCardBase)action);
                 }
                 else
                 {
-                    if (action.MagicCardType is MagicCardType.Hero || action.MagicCardType is MagicCardType.Crook)
-                    {
-                        action.CastSpecialSpell(user, game, null);
-                    }
-                    else
-                    {
-                        user.Deck.MagicCards.Add(action);
-                    }
+                    game.ActionCards.Remove(action);
+                    user.Deck.MagicCards.Add(action);
                 }
-                game.ActionCards.Remove(action);
-                game.DestroyedActionCards.Add(action);
+            }
+        }
+
+        public void CheckNumberOfActionCards()
+        {
+            if (game.ActionCards.Count == 0)
+            {
+                game.ActionCards.AddRange(game.DestroyedActionCards);
+                game.DestroyedActionCards.RemoveRange(0, game.DestroyedActionCards.Count);
+                _drawCardService.Shuffle(game.ActionCards);
             }
         }
 

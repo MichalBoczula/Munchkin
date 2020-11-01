@@ -8,6 +8,7 @@ using Munchkin.BL.CharacterCreator;
 using Munchkin.Model;
 using Munchkin.Model.Card.PrizeCard;
 using FluentAssertions;
+using Munchkin.Model.User;
 
 namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
 {
@@ -49,22 +50,5 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             userAfterDeckInicialize.Deck.Count().Should().Be(0);
         }
 
-        [Fact]
-        public void DrawCardPrizeCardsTests()
-        {
-            //Arrange
-            var user = new UserClass();
-            var howMany2 = 2;
-            var stackCardGenedratorService = new StackCardGeneratorService();
-            var random = new Random();
-            var drawCardService = new DrawCardService(random);
-            var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
-            user = prizeStackController.DrawCardsForStartDeck(user);
-            //Act
-            user = prizeStackController.DrawCardPrizeCards(user, howMany2);
-            //Assert
-            user.Deck.Count().Should().Be(7);
-            prizeStackController.PrizeStack.Deck.Should().HaveCount(43);
-        }
     }
 }

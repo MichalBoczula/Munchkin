@@ -4,6 +4,7 @@ using Munchkin.BL.CardGenerator.PrizeCard.ItemCards;
 using Munchkin.BL.CharacterCreator;
 using Munchkin.Model;
 using Munchkin.Model.Card.PrizeCard;
+using Munchkin.Model.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace Munchkin.BL.GameController
         private readonly StackCardGeneratorService _stackCardGeneratorService;
         private readonly DrawCardService _drawCardService;
         public PrizeStack PrizeStack;
+        public Game Game;
 
         public PrizeStackController(DrawCardService drawCardService, StackCardGeneratorService stackCardGeneratorService)
         {
@@ -25,9 +27,18 @@ namespace Munchkin.BL.GameController
             _drawCardService.Shuffle(PrizeStack.Deck);
         }
 
+        public PrizeStackController(DrawCardService drawCardService, StackCardGeneratorService stackCardGeneratorService, Game game)
+        {
+            _drawCardService = drawCardService;
+            _stackCardGeneratorService = stackCardGeneratorService;
+            PrizeStack = _stackCardGeneratorService.GeneratePrizeStack();
+            _drawCardService.Shuffle(PrizeStack.Deck);
+            Game = game;
+        }
+
         public UserClass DrawCardsForStartDeck(UserClass user)
         {
-            if(!user.IsDeckInicialize)
+            if (!user.IsDeckInicialize)
             {
                 var startedHand = new List<ItemCard>
                 {
@@ -38,7 +49,7 @@ namespace Munchkin.BL.GameController
                     DrawCard()
                 };
                 user.Deck.Items.AddRange(startedHand);
-                user.IsDeckInicialize = true;           
+                user.IsDeckInicialize = true;
             }
             else
             {
@@ -49,23 +60,21 @@ namespace Munchkin.BL.GameController
 
         public ItemCard DrawCard()
         {
+            CheckHowManyPrizesAre(Game);
             var num = _drawCardService.RandomPrizeCard(PrizeStack.Deck.Count);
             var item = PrizeStack.Deck[num];
             PrizeStack.Deck.Remove(item);
             return item;
         }
 
-        public UserClass DrawCardPrizeCards(UserClass user, int howMany)
+        private void CheckHowManyPrizesAre(Game game)
         {
-            for(int i = 0; i < howMany; i++)
+            if (PrizeStack.Deck.Count == 0)
             {
-                var num = _drawCardService.RandomPrizeCard(PrizeStack.Deck.Count);
-                var item = PrizeStack.Deck[num];
-                PrizeStack.Deck.Remove(item);
-                user.Deck.Items.Add(item);
+                PrizeStack.Deck.AddRange(Game.DestroyedPrizeCards);
+                Game.DestroyedPrizeCards.RemoveRange(0, Game.DestroyedPrizeCards.Count);
+                _drawCardService.Shuffle(PrizeStack.Deck);
             }
-            return user;
         }
-
     }
 }

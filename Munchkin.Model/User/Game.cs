@@ -1,4 +1,5 @@
 ﻿using Munchkin.Model.Card.ActionCard;
+using Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards;
 using Munchkin.Model.Card.PrizeCard;
 using System;
 using System.Collections.Generic;

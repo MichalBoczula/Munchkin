@@ -66,11 +66,11 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.Monsters
         public void DeadEndDiffrentClassTest()
         {
             //Arrange
+            var game = new Game();
             var stackCardGenedratorService = new StackCardGeneratorService();
             var random = new Random();
             var drawCardService = new DrawCardService(random);
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGenedratorService);
-            var game = new Game();
             var quetzalcoatl = new Quetzalcoatl("Quetzalcoatl", CardType.Monster);
             var userAvatar = new UserAvatar();
             var user = new UserClass()

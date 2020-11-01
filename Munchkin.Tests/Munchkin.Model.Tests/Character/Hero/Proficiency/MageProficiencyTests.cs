@@ -12,6 +12,7 @@ using Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret;
 using Munchkin.Model.Character;
 using Munchkin.Model.Character.Hero.Proficiency;
+using Munchkin.Model.User;
 using Xunit;
 
 namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
@@ -22,6 +23,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
         public void FleeSpellSuccessTest()
         {
             //Arrange
+            var game = new Game();
             var mockReadLineOverride = new Mock<ReadLineOverride>();
             mockReadLineOverride.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "4", "1", "2", "1", "1", "1" }).Dequeue);
             var random = new Random();
@@ -54,6 +56,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
         public void FleeSpellFailNotEnoughCardsTest()
         {
             //Arrange
+            var game = new Game();
             var mockReadLineOverride = new Mock<ReadLineOverride>();
             mockReadLineOverride.Setup(x => x.GetNextString()).Returns("1");
             var random = new Random();

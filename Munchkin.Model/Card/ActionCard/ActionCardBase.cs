@@ -1,4 +1,5 @@
 ﻿using Munchkin.Model.Card.ActionCard.SpecialCardType;
+using Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Abstract;
 using Munchkin.Model.User;
 using System;

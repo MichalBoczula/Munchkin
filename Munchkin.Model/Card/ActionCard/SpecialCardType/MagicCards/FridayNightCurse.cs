@@ -17,5 +17,6 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
         {
             user.UserAvatar.Nerfs.Poisoned.Add(true);
         }
+
     }
 }

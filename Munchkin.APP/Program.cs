@@ -48,31 +48,6 @@ namespace Munchkin.APP
 
             //var deckController = new DeckController();
 
-            var readLineOverride = new ReadLineOverride();
-            var random = new Random();
-            var drawCard = new DrawCardService(random);
-            var stackCardGeneratorService = new StackCardGeneratorService();
-            var prizeStackGenerator = new PrizeStackController(drawCard, stackCardGeneratorService);
-            var warrior = new WarriorProficiency(readLineOverride);
-            var userAvatar = new UserAvatar()
-            {
-                Proficiency = warrior
-            };
-            var user = new UserClass()
-            {
-                UserAvatar = userAvatar
-            };
-            var monster = new AntArmy("Ant Army", CardType.Monster);
-            var magic = new BackToSchool("BackToSchool", CardType.Curse);
-            user = prizeStackGenerator.DrawCardsForStartDeck(user);
-            user.Deck.Items.RemoveAt(0);
-            user.Deck.Items.RemoveAt(0);
-            user.Deck.Items.RemoveAt(0);
-            user.Deck.Items.RemoveAt(0);
-            user.Deck.Monsters.Add(monster);
-            user.Deck.MagicCards.Add(magic);
-            var deckController = new DeckController(readLineOverride);
-            deckController.LookOnCard(user);
         }
     }
 }
