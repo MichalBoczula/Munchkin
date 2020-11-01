@@ -1,4 +1,5 @@
-﻿using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Abstract;
+﻿using Munchkin.Model.Card.ActionCard.SpecialCardType;
+using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Abstract;
 using Munchkin.Model.User;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,8 @@ namespace Munchkin.Model.Card.ActionCard
 {
     public abstract class ActionCardBase : CardGameBase
     {
+        public MagicCardType MagicCardType;
+
         protected ActionCardBase(string name, CardType cardType) : base(name, cardType)
         {
         }
@@ -33,7 +36,7 @@ namespace Munchkin.Model.Card.ActionCard
 
         }
 
-        public virtual void CastSpecialSpell(UserClass? user, Game? game, Fight fight)
+        public virtual void CastSpecialSpell(UserClass? user, Game? game, Fight? fight)
         {
 
         }

@@ -10,6 +10,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
     {
         public ItIsTooHeavy(string name, CardType cardType) : base(name, cardType)
         {
+            MagicCardType = MagicCardType.Hero;
         }
 
         public override void CastSpecialSpell(UserClass user, MonsterCardBase monster, Game game)

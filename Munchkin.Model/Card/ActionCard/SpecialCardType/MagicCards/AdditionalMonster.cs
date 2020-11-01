@@ -14,6 +14,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
         public AdditionalMonster(string name, CardType cardType, ReadLineOverride readLineOverride) : base(name, cardType)
         {
             this.readLineOverride = readLineOverride;
+            MagicCardType = MagicCardType.Monster;
         }
 
         public override void CastSpecialSpell(UserClass user, Game game, Fight fight)

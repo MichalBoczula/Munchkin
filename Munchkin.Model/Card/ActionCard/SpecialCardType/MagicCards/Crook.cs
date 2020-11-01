@@ -10,6 +10,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
     {
         public Crook(string name, CardType cardType) : base(name, cardType)
         {
+            MagicCardType = MagicCardType.Crook;
         }
 
         public override void CastSpecialSpell(UserClass user, MonsterCardBase monster, Game game)

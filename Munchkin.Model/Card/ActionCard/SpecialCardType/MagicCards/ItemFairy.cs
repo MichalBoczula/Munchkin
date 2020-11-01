@@ -15,6 +15,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
 
         public ItemFairy(string name, CardType cardType, Random random) : base(name, cardType)
         {
+            MagicCardType = MagicCardType.Hero;
             this.random = random;
         }
 

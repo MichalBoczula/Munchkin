@@ -9,10 +9,11 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
 {
     public class PayToHaron : ActionCardBase
     {
-
         public PayToHaron(string name, CardType cardType) : base(name, cardType)
         {
+            MagicCardType = MagicCardType.Hero;
         }
+
 #nullable enable
         public override void CastSpecialSpell(UserClass? user, MonsterCardBase? monster, Game? game)
         {

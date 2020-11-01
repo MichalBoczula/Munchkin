@@ -14,6 +14,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
         public WhatAMess(string name, CardType cardType, Random random) : base(name, cardType)
         {
             this.random = random;
+            MagicCardType = MagicCardType.Hero;
         }
 
         public override void CastSpecialSpell(UserClass user, MonsterCardBase monster, Game game)

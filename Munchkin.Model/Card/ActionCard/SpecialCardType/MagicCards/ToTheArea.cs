@@ -10,6 +10,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
     {
         public ToTheArea(string name, CardType cardType) : base(name, cardType)
         {
+            MagicCardType = MagicCardType.Hero;
         }
 
 #nullable enable

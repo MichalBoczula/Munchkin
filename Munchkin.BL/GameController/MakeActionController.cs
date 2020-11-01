@@ -8,6 +8,7 @@ using Munchkin.Model.User;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Munchkin.Model.Card.ActionCard.SpecialCardType;
 
 namespace Munchkin.BL.GameController
 {
@@ -78,32 +79,58 @@ namespace Munchkin.BL.GameController
                         DeadEnd(fight);
                     }
                 }
-
+                else
+                {
+                    if (action.MagicCardType is MagicCardType.Hero || action.MagicCardType is MagicCardType.Crook)
+                    {
+                        action.CastSpecialSpell(user, game, null);
+                    }
+                    else
+                    {
+                        user.Deck.MagicCards.Add(action);
+                    }
+                }
+                game.ActionCards.Remove(action);
+                game.DestroyedActionCards.Add(action);
+                if (!gameAction.IsFight)
+                {
+                    OpenMisteryDoor(user);
+                }
+            }
+            else
+            {
+                var action = game.ActionCards[0];
+                if (action.CardType is CardType.Monster)
+                {
+                    gameAction.IsFight = true;
+                    action.SpecialPower(game, user);
+                    var fight = new Fight();
+                    fight.Heros.Add(user);
+                    fight.Monsters.Add((MonsterCardBase)action);
+                    if (fightController.WhoWinFight(fight))
+                    {
+                        game.DestroyedActionCards.AddRange(fight.Monsters);
+                        GetPrizes(fight);
+                    }
+                    else
+                    {
+                        DeadEnd(fight);
+                    }
+                }
+                else
+                {
+                    if (action.MagicCardType is MagicCardType.Hero || action.MagicCardType is MagicCardType.Crook)
+                    {
+                        action.CastSpecialSpell(user, game, null);
+                    }
+                    else
+                    {
+                        user.Deck.MagicCards.Add(action);
+                    }
+                }
                 game.ActionCards.Remove(action);
                 game.DestroyedActionCards.Add(action);
             }
-            //else
-            //{
-            //    IsFirstTime = false;
-            //    var action = Game.ActionCards[0];
-            //    if (action.CardType is CardType.Monster)
-            //    {
-            //        IsFight = true;
-            //        //Fight
-            //    }
-            //    else
-            //    {
-            //        user.Deck.MagicCards.Add(action);
-            //    }
-            //    Game.ActionCards.Remove(action);
-            //    Game.DestroyedActionCards.Add(action);
-            //}
-
-            //if (!IsFight)
-            //{
-            //    IsFight = true;
-            //    OpenMisteryDoor(user, monster);
-            //}
         }
 
         public void DeadEnd(Fight fight)
@@ -136,7 +163,6 @@ namespace Munchkin.BL.GameController
             }
             else if (fight.Heros.Count > 1)
             {
-                var list = new List<ItemCard>();
                 var prizes = 0;
                 foreach (var monster in fight.Monsters)
                 {
