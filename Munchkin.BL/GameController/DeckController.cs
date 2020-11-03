@@ -31,13 +31,13 @@ namespace Munchkin.BL.GameController
             LookOnCard(user);
             if (Int32.TryParse(_readLineOverride.GetNextString(), out int num))
             {
-                
+
             }
             else
             {
 
             }
-            
+
 
 
 
@@ -81,6 +81,36 @@ namespace Munchkin.BL.GameController
                 i++;
             }
             return strBuilder.ToString();
+        }
+
+        public string LookOnSituationalCard(UserClass user, ref int i)
+        {
+            StringBuilder strBuilder = new StringBuilder();
+            strBuilder.Append("SituationalItems\n");
+            strBuilder.Append("___________________________________________________________________\n");
+            var isItem = false;
+            foreach (var card in user.Deck.Items)
+            {
+                if (card.ItemType == ItemType.Sitiuational)
+                {
+                    isItem = true;
+                    strBuilder.Append($"{i}. ");
+                    strBuilder.Append($"Name: {card.Name}");
+                    strBuilder.Append($"Effect: effect");
+                    strBuilder.Append(";\n");
+                    i++;
+                }
+            }
+            if (isItem)
+            {
+                return strBuilder.ToString();
+            } 
+            else
+            {
+                strBuilder.Clear();
+                strBuilder.Append("You don't have situational items");
+                return strBuilder.ToString();
+            }
         }
 
         public string LookOnMagicCardsCard(UserClass user, ref int i)
@@ -293,7 +323,6 @@ namespace Munchkin.BL.GameController
                 UseSituationalItems(card, fight);
             }
         }
-
 
         public void UseSituationalItems(ItemCard card, Fight? fight)
         {

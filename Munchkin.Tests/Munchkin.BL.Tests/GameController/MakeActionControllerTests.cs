@@ -3,6 +3,7 @@ using Moq;
 using Munchkin.BL.CardGenerator;
 using Munchkin.BL.CharacterCreator;
 using Munchkin.BL.GameController;
+using Munchkin.BL.Helper;
 using Munchkin.Model;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret;
@@ -114,6 +115,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             //Arrange
             var random = new Random();
             var drawCardService = new DrawCardService(random);
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
             var stackCardGeneratorService = new StackCardGeneratorService();
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
             var user = new UserClass();
@@ -128,7 +131,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             {
                 NumberOfPrizes = 3
             };
-            var makeActionController = new MakeActionController(game, fightController, prizeStackController);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, mock.Object);
             fight.Monsters.Add(antArmy);
             fight.Monsters.Add(antArmy2);
             fight.Heros.Add(user);
@@ -147,6 +150,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             var drawCardService = new DrawCardService(random);
             var stackCardGeneratorService = new StackCardGeneratorService();
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
             var user = new UserClass();
             var user2 = new UserClass();
             var fight = new Fight();
@@ -160,7 +165,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             {
                 NumberOfPrizes = 3
             };
-            var makeActionController = new MakeActionController(game, fightController, prizeStackController);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, mock.Object);
             fight.Monsters.Add(antArmy);
             fight.Monsters.Add(antArmy2);
             fight.Heros.Add(user);
@@ -180,6 +185,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             //Arrange
             var random = new Random();
             var drawCardService = new DrawCardService(random);
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
             var stackCardGeneratorService = new StackCardGeneratorService();
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
             var user = new UserClass();
@@ -196,7 +203,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             {
                 NumberOfPrizes = 2
             };
-            var makeActionController = new MakeActionController(game, fightController, prizeStackController);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, mock.Object);
             fight.Monsters.Add(antArmy);
             fight.Monsters.Add(antArmy2);
             fight.Heros.Add(user);
@@ -290,6 +297,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         {
             //Arrange
             var random = new Random();
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
             var game = new Game();
             var userAvatar = new UserAvatar();
             var user = new UserClass()
@@ -300,7 +309,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             var drawCardService = new DrawCardService(random);
             var stackCardGeneratorService = new StackCardGeneratorService();
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
-            var makeActionController = new MakeActionController(game, fightController, prizeStackController);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, mock.Object);
             var antArmy = new AntArmy("Ant Army", CardType.Monster);
             var antArmy2 = new AntArmy("Ant Army", CardType.Monster);
             game.ActionCards.Add(antArmy);
@@ -319,6 +328,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         public void OpenMisteryDoorLoseFight()
         {
             //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
             var random = new Random();
             var game = new Game();
             var userAvatar = new UserAvatar();
@@ -330,7 +341,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             var drawCardService = new DrawCardService(random);
             var stackCardGeneratorService = new StackCardGeneratorService();
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
-            var makeActionController = new MakeActionController(game, fightController, prizeStackController);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, mock.Object);
             var antArmy = new AntArmy("Ant Army", CardType.Monster);
             game.ActionCards.Add(antArmy);
             //Act
@@ -345,6 +356,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         public void OpenMisteryDoorWinFight()
         {
             //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
             var random = new Random();
             var game = new Game();
             var userAvatar = new UserAvatar();
@@ -356,7 +369,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             var drawCardService = new DrawCardService(random);
             var stackCardGeneratorService = new StackCardGeneratorService();
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
-            var makeActionController = new MakeActionController(game, fightController, prizeStackController);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, mock.Object);
             var antArmy = new AntArmy("Ant Army", CardType.Monster)
             {
                 Power = 0,
@@ -381,6 +394,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         public void OpenMisteryDoorWinFightNotEnoughPrizes()
         {
             //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
             var random = new Random();
             var game = new Game();
             var userAvatar = new UserAvatar();
@@ -392,7 +407,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             var drawCardService = new DrawCardService(random);
             var stackCardGeneratorService = new StackCardGeneratorService();
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService, game);
-            var makeActionController = new MakeActionController(game, fightController, prizeStackController);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, mock.Object);
             var antArmy = new AntArmy("Ant Army", CardType.Monster)
             {
                 Power = 0,
@@ -417,6 +432,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         public void OpenMisteryDoorTwoCurse()
         {
             //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
             var random = new Random();
             var game = new Game();
             var userAvatar = new UserAvatar
@@ -431,7 +448,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             var drawCardService = new DrawCardService(random);
             var stackCardGeneratorService = new StackCardGeneratorService();
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
-            var makeActionController = new MakeActionController(game, fightController, prizeStackController);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, mock.Object);
             var curse = new BackToSchool("BackToSchool", CardType.Curse);
             var curse2 = new BackToSchool("BackToSchool", CardType.Curse);
             game.ActionCards.Add(curse);
@@ -449,6 +466,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         public void OpenMisteryDoorFirstMonsterThanCurse()
         {
             //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
             var random = new Random();
             var game = new Game();
             var userAvatar = new UserAvatar
@@ -463,7 +482,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             var drawCardService = new DrawCardService(random);
             var stackCardGeneratorService = new StackCardGeneratorService();
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
-            var makeActionController = new MakeActionController(game, fightController, prizeStackController);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, mock.Object);
             var curse = new BackToSchool("BackToSchool", CardType.Curse);
             var antArmy = new AntArmy("Ant Army", CardType.Monster);
             game.ActionCards.Add(antArmy);
@@ -481,6 +500,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         public void OpenMisteryDoorFirstCurseThanMonster()
         {
             //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
             var random = new Random();
             var game = new Game();
             var userAvatar = new UserAvatar
@@ -495,7 +516,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             var drawCardService = new DrawCardService(random);
             var stackCardGeneratorService = new StackCardGeneratorService();
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
-            var makeActionController = new MakeActionController(game, fightController, prizeStackController);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, mock.Object);
             var curse = new BackToSchool("BackToSchool", CardType.Curse);
             var antArmy = new AntArmy("Ant Army", CardType.Monster);
             game.ActionCards.Add(curse);
@@ -514,6 +535,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         public void OpenMisteryDoorNoActionCard()
         {
             //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
             var random = new Random();
             var game = new Game();
             var userAvatar = new UserAvatar
@@ -528,7 +551,10 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             var drawCardService = new DrawCardService(random);
             var stackCardGeneratorService = new StackCardGeneratorService();
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
-            var makeActionController = new MakeActionController(game, fightController, prizeStackController, drawCardService);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, drawCardService)
+            {
+                readLineOverride = mock.Object
+            };
             var antArmy = new AntArmy("Ant Army", CardType.Monster);
             game.DestroyedActionCards.Add(antArmy);
             //Act
@@ -537,6 +563,30 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             userAvatar.Nerfs.FleeChances.Should().HaveCount(1);
             game.DestroyedActionCards.Should().HaveCount(1);
             game.DestroyedActionCards[0].Should().BeSameAs(antArmy);
+        }
+
+        [Fact]
+        public void OpenMisteryDoorFirstCurseThanFightWithMonsterFromDeck()
+        {
+            
+        }
+
+        [Fact]
+        public void OpenMisteryDoorFirstCurseThanThanOpenDoor()
+        {
+
+        }
+
+        [Fact]
+        public void FightWithYouMonsterWinFight()
+        {
+
+        }
+
+        [Fact]
+        public void FightWithYouMonsterLoseFight()
+        {
+
         }
     }
 }

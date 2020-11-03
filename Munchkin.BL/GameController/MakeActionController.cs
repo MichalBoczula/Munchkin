@@ -17,11 +17,11 @@ namespace Munchkin.BL.GameController
     {
         public Game game;
         public GameAction gameAction;
+        public ReadLineOverride readLineOverride;
         public FightController fightController;
         public PrizeStackController prizeStackController;
         public Random random;
         public DeckController deckController;
-        public ReadLineOverride readLineOverride;
         private readonly DrawCardService _drawCardService;
 
         public MakeActionController(Game game, FightController fightController)
@@ -31,13 +31,15 @@ namespace Munchkin.BL.GameController
             this.fightController = fightController;
         }
 
-        public MakeActionController(Game game, FightController fightController, PrizeStackController prizeStackController)
+        public MakeActionController(Game game, FightController fightController, PrizeStackController prizeStackController, ReadLineOverride readLineOverride)
         {
             this.game = game;
             gameAction = new GameAction();
             this.fightController = fightController;
             this.prizeStackController = prizeStackController;
+            this.readLineOverride = readLineOverride;
         }
+
         public MakeActionController(Game game, FightController fightController, PrizeStackController prizeStackController, Random random)
         {
             this.game = game;
@@ -68,36 +70,20 @@ namespace Munchkin.BL.GameController
             _drawCardService = drawCardService;
         }
 
-        public string LookOnMonstersCard(UserClass user, ref int i)
-        {
-            StringBuilder strBuilder = new StringBuilder();
-            strBuilder.Append("Monsters\n");
-            strBuilder.Append("___________________________________________________________________\n");
-            foreach (var card in user.Deck.Monsters)
-            {
-                strBuilder.Append($"{i}. ");
-                strBuilder.Append($"Name: {card.Name}, Power: {card.Power}, Undead: { card.Undead}, ");
-                strBuilder.Append($"Levels after fight: {card.HowManyLevels}");
-                strBuilder.Append($"Prizes: {card.NumberOfPrizes}");
-                strBuilder.Append(";\n");
-                i++;
-            }
-            return strBuilder.ToString();
-        }
-
         public void FightWithYouMonster(UserClass user)
         {
             MonsterCardBase monster;
             while (true)
             {
                 int i = 1;
-                LookOnMonstersCard(user, ref i);
-                System.Console.WriteLine("Select monster to fight");
+                System.Console.WriteLine(deckController.LookOnMonstersCard(user, ref i));
+                System.Console.WriteLine("Select monster to fight:");
                 if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
                 {
                     if (result <= user.Deck.Monsters.Count)
                     {
                         monster = user.Deck.Monsters[result - 1];
+                        user.Deck.Monsters.Remove(monster);
                         break;
                     }
                     else
@@ -117,11 +103,15 @@ namespace Munchkin.BL.GameController
             fight.Monsters.Add(monster);
             if (fightController.WhoWinFight(fight))
             {
+                System.Console.WriteLine("You won a figh get some prizes!!!. Press enter to continue...");
+                readLineOverride.GetNextString();
                 game.DestroyedActionCards.AddRange(fight.Monsters);
                 GetPrizes(fight);
             }
             else
             {
+                System.Console.WriteLine("You lost a figh, now wait for you dead end!!!. Press enter to continue...");
+                readLineOverride.GetNextString();
                 game.DestroyedActionCards.AddRange(fight.Monsters);
                 DeadEnd(fight);
             }
@@ -143,12 +133,16 @@ namespace Munchkin.BL.GameController
                     fight.Monsters.Add((MonsterCardBase)action);
                     if (fightController.WhoWinFight(fight))
                     {
+                        System.Console.WriteLine("You won a figh get some prizes!!!. Press enter to continue...");
+                        readLineOverride.GetNextString();
                         game.DestroyedActionCards.AddRange(fight.Monsters);
                         game.ActionCards.Remove(action);
                         GetPrizes(fight);
                     }
                     else
                     {
+                        System.Console.WriteLine("You lost a figh, now wait for you dead end!!!. Press enter to continue...");
+                        readLineOverride.GetNextString();
                         game.DestroyedActionCards.AddRange(fight.Monsters);
                         game.ActionCards.Remove(action);
                         DeadEnd(fight);
@@ -169,9 +163,30 @@ namespace Munchkin.BL.GameController
                         user.Deck.MagicCards.Add(action);
                     }
                 }
+
                 if (!gameAction.IsFight)
                 {
-                    OpenMisteryDoor(user);
+                    if (user.Deck.Monsters.Count > 0)
+                    {
+                        while (true)
+                        {
+                            System.Console.WriteLine("You have monster in you deck, if you don't choose fight with, you have to open next door.\n" +
+                            "Do you want fight with monster from your deck?\n1.Yes\n2.No");
+                            if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
+                            {
+                                FightWithYouMonster(user);
+                            }
+                            else
+                            {
+                                System.Console.WriteLine("Choose one option 1 or 2. Press enter to continue...");
+                                readLineOverride.GetNextString();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        OpenMisteryDoor(user);
+                    }
                 }
             }
             else
