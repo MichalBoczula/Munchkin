@@ -26,25 +26,6 @@ namespace Munchkin.BL.GameController
             System.Console.WriteLine(LookOnMagicCardsCard(user, ref i));
         }
 
-        public int ChooseCard(UserClass user)
-        {
-            LookOnCard(user);
-            if (Int32.TryParse(_readLineOverride.GetNextString(), out int num))
-            {
-
-            }
-            else
-            {
-
-            }
-
-
-
-
-
-            return 0;
-        }
-
         public string LookOnItemsCard(UserClass user, ref int i)
         {
             StringBuilder strBuilder = new StringBuilder();

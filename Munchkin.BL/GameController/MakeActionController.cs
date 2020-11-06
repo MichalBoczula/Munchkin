@@ -110,7 +110,7 @@ namespace Munchkin.BL.GameController
             }
             else
             {
-                System.Console.WriteLine("You lost a figh, now wait for you dead end!!!. Press enter to continue...");
+                System.Console.WriteLine("You lost a fight, now wait for you dead end!!!. Press enter to continue...");
                 readLineOverride.GetNextString();
                 game.DestroyedActionCards.AddRange(fight.Monsters);
                 DeadEnd(fight);
@@ -174,7 +174,24 @@ namespace Munchkin.BL.GameController
                             "Do you want fight with monster from your deck?\n1.Yes\n2.No");
                             if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
                             {
-                                FightWithYouMonster(user);
+                                if (result == 1)
+                                {
+                                    System.Console.WriteLine("You chose to fight with monster. Press enter to continue...");
+                                    readLineOverride.GetNextString();
+                                    FightWithYouMonster(user);
+                                    break;
+                                }
+                                else if (result == 2)
+                                {
+                                    System.Console.WriteLine("You chose don't fight, lets open next door. Press enter to continue...");
+                                    readLineOverride.GetNextString();
+                                    break;
+                                }
+                                else
+                                {
+                                    System.Console.WriteLine("Choose one option 1 or 2. Press enter to continue...");
+                                    readLineOverride.GetNextString();
+                                }
                             }
                             else
                             {

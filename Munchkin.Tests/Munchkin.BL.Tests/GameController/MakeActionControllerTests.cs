@@ -568,25 +568,144 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         [Fact]
         public void OpenMisteryDoorFirstCurseThanFightWithMonsterFromDeck()
         {
-            
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, random, deckController, mock.Object, drawCardService);
+            var curse = new BackToSchool("BackToSchool", CardType.Curse);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster);
+            game.ActionCards.Add(curse);
+            user.Deck.Monsters.Add(antArmy);
+            //Act
+            makeActionController.OpenMisteryDoor(user);
+            //Assert
+            userAvatar.Nerfs.FleeChances.Should().HaveCount(1);
+            game.DestroyedActionCards.Should().HaveCount(2);
+            user.Deck.Monsters.Should().HaveCount(0);
         }
 
         [Fact]
-        public void OpenMisteryDoorFirstCurseThanThanOpenDoor()
+        public void OpenMisteryDoorFirstCurseThanOpenDoorNoCards()
         {
-
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("2");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, random, deckController, mock.Object, drawCardService);
+            var curse = new BackToSchool("BackToSchool", CardType.Curse);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster);
+            game.ActionCards.Add(curse);
+            game.DestroyedActionCards.Add(antArmy);
+            //Act
+            makeActionController.OpenMisteryDoor(user);
+            //Assert
+            game.DestroyedActionCards.Should().HaveCount(0);
+            user.Deck.Monsters.Should().HaveCount(1);
+            userAvatar.Level.Should().Be(0);
         }
 
         [Fact]
-        public void FightWithYouMonsterWinFight()
+        public void FightWithYourMonsterWinFight()
         {
-
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Power = 20,
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, random, deckController, mock.Object, drawCardService);
+            var curse = new BackToSchool("BackToSchool", CardType.Curse);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 5,
+                NumberOfPrizes = 2
+            };
+            game.ActionCards.Add(curse);
+            user.Deck.Monsters.Add(antArmy);
+            //Act
+            makeActionController.OpenMisteryDoor(user);
+            //Assert
+            user.Deck.Items.Should().HaveCount(2);
+            game.DestroyedActionCards.Should().HaveCount(2);
+            user.Deck.Monsters.Should().HaveCount(0);
+            userAvatar.Level.Should().Be(0);
         }
 
         [Fact]
-        public void FightWithYouMonsterLoseFight()
+        public void FightWithYourMonsterLoseFight()
         {
-
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, random, deckController, mock.Object, drawCardService);
+            var curse = new BackToSchool("BackToSchool", CardType.Curse);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster);
+            game.ActionCards.Add(curse);
+            user.Deck.Monsters.Add(antArmy);
+            //Act
+            makeActionController.OpenMisteryDoor(user);
+            //Assert
+            userAvatar.Nerfs.FleeChances.Should().HaveCount(1);
+            game.DestroyedActionCards.Should().HaveCount(2);
+            user.Deck.Monsters.Should().HaveCount(0);
+            userAvatar.Level.Should().Be(0);
         }
     }
 }
