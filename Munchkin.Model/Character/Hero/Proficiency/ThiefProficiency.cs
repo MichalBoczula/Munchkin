@@ -101,7 +101,10 @@ namespace Munchkin.Model.Character.Hero.Proficiency
                         break;
                 }
             }
-            thief.Deck.Items.Add(stolen);
+            if (stolen != null)
+            {
+                thief.Deck.Items.Add(stolen);
+            }
         }
 
         public override bool BackStab(UserClass victim)

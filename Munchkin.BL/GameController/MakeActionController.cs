@@ -580,13 +580,16 @@ namespace Munchkin.BL.GameController
                         {
                             if (choice == 1)
                             {
+                                List<UserClass> users = new List<UserClass>();
                                 System.Console.WriteLine("Your opponents:");
                                 int i = 1;
                                 foreach (var hero in game.Users)
                                 {
                                     if (!user.Equals(hero))
                                     {
+                                        users.Add(hero);
                                         System.Console.WriteLine($"{i}. {hero.Name}, Power: {hero.UserAvatar.Power}");
+                                        i++;
                                     }
                                 }
                                 System.Console.WriteLine($"Choose one from you opponents, choose option from 1 to {game.Users.Count}");
@@ -594,11 +597,11 @@ namespace Munchkin.BL.GameController
                                 {
                                     if (opponent <= game.Users.Count)
                                     {
-                                        var victim = game.Users[opponent - 1];
+                                        var victim = users[opponent - 1];
                                         user.UserAvatar.Proficiency.BackStab(victim);
                                         System.Console.WriteLine($"You backstabbed {victim.Name}. Press enter to continue...");
                                         readLineOverride.GetNextString();
-                                        break;
+                                        return;
                                     }
                                     else
                                     {
@@ -614,13 +617,16 @@ namespace Munchkin.BL.GameController
                             }
                             else if (choice == 2)
                             {
+                                List<UserClass> users = new List<UserClass>();
                                 System.Console.WriteLine("Your opponents:");
                                 int i = 1;
                                 foreach (var hero in game.Users)
                                 {
                                     if (!user.Equals(hero))
                                     {
+                                        users.Add(hero);
                                         System.Console.WriteLine($"{i}. {hero.Name}, Power: {hero.UserAvatar.Power}");
+                                        i++;
                                     }
                                 }
                                 System.Console.WriteLine($"Choose one from you opponents, choose option from 1 to {game.Users.Count}");
@@ -628,11 +634,11 @@ namespace Munchkin.BL.GameController
                                 {
                                     if (opponent <= game.Users.Count)
                                     {
-                                        var victim = game.Users[opponent - 1];
+                                        var victim = users[opponent - 1];
                                         user.UserAvatar.Proficiency.StealCard(user, victim);
                                         System.Console.WriteLine($"You stole item from {victim.Name}. Press enter to continue...");
                                         readLineOverride.GetNextString();
-                                        break;
+                                        return;
                                     }
                                     else
                                     {
@@ -651,6 +657,7 @@ namespace Munchkin.BL.GameController
                             {
                                 System.Console.WriteLine("You didn't use skill. Press enter to continue...");
                                 readLineOverride.GetNextString();
+                                return;
                             }
                             else
                             {
