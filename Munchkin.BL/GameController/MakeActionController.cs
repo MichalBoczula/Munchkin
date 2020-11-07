@@ -404,8 +404,14 @@ namespace Munchkin.BL.GameController
                                     var result = user.UserAvatar.Proficiency.InstantKill(user);
                                     if (result.DestroyedActionCards.Count + result.DestroyedPrizeCards.Count > 3)
                                     {
-                                        game.DestroyedActionCards.AddRange(result.DestroyedActionCards);
-                                        game.DestroyedPrizeCards.AddRange(result.DestroyedPrizeCards);
+                                        if (result.DestroyedActionCards.Count > 0)
+                                        {
+                                            game.DestroyedActionCards.AddRange(result.DestroyedActionCards);
+                                        }
+                                        if (result.DestroyedPrizeCards.Count > 0)
+                                        {
+                                            game.DestroyedPrizeCards.AddRange(result.DestroyedPrizeCards);
+                                        }
                                         if (fight.Monsters.Count == 1)
                                         {
                                             fight.Monsters[0].Power = -999;
@@ -525,11 +531,11 @@ namespace Munchkin.BL.GameController
                             var result = user.UserAvatar.Proficiency.RestorePrizeCard(user, game);
                             if (result.DestroyedActionCards.Count > 0 || result.DestroyedPrizeCards.Count > 0)
                             {
-                                if (game.DestroyedActionCards.Count > 0)
+                                if (result.DestroyedActionCards.Count > 0)
                                 {
                                     game.DestroyedActionCards.AddRange(result.DestroyedActionCards);
                                 }
-                                if (game.DestroyedPrizeCards.Count > 0)
+                                if (result.DestroyedPrizeCards.Count > 0)
                                 {
                                     game.DestroyedPrizeCards.AddRange(result.DestroyedPrizeCards);
                                 }

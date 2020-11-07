@@ -31,7 +31,6 @@ namespace Munchkin.Model.Character.Hero.Proficiency
             {
                 while (true)
                 {
-
                     System.Console.WriteLine("You have enough cards do you want cast spell. Remember you will lose you whole deck.\n" +
                         "Choose option:\n1.Yes\n2.No");
                     readLineOverride.GetNextString();

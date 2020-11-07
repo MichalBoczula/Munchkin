@@ -21,11 +21,12 @@ namespace Munchkin.Model.Character.Hero.Proficiency
         public override DestroyedCards InstantKill(UserClass user)
         {
             var destroyedCards = new DestroyedCards();
-            Console.WriteLine(_informationModel.CastCharmSpell());
+            Console.WriteLine(_informationModel.Description);
+            Console.WriteLine(_informationModel.CastInstantKillSpell());
             readLineOverride.GetNextString();
             if (user.Deck.Count() > 3)
             {
-                Console.WriteLine(_informationModel.CharmSpellSuccess());
+                Console.WriteLine(_informationModel.InstantKillSpellSuccess());
                 if (user.Deck.Monsters.Count > 0)
                 {
                     destroyedCards.DestroyedActionCards.AddRange(user.Deck.Monsters);
@@ -43,7 +44,7 @@ namespace Munchkin.Model.Character.Hero.Proficiency
             }
             else
             {
-                Console.WriteLine(_informationModel.CharmSpellfailure());
+                Console.WriteLine(_informationModel.InstantKillSpellFailure());
                 readLineOverride.GetNextString();
             }
             return destroyedCards;
