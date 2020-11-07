@@ -8,6 +8,6 @@ namespace Munchkin.Model.Character.Action
     public interface IMageAction
     {
         DestroyedCards FleeSpell(UserClass user);
-        bool InstantKill(UserClass user);
+        DestroyedCards InstantKill(UserClass user);
     }
 }

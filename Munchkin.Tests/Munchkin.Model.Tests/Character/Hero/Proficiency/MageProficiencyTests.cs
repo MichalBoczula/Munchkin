@@ -206,7 +206,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             //Act
             var result = user.UserAvatar.Proficiency.InstantKill(user);
             //Assert
-            result.Should().BeTrue();
+            Assert.True(result.DestroyedActionCards.Count + result.DestroyedPrizeCards.Count > 3);
             user.Deck.Count().Should().Be(0);
         }
 
@@ -234,7 +234,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Character.Hero.Proficiency
             //Act
             var result = user.UserAvatar.Proficiency.InstantKill(user);
             //Assert
-            result.Should().BeFalse();
+            Assert.False(result.DestroyedActionCards.Count + result.DestroyedPrizeCards.Count > 3);
             user.Deck.Count().Should().Be(0);
         }
     }

@@ -18,25 +18,35 @@ namespace Munchkin.Model.Character.Hero.Proficiency
             this.readLineOverride = readLineOverride;
         }
 
-        public override bool InstantKill(UserClass user)
+        public override DestroyedCards InstantKill(UserClass user)
         {
+            var destroyedCards = new DestroyedCards();
             Console.WriteLine(_informationModel.CastCharmSpell());
             readLineOverride.GetNextString();
-            bool result;
             if (user.Deck.Count() > 3)
             {
                 Console.WriteLine(_informationModel.CharmSpellSuccess());
+                if (user.Deck.Monsters.Count > 0)
+                {
+                    destroyedCards.DestroyedActionCards.AddRange(user.Deck.Monsters);
+                }
+                if (user.Deck.MagicCards.Count > 0)
+                {
+                    destroyedCards.DestroyedActionCards.AddRange(user.Deck.MagicCards);
+                }
+                if (user.Deck.Items.Count > 0)
+                {
+                    destroyedCards.DestroyedPrizeCards.AddRange(user.Deck.Items);
+                }
                 user.Deck.Clear();
                 readLineOverride.GetNextString();
-                result = true;
             }
             else
             {
                 Console.WriteLine(_informationModel.CharmSpellfailure());
                 readLineOverride.GetNextString();
-                result = false;
             }
-            return result;
+            return destroyedCards;
         }
 
         public override DestroyedCards FleeSpell(UserClass user)

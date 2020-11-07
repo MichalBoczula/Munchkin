@@ -25,7 +25,7 @@ namespace Munchkin.Model.Character
             throw new NotImplementedException();
         }
 
-        public virtual bool InstantKill(UserClass user)
+        public virtual DestroyedCards InstantKill(UserClass user)
         {
             throw new NotImplementedException();
         }

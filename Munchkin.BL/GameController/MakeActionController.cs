@@ -382,6 +382,7 @@ namespace Munchkin.BL.GameController
                                         {
                                             System.Console.WriteLine("You didn't use skill. Press enter to continue...");
                                             readLineOverride.GetNextString();
+                                            return;
                                         }
                                         else
                                         {
@@ -395,17 +396,17 @@ namespace Munchkin.BL.GameController
                                         readLineOverride.GetNextString();
                                     }
                                 }
-                                System.Console.WriteLine("You are much Faster. Press enter to continue...");
-                                readLineOverride.GetNextString();
                             }
                             else if (choice == 2)
                             {
                                 if (fight != null)
                                 {
                                     var result = user.UserAvatar.Proficiency.InstantKill(user);
-                                    if (result)
+                                    if (result.DestroyedActionCards.Count + result.DestroyedPrizeCards.Count > 3)
                                     {
-                                        if (fight.Monsters.Count == 0)
+                                        game.DestroyedActionCards.AddRange(result.DestroyedActionCards);
+                                        game.DestroyedPrizeCards.AddRange(result.DestroyedPrizeCards);
+                                        if (fight.Monsters.Count == 1)
                                         {
                                             fight.Monsters[0].Power = -999;
                                         }
@@ -424,6 +425,7 @@ namespace Munchkin.BL.GameController
                                                     if (whichOne <= fight.Monsters.Count)
                                                     {
                                                         fight.Monsters[whichOne - 1].Power = -999;
+                                                        break;
                                                     }
                                                     else
                                                     {
@@ -546,7 +548,7 @@ namespace Munchkin.BL.GameController
                         {
                             System.Console.WriteLine("You didn't use a skill. Press enter to continue");
                             readLineOverride.GetNextString();
-                            break;
+                            return;
                         }
                         else
                         {

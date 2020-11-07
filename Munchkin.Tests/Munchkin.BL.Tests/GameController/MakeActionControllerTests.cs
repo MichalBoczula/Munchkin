@@ -8,6 +8,7 @@ using Munchkin.Model;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret;
 using Munchkin.Model.Card.PrizeCard;
+using Munchkin.Model.Card.PrizeCard.SituationalItems;
 using Munchkin.Model.Character;
 using Munchkin.Model.Character.Hero.Proficiency;
 using Munchkin.Model.User;
@@ -1010,7 +1011,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         {
             //Arrange
             var mock = new Mock<ReadLineOverride>();
-            mock.Setup(x => x.GetNextString()).Returns("2");
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "1", "2", "1" }).Dequeue);
             var random = new Random();
             var game = new Game();
             var userAvatar = new UserAvatar
@@ -1040,6 +1041,199 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             user.UserAvatar.FleeChances.Should().Be(3);
             game.DestroyedPrizeCards.Should().HaveCount(0);
             user.Deck.Items.Count.Should().Be(2);
+        }
+
+        [Fact]
+        public void UseSpecialPowerMageInstantKillTestOnlyThreeCards()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("2");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1,
+                Proficiency = new MageProficiency(mock.Object)
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, random, deckController, mock.Object, drawCardService);
+            var item = new ItemCard("g", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null, 300);
+            var item1 = new ItemCard("r", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null, 300);
+            var fight = new Fight();
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2
+            };
+            user.Deck.Items.Add(item);
+            user.Deck.Items.Add(item1);
+            user.Deck.Monsters.Add(antArmy);
+            user.UserAvatar.EndTurn();
+            //Act
+            makeActionController.UseSpecialPower(user, fight);
+            //Assert
+            user.Deck.Items.Count.Should().Be(2);
+            antArmy.Power.Should().Be(5);
+            game.DestroyedActionCards.Count.Should().Be(0);
+            game.DestroyedPrizeCards.Count.Should().Be(0);
+        }
+
+        [Fact]
+        public void UseSpecialPowerMageInstantKillTestThereIsNoFight()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("2");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1,
+                Proficiency = new MageProficiency(mock.Object)
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, random, deckController, mock.Object, drawCardService);
+            var item = new ItemCard("g", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null, 300);
+            var item1 = new ItemCard("r", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null, 300);
+            user.Deck.Items.Add(item);
+            user.Deck.Items.Add(item1);
+            user.UserAvatar.EndTurn();
+            //Act
+            makeActionController.UseSpecialPower(user, null);
+            //Assert
+            user.Deck.Items.Count.Should().Be(2);
+            game.DestroyedActionCards.Count.Should().Be(0);
+            game.DestroyedPrizeCards.Count.Should().Be(0);
+        }
+
+        [Fact]
+        public void UseSpecialPowerMageInstantKillTestFullDeck()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("2");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1,
+                Proficiency = new MageProficiency(mock.Object)
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, random, deckController, mock.Object, drawCardService);
+            var item = new ItemCard("g", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null, 300);
+            var item1 = new ItemCard("r", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null, 300);
+            var sit1 = new DeadlyBerries("DeadlyBerries", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 500, mock.Object);
+            var magic = new Gambling("Gambling", CardType.Curse, random);
+            var fight = new Fight();
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2
+            };
+            user.Deck.Items.Add(item);
+            user.Deck.Items.Add(item1);
+            user.Deck.Items.Add(sit1);
+            user.Deck.MagicCards.Add(magic);
+            user.Deck.Monsters.Add(antArmy);
+            user.UserAvatar.EndTurn();
+            fight.Heros.Add(user);
+            fight.Monsters.Add(antArmy);
+            //Act
+            makeActionController.UseSpecialPower(user, fight);
+            //Assert
+            user.Deck.Items.Count.Should().Be(0);
+            user.Deck.Monsters.Count.Should().Be(0);
+            user.Deck.MagicCards.Count.Should().Be(0);
+            antArmy.Power.Should().Be(-999);
+            game.DestroyedActionCards.Count.Should().Be(2);
+            game.DestroyedPrizeCards.Count.Should().Be(3);
+        }
+
+        [Fact]
+        public void UseSpecialPowerMageInstantKillTestFullDeckTwoMonsters()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "2", "2", "2", "2", "2" }).Dequeue);
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1,
+                Proficiency = new MageProficiency(mock.Object)
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, random, deckController, mock.Object, drawCardService);
+            var item = new ItemCard("g", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null, 300);
+            var item1 = new ItemCard("r", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Weapon, null, 300);
+            var sit1 = new DeadlyBerries("DeadlyBerries", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 500, mock.Object);
+            var magic = new Gambling("Gambling", CardType.Curse, random);
+            var fight = new Fight();
+            var fenrir = new Fenrir("Fenrir", CardType.Monster)
+            {
+                Power = 20
+            };
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2
+            };
+            user.Deck.Items.Add(item);
+            user.Deck.Items.Add(item1);
+            user.Deck.Items.Add(sit1);
+            user.Deck.MagicCards.Add(magic);
+            user.Deck.Monsters.Add(antArmy);
+            user.UserAvatar.EndTurn();
+            fight.Heros.Add(user);
+            fight.Monsters.Add(antArmy);
+            fight.Monsters.Add(fenrir);
+            //Act
+            makeActionController.UseSpecialPower(user, fight);
+            //Assert
+            user.Deck.Items.Count.Should().Be(0);
+            user.Deck.Monsters.Count.Should().Be(0);
+            user.Deck.MagicCards.Count.Should().Be(0);
+            antArmy.Power.Should().Be(5);
+            fenrir.Power.Should().Be(-999);
+            game.DestroyedActionCards.Count.Should().Be(2);
+            game.DestroyedPrizeCards.Count.Should().Be(3);
         }
     }
 }
