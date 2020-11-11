@@ -11,6 +11,8 @@ namespace Munchkin.Model.Character.Hero.Proficiency
         private readonly InformationModelThiefProficiency _informationModelThiefProficiency;
         private new ReadLineOverride readLineOverride { get; set; }
         public Random random { get; set; }
+        public bool AreYouSteal { get; set; }
+        public bool AreYouBackStab { get; set; }
 
         public ThiefProficiency(ReadLineOverride readLineOverride, Random random)
         {
@@ -18,124 +20,89 @@ namespace Munchkin.Model.Character.Hero.Proficiency
             _informationModelThiefProficiency = new InformationModelThiefProficiency();
             this.readLineOverride = readLineOverride;
             this.random = random;
+            AreYouSteal = false;
+            AreYouBackStab = false;
         }
 
         public override void StealCard(UserClass thief, UserClass victim)
         {
-            if (!victim.UserAvatar.WasRob)
+            if (!AreYouSteal)
             {
-                victim.UserAvatar.WasRob = true;
-                if (victim.UserAvatar.Build != null)
+                AreYouSteal = true;
+                if (!victim.UserAvatar.WasRob && victim.Deck.Count() > 0)
                 {
                     var num = RollDice(random);
                     if (num > 4)
                     {
-                        var information = _informationModelThiefProficiency.ShowItemsToSteal(victim.UserAvatar.Build);
-                        Console.WriteLine(information.ItemDescription);
-                        readLineOverride.GetNextString();
-                        int choice;
-                        while (true)
+                        if(victim.Deck.Items.Count == 0)
                         {
-                            Console.WriteLine(_informationModelThiefProficiency.StealWelcomeMsg(information));
-                            if (!Int32.TryParse(readLineOverride.GetNextString(), out choice))
-                            {
-                                Console.WriteLine(_informationModelThiefProficiency.StealInvalidInput);
-                                readLineOverride.GetNextString();
-                                continue;
-                            }
-
-                            if (choice > information.ItemCount || choice < 0)
-                            {
-                                Console.WriteLine(_informationModelThiefProficiency.InvalidNumber(information));
-                                readLineOverride.GetNextString();
-                            }
-                            else if (choice <= information.ItemCount || choice > 0)
-                            {
-                                break;
-                            }
+                            System.Console.WriteLine("You can't steal item beacuse item doesn't have. Press enter to continue");
+                            readLineOverride.GetNextString();
                         }
-                        MoveItemFromVictimToThief(thief, victim, choice);
-                        Console.WriteLine(_informationModelThiefProficiency.StealSuccessfully);
-                        readLineOverride.GetNextString();
-                    }
-                    else
-                    {
-                        Console.WriteLine(_informationModelThiefProficiency.StealFail);
-                        readLineOverride.GetNextString();
+                        else
+                        {
+                            victim.UserAvatar.WasRob = true;
+                            var item = victim.Deck.Items[random.Next(victim.Deck.Items.Count)];
+                            victim.Deck.Items.Remove(item);
+                            thief.Deck.Items.Add(item);
+                            System.Console.WriteLine("You stole item from you enemy. Press enter to continue");
+                            readLineOverride.GetNextString();
+                        }
                     }
                 }
-            }
-        }
-
-        public void MoveItemFromVictimToThief(UserClass thief, UserClass victim, int choice)
-        {
-            ItemCard stolen = null;
-            if (choice > 5)
-            {
-                stolen = victim.UserAvatar.Build.AdditionalItems[choice - 6];
-                victim.UserAvatar.Build.AdditionalItems.Remove(stolen);
             }
             else
             {
-                switch (choice)
-                {
-                    case 1:
-                        stolen = victim.UserAvatar.Build.Helmet;
-                        victim.UserAvatar.Build.Helmet = null;
-                        break;
-                    case 2:
-                        stolen = victim.UserAvatar.Build.Armor;
-                        victim.UserAvatar.Build.Armor = null;
-                        break;
-                    case 3:
-                        stolen = victim.UserAvatar.Build.Boots;
-                        victim.UserAvatar.Build.Boots = null;
-                        break;
-                    case 4:
-                        stolen = victim.UserAvatar.Build.LeftHandItem;
-                        victim.UserAvatar.Build.LeftHandItem = null;
-                        break;
-                    case 5:
-                        stolen = victim.UserAvatar.Build.RightHandItem;
-                        victim.UserAvatar.Build.RightHandItem = null;
-                        break;
-                }
-            }
-            if (stolen != null)
-            {
-                thief.Deck.Items.Add(stolen);
+                System.Console.WriteLine("You can't steal more items. Press enter to continue");
+                readLineOverride.GetNextString();
             }
         }
 
         public override bool BackStab(UserClass victim)
         {
-            bool result = false;
-
-            if (!victim.UserAvatar.WasBackstab)
+            if (!AreYouBackStab)
             {
-                Console.WriteLine(_informationModelThiefProficiency.BackStabMsg);
-                readLineOverride.GetNextString();
-                var num = RollDice(random);
-                if (num > 3)
+                bool result = false;
+                if (!victim.UserAvatar.WasBackstab)
                 {
-                    victim.UserAvatar.TempPower -= 2;
-                    result = true;
-                    victim.UserAvatar.WasBackstab = true;
-                    Console.WriteLine(_informationModelThiefProficiency.BackSuccessMsg);
+                    Console.WriteLine(_informationModelThiefProficiency.BackStabMsg);
                     readLineOverride.GetNextString();
+                    var num = RollDice(random);
+                    if (num > 3)
+                    {
+                        victim.UserAvatar.TempPower -= 2;
+                        result = true;
+                        AreYouBackStab = true;
+                        victim.UserAvatar.WasBackstab = true;
+                        Console.WriteLine(_informationModelThiefProficiency.BackSuccessMsg);
+                        readLineOverride.GetNextString();
+                    }
+                    else
+                    {
+                        AreYouBackStab = true;
+                        Console.WriteLine(_informationModelThiefProficiency.BackFailMsg);
+                        readLineOverride.GetNextString();
+                    }
                 }
                 else
                 {
-                    Console.WriteLine(_informationModelThiefProficiency.BackFailMsg);
+                    Console.WriteLine(_informationModelThiefProficiency.CanNotBackStabTwoTimes);
                     readLineOverride.GetNextString();
                 }
+                return result;
             }
             else
             {
-                Console.WriteLine(_informationModelThiefProficiency.CanNotBackStabTwoTimes);
+                Console.WriteLine("You can only once per turn use back stab skill Press enter to continue");
                 readLineOverride.GetNextString();
+                return false;
             }
-            return result;
+        }
+
+        public override void CleanAfterTurn()
+        {
+            AreYouSteal = false;
+            AreYouBackStab = false;
         }
     }
 }

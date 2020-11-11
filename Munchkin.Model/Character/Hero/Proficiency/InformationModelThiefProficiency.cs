@@ -147,10 +147,6 @@ namespace Munchkin.Model.Character.Hero.Proficiency
             return informationModelData;
         }
 
-        public string InvalidNumber(InformationModelData information)
-        {
-            return $"Man it is easy. You must number from 1 to {information.ItemCount} do it correctly this time!\nPress enter to continue...";
-        }
     }
 
     public class InformationModelData

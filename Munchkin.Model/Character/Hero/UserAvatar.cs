@@ -169,6 +169,7 @@ namespace Munchkin.Model.Character
             WasBackstab = false;
             WasRob = false;
             HowManyCardsThrowToUseSkill = 0;
+            Proficiency.CleanAfterTurn();
         }
     }
 }

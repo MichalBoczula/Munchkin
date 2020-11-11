@@ -103,5 +103,10 @@ namespace Munchkin.Model.Character
         {
             throw new NotImplementedException();
         }
+
+        public virtual void CleanAfterTurn()
+        {
+
+        }
     }
 }

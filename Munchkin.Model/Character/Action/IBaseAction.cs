@@ -6,5 +6,6 @@ namespace Munchkin.Model.Character
     public interface IBaseAction
     {
         bool ThrowOutCart(int whichOne, UserClass user);
+        void CleanAfterTurn();
     }
 }

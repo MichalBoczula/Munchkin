@@ -1916,7 +1916,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         }
 
         [Fact]
-        public void UseSpecialPowerThiefStealItemHelmetSuccess()
+        public void UseSpecialPowerThiefStealItemSuccess()
         {
             //Arrange
             var mock = new Mock<ReadLineOverride>();
@@ -1953,16 +1953,238 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             var deckController = new DeckController(mock.Object);
             var makeActionController = new MakeActionController(game, fightController, prizeStackController, random, deckController, mock.Object, drawCardService);
             var helmet = new ItemCard("Helmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null, 300);
-            opponent.UserAvatar.Build.Helmet = helmet;
+            opponent.Deck.Items.Add(helmet);
             game.Users.Add(user);
             game.Users.Add(opponent);
             //Act
             makeActionController.UseSpecialPower(user, null);
             //Assert
-            opponent.UserAvatar.Build.Helmet.Should().BeNull();
+            opponent.Deck.Items.Count.Should().Be(0);
             user.Deck.Items.Should().HaveCount(1);
             user.Deck.Items[0].Should().BeSameAs(helmet);
         }
 
+        [Fact]
+        public void UseSpecialPowerThiefStealItemFail()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "2", "1", "1", "1", "1", "1", "1" }).Dequeue);
+            var random = new Random();
+            var mockRandom = new Mock<Random>();
+            mockRandom.Setup(x => x.Next(6)).Returns(5);
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1,
+                Proficiency = new ThiefProficiency(mock.Object, mockRandom.Object)
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar,
+                Name = "Majk"
+            };
+            var opponentAvatar = new UserAvatar
+            {
+                Level = 1,
+                Proficiency = new NoOneProficiency(),
+                TempPower = 2,
+                WasRob = true
+            };
+            var opponent = new UserClass()
+            {
+                UserAvatar = opponentAvatar,
+                Name = "Victim"
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, random, deckController, mock.Object, drawCardService);
+            var helmet = new ItemCard("Helmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null, 300);
+            opponent.Deck.Items.Add(helmet);
+            game.Users.Add(user);
+            game.Users.Add(opponent);
+            //Act
+            makeActionController.UseSpecialPower(user, null);
+            //Assert
+            opponent.Deck.Items.Count.Should().Be(1);
+            user.Deck.Items.Should().HaveCount(0);
+        }
+
+        [Fact]
+        public void UseSpecialPowerThiefStealItemTwoEnemiesRobFirst()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "2", "1", "1", "1", "1", "1", "1" }).Dequeue);
+            var random = new Random();
+            var mockRandom = new Mock<Random>();
+            mockRandom.Setup(x => x.Next(6)).Returns(5);
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1,
+                Proficiency = new ThiefProficiency(mock.Object, mockRandom.Object)
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar,
+                Name = "Majk"
+            };
+            var opponentAvatar = new UserAvatar
+            {
+                Level = 1,
+                Proficiency = new NoOneProficiency(),
+                TempPower = 2,
+            };
+            var opponent = new UserClass()
+            {
+                UserAvatar = opponentAvatar,
+                Name = "Victim"
+            };
+            var opponentAvatar2 = new UserAvatar
+            {
+                Level = 1,
+                Proficiency = new NoOneProficiency(),
+                TempPower = 2,
+            };
+            var opponent2 = new UserClass()
+            {
+                UserAvatar = opponentAvatar2,
+                Name = "Victim"
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, random, deckController, mock.Object, drawCardService);
+            var helmet = new ItemCard("Helmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null, 300);
+            opponent.Deck.Items.Add(helmet);
+            opponent2.Deck.Items.Add(helmet);
+            game.Users.Add(user);
+            game.Users.Add(opponent);
+            game.Users.Add(opponent2);
+            //Act
+            makeActionController.UseSpecialPower(user, null);
+            //Assert
+            opponent.Deck.Items.Count.Should().Be(0);
+            opponent2.Deck.Items.Count.Should().Be(1);
+            user.Deck.Items.Should().HaveCount(1);
+        }
+
+        [Fact]
+        public void UseSpecialPowerThiefStealItemTwoEnemiesRobSecond()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "2", "2", "1", "1", "1", "1", "1" }).Dequeue);
+            var random = new Random();
+            var mockRandom = new Mock<Random>();
+            mockRandom.Setup(x => x.Next(6)).Returns(5);
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1,
+                Proficiency = new ThiefProficiency(mock.Object, mockRandom.Object)
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar,
+                Name = "Majk"
+            };
+            var opponentAvatar = new UserAvatar
+            {
+                Level = 1,
+                Proficiency = new NoOneProficiency(),
+                TempPower = 2,
+            };
+            var opponent = new UserClass()
+            {
+                UserAvatar = opponentAvatar,
+                Name = "Victim"
+            };
+            var opponentAvatar2 = new UserAvatar
+            {
+                Level = 1,
+                Proficiency = new NoOneProficiency(),
+                TempPower = 2,
+            };
+            var opponent2 = new UserClass()
+            {
+                UserAvatar = opponentAvatar2,
+                Name = "Victim"
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, random, deckController, mock.Object, drawCardService);
+            var helmet = new ItemCard("Helmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null, 300);
+            opponent.Deck.Items.Add(helmet);
+            opponent2.Deck.Items.Add(helmet);
+            game.Users.Add(user);
+            game.Users.Add(opponent);
+            game.Users.Add(opponent2);
+            //Act
+            makeActionController.UseSpecialPower(user, null);
+            //Assert
+            opponent.Deck.Items.Count.Should().Be(1);
+            opponent2.Deck.Items.Count.Should().Be(0);
+            user.Deck.Items.Should().HaveCount(1);
+        }
+
+        [Fact]
+        public void UseSpecialPowerThiefStealItemTryRobTwoTimes()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "2", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1" }).Dequeue);
+            var random = new Random();
+            var mockRandom = new Mock<Random>();
+            mockRandom.Setup(x => x.Next(6)).Returns(5);
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1,
+                Proficiency = new ThiefProficiency(mock.Object, mockRandom.Object)
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar,
+                Name = "Majk"
+            };
+            var opponentAvatar = new UserAvatar
+            {
+                Level = 1,
+                Proficiency = new NoOneProficiency(),
+                TempPower = 2,
+            };
+            var opponent = new UserClass()
+            {
+                UserAvatar = opponentAvatar,
+                Name = "Victim"
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, random, deckController, mock.Object, drawCardService);
+            var helmet = new ItemCard("Helmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null, 300);
+            opponent.Deck.Items.Add(helmet);
+            opponent.Deck.Items.Add(helmet);
+            game.Users.Add(user);
+            game.Users.Add(opponent);
+            //Act
+            makeActionController.UseSpecialPower(user, null);
+            makeActionController.UseSpecialPower(user, null);
+            //Assert
+            opponent.Deck.Items.Count.Should().Be(1);
+            user.Deck.Items.Should().HaveCount(1);
+        }
     }
 }
