@@ -20,6 +20,12 @@ namespace Munchkin.BL.GameController
 
         public bool SellItem(UserClass user)
         {
+            if (user.Deck.Items.Count == 0)
+            {
+                System.Console.WriteLine("You don't have item to sell. Press item to continue...");
+                readLineOverride.GetNextString();
+                return false;
+            }
             var flag = false;
             int i = 1;
             while (true)
@@ -37,18 +43,18 @@ namespace Munchkin.BL.GameController
                         readLineOverride.GetNextString();
                         break;
                     }
-                    else if (i <= user.Deck.Items.Count)
+                    else if (result <= user.Deck.Items.Count)
                     {
                         var item = user.Deck.Items[result - 1];
                         user.Deck.Items.Remove(item);
                         user.UserAvatar.Wallet = user.UserAvatar.Race is Halfling ? item.Price * 2 : item.Price;
+                        flag = true;
                         if (user.UserAvatar.Race is Halfling)
                         {
                             System.Console.WriteLine($"You race is halfing so you have big selling skills and " +
                                 "price for item is 2 time bigger, price is: {item.Price} ." +
                                 " Press enter to continue");
                             readLineOverride.GetNextString();
-                            flag = true;
                             break;
                         }
                         else
@@ -81,6 +87,7 @@ namespace Munchkin.BL.GameController
             if (user.UserAvatar.Wallet >= 1000)
             {
                 user.UserAvatar.Level += 1;
+                user.UserAvatar.Wallet -= 1000;
                 System.Console.WriteLine($"You has got next level now you are on {user.UserAvatar.Level} Press enter to continue...");
                 readLineOverride.GetNextString();
             }

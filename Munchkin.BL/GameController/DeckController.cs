@@ -36,6 +36,7 @@ namespace Munchkin.BL.GameController
                 strBuilder.Append($"{i}. ");
                 strBuilder.Append($"Name: {card.Name}, Power: {card.Power} ");
                 strBuilder.Append($"ItemType: {card.ItemType}, CardType: {card.CardType}");
+                strBuilder.Append($"Price: {card.Price}");
                 if (card.RaceRestriction != null)
                 {
                     if (card.RaceRestriction.TryGetValue(true, out RaceBase value))
