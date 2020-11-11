@@ -23,6 +23,7 @@ namespace Munchkin.BL.GameController
         public Random random;
         public DeckController deckController;
         private readonly DrawCardService _drawCardService;
+        public SellItemController sellItemController;
 
         public MakeActionController(Game game, FightController fightController)
         {
@@ -49,6 +50,15 @@ namespace Munchkin.BL.GameController
             this.random = random;
         }
 
+        public MakeActionController(Game game, FightController fightController, PrizeStackController prizeStackController, DrawCardService drawCardService)
+        {
+            this.game = game;
+            gameAction = new GameAction();
+            this.fightController = fightController;
+            this.prizeStackController = prizeStackController;
+            _drawCardService = drawCardService;
+        }
+
         public MakeActionController(Game game, FightController fightController, PrizeStackController prizeStackController, Random random, DeckController deckController, ReadLineOverride readLineOverride, DrawCardService drawCardService)
         {
             this.game = game;
@@ -61,13 +71,17 @@ namespace Munchkin.BL.GameController
             _drawCardService = drawCardService;
         }
 
-        public MakeActionController(Game game, FightController fightController, PrizeStackController prizeStackController, DrawCardService drawCardService)
+        public MakeActionController(Game game, FightController fightController, PrizeStackController prizeStackController, Random random, DeckController deckController, ReadLineOverride readLineOverride, DrawCardService drawCardService, SellItemController sellItemController)
         {
             this.game = game;
             gameAction = new GameAction();
             this.fightController = fightController;
             this.prizeStackController = prizeStackController;
+            this.random = random;
+            this.deckController = deckController;
+            this.readLineOverride = readLineOverride;
             _drawCardService = drawCardService;
+            this.sellItemController = sellItemController;
         }
 
         public void FightWithYouMonster(UserClass user)
@@ -701,9 +715,12 @@ namespace Munchkin.BL.GameController
             return null;
         }
 
-        public void SellItem()
+        public void SellItem(UserClass user)
         {
-
+            if (sellItemController.SellItem(user))
+            {
+                sellItemController.CheckMoneyAndAddLevel(user);
+            }
         }
     }
 }

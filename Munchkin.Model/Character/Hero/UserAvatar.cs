@@ -22,6 +22,8 @@ namespace Munchkin.Model.Character
         public NerfType Nerfs { get; set; }
         public bool IsDied { get; set; }
         public Curses Curses;
+        public int Wallet { get; set; }
+        public bool DidItemSell { get; set; }
 
         public UserAvatar()
         {
@@ -37,6 +39,8 @@ namespace Munchkin.Model.Character
             Curses = new Curses();
             IsDied = false;
             CountPower();
+            Wallet = 0;
+            DidItemSell = false;
         }
 
         public void CountPower()
@@ -160,7 +164,7 @@ namespace Munchkin.Model.Character
                 FleeChances -= 1;
             }
         }
-        
+
         public void EndTurn()
         {
             CountPower();
@@ -170,6 +174,7 @@ namespace Munchkin.Model.Character
             WasRob = false;
             HowManyCardsThrowToUseSkill = 0;
             Proficiency.CleanAfterTurn();
+            DidItemSell = false;
         }
     }
 }
