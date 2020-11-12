@@ -2186,5 +2186,135 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             opponent.Deck.Items.Count.Should().Be(1);
             user.Deck.Items.Should().HaveCount(1);
         }
+
+        [Fact]
+        public void SellItemTestsSuccess()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, random, deckController, mock.Object, drawCardService, sellItemController);
+            var helmet = new ItemCard("Helmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null, 300);
+            user.Deck.Items.Add(helmet);
+            //Act
+            makeActionController.SellItem(user);
+            //Assert
+            user.Deck.Items.Should().HaveCount(0);
+            user.UserAvatar.Level.Should().Be(1);
+            user.UserAvatar.Wallet.Should().Be(300);
+        }
+
+        [Fact]
+        public void SellItemTestsSuccessAndNextLevel()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, random, deckController, mock.Object, drawCardService, sellItemController);
+            var helmet = new ItemCard("Helmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null, 1000);
+            user.Deck.Items.Add(helmet);
+            //Act
+            makeActionController.SellItem(user);
+            //Assert
+            user.Deck.Items.Should().HaveCount(0);
+            user.UserAvatar.Level.Should().Be(2);
+            user.UserAvatar.Wallet.Should().Be(0);
+        }
+
+        [Fact]
+        public void SellItemTestsFail()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("0");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, random, deckController, mock.Object, drawCardService, sellItemController);
+            var helmet = new ItemCard("Helmet", CardType.Prize, PrizeCardType.Item, 3, null, false, ItemType.Helmet, null, 300);
+            user.Deck.Items.Add(helmet);
+            //Act
+            makeActionController.SellItem(user);
+            //Assert
+            user.Deck.Items.Should().HaveCount(1);
+            user.UserAvatar.Level.Should().Be(1);
+            user.UserAvatar.Wallet.Should().Be(0);
+        }
+
+        [Fact]
+        public void SellItemTestsEmptyDeck()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game, fightController, prizeStackController, random, deckController, mock.Object, drawCardService, sellItemController);
+            //Act
+            makeActionController.SellItem(user);
+            //Assert
+            user.Deck.Items.Should().HaveCount(0);
+            user.UserAvatar.Level.Should().Be(1);
+            user.UserAvatar.Wallet.Should().Be(0);
+        }
     }
 }

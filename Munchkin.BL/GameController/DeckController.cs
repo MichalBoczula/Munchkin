@@ -89,9 +89,7 @@ namespace Munchkin.BL.GameController
             } 
             else
             {
-                strBuilder.Clear();
-                strBuilder.Append("You don't have situational items");
-                return strBuilder.ToString();
+                return string.Empty;
             }
         }
 

@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Text;
 using Munchkin.Model.Card.ActionCard.SpecialCardType;
 using Munchkin.BL.CharacterCreator;
+using System.Linq;
 
 namespace Munchkin.BL.GameController
 {
@@ -693,7 +694,6 @@ namespace Munchkin.BL.GameController
                 readLineOverride.GetNextString();
             }
         }
-#nullable disable
 
         public bool Flee(UserClass user)
         {
@@ -705,15 +705,66 @@ namespace Munchkin.BL.GameController
             return false;
         }
 
-        public void UseSituationalCard(UserClass user)
+        public void UseSituationalCard(UserClass user, Fight? fight)
         {
-            //Add Look on SituationalItems
+            if (fight == null)
+            {
+                System.Console.WriteLine("Use this items when you or someone fighting. Press enter to continue...");
+                readLineOverride.GetNextString();
+                return;
+            }
+            int i = 1;
+            var items = deckController.LookOnSituationalCard(user, ref i);
+            while (true)
+            {
+                if (string.IsNullOrEmpty(items))
+                {
+                    System.Console.WriteLine("You don't have situational items. Press enter to continue...");
+                    readLineOverride.GetNextString();
+                    return;
+                }
+                else
+                {
+                    System.Console.WriteLine(items);
+                }
+                System.Console.WriteLine("Choose option from list, or press 0 to abort");
+                if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
+                {
+                    if (result == 0)
+                    {
+                        System.Console.WriteLine("You decided to not use item. Press enter to continue...");
+                        readLineOverride.GetNextString();
+                        return;
+                    }
+                    else if (result <= i)
+                    {
+                        var sit = user.Deck.Items.Where(x => x.ItemType == ItemType.Sitiuational).ToList();
+                        var item = sit[result - 1];
+                        user.Deck.Items.Remove(item);
+                        game.DestroyedPrizeCards.Add(item);
+                        item.SpecialEffect(fight);
+                        return;
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("Broo choose option from list. Press enter to continue...");
+                        readLineOverride.GetNextString();
+                    }
+                }
+                else
+                {
+                    System.Console.WriteLine("Broo choose option from list. Press enter to continue...");
+                    readLineOverride.GetNextString();
+                }
+            }
+
         }
 
         public List<UserAvatar> AskForHelp()
         {
             return null;
         }
+#nullable disable
 
         public void SellItem(UserClass user)
         {
