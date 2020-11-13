@@ -760,11 +760,50 @@ namespace Munchkin.BL.GameController
 
         }
 
-        public List<UserAvatar> AskForHelp()
+        public void AskForHelp(Fight fight)
         {
-            return null;
+            foreach (var hero in game.Users)
+            {
+                while (true)
+                {
+                    System.Console.WriteLine($"Do you want join to fight?\n1.Yes\n2.No");
+                    if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
+                    {
+                        if (result == 1)
+                        {
+                            System.Console.WriteLine("You have choosen to join!!! Press enter to continue...");
+                            readLineOverride.GetNextString();
+                            break;
+                        }
+                        else if (result == 2)
+                        {
+                            System.Console.WriteLine("You have choosen to not join to fight. Press enter to continue...");
+                            JoinToFight(hero, fight);
+                            readLineOverride.GetNextString();
+                            break;
+                        }
+                        else
+                        {
+                            System.Console.WriteLine("Choose option from list. Press enter to continue...");
+                            readLineOverride.GetNextString();
+                        }
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("Choose option from list. Press enter to continue...");
+                        readLineOverride.GetNextString();
+                    }
+                }
+            }
         }
 #nullable disable
+
+        public void JoinToFight(UserClass user, Fight fight)
+        {
+            fight.Heros.Add(user);
+            System.Console.WriteLine($"Hero {user.Name} joined to fight. Press enter to continue...");
+            readLineOverride.GetNextString();
+        }
 
         public void SellItem(UserClass user)
         {

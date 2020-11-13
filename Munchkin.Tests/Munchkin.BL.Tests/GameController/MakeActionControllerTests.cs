@@ -2316,5 +2316,350 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             user.UserAvatar.Level.Should().Be(1);
             user.UserAvatar.Wallet.Should().Be(0);
         }
+
+        [Fact]
+        public void UseSituationalCardTestNoFight()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var card = new GoldenApple("GoldenApple",
+                                                        CardType.Special,
+                                                        PrizeCardType.Sitiuational,
+                                                        0,
+                                                        null,
+                                                        false,
+                                                        ItemType.Sitiuational,
+                                                        null,
+                                                        500);
+            user.Deck.Items.Add(card);
+            //Act
+            makeActionController.UseSituationalCard(user, null);
+            //Assert
+            user.Deck.Items.Should().HaveCount(1);
+        }
+
+        [Fact]
+        public void UseSituationalCardTestUsedCard()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var card = new GoldenApple("GoldenApple",
+                                                       CardType.Special,
+                                                       PrizeCardType.Sitiuational,
+                                                       0,
+                                                       null,
+                                                       false,
+                                                       ItemType.Sitiuational,
+                                                       null,
+                                                       500);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2
+            };
+            var fight = new Fight();
+            fight.Heros.Add(user);
+            fight.Monsters.Add(antArmy);
+            user.Deck.Items.Add(card);
+            user.UserAvatar.CountPower();
+            //Act
+            makeActionController.UseSituationalCard(user, fight);
+            //Assert
+            user.UserAvatar.Power.Should().Be(6);
+            user.UserAvatar.Nerfs.Poisoned.Should().HaveCount(1);
+            user.Deck.Items.Should().HaveCount(0);
+        }
+
+        [Fact]
+        public void UseSituationalCardTestNoCards()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2
+            };
+            var fight = new Fight();
+            fight.Heros.Add(user);
+            fight.Monsters.Add(antArmy);
+            user.UserAvatar.CountPower();
+            //Act
+            makeActionController.UseSituationalCard(user, fight);
+            //Assert
+            user.UserAvatar.Power.Should().Be(1);
+            user.UserAvatar.Nerfs.Poisoned.Should().HaveCount(0);
+            user.Deck.Items.Should().HaveCount(0);
+        }
+
+        [Fact]
+        public void UseSituationalCardTestTwoCardsUseFirstOne()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2
+            };
+            var card = new GoldenApple("GoldenApple",
+                                                      CardType.Special,
+                                                      PrizeCardType.Sitiuational,
+                                                      0,
+                                                      null,
+                                                      false,
+                                                      ItemType.Sitiuational,
+                                                      null,
+                                                      500);
+            var secondCard = new FireBall("FireBall",
+                                          CardType.Special,
+                                          PrizeCardType.Sitiuational,
+                                          0,
+                                          null,
+                                          false,
+                                          ItemType.Sitiuational,
+                                          null,
+                                          400);
+            var fight = new Fight();
+            fight.Heros.Add(user);
+            fight.Monsters.Add(antArmy);
+            user.UserAvatar.CountPower();
+            user.Deck.Items.Add(card);
+            user.Deck.Items.Add(secondCard);
+            //Act
+            makeActionController.UseSituationalCard(user, fight);
+            //Assert
+            user.UserAvatar.Power.Should().Be(6);
+            user.UserAvatar.Nerfs.Poisoned.Should().HaveCount(1);
+            user.Deck.Items.Should().HaveCount(1);
+        }
+
+        [Fact]
+        public void UseSituationalCardTestTwoCardsUseSecondOne()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "2", "2", "1", "1", "1", "1" }).Dequeue);
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2
+            };
+            var card = new GoldenApple("GoldenApple",
+                                                      CardType.Special,
+                                                      PrizeCardType.Sitiuational,
+                                                      0,
+                                                      null,
+                                                      false,
+                                                      ItemType.Sitiuational,
+                                                      null,
+                                                      500);
+            var secondCard = new FireBall("FireBall",
+                                          CardType.Special,
+                                          PrizeCardType.Sitiuational,
+                                          0,
+                                          null,
+                                          false,
+                                          ItemType.Sitiuational,
+                                          null,
+                                          400);
+            var fight = new Fight();
+            fight.Heros.Add(user);
+            fight.Monsters.Add(antArmy);
+            user.UserAvatar.CountPower();
+            user.Deck.Items.Add(card);
+            user.Deck.Items.Add(secondCard);
+            //Act
+            makeActionController.UseSituationalCard(user, fight);
+            //Assert
+            user.UserAvatar.Power.Should().Be(4);
+            user.UserAvatar.Nerfs.Poisoned.Should().HaveCount(0);
+            user.Deck.Items.Should().HaveCount(1);
+        }
+
+        [Fact]
+        public void UseSituationalCardTestAbort()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("0");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2
+            };
+            var card = new GoldenApple("GoldenApple",
+                                                      CardType.Special,
+                                                      PrizeCardType.Sitiuational,
+                                                      0,
+                                                      null,
+                                                      false,
+                                                      ItemType.Sitiuational,
+                                                      null,
+                                                      500);
+            var fight = new Fight();
+            fight.Heros.Add(user);
+            fight.Monsters.Add(antArmy);
+            user.UserAvatar.CountPower();
+            user.Deck.Items.Add(card);
+            //Act
+            makeActionController.UseSituationalCard(user, fight);
+            //Assert
+            user.UserAvatar.Power.Should().Be(1);
+            user.Deck.Items.Should().HaveCount(1);
+        }
     }
 }
