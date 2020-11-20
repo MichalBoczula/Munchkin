@@ -760,27 +760,147 @@ namespace Munchkin.BL.GameController
 
         }
 
-        public void AskForHelp(Fight fight)
+        public void UseMonsterCard(UserClass user, Fight? fight)
         {
-            foreach (var hero in game.Users)
+            if (fight == null)
+            {
+                System.Console.WriteLine("Bro add monster to fight, Currently noone is fighting. Press enter to continue...");
+                readLineOverride.GetNextString();
+            }
+            var card = user.Deck.MagicCards.FirstOrDefault(x => x.Name.Equals("AdditionalMonster"));
+            if (card == null)
+            {
+                var monsters = user.Deck.Monsters.Where(x => x.Undead.Equals(true)).ToList();
+                if (card == null)
+                {
+                    System.Console.WriteLine("You don't have undead monster in deck and AdditionalMonster magic card. " +
+                        "You can't add monster to fight. Press enter to continue...");
+                    readLineOverride.GetNextString();
+                }
+                else
+                {
+                    while (true)
+                    {
+                        System.Console.WriteLine("You can add undead monsters to fight:");
+                        int i = 1;
+                        foreach (var mon in monsters)
+                        {
+                            System.Console.WriteLine($"{i}. {mon.Name}, {mon.Power}");
+                            i++;
+                        }
+                        System.Console.WriteLine("Choose option from above list or press 0 to don't do anything");
+                        if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
+                        {
+                            if (i <= result)
+                            {
+                                var monster = monsters[result - 1];
+                                fight.Monsters.Add(monster);
+                                user.Deck.Monsters.Remove(monster);
+                                return;
+                            }
+                            else if (result == 0)
+                            {
+                                System.Console.WriteLine("You decide to not add monster to fight. Press enter to continue...");
+                                readLineOverride.GetNextString();
+                            }
+                            else
+                            {
+                                System.Console.WriteLine("Choose option from above list or press 0 to don't do anything");
+                                readLineOverride.GetNextString();
+                            }
+                        }
+                        else
+                        {
+                            System.Console.WriteLine("Choose option from above list or press 0 to don't do anything");
+                            readLineOverride.GetNextString();
+                        }
+                    }
+                }
+            } 
+            else
             {
                 while (true)
                 {
-                    System.Console.WriteLine($"Do you want join to fight?\n1.Yes\n2.No");
+                    System.Console.WriteLine("You can add monsters to fight:");
+                    int i = 1;
+                    foreach (var mon in user.Deck.Monsters)
+                    {
+                        System.Console.WriteLine($"{i}. {mon.Name}, {mon.Power}");
+                        i++;
+                    }
+                    System.Console.WriteLine("Choose option from above list or press 0 to don't do anything");
                     if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
                     {
-                        if (result == 1)
+                        if (i <= result)
                         {
-                            System.Console.WriteLine("You have choosen to join!!! Press enter to continue...");
-                            readLineOverride.GetNextString();
-                            break;
+                            var monster = user.Deck.Monsters[result - 1];
+                            fight.Monsters.Add(monster);
+                            user.Deck.Monsters.Remove(monster);
+                            foreach(var addMon in user.Deck.MagicCards)
+                            {
+                                if(addMon.Name.Equals("AdditionalMonster"))
+                                {
+                                    user.Deck.MagicCards.Remove(addMon);
+                                    game.DestroyedActionCards.Add(addMon);
+                                    break;
+                                }
+                            }
+                            return;
                         }
-                        else if (result == 2)
+                        else if (result == 0)
                         {
-                            System.Console.WriteLine("You have choosen to not join to fight. Press enter to continue...");
-                            JoinToFight(hero, fight);
+                            System.Console.WriteLine("You decide to not add monster to fight. Press enter to continue...");
                             readLineOverride.GetNextString();
-                            break;
+                        }
+                        else
+                        {
+                            System.Console.WriteLine("Choose option from above list or press 0 to don't do anything");
+                            readLineOverride.GetNextString();
+                        }
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("Choose option from above list or press 0 to don't do anything");
+                        readLineOverride.GetNextString();
+                    }
+                }
+            }
+        }
+
+        public void UseMagicCard(UserClass user, Fight? fight)
+        {
+
+        }
+
+        public void AskForHelp(UserClass user, Fight fight)
+        {
+            foreach (var hero in game.Users)
+            {
+                if (!(hero.Equals(user)))
+                {
+                    while (true)
+                    {
+                        System.Console.WriteLine($"Do you want join to fight?\n1.Yes\n2.No");
+                        if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
+                        {
+                            if (result == 1)
+                            {
+                                System.Console.WriteLine("You have choosen to join!!! Press enter to continue...");
+                                JoinToFight(hero, fight);
+                                readLineOverride.GetNextString();
+                                break;
+                            }
+                            else if (result == 2)
+                            {
+                                System.Console.WriteLine("You have choosen to not join to fight. Press enter to continue...");
+                                readLineOverride.GetNextString();
+                                break;
+                            }
+                            else
+                            {
+                                System.Console.WriteLine("Choose option from list. Press enter to continue...");
+                                readLineOverride.GetNextString();
+                            }
                         }
                         else
                         {
@@ -788,18 +908,19 @@ namespace Munchkin.BL.GameController
                             readLineOverride.GetNextString();
                         }
                     }
-                    else
-                    {
-                        System.Console.WriteLine("Choose option from list. Press enter to continue...");
-                        readLineOverride.GetNextString();
-                    }
                 }
             }
         }
+
 #nullable disable
 
         public void JoinToFight(UserClass user, Fight fight)
         {
+            if (fight == null)
+            {
+                System.Console.WriteLine($"There is no fight brooo. Press enter to continue...");
+                readLineOverride.GetNextString();
+            }
             fight.Heros.Add(user);
             System.Console.WriteLine($"Hero {user.Name} joined to fight. Press enter to continue...");
             readLineOverride.GetNextString();
@@ -811,6 +932,11 @@ namespace Munchkin.BL.GameController
             {
                 sellItemController.CheckMoneyAndAddLevel(user);
             }
+        }
+
+        public void ChooseAction(UserClass user)
+        {
+
         }
     }
 }

@@ -125,6 +125,7 @@ namespace Munchkin.BL.GameController
             }
             return strBuilder.ToString();
         }
+
 #nullable enable
         public void UseItemCard(UserClass user, ItemCard card, Fight? fight)
         {
@@ -300,22 +301,11 @@ namespace Munchkin.BL.GameController
             }
             else if (card.ItemType == ItemType.Sitiuational)
             {
-                UseSituationalItems(card, fight);
+                System.Console.WriteLine("Broo situational item can be used during you or someone fight. Press enter to continue...");
+                _readLineOverride.GetNextString();
             }
         }
 
-        public void UseSituationalItems(ItemCard card, Fight? fight)
-        {
-            if (fight == null)
-            {
-                System.Console.WriteLine("Man no one is fighting, use this card during a fight. Press enter to continue");
-                _readLineOverride.GetNextString();
-            }
-            else
-            {
-                card.SpecialEffect(fight);
-            }
-        }
 #nullable disable
         public void SetWeapon(UserClass user, ItemCard card)
         {

@@ -2661,5 +2661,314 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             user.UserAvatar.Power.Should().Be(1);
             user.Deck.Items.Should().HaveCount(1);
         }
+
+        [Fact]
+        public void JoinFightTestSuccess()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("0");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2
+            };
+            var userAvatar2 = new UserAvatar
+            {
+                Level = 1
+            };
+            var userToJoin = new UserClass()
+            {
+                UserAvatar = userAvatar2
+            };
+            var fight = new Fight();
+            fight.Heros.Add(user);
+            fight.Monsters.Add(antArmy);
+            //Act
+            makeActionController.JoinToFight(userToJoin, fight);
+            //Assert
+            fight.Heros.Should().HaveCount(2);
+            fight.Monsters.Should().HaveCount(1);
+        }
+
+        [Fact]
+        public void AskForHelpOnePlayerJoin()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2
+            };
+            var userAvatar2 = new UserAvatar
+            {
+                Level = 1
+            };
+            var userToJoin = new UserClass()
+            {
+                UserAvatar = userAvatar2
+            };
+            var fight = new Fight();
+            game.Users.Add(user);
+            game.Users.Add(userToJoin);
+            fight.Heros.Add(user);
+            fight.Monsters.Add(antArmy);
+            //Act
+            makeActionController.AskForHelp(user, fight);
+            //Assert
+            fight.Heros.Should().HaveCount(2);
+            fight.Monsters.Should().HaveCount(1);
+            game.Users.Count.Should().Be(2);
+        }
+
+        [Fact]
+        public void AskForHelpAllPlayersJoin()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2
+            };
+            var userAvatar2 = new UserAvatar
+            {
+                Level = 1
+            };
+            var userToJoin = new UserClass()
+            {
+                UserAvatar = userAvatar2
+            };
+            var userAvatar3 = new UserAvatar
+            {
+                Level = 1
+            };
+            var userToJoin2 = new UserClass()
+            {
+                UserAvatar = userAvatar2
+            };
+            var fight = new Fight();
+            game.Users.Add(user);
+            game.Users.Add(userToJoin);
+            game.Users.Add(userToJoin2);
+            fight.Heros.Add(user);
+            fight.Monsters.Add(antArmy);
+            //Act
+            makeActionController.AskForHelp(user, fight);
+            //Assert
+            fight.Heros.Should().HaveCount(3);
+            fight.Monsters.Should().HaveCount(1);
+            game.Users.Count.Should().Be(3);
+        }
+
+        [Fact]
+        public void AskForHelpFirstPlayerJoin()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "1", "2", "2", "2", "2" }).Dequeue);
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2
+            };
+            var userAvatar2 = new UserAvatar
+            {
+                Level = 1
+            };
+            var userToJoin = new UserClass()
+            {
+                UserAvatar = userAvatar2
+            };
+            var userAvatar3 = new UserAvatar
+            {
+                Level = 1
+            };
+            var userToJoin2 = new UserClass()
+            {
+                UserAvatar = userAvatar2
+            };
+            var fight = new Fight();
+            game.Users.Add(user);
+            game.Users.Add(userToJoin);
+            game.Users.Add(userToJoin2);
+            fight.Heros.Add(user);
+            fight.Monsters.Add(antArmy);
+            //Act
+            makeActionController.AskForHelp(user, fight);
+            //Assert
+            fight.Heros.Should().HaveCount(2);
+            fight.Monsters.Should().HaveCount(1);
+            game.Users.Count.Should().Be(3);
+        }
+
+        [Fact]
+        public void AskForHelpSecondPlayerJoin()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "2", "2", "1", "2", "2" }).Dequeue);
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2
+            };
+            var userAvatar2 = new UserAvatar
+            {
+                Level = 1
+            };
+            var userToJoin = new UserClass()
+            {
+                UserAvatar = userAvatar2
+            };
+            var userAvatar3 = new UserAvatar
+            {
+                Level = 1
+            };
+            var userToJoin2 = new UserClass()
+            {
+                UserAvatar = userAvatar2
+            };
+            var fight = new Fight();
+            game.Users.Add(user);
+            game.Users.Add(userToJoin);
+            game.Users.Add(userToJoin2);
+            fight.Heros.Add(user);
+            fight.Monsters.Add(antArmy);
+            //Act
+            makeActionController.AskForHelp(user, fight);
+            //Assert
+            fight.Heros.Should().HaveCount(2);
+            fight.Monsters.Should().HaveCount(1);
+            game.Users.Count.Should().Be(3);
+        }
     }
 }

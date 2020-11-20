@@ -779,56 +779,6 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         }
         #endregion
 
-        #region UseSituationalItems
-        [Fact]
-        public void UseSituationalItemsThereIsNoFight()
-        {
-            //Arrange
-            var mock = new Mock<ReadLineOverride>();
-            mock.Setup(x => x.GetNextString()).Returns("1");
-            var userAvatar = new UserAvatar()
-            {
-                Power = 5
-            };
-            var user = new UserClass()
-            {
-                UserAvatar = userAvatar
-            };
-            var deckController = new DeckController(mock.Object);
-            var dionisiosWine = new DionisiosWine("DionisiosWine", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 400, mock.Object);
-            //Act
-            deckController.UseSituationalItems(dionisiosWine, null);
-            //Assert
-            user.UserAvatar.Power.Should().Be(5);
-            user.UserAvatar.FleeChances.Should().Be(3);
-        }
-
-        [Fact]
-        public void UseSituationalItemsWithFight()
-        {
-            ///Arrange
-            var mock = new Mock<ReadLineOverride>();
-            mock.Setup(x => x.GetNextString()).Returns("1");
-            var userAvatar = new UserAvatar()
-            {
-                Power = 5
-            };
-            var user = new UserClass()
-            {
-                UserAvatar = userAvatar
-            };
-            var deckController = new DeckController(mock.Object);
-            var fight = new Fight();
-            fight.Heros.Add(user);
-            var dionisiosWine = new DionisiosWine("DionisiosWine", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 400, mock.Object);
-            //Act
-            deckController.UseSituationalItems(dionisiosWine, fight);
-            //Assert
-            user.UserAvatar.Power.Should().Be(8);
-            user.UserAvatar.FleeChances.Should().Be(1);
-        }
-        #endregion
-
         #region SetWeapon
         [Fact]
         public void SetWeaponBothHandsNullWithoutRestrictionOneHanded()
