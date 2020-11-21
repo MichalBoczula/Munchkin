@@ -766,12 +766,19 @@ namespace Munchkin.BL.GameController
             {
                 System.Console.WriteLine("Bro add monster to fight, Currently noone is fighting. Press enter to continue...");
                 readLineOverride.GetNextString();
+                return;
+            }
+            if (user.Deck.Monsters.Count == 0)
+            {
+                System.Console.WriteLine("Bro you don't have monsters. Press enter to continue...");
+                readLineOverride.GetNextString();
+                return;
             }
             var card = user.Deck.MagicCards.FirstOrDefault(x => x.Name.Equals("AdditionalMonster"));
             if (card == null)
             {
                 var monsters = user.Deck.Monsters.Where(x => x.Undead.Equals(true)).ToList();
-                if (card == null)
+                if (monsters.Count == 0)
                 {
                     System.Console.WriteLine("You don't have undead monster in deck and AdditionalMonster magic card. " +
                         "You can't add monster to fight. Press enter to continue...");
@@ -782,16 +789,16 @@ namespace Munchkin.BL.GameController
                     while (true)
                     {
                         System.Console.WriteLine("You can add undead monsters to fight:");
-                        int i = 1;
+                        int i = 0;
                         foreach (var mon in monsters)
                         {
-                            System.Console.WriteLine($"{i}. {mon.Name}, {mon.Power}");
                             i++;
+                            System.Console.WriteLine($"{i}. {mon.Name}, {mon.Power}");
                         }
                         System.Console.WriteLine("Choose option from above list or press 0 to don't do anything");
                         if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
                         {
-                            if (i <= result)
+                            if (result <= i)
                             {
                                 var monster = monsters[result - 1];
                                 fight.Monsters.Add(monster);
@@ -822,16 +829,16 @@ namespace Munchkin.BL.GameController
                 while (true)
                 {
                     System.Console.WriteLine("You can add monsters to fight:");
-                    int i = 1;
+                    int i = 0;
                     foreach (var mon in user.Deck.Monsters)
                     {
-                        System.Console.WriteLine($"{i}. {mon.Name}, {mon.Power}");
                         i++;
+                        System.Console.WriteLine($"{i}. {mon.Name}, {mon.Power}");
                     }
                     System.Console.WriteLine("Choose option from above list or press 0 to don't do anything");
                     if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
                     {
-                        if (i <= result)
+                        if (result <= i)
                         {
                             var monster = user.Deck.Monsters[result - 1];
                             fight.Monsters.Add(monster);

@@ -2970,5 +2970,587 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             fight.Monsters.Should().HaveCount(1);
             game.Users.Count.Should().Be(3);
         }
+
+        [Fact]
+        public void UseMonsterCardThereIsNoFight()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2,
+                Undead = true
+            };
+            user.Deck.Monsters.Add(antArmy);
+            //Act
+            makeActionController.UseMonsterCard(user, null);
+            //Assert
+            user.Deck.Monsters.Count.Should().Be(1);
+            user.Deck.Monsters[0].Should().BeSameAs(antArmy);
+        }
+
+        [Fact]
+        public void UseMonsterCardAddUndeadMonster()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2,
+                Undead = true
+            };
+            user.Deck.Monsters.Add(antArmy);
+            var fight = new Fight();
+            //Act
+            makeActionController.UseMonsterCard(user, fight);
+            //Assert
+            user.Deck.Monsters.Count.Should().Be(0);
+            fight.Monsters.Should().HaveCount(1);
+            fight.Monsters[0].Should().BeSameAs(antArmy);
+        }
+
+        [Fact]
+        public void UseMonsterCardTwoUndeadMonsterInDeckAddFirstOne()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2,
+                Undead = true
+            };
+            var cerber = new Cerber("Cerber", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2,
+                Undead = true
+            };
+            user.Deck.Monsters.Add(antArmy);
+            user.Deck.Monsters.Add(cerber);
+            var fight = new Fight();
+            //Act
+            makeActionController.UseMonsterCard(user, fight);
+            //Assert
+            user.Deck.Monsters.Count.Should().Be(1);
+            fight.Monsters.Should().HaveCount(1);
+            fight.Monsters[0].Should().BeSameAs(antArmy);
+        }
+
+        [Fact]
+        public void UseMonsterCardTwoUndeadMonsterInDeckAddSecond()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("2");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2,
+                Undead = true
+            };
+            var cerber = new Cerber("Cerber", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2,
+                Undead = true
+            };
+            user.Deck.Monsters.Add(antArmy);
+            user.Deck.Monsters.Add(cerber);
+            var fight = new Fight();
+            //Act
+            makeActionController.UseMonsterCard(user, fight);
+            //Assert
+            user.Deck.Monsters.Count.Should().Be(1);
+            fight.Monsters.Should().HaveCount(1);
+            fight.Monsters[0].Should().BeSameAs(cerber);
+        }
+
+        [Fact]
+        public void UseMonsterCardNormalMonsterNoAdditionalMonsterMagicCard()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2,
+            };
+            user.Deck.Monsters.Add(antArmy);
+            var fight = new Fight();
+            //Act
+            makeActionController.UseMonsterCard(user, fight);
+            //Assert
+            user.Deck.Monsters.Count.Should().Be(1);
+            user.Deck.Monsters[0].Should().BeSameAs(antArmy);
+            fight.Monsters.Should().HaveCount(0);
+        }
+
+        [Fact]
+        public void UseMonsterCardNormalMonsterAndMagicCard()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2,
+            };
+            var addMonster = new AdditionalMonster("AdditionalMonster", CardType.Special, mock.Object);
+            user.Deck.Monsters.Add(antArmy);
+            user.Deck.MagicCards.Add(addMonster);
+            var fight = new Fight();
+            //Act
+            makeActionController.UseMonsterCard(user, fight);
+            //Assert
+            user.Deck.Monsters.Count.Should().Be(0);
+            user.Deck.MagicCards.Count.Should().Be(0);
+            fight.Monsters.Should().HaveCount(1);
+            fight.Monsters[0].Should().BeSameAs(antArmy);
+            game.DestroyedActionCards.Should().HaveCount(1);
+            game.DestroyedActionCards[0].Should().Be(addMonster);
+        }
+
+        [Fact]
+        public void UseMonsterCardTwoNormalMonsterAndMagicCardAddedFirst()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2,
+            };
+            var cerber = new Cerber("Cerber", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2,
+                Undead = true
+            };
+            var addMonster = new AdditionalMonster("AdditionalMonster", CardType.Special, mock.Object);
+            user.Deck.Monsters.Add(antArmy);
+            user.Deck.Monsters.Add(cerber);
+            user.Deck.MagicCards.Add(addMonster);
+            var fight = new Fight();
+            //Act
+            makeActionController.UseMonsterCard(user, fight);
+            //Assert
+            user.Deck.Monsters.Count.Should().Be(1);
+            user.Deck.Monsters[0].Should().BeSameAs(cerber);
+            user.Deck.MagicCards.Count.Should().Be(0);
+            fight.Monsters.Should().HaveCount(1);
+            fight.Monsters[0].Should().BeSameAs(antArmy);
+            game.DestroyedActionCards.Should().HaveCount(1);
+            game.DestroyedActionCards[0].Should().Be(addMonster);
+        }
+
+        [Fact]
+        public void UseMonsterCardNormalMonsterAndMagicCardAddedSecond()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("2");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2,
+            };
+            var cerber = new Cerber("Cerber", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2
+            };
+            var addMonster = new AdditionalMonster("AdditionalMonster", CardType.Special, mock.Object);
+            user.Deck.Monsters.Add(antArmy);
+            user.Deck.Monsters.Add(cerber);
+            user.Deck.MagicCards.Add(addMonster);
+            var fight = new Fight();
+            //Act
+            makeActionController.UseMonsterCard(user, fight);
+            //Assert
+            user.Deck.Monsters.Count.Should().Be(1);
+            user.Deck.Monsters[0].Should().BeSameAs(antArmy);
+            user.Deck.MagicCards.Count.Should().Be(0);
+            fight.Monsters.Should().HaveCount(1);
+            fight.Monsters[0].Should().BeSameAs(cerber);
+            game.DestroyedActionCards.Should().HaveCount(1);
+            game.DestroyedActionCards[0].Should().Be(addMonster);
+        }
+
+        [Fact]
+        public void UseMonsterCardTryToAddTwoMonsterOnlyOneMagicCard()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2,
+                Undead = false
+            };
+            var cerber = new Cerber("Cerber", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2,
+                Undead = false
+            };
+            var addMonster = new AdditionalMonster("AdditionalMonster", CardType.Special, mock.Object);
+            user.Deck.Monsters.Add(antArmy);
+            user.Deck.Monsters.Add(cerber);
+            user.Deck.MagicCards.Add(addMonster);
+            var fight = new Fight();
+            //Act
+            makeActionController.UseMonsterCard(user, fight);
+            makeActionController.UseMonsterCard(user, fight);
+            //Assert
+            user.Deck.Monsters.Count.Should().Be(1);
+            user.Deck.Monsters[0].Should().BeSameAs(cerber);
+            user.Deck.MagicCards.Count.Should().Be(0);
+            fight.Monsters.Should().HaveCount(1);
+            fight.Monsters[0].Should().BeSameAs(antArmy);
+            game.DestroyedActionCards.Should().HaveCount(1);
+            game.DestroyedActionCards[0].Should().Be(addMonster);
+        }
+
+        [Fact]
+        public void UseMonsterCardTryToAddTwoMonsterTwoMagicCard()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2,
+                Undead = false
+            };
+            var cerber = new Cerber("Cerber", CardType.Monster)
+            {
+                Power = 5,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2,
+                Undead = false
+            };
+            var addMonster = new AdditionalMonster("AdditionalMonster", CardType.Special, mock.Object);
+            user.Deck.Monsters.Add(antArmy);
+            user.Deck.Monsters.Add(cerber);
+            user.Deck.MagicCards.Add(addMonster);
+            user.Deck.MagicCards.Add(addMonster);
+            var fight = new Fight();
+            //Act
+            makeActionController.UseMonsterCard(user, fight);
+            makeActionController.UseMonsterCard(user, fight);
+            //Assert
+            user.Deck.Monsters.Count.Should().Be(0);
+            user.Deck.MagicCards.Count.Should().Be(0);
+            fight.Monsters.Should().HaveCount(2);
+            game.DestroyedActionCards.Should().HaveCount(2);
+        }
+
+        [Fact]
+        public void UseMonsterCardThereAreNoMonsters()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var addMonster = new AdditionalMonster("AdditionalMonster", CardType.Special, mock.Object);
+            user.Deck.MagicCards.Add(addMonster);
+            var fight = new Fight();
+            //Act
+            makeActionController.UseMonsterCard(user, fight);
+            //Assert
+            user.Deck.Monsters.Count.Should().Be(0);
+            user.Deck.MagicCards.Count.Should().Be(1);
+            fight.Monsters.Should().HaveCount(0);
+            game.DestroyedActionCards.Should().HaveCount(0);
+        }
     }
 }
