@@ -19,6 +19,13 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                 hero.UserAvatar.Power += 5;
                 hero.UserAvatar.Nerfs.Poisoned.Add(true);
             }
+            System.Console.WriteLine("Heroes gain 5 power points and 1 poison nerf");
+        }
+
+        public override void Description()
+        {
+            System.Console.WriteLine("GoldenApple give user 5 points of power, but get 1 poison nerf too:" +
+                "\nPlayer Power += 5 && Player Poisonde += 1");
         }
     }
 }

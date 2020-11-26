@@ -40,6 +40,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                                     {
                                         fight.Heros[choice - 1].UserAvatar.Power += 2;
                                         fight.Heros[choice - 1].UserAvatar.FleeChances += 1;
+                                        Console.WriteLine($"{fight.Heros[choice - 1].Name} Hero get 2 point of power and 1 point of flee chances.");
                                         return;
                                     }
                                     else
@@ -54,6 +55,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                         {
                             fight.Heros[0].UserAvatar.Power += 2;
                             fight.Heros[0].UserAvatar.FleeChances += 1;
+                            Console.WriteLine($"{fight.Heros[0].Name} Hero get 2 point of power and 1 point of flee chances.");
                             return;
                         }
                     }
@@ -77,6 +79,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                                         {
                                             hero.UserAvatar.FleeChances -= 1;
                                         }
+                                        Console.WriteLine($"All heroes lose 1 point of flee chances and Monster {fight.Monsters[choice - 1].Name} get 2 point of power.");
                                         return;
                                     }
                                     else
@@ -94,6 +97,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                             {
                                 hero.UserAvatar.FleeChances -= 1;
                             }
+                            Console.WriteLine($"All heroes lose 1 point of flee chances and Monster {fight.Monsters[0].Name} get 2 point of power.");
                             return;
                         }
                     }
@@ -104,6 +108,13 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                     readLineOverride.GetNextString();
                 }
             }
+        }
+
+        public override void Description()
+        {
+            System.Console.WriteLine("RedBullDrink get monster or user 2 points of power and 1 point of flee chances:" +
+                "\nUser get 2 points of power and 1 point of flee chances. Player Power += 2 && Player Flee Chances += 1" +
+                "\nMonster get 3 points of power, users lose 1 point of flee chances. Monster Power += 2, Player Flee Chances -= 1");
         }
     }
 }

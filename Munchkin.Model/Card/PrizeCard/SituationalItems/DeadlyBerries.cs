@@ -40,6 +40,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                                     {
                                         fight.Heros[choice - 1].UserAvatar.Power -= 2;
                                         fight.Heros[choice - 1].UserAvatar.Nerfs.Poisoned.Add(true);
+                                        Console.WriteLine($"{fight.Heros[choice - 1].Name} Hero lose 2 point of power and get 1 poison point");
                                         return;
                                     }
                                     else
@@ -54,6 +55,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                         {
                             fight.Heros[0].UserAvatar.Power -= 2;
                             fight.Heros[0].UserAvatar.Nerfs.Poisoned.Add(true);
+                            Console.WriteLine($"{fight.Heros[0].Name} Hero lose 2 point of power and get 1 poison point");
                             return;
                         }
                     }
@@ -73,6 +75,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                                     if (choice - 1 <= fight.Monsters.Count - 1)
                                     {
                                         fight.Monsters[choice - 1].Power -= 3;
+                                        Console.WriteLine($"{fight.Monsters[choice - 1].Name} Monster lose 3 point of powe.");
                                         return;
                                     }
                                     else
@@ -86,6 +89,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                         else
                         {
                             fight.Monsters[0].Power -= 3;
+                            Console.WriteLine($"{fight.Monsters[0].Name} Monster lose 3 point of powe.");
                             return;
                         }
                     }
@@ -96,6 +100,13 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                     readLineOverride.GetNextString();
                 }
             }
+        }
+
+        public override void Description()
+        {
+            System.Console.WriteLine("Deadly berries poisoned you or monster:" +
+                "\nUser lose 2 points of power and gain 1 poison nerf. Player Power -= 2 && Player Poison += 1" +
+                "\nMonster lose 3 points of power. Monster Power -= 3");
         }
     }
 }

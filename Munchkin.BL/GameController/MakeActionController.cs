@@ -794,6 +794,7 @@ namespace Munchkin.BL.GameController
                         {
                             i++;
                             System.Console.WriteLine($"{i}. {mon.Name}, {mon.Power}");
+                            System.Console.WriteLine("______________________________________________________________________________");
                         }
                         System.Console.WriteLine("Choose option from above list or press 0 to don't do anything");
                         if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
@@ -834,6 +835,7 @@ namespace Munchkin.BL.GameController
                     {
                         i++;
                         System.Console.WriteLine($"{i}. {mon.Name}, {mon.Power}");
+                        System.Console.WriteLine("______________________________________________________________________________");
                     }
                     System.Console.WriteLine("Choose option from above list or press 0 to don't do anything");
                     if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
@@ -891,6 +893,8 @@ namespace Munchkin.BL.GameController
                     {
                         i++;
                         System.Console.WriteLine($"{i}. {magic.Name}");
+                        magic.Description();
+                        System.Console.WriteLine("______________________________________________________________________________");
                     }
                     return;
                 }

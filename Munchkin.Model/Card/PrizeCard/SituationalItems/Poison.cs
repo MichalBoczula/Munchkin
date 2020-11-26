@@ -39,6 +39,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                                     if (choice - 1 <= fight.Heros.Count - 1)
                                     {
                                         fight.Heros[choice - 1].UserAvatar.Power -= 3;
+                                        Console.WriteLine($"{fight.Heros[choice - 1].Name} Hero lose 3 point.");
                                         return;
                                     }
                                     else
@@ -52,6 +53,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                         else
                         {
                             fight.Heros[0].UserAvatar.Power -= 3;
+                            Console.WriteLine($"{fight.Heros[0].Name} Hero lose 3 point.");
                             return;
                         }
                     }
@@ -71,6 +73,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                                     if (choice - 1 <= fight.Monsters.Count - 1)
                                     {
                                         fight.Monsters[choice - 1].Power -= 3;
+                                        Console.WriteLine($"{fight.Monsters[choice - 1].Name} Monster lose 3 point of power.");
                                         return;
                                     }
                                     else
@@ -84,6 +87,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                         else
                         {
                             fight.Monsters[0].Power -= 3;
+                            Console.WriteLine($"{fight.Monsters[0].Name} Monster lose 3 point.");
                             return;
                         }
                     }
@@ -94,6 +98,13 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                     readLineOverride.GetNextString();
                 }
             }
+        }
+
+        public override void Description()
+        {
+            System.Console.WriteLine("Poison make user or monster weaker:" +
+                "\nUser lose 3 points of power. Player Power -= 3" +
+                "\nMonster lose 3 points of power. Monster Power -= 3");
         }
     }
 }

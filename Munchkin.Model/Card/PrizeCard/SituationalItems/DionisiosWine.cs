@@ -30,6 +30,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                             hero.UserAvatar.Power += 3;
                             hero.UserAvatar.FleeChances -= 2;
                         }
+                        System.Console.WriteLine("Heroes get 3 power boots and lose 2 point of flee chances");
                         return;
                     }
                     else if (choice == 2)
@@ -42,6 +43,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                         {
                             hero.UserAvatar.FleeChances += 2;
                         }
+                        System.Console.WriteLine("Monsters get 3 power boots and Users gain 2 point of flee chances");
                         return;
                     }
                 }
@@ -51,6 +53,13 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                     readLineOverride.GetNextString();
                 }
             }
+        }
+
+        public override void Description()
+        {
+            System.Console.WriteLine("DionisiosWine used make drunk you or monster can be use on user or monster:" +
+                "\nUser get 3 points of power and lose 2 poison flee chances. Player Power += 3 && Player FleeChances -= 2" +
+                "\nMonster get 3 points of power but Player chances to flee increased by 2 points. Monster Power += 3 && Player FleeChances += 2");
         }
     }
 }

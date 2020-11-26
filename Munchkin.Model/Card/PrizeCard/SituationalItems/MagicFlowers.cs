@@ -40,6 +40,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                                     if (choice - 1 <= fight.Heros.Count - 1)
                                     {
                                         fight.Heros[choice - 1].UserAvatar.Power += 2;
+                                        Console.WriteLine($"{fight.Heros[choice - 1].Name} Hero gain 2 point of power");
                                         return;
                                     }
                                     else
@@ -53,6 +54,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                         else
                         {
                             fight.Heros[0].UserAvatar.Power += 2;
+                            Console.WriteLine($"{fight.Heros[0].Name} Hero gain 2 point of power");
                             return;
                         }
                     }
@@ -72,6 +74,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                                     if (choice - 1 <= fight.Monsters.Count - 1)
                                     {
                                         fight.Monsters[choice - 1].Power += 2;
+                                        Console.WriteLine($"{fight.Monsters[choice - 1].Name} Monster gain 2 point of power");
                                         return;
                                     }
                                     else
@@ -85,6 +88,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                         else
                         {
                             fight.Monsters[0].Power += 2;
+                            Console.WriteLine($"{fight.Monsters[0].Name} Monster gain 2 point of power");
                             return;
                         }
                     }
@@ -95,6 +99,13 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                     readLineOverride.GetNextString();
                 }
             }
+        }
+
+        public override void Description()
+        {
+            System.Console.WriteLine("MagicFlowers, herbals always has impact on creatures:" +
+                "\nUser gain 2 points of power. Player Power += 2" +
+                "\nMonster gain 2 points of power. Monster Power += 2");
         }
     }
 }

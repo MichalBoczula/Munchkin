@@ -40,6 +40,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                                     {
                                         fight.Heros[choice - 1].UserAvatar.Power -= 1;
                                         fight.Heros[choice - 1].UserAvatar.Nerfs.FleeChances.Add(1);
+                                        Console.WriteLine($"{fight.Heros[choice - 1].Name} Hero lose 1 point of power and 1 point of flee chances.");
                                         return;
                                     }
                                     else
@@ -54,6 +55,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                         {
                             fight.Heros[0].UserAvatar.Power -= 1;
                             fight.Heros[0].UserAvatar.Nerfs.FleeChances.Add(1);
+                            Console.WriteLine($"{fight.Heros[0].Name} Hero lose 1 point of power and 1 point of flee chances.");
                             return;
                         }
                     }
@@ -73,6 +75,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                                     if (choice - 1 <= fight.Monsters.Count - 1)
                                     {
                                         fight.Monsters[choice - 1].Power -= 1;
+                                        Console.WriteLine($"{fight.Monsters[choice - 1].Name} Monster lose 1 point of power.");
                                         return;
                                     }
                                     else
@@ -86,6 +89,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                         else
                         {
                             fight.Monsters[0].Power -= 1;
+                            Console.WriteLine($"{fight.Monsters[0].Name} Monster lose 1 point of power.");
                             return;
                         }
                     }
@@ -96,6 +100,13 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                     readLineOverride.GetNextString();
                 }
             }
+        }
+
+        public override void Description()
+        {
+            System.Console.WriteLine("SnowBall decrease monster power by 1 or decrease user power and flee chances by 1:" +
+                "\nUser lose 1 points of power and 1 point of flee chances. Player Power -= 1 && Player Flee Chances -= 1" +
+                "\nMonster lose 1 points of power. Monster Power -= 1");
         }
     }
 }

@@ -48,6 +48,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                                     if (choice - 1 <= fight.Heros.Count - 1)
                                     {
                                         fight.Heros[choice - 1].UserAvatar.Power -= 4;
+                                        Console.WriteLine($"{fight.Heros[choice - 1].Name} Hero lose 4 point of power");
                                         return;
                                     }
                                     else
@@ -61,6 +62,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                         else
                         {
                             fight.Heros[0].UserAvatar.Power -= 4;
+                            Console.WriteLine($"{fight.Heros[0].Name} Hero lose 4 point of power");
                             return;
                         }
                     }
@@ -80,6 +82,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                                     if (choice - 1 <= fight.Monsters.Count - 1)
                                     {
                                         fight.Monsters[choice - 1].Power -= 4;
+                                        Console.WriteLine($"{fight.Monsters[choice - 1].Name} Monster lose 4 point of power");
                                         return;
                                     }
                                     else
@@ -93,6 +96,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                         else
                         {
                             fight.Monsters[0].Power -= 4;
+                            Console.WriteLine($"{fight.Monsters[0].Name} Monster lose 4 point of power");
                             return;
                         }
                     }
@@ -103,6 +107,13 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                     readLineOverride.GetNextString();
                 }
             }
+        }
+
+        public override void Description()
+        {
+            System.Console.WriteLine("LightingStrike hit you fith pure energy:" +
+                "\nUser lose 4 points of power. Player Power -= 4" +
+                "\nMonster lose 4 points of power. Monster Power -= 4");
         }
     }
 }

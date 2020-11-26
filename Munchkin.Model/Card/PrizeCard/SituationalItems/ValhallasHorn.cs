@@ -22,6 +22,15 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
             {
                 monster.Power -= 2;
             }
+            System.Console.WriteLine("All users get 2 points of power and all monsters lose 2 points of power.");
+        }
+
+
+        public override void Description()
+        {
+            System.Console.WriteLine("Sound of Valhallas Horn increase user power by 2 and decrese monster power by 2 :" +
+                "\nUser get 2 points of power. Player Power += 2 " +
+                "\nMonster lose 2 points of power. Monster Power -= 2");
         }
     }
 }

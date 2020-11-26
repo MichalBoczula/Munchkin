@@ -28,6 +28,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                         {
                             hero.UserAvatar.FleeChances = 0;
                         }
+                        System.Console.WriteLine("Heroes FleeChances is 0 points");
                         return;
                     }
                     else if (result == 2)
@@ -36,6 +37,7 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                         {
                             hero.UserAvatar.FleeChances = 6;
                         }
+                        System.Console.WriteLine("Heroes FleeChances is 6 points");
                         return;
                     }
                     else
@@ -50,6 +52,13 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
                     readLineOverride.GetNextString();
                 }
             }
+        }
+
+        public override void Description()
+        {
+            System.Console.WriteLine("IcePotion, blood in your vines freeze, card can be use on player or monster:" +
+                "\nPlayer loose all flee chances: Player FleeChances = 0" +
+                "\nUse on monster and you can flee without problems: Player FleeChances = 6");
         }
     }
 }
