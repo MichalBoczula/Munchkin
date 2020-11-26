@@ -34,5 +34,12 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
                 Power += user.UserAvatar.Build.Boots.Power;
             }
         }
+
+        public override string Description()
+        {
+            return "Monster: BoogieManDanceFloorKing\n" +
+                "SpecialPower: Monster gain power equal to players boots power\n" +
+                "Dead End: Player has permanent broken legs and can use a boots && Lose actual equip boots item";
+        }
     }
 }

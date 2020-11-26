@@ -40,5 +40,12 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
                 Power += 4;
             }
         }
+
+        public override string Description()
+        {
+            return "Monster: DemonicFly\n" +
+                "SpecialPower: Monster gain 4 power when player race is Elf\n" +
+                "Dead End: Player Level -= 1 || Player Level -= 2 when race is Elf";
+        }
     }
 }

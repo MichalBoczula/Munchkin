@@ -25,5 +25,12 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         {
             user.UserAvatar.Nerfs.Wounded.Add(true);
         }
+
+        public override string Description()
+        {
+            return "Monster: BabaYaga\n" +
+                "SpecialPower: Player Wound Nerf += 1\n" +
+                "Dead End: Player Lose all cards from deck";
+        }
     }
 }

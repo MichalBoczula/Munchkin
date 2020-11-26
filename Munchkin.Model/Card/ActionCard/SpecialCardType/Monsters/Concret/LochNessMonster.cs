@@ -24,5 +24,12 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         {
             user.UserAvatar.Level -= 2;
         }
+
+        public override string Description()
+        {
+            return "Monster: LochNessMonster\n" +
+                "SpecialPower: Player is poison.\n" +
+                "Dead End: Player lose 2 levels. Player Level -= 2";
+        }
     }
 }

@@ -36,5 +36,12 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
                 HowManyLevels += 1;
             }
         }
+
+        public override string Description()
+        {
+            return "Monster: Gryphon\n" +
+                "SpecialPower: Monster gain 1 power when Player has bigger level than 1 or when Player has 1 level then after win in fight get 2.\n" +
+                "Dead End: Player lose left hand item";
+        }
     }
 }

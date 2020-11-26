@@ -33,5 +33,12 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
                 Power += 5;
             }
         }
+
+        public override string Description()
+        {
+            return "Monster: Shiva\n" +
+                "SpecialPower: Monster gain 5 power when player proficiency is Warrior.\n" +
+                "Dead End: Player lose helmet.";
+        }
     }
 }

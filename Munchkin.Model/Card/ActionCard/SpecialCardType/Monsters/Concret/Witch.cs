@@ -25,5 +25,12 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         {
             user.UserAvatar.Level -= 1;
         }
+
+        public override string Description()
+        {
+            return "Monster: Valkyries\n" +
+                "SpecialPower: Player Level -= 1.\n" +
+                "Dead End: Player poison by monster.";
+        }
     }
 }

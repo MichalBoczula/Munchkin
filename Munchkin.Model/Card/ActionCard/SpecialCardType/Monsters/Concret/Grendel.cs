@@ -18,6 +18,12 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
 
         public override void DeadEnd(Game game, UserClass user)
         {
+            if (user.UserAvatar.Build.Armor != null)
+            {
+                var item = user.UserAvatar.Build.Armor;
+                user.UserAvatar.Build.Armor = null;
+                game.DestroyedPrizeCards.Add(item);
+            }
             user.UserAvatar.Nerfs.BrokenRibs = true;
         }
 
@@ -27,6 +33,13 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
             {
                 Power += 5;
             }
+        }
+
+        public override string Description()
+        {
+            return "Monster: Grendel\n" +
+                "SpecialPower: Monster gain 5 power when Player race is Dwarf\n" +
+                "Dead End: Player has broken ribs and can't use armor and lose actual equiped armor";
         }
     }
 }

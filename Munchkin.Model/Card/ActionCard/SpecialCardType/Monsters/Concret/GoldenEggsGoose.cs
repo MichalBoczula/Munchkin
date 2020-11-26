@@ -152,6 +152,13 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
                 game.DestroyedPrizeCards.Add(item);
             }
         }
+
+        public override string Description()
+        {
+            return "Monster: GoldenEggsGoose\n" +
+                "SpecialPower: Player has to choose which prize prefer: Level or Items\n" +
+                "Dead End: Player lose the most expensive item";
+        }
     }
 
     public class GoldenEggsGooseInformationModel

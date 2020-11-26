@@ -124,5 +124,12 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
                 game.DestroyedPrizeCards.Add(item);
             }
         }
+
+        public override string Description()
+        {
+            return "Monster: Gremlin\n" +
+                "SpecialPower: Player lose the most powerful item\n" +
+                "Dead End: again... Player lose the most powerful item";
+        }
     }
 }

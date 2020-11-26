@@ -41,5 +41,12 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
                 Power += 3;
             }
         }
+
+        public override string Description()
+        {
+            return "Monster: TomTumb\n" +
+                "SpecialPower: If Player race is halfing then monster gain 3 power.\n" +
+                "Dead End: Player lose both weapons.";
+        }
     }
 }

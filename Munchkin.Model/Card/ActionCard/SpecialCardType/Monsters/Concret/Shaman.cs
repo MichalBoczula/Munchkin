@@ -28,5 +28,12 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
                 Power += 5;
             }
         }
+
+        public override string Description()
+        {
+            return "Monster: Shaman\n" +
+                "SpecialPower: If player proficiency is Mage or Priest then monster gain 5 power.\n" +
+                "Dead End: Player poison by Shaman.";
+        }
     }
 }

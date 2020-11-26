@@ -35,5 +35,12 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
                 Power += 5;
             }
         }
+
+        public override string Description()
+        {
+            return "Monster: Quetzalcoatl\n" +
+                "SpecialPower: If player proficiency is diffrent then Priest, Monster gain 5 power.\n" +
+                "Dead End: If player proficiency is Preist then lose deck, otherwise player die, and it's end.";
+        }
     }
 }

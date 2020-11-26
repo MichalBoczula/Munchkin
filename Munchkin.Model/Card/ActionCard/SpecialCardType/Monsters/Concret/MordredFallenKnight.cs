@@ -23,14 +23,17 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
 
         public override void SpecialPower(Game game, UserClass user)
         {
-            if(user.UserAvatar.Proficiency == null)
+            if(!(user.UserAvatar.Proficiency is WarriorProficiency))
             {
                 Power += 3;
             }
-            else if(!(user.UserAvatar.Proficiency is WarriorProficiency))
-            {
-                Power += 3;
-            }
+        }
+
+        public override string Description()
+        {
+            return "Monster: MordredFallenKnight\n" +
+                "SpecialPower: Monster gain 3 power when Player has diffren proficiency then Warrior.\n" +
+                "Dead End: Player get wound nerf.";
         }
     }
 }

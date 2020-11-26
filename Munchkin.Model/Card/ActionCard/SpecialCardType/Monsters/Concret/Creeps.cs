@@ -29,5 +29,12 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
                 Power += 3;
             }
         }
+
+        public override string Description()
+        {
+            return "Monster: Creeps\n" +
+                "SpecialPower: Monster gain 3 power when player proficiency is Mage\n" +
+                "Dead End: Player Level -= 2";
+        }
     }
 }

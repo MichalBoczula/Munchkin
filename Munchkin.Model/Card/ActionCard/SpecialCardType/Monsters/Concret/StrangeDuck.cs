@@ -93,5 +93,12 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
                 true :
                 false;
         }
+
+        public override string Description()
+        {
+            return "Monster: StrangeDuck\n" +
+                "SpecialPower: If Player has 3 or more items in buld, monster gain 10 power and 1 prize and 1 level.\n" +
+                "Dead End: If Player has 5 or more power then lose helmet, armor and boots, otherwise lose both weapons.";
+        }
     }
 }

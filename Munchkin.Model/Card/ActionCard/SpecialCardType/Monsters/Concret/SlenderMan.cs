@@ -25,5 +25,12 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         {
             user.UserAvatar.Proficiency = new NoOneProficiency();
         }
+
+        public override string Description()
+        {
+            return "Monster: SlenderMan\n" +
+                "SpecialPower: Player get wound nerf.\n" +
+                "Dead End: Player lose proficiency and now is NoOne.";
+        }
     }
 }

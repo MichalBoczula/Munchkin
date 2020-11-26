@@ -32,5 +32,12 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
                 Power += user.UserAvatar.Build.RightHandItem.Power;
             }
         }
+
+        public override string Description()
+        {
+            return "Monster: Shiva\n" +
+                "SpecialPower: Monster gain power equal to player weapons.\n" +
+                "Dead End: Player die :(.";
+        }
     }
 }

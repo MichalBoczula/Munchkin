@@ -30,5 +30,12 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         {
             user.UserAvatar.FleeChances = -999;
         }
+
+        public override string Description()
+        {
+            return "Monster: AntArmy\n" +
+                "SpecialPower: Player Flee Chances = -999\n" +
+                "Dead End: Player Flee Chances Nerf += 1 && Destroy Boots";
+        }
     }
 }

@@ -19,6 +19,12 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
 
         public override void DeadEnd(Game game, UserClass user)
         {
+            if (user.UserAvatar.Build.Boots != null)
+            {
+                var item = user.UserAvatar.Build.Boots;
+                user.UserAvatar.Build.Boots = null;
+                game.DestroyedPrizeCards.Add(item);
+            }
             user.UserAvatar.Nerfs.BrokenLegs = true;
         }
 
@@ -30,6 +36,13 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
                 Power += 4;
                 HowManyLevels += 1;
             }
+        }
+
+        public override string Description()
+        {
+            return "Monster: FrozenGiant\n" +
+                "SpecialPower: Monster gain 4 when player race is Halfing but halfing get two levels when win fight\n" +
+                "Dead End: Player has permanent broke legs and can't use a boots and lose actual equipped boots";
         }
     }
 }

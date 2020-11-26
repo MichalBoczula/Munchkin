@@ -32,7 +32,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
             {
                 Power += 2;
             }
-            if (user.UserAvatar.Build.LeftHandItem != null)
+            if (user.UserAvatar.Build.LeftHandItem != null || user.UserAvatar.Build.RightHandItem != null)
             {
                 Power += 4;
             }
@@ -127,6 +127,13 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
                 user.UserAvatar.Build.RightHandItem = null;
                 game.DestroyedPrizeCards.Add(item);
             }
+        }
+
+        public override string Description()
+        {
+            return "Monster: Valkyries\n" +
+                "SpecialPower: Monster get 4 power when player has weapon and get 2 power when player proficiency is Warrior.\n" +
+                "Dead End: Player lose most powerful item.";
         }
     }
 }

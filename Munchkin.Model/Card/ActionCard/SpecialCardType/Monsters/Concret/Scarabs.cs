@@ -28,5 +28,12 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
                 Power += 3;
             }
         }
+
+        public override string Description()
+        {
+            return "Monster: Scarabs\n" +
+                "SpecialPower: Player don't have a boot then monster gain 3 power.\n" +
+                "Dead End: Player Power Nerf += 2 && Player Flee Chances Nerf += 2.";
+        }
     }
 }

@@ -128,5 +128,12 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
             }
             return item;
         }
+
+        public override string Description()
+        {
+            return "Monster: MonkeyGang\n" +
+                "SpecialPower: If Player proficiency is Thief, Monsters power increase by 2.\n" +
+                "Dead End: Monkey try to steal each item from players build";
+        }
     }
 }

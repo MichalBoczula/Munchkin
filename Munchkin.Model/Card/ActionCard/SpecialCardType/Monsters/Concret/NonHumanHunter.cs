@@ -33,7 +33,13 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
             {
                 Power += 5;
             }
+        }
 
+        public override string Description()
+        {
+            return "Monster: NonDecided\n" +
+                "SpecialPower: If player race is diffrent then human, Monster gain 5 power.\n" +
+                "Dead End: Player lose armor.";
         }
     }
 }

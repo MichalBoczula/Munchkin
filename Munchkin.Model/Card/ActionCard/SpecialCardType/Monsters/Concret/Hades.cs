@@ -24,5 +24,12 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         {
             user.UserAvatar.Nerfs.Wounded.Add(true);
         }
+
+        public override string Description()
+        {
+            return "Monster: Hades\n" +
+                "SpecialPower: Player get wounds nerf.\n" +
+                "Dead End: Player die. It's over of your journey...";
+        }
     }
 }

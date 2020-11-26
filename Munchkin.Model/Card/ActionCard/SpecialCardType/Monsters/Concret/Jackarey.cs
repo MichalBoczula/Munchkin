@@ -35,5 +35,14 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
                 user.UserAvatar.Nerfs.FleeChances.Add(1);
             }
         }
+
+        public override string Description()
+        {
+            return "Monster: Jackarey\n" +
+                "SpecialPower: Player is poison.\n" +
+                "Dead End: If player don't have helmet then lose 1 level\n" +
+                "&& If player don't have armor then Player Power Nerfs += 2\n" +
+                "&& If player don't have boots then Player Power Nerfs += 1";
+        }
     }
 }
