@@ -102,11 +102,11 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
             }
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("Deadly berries poisoned you or monster:" +
+            return "Deadly berries poisoned you or monster:" +
                 "\nUser lose 2 points of power and gain 1 poison nerf. Player Power -= 2 && Player Poison += 1" +
-                "\nMonster lose 3 points of power. Monster Power -= 3");
+                "\nMonster lose 3 points of power. Monster Power -= 3";
         }
     }
 }

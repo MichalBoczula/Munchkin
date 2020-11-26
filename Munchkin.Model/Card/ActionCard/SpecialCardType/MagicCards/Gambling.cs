@@ -68,9 +68,9 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
             }
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("You have gambling addict, and lose one of your item from build.");
+            return "You have gambling addict, and lose one of your item from build.";
         }
     }
 }

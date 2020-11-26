@@ -23,10 +23,5 @@ namespace Munchkin.Model.Card.PrizeCard
         }
 
         public override abstract void SpecialEffect(Fight fight);
-
-        public virtual void Description()
-        {
-
-        }
     }
 }

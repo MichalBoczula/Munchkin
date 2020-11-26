@@ -78,7 +78,7 @@ namespace Munchkin.BL.GameController
                     isItem = true;
                     strBuilder.Append($"{i}. ");
                     strBuilder.Append($"Name: {card.Name}");
-                    strBuilder.Append($"Effect: effect");
+                    strBuilder.Append($"Effect: {card.Description()}");
                     strBuilder.Append(";\n");
                     i++;
                 }
@@ -102,7 +102,7 @@ namespace Munchkin.BL.GameController
             {
                 strBuilder.Append($"{i}. ");
                 strBuilder.Append($"Name: {card.Name}");
-                strBuilder.Append($"Description: {card.Name}");
+                strBuilder.Append($"Description: {card.Description()}");
                 strBuilder.Append(";\n");
                 i++;
             }
@@ -120,6 +120,7 @@ namespace Munchkin.BL.GameController
                 strBuilder.Append($"Name: {card.Name}, Power: {card.Power}, Undead: { card.Undead}, ");
                 strBuilder.Append($"Levels after fight: {card.HowManyLevels}");
                 strBuilder.Append($"Prizes: {card.NumberOfPrizes}");
+                strBuilder.Append($"Description: {card.Description()}");
                 strBuilder.Append(";\n");
                 i++;
             }

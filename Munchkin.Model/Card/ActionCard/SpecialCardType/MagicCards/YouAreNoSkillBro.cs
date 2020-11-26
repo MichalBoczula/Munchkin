@@ -19,9 +19,9 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
             user.UserAvatar.Proficiency = new NoOneProficiency();
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("You stop develop your proficiency skill and lose it. Now you are a No One.");
+            return "You stop develop your proficiency skill and lose it. Now you are a No One.";
         }
     }
 }

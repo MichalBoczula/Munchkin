@@ -36,10 +36,10 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
             }
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("MysteryPotion, how it works noone knows you can get power or lose:" +
-                "\nUser gain 3 points of power or lose 2. Player Power += 3 ||Player Power -= 2");
+            return "MysteryPotion, how it works noone knows you can get power or lose:" +
+                "\nUser gain 3 points of power or lose 2. Player Power += 3 ||Player Power -= 2";
         }
     }
 }

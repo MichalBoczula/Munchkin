@@ -18,9 +18,9 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
             user.UserAvatar.Level -= 1;
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("Curse decrease user level by 1 point");
+            return "Curse decrease user level by 1 point";
         }
     }
 }

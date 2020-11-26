@@ -26,9 +26,9 @@ namespace Munchkin.Model.Card.ActionCard
 
         }
 
-        public virtual void Description()
+        public virtual string Description()
         {
-
+            return "";
         }
 
 #nullable enable

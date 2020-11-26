@@ -18,9 +18,9 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
             user.UserAvatar.Level -= 1;
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("God is angry on you and decreased your level by 1 point.");
+            return "God is angry on you and decreased your level by 1 point.";
         }
     }
 }

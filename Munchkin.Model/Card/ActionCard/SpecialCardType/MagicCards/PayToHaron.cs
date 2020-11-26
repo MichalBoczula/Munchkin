@@ -119,9 +119,9 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
             }
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("You have to pay to haron. You lose the most expensive item.");
+            return "You have to pay to haron. You lose the most expensive item.";
         }
     }
 }

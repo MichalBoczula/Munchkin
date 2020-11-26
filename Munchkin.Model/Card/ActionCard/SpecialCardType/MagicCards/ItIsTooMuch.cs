@@ -117,9 +117,9 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
             }
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("You are too strong so God of Fate take away your the best item.");
+            return "You are too strong so God of Fate take away your the best item.";
         }
     }
 }

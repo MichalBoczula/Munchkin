@@ -26,9 +26,9 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
             }
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("Card destroy user armor.");
+            return "Card destroy user armor.";
         }
     }
 }

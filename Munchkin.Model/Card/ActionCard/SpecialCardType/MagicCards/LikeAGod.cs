@@ -21,9 +21,9 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
             monster.NumberOfPrizes += 2;
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("Card can be used only one monster. Monster get additional 10 point power and 2 prizes.");
+            return "Card can be used only one monster. Monster get additional 10 point power and 2 prizes.";
         }
     }
 }

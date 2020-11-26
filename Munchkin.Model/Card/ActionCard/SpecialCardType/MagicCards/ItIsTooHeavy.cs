@@ -33,9 +33,9 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
             }
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("You are too weak and too tired to have a weapons. You lose both of them.");
+            return "You are too weak and too tired to have a weapons. You lose both of them.";
         }
     }
 }

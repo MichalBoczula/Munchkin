@@ -55,11 +55,11 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
             }
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("DionisiosWine used make drunk you or monster can be use on user or monster:" +
+            return "DionisiosWine used make drunk you or monster can be use on user or monster:" +
                 "\nUser get 3 points of power and lose 2 poison flee chances. Player Power += 3 && Player FleeChances -= 2" +
-                "\nMonster get 3 points of power but Player chances to flee increased by 2 points. Monster Power += 3 && Player FleeChances += 2");
+                "\nMonster get 3 points of power but Player chances to flee increased by 2 points. Monster Power += 3 && Player FleeChances += 2";
         }
     }
 }

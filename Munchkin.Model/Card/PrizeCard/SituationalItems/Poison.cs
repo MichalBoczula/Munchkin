@@ -100,11 +100,11 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
             }
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("Poison make user or monster weaker:" +
+            return "Poison make user or monster weaker:" +
                 "\nUser lose 3 points of power. Player Power -= 3" +
-                "\nMonster lose 3 points of power. Monster Power -= 3");
+                "\nMonster lose 3 points of power. Monster Power -= 3";
         }
     }
 }

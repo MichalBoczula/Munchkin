@@ -21,10 +21,10 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
             System.Console.WriteLine("All monsters lose 3 point of power.");
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("Monster lose 3 point of power:" +
-                "\nMonster lose 3 points of power. Monster Power -= 3");
+            return "Monster lose 3 point of power:" +
+                "\nMonster lose 3 points of power. Monster Power -= 3";
         }
     }
 }

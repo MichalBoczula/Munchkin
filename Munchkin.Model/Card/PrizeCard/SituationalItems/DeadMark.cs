@@ -21,9 +21,9 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
             System.Console.WriteLine("Heroes gain wound nerf.");
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("Dead Mark used by ocultist. Use on user and look give him wound nerf. Player Wounded += 1");
+            return "Dead Mark used by ocultist. Use on user and look give him wound nerf. Player Wounded += 1";
         }
     }
 }

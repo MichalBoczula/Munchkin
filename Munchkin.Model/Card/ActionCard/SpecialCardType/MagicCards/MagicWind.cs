@@ -18,9 +18,9 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
             user.Deck.Monsters.Add(monster);
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("Magic wind make monster more friendly and now you have pet. Monster card is currently in your deck.");
+            return "Magic wind make monster more friendly and now you have pet. Monster card is currently in your deck.";
         }
     }
 }

@@ -18,9 +18,9 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
             user.UserAvatar.Nerfs.Poisoned.Add(true);
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("You have a hangover. Poison nerf is increased by one.");
+            return "You have a hangover. Poison nerf is increased by one.";
         }
     }
 }

@@ -18,9 +18,9 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
             user.UserAvatar.Level -= 1;
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("You had a bad day and lose 1 level.");
+            return "You had a bad day and lose 1 level.";
         }
     }
 }

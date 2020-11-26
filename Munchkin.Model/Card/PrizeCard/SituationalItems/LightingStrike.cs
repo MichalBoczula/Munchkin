@@ -109,11 +109,11 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
             }
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("LightingStrike hit you fith pure energy:" +
+            return "LightingStrike hit you fith pure energy:" +
                 "\nUser lose 4 points of power. Player Power -= 4" +
-                "\nMonster lose 4 points of power. Monster Power -= 4");
+                "\nMonster lose 4 points of power. Monster Power -= 4";
         }
     }
 }

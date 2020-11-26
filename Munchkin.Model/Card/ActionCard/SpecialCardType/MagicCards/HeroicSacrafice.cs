@@ -119,9 +119,9 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
             }
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("You sacrificed you the best item for save innocent life.");
+            return "You sacrificed you the best item for save innocent life.";
         }
     }
 }

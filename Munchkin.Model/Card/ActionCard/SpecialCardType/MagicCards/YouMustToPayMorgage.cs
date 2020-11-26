@@ -116,9 +116,9 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
             }
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("The Bank send you a request to pay morgage. You lose a most expensive item.");
+            return "The Bank send you a request to pay morgage. You lose a most expensive item.";
         }
     }
 }

@@ -33,10 +33,10 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
             }
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("Card destroy user weapons. If user use two weapons destroyed will be both of them, " +
-                "otherwise ddestroy only one.");
+            return "Card destroy user weapons. If user use two weapons destroyed will be both of them, " +
+                "otherwise ddestroy only one.";
         }
     }
 }

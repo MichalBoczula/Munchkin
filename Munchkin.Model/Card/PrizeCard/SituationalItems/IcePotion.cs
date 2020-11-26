@@ -54,11 +54,11 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
             }
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("IcePotion, blood in your vines freeze, card can be use on player or monster:" +
+            return "IcePotion, blood in your vines freeze, card can be use on player or monster:" +
                 "\nPlayer loose all flee chances: Player FleeChances = 0" +
-                "\nUse on monster and you can flee without problems: Player FleeChances = 6");
+                "\nUse on monster and you can flee without problems: Player FleeChances = 6";
         }
     }
 }

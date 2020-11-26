@@ -22,9 +22,9 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
             monster.NumberOfPrizes += 2;
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("Monster start be undead and get additional 5 power point and 2 prizes.");
+            return "Monster start be undead and get additional 5 power point and 2 prizes.";
         }
     }
 }

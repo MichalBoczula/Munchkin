@@ -101,11 +101,11 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
             }
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("MagicFlowers, herbals always has impact on creatures:" +
+            return "MagicFlowers, herbals always has impact on creatures:" +
                 "\nUser gain 2 points of power. Player Power += 2" +
-                "\nMonster gain 2 points of power. Monster Power += 2");
+                "\nMonster gain 2 points of power. Monster Power += 2";
         }
     }
 }

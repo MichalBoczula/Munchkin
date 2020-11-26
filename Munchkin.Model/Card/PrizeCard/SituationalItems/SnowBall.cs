@@ -102,11 +102,11 @@ namespace Munchkin.Model.Card.PrizeCard.SituationalItems
             }
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("SnowBall decrease monster power by 1 or decrease user power and flee chances by 1:" +
+            return "SnowBall decrease monster power by 1 or decrease user power and flee chances by 1:" +
                 "\nUser lose 1 points of power and 1 point of flee chances. Player Power -= 1 && Player Flee Chances -= 1" +
-                "\nMonster lose 1 points of power. Monster Power -= 1");
+                "\nMonster lose 1 points of power. Monster Power -= 1";
         }
     }
 }

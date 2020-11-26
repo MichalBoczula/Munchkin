@@ -38,6 +38,11 @@ namespace Munchkin.Model.Card.PrizeCard
         {
 
         }
+
+        public virtual string Description()
+        {
+            return "";
+        }
     }
 
 

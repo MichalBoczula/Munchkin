@@ -28,9 +28,9 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
         }
 #nullable disable
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("Card destroy user boots.");
+            return "Card destroy user boots.";
         }
     }
 }

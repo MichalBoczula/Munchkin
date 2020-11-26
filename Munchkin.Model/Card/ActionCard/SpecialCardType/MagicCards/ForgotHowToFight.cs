@@ -18,9 +18,9 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
             user.UserAvatar.Nerfs.Power.Add(3);
         }
 
-        public override void Description()
+        public override string Description()
         {
-            System.Console.WriteLine("You fighting skill decreased. You will lost 3 power point.");
+            return "You fighting skill decreased. You will lost 3 power point.";
         }
     }
 }
