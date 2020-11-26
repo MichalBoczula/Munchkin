@@ -3552,5 +3552,42 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             fight.Monsters.Should().HaveCount(0);
             game.DestroyedActionCards.Should().HaveCount(0);
         }
+
+        [Fact]
+        public void UseMagicCardNoMagicCards()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            //Act
+            makeActionController.UseMagicCard(user);
+            //Assert
+            user.Deck.MagicCards.Count.Should().Be(0);
+            game.DestroyedActionCards.Count.Should().Be(0);
+        }
     }
 }

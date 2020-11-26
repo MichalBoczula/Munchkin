@@ -59,6 +59,11 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
                 }
             }
         }
-    }
 
+        public override void Description()
+        {
+            System.Console.WriteLine("Card allow you to add monster to fight when monter is not undead. " +
+                "Undead monter can be added without special card");
+        }
+    }
 }

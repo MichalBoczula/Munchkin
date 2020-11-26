@@ -18,5 +18,10 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
         {
             user.UserAvatar.Proficiency = new NoOneProficiency();
         }
+
+        public override void Description()
+        {
+            System.Console.WriteLine("Difficult life cause that you lose your profession.");
+        }
     }
 }

@@ -20,5 +20,10 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
             monster.Power += 10;
             monster.NumberOfPrizes += 2;
         }
+
+        public override void Description()
+        {
+            System.Console.WriteLine("Monster get additional 10 power point and 2 prizes.");
+        }
     }
 }

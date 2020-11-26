@@ -56,5 +56,10 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
                 }
             }
         }
+
+        public override void Description()
+        {
+            System.Console.WriteLine("You have a big mess in your eqipment and lose an item from build.");
+        }
     }
 }

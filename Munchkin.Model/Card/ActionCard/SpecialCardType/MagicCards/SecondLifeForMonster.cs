@@ -21,5 +21,10 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
             monster.Undead = true;
             monster.NumberOfPrizes += 2;
         }
+
+        public override void Description()
+        {
+            System.Console.WriteLine("Monster start be undead and get additional 5 power point and 2 prizes.");
+        }
     }
 }

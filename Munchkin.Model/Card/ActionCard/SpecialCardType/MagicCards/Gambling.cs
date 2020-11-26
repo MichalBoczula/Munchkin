@@ -67,5 +67,10 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
                 user.UserAvatar.Build.RightHandItem = null;
             }
         }
+
+        public override void Description()
+        {
+            System.Console.WriteLine("You have gambling addict, and lose one of your item from build.");
+        }
     }
 }

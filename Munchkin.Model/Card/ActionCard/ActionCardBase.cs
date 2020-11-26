@@ -26,7 +26,7 @@ namespace Munchkin.Model.Card.ActionCard
 
         }
 
-        public virtual void DoSomething()
+        public virtual void Description()
         {
 
         }

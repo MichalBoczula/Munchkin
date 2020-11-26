@@ -22,5 +22,10 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
             }
         }
 #nullable disable
+
+        public override void Description()
+        {
+            System.Console.WriteLine("This is nightmare you going to area and have only a weapons.");
+        }
     }
 }

@@ -67,5 +67,10 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
                 user.UserAvatar.Build.RightHandItem = null;
             }
         }
+
+        public override void Description()
+        {
+            System.Console.WriteLine("Item Fairy is the Tooth Fairy sister, but she don't give you award for you item. So she stole your item.");
+        }
     }
 }

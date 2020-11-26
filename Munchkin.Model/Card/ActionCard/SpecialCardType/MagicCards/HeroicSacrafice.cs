@@ -118,5 +118,10 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
                 game.DestroyedPrizeCards.Add(item);
             }
         }
+
+        public override void Description()
+        {
+            System.Console.WriteLine("You sacrificed you the best item for save innocent life.");
+        }
     }
 }

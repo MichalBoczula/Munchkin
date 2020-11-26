@@ -823,7 +823,7 @@ namespace Munchkin.BL.GameController
                         }
                     }
                 }
-            } 
+            }
             else
             {
                 while (true)
@@ -843,9 +843,9 @@ namespace Munchkin.BL.GameController
                             var monster = user.Deck.Monsters[result - 1];
                             fight.Monsters.Add(monster);
                             user.Deck.Monsters.Remove(monster);
-                            foreach(var addMon in user.Deck.MagicCards)
+                            foreach (var addMon in user.Deck.MagicCards)
                             {
-                                if(addMon.Name.Equals("AdditionalMonster"))
+                                if (addMon.Name.Equals("AdditionalMonster"))
                                 {
                                     user.Deck.MagicCards.Remove(addMon);
                                     game.DestroyedActionCards.Add(addMon);
@@ -874,8 +874,27 @@ namespace Munchkin.BL.GameController
             }
         }
 
-        public void UseMagicCard(UserClass user, Fight? fight)
+        public void UseMagicCard(UserClass user)
         {
+            if (user.Deck.MagicCards.Count == 0)
+            {
+                System.Console.WriteLine("Broo you don't have magic card. Press enter to continue...");
+                readLineOverride.GetNextString();
+                return;
+            }
+            else
+            {
+                while(true)
+                {
+                    int i = 0;
+                    foreach(var magic in user.Deck.MagicCards)
+                    {
+                        i++;
+                        System.Console.WriteLine($"{i}. {magic.Name}");
+                    }
+                    return;
+                }
+            }
 
         }
 

@@ -17,5 +17,10 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
         {
             user.UserAvatar.Nerfs.Wounded.Add(true);
         }
+
+        public override void Description()
+        {
+            System.Console.WriteLine("What a tradegy you have a accident and now you are wounded.");
+        }
     }
 }

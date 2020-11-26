@@ -55,5 +55,10 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
                 }
             }
         }
+
+        public override void Description()
+        {
+            System.Console.WriteLine("You was on party. Currently you struggle with huge amount of alcohol, and you lost one of your cards.");
+        }
     }
 }

@@ -17,5 +17,10 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
         {
             user.UserAvatar.Build.IsItACrook = true;
         }
+
+        public override void Description()
+        {
+            System.Console.WriteLine("Card allow you use additional item. This card eliminate all restriction.");
+        }
     }
 }

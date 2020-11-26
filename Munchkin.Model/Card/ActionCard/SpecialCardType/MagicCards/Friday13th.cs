@@ -19,5 +19,10 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
             user.UserAvatar.Nerfs.FleeChances.Add(1);
             user.UserAvatar.Level -= 1;
         }
+
+        public override void Description()
+        {
+            System.Console.WriteLine("Friday 13th is difficult day. You lose 1 point power, fleechances and level. Unlucky :( !");
+        }
     }
 }

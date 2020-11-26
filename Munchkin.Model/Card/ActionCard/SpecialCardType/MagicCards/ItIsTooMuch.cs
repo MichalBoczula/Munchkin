@@ -116,5 +116,10 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
                 game.DestroyedPrizeCards.Add(item);
             }
         }
+
+        public override void Description()
+        {
+            System.Console.WriteLine("You are too strong so God of Fate take away your the best item.");
+        }
     }
 }

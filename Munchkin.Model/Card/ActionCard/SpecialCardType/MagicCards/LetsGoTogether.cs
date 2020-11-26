@@ -17,5 +17,10 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards
         {
             user.Deck.Monsters.Add(monster);
         }
+
+        public override void Description()
+        {
+            System.Console.WriteLine("You are great monster trainer. Monster card is currently in your deck.");
+        }
     }
 }
