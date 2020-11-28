@@ -11,6 +11,7 @@ using System.Text;
 using Munchkin.Model.Card.ActionCard.SpecialCardType;
 using Munchkin.BL.CharacterCreator;
 using System.Linq;
+using Munchkin.Model.Card.ActionCard;
 
 namespace Munchkin.BL.GameController
 {
@@ -116,6 +117,26 @@ namespace Munchkin.BL.GameController
             var fight = new Fight();
             fight.Heros.Add(user);
             fight.Monsters.Add(monster);
+            System.Console.WriteLine("Would you like to make an action?\n" +
+                        "You can ask for help, use special skill or card from your deck.\n" +
+                        "Press 1 to make an action or press diffrent key to abort.");
+            if (Int32.TryParse(readLineOverride.GetNextString(), out int act))
+            {
+                if (act == 1)
+                {
+                    ChooseFightAction(user);
+                }
+                else
+                {
+                    System.Console.WriteLine("You chose to do nothing. Press enter to fight with monster.");
+                    readLineOverride.GetNextString();
+                }
+            }
+            else
+            {
+                System.Console.WriteLine("You chose to do nothing. Press enter to fight with monster.");
+                readLineOverride.GetNextString();
+            }
             if (fightController.WhoWinFight(fight))
             {
                 System.Console.WriteLine("You won a figh get some prizes!!!. Press enter to continue...");
@@ -146,6 +167,27 @@ namespace Munchkin.BL.GameController
                     var fight = new Fight();
                     fight.Heros.Add(user);
                     fight.Monsters.Add((MonsterCardBase)action);
+                    System.Console.WriteLine(action.Description());
+                    System.Console.WriteLine("Would you like to make an action?\n" +
+                        "You can ask for help, use special skill or card from your deck.\n" +
+                        "Press 1 to make an action or press diffrent key to abort.");
+                    if (Int32.TryParse(readLineOverride.GetNextString(), out int act))
+                    {
+                        if (act == 1)
+                        {
+                            ChooseFightAction(user);
+                        }
+                        else
+                        {
+                            System.Console.WriteLine("You chose to do nothing. Press enter to fight with monster.");
+                            readLineOverride.GetNextString();
+                        }
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("You chose to do nothing. Press enter to fight with monster.");
+                        readLineOverride.GetNextString();
+                    }
                     if (fightController.WhoWinFight(fight))
                     {
                         System.Console.WriteLine("You won a figh get some prizes!!!. Press enter to continue...");
@@ -165,6 +207,7 @@ namespace Munchkin.BL.GameController
                 }
                 else
                 {
+                    System.Console.WriteLine(action.Description());
                     if (action.MagicCardType is MagicCardType.Hero || action.MagicCardType is MagicCardType.Crook)
                     {
                         game.ActionCards.Remove(action);
@@ -886,20 +929,102 @@ namespace Munchkin.BL.GameController
             }
             else
             {
-                while(true)
+                while (true)
                 {
                     int i = 0;
-                    foreach(var magic in user.Deck.MagicCards)
+                    foreach (var magic in user.Deck.MagicCards)
                     {
                         i++;
                         System.Console.WriteLine($"{i}. {magic.Name}");
                         magic.Description();
                         System.Console.WriteLine("______________________________________________________________________________");
                     }
-                    return;
+                    System.Console.WriteLine($"Choose card from 1 to {i}, or press 0 to abort.");
+                    if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
+                    {
+                        if (result <= user.Deck.MagicCards.Count)
+                        {
+                            var card = user.Deck.MagicCards[result - 1];
+                            user.Deck.MagicCards.Remove(card);
+                            game.DestroyedActionCards.Add(card);
+                            UseMagicCardOnUser(card, user);
+                            readLineOverride.GetNextString();
+                            return;
+                        }
+                        else if (result == 0)
+                        {
+                            System.Console.WriteLine($"You didn't use magic card. Press enter to continue");
+                            readLineOverride.GetNextString();
+                            return;
+                        }
+                        else
+                        {
+                            System.Console.WriteLine($"Broo it's easy!!! Choose card from 1 to {i}, " +
+                                $"or press 0 to abort. Press enter to continue");
+                            readLineOverride.GetNextString();
+                        }
+                    }
+                    else
+                    {
+                        System.Console.WriteLine($"Something gone wrong. Please try again. " +
+                            $"Choose card from 1 to {i}, or press 0 to abort. Press enter to continue");
+                        readLineOverride.GetNextString();
+                    }
                 }
             }
+        }
 
+        public void UseMagicCardOnUser(ActionCardBase card, UserClass user)
+        {
+            while (true)
+            {
+                int i = 0;
+                foreach (var hero in game.Users)
+                {
+                    if (user.Equals(hero))
+                    {
+                        i++;
+                        System.Console.WriteLine($"{i}.It's your Hero Broo!!! Name: {hero.Name}, Power: {hero.UserAvatar.Power}, Level: {hero.UserAvatar.Level}");
+                    }
+                    else
+                    {
+                        i++;
+                        System.Console.WriteLine($"{i}.Enemy! Name: {hero.Name}, Power: {hero.UserAvatar.Power}, Level: {hero.UserAvatar.Level}");
+                    }
+
+                }
+                System.Console.WriteLine("Choose her on which you would like to use magic card, or choose 0 to abort.");
+                if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
+                {
+                    if (result <= i && result > 0)
+                    {
+                        card.CastSpecialSpell(game.Users[result - 1], null, game);
+                        System.Console.WriteLine($"You used magic card on {user.Name }. Press enter to continue");
+                        readLineOverride.GetNextString();
+                        return;
+                    }
+                    else if (result == 0)
+                    {
+                        System.Console.WriteLine($"You didn't use magic card. Press enter to continue");
+                        readLineOverride.GetNextString();
+                        return;
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("Bro something gone wrong...\n" +
+                            "Choose her on which you would like to use magic card, or choose 0 to abort.\n" +
+                            "Press enter to continue");
+                        readLineOverride.GetNextString();
+                    }
+                }
+                else
+                {
+                    System.Console.WriteLine("Bro something gone wrong...\n" +
+                            "Choose her on which you would like to use magic card, or choose 0 to abort.\n" +
+                            "Press enter to continue");
+                    readLineOverride.GetNextString();
+                }
+            }
         }
 
         public void AskForHelp(UserClass user, Fight fight)
@@ -910,7 +1035,7 @@ namespace Munchkin.BL.GameController
                 {
                     while (true)
                     {
-                        System.Console.WriteLine($"Do you want join to fight?\n1.Yes\n2.No");
+                        System.Console.WriteLine($"{hero.Name} Do you want to join to fight?\n1.Yes\n2.No");
                         if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
                         {
                             if (result == 1)
@@ -964,7 +1089,7 @@ namespace Munchkin.BL.GameController
             }
         }
 
-        public void ChooseAction(UserClass user)
+        public void ChooseFightAction(UserClass user)
         {
 
         }
