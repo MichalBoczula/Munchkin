@@ -942,7 +942,7 @@ namespace Munchkin.BL.GameController
                     System.Console.WriteLine($"Choose card from 1 to {i}, or press 0 to abort.");
                     if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
                     {
-                        if (result <= user.Deck.MagicCards.Count)
+                        if (result <= user.Deck.MagicCards.Count && result > 0)
                         {
                             var card = user.Deck.MagicCards[result - 1];
                             user.Deck.MagicCards.Remove(card);

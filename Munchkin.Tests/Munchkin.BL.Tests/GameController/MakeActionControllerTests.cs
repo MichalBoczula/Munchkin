@@ -1661,7 +1661,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         }
 
         [Fact]
-        public void UseMagicCardOnEnemy()
+        public void UseMagicCardOnUserUsedOnEnemy()
         {
             //Arrange
             var mock = new Mock<ReadLineOverride>();
@@ -1711,7 +1711,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         }
 
         [Fact]
-        public void UseMagicCardAbort()
+        public void UseMagicCardOnUserAbort()
         {
             //Arrange
             var mock = new Mock<ReadLineOverride>();
@@ -1760,9 +1760,8 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             user.UserAvatar.Level.Should().Be(1);
         }
 
-
         [Fact]
-        public void UseMagicCardOnUser()
+        public void UseMagicCardOnUserUsedOnUser()
         {
             //Arrange
             var mock = new Mock<ReadLineOverride>();
@@ -1812,7 +1811,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         }
 
         [Fact]
-        public void UseMagicCardOnSecondEnemy()
+        public void UseMagicCardOnUsedOnSecondEnemy()
         {
             //Arrange
             var mock = new Mock<ReadLineOverride>();
@@ -1872,5 +1871,203 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             user.UserAvatar.Level.Should().Be(1);
         }
 
+
+        [Fact]
+        public void UseMagicCardNoMagicCard()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar,
+                Name = "user"
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            //Act
+            makeActionController.UseMagicCard(user);
+            //Assert
+            user.Deck.MagicCards.Count.Should().Be(0);
+        }
+
+        [Fact]
+        public void UseMagicCardOneMagicCard()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("1");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar,
+                Name = "user"
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var userAvatar2 = new UserAvatar
+            {
+                Level = 2
+            };
+            var enemy = new UserClass()
+            {
+                UserAvatar = userAvatar2,
+                Name = "enemy"
+            };
+            game.Users.Add(enemy);
+            game.Users.Add(user);
+            var curse = new BackToSchool("BackToSchool", CardType.Curse);
+            user.Deck.MagicCards.Add(curse);
+            //Act
+            makeActionController.UseMagicCard(user);
+            //Assert
+            enemy.UserAvatar.Level.Should().Be(1);
+            user.UserAvatar.Level.Should().Be(1);
+            game.DestroyedActionCards.Should().HaveCount(1);
+        }
+
+        [Fact]
+        public void UseMagicCardFewMagicCard()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "3", "3", "1", "1", "1", "1" }).Dequeue);
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar,
+                Name = "user"
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var userAvatar2 = new UserAvatar
+            {
+                Level = 2
+            };
+            var enemy = new UserClass()
+            {
+                UserAvatar = userAvatar2,
+                Name = "enemy"
+            };
+            game.Users.Add(enemy);
+            game.Users.Add(user);
+            var curse = new BackToSchool("BackToSchool", CardType.Curse);
+            var damageArmor = new DamagedArmor("Damaged Armor", CardType.Curse);
+            var damageBoots = new DamagedBoots("Damaged Boots", CardType.Curse);
+            user.Deck.MagicCards.Add(damageArmor);
+            user.Deck.MagicCards.Add(damageBoots);
+            user.Deck.MagicCards.Add(curse);
+            //Act
+            makeActionController.UseMagicCard(user);
+            //Assert
+            enemy.UserAvatar.Level.Should().Be(1);
+            user.UserAvatar.Level.Should().Be(1);
+            game.DestroyedActionCards.Should().HaveCount(1);
+        }
+
+        [Fact]
+        public void UseMagicCardAbort()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns("0");
+            var random = new Random();
+            var game = new Game();
+            var userAvatar = new UserAvatar
+            {
+                Level = 1
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar,
+                Name = "user"
+            };
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var userAvatar2 = new UserAvatar
+            {
+                Level = 2
+            };
+            var enemy = new UserClass()
+            {
+                UserAvatar = userAvatar2,
+                Name = "enemy"
+            };
+            game.Users.Add(enemy);
+            game.Users.Add(user);
+            var curse = new BackToSchool("BackToSchool", CardType.Curse);
+            user.Deck.MagicCards.Add(curse);
+            //Act
+            makeActionController.UseMagicCard(user);
+            //Assert
+            enemy.UserAvatar.Level.Should().Be(2);
+            user.UserAvatar.Level.Should().Be(1);
+            user.Deck.MagicCards.Should().HaveCount(1);
+            game.DestroyedActionCards.Should().HaveCount(0);
+        }
     }
 }
