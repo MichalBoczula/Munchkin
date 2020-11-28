@@ -48,7 +48,6 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.CardFactory
             var m30 = magicCardFactory.CreateMagicCard(30);
             var m31 = magicCardFactory.CreateMagicCard(31);
             var m32 = magicCardFactory.CreateMagicCard(32);
-            var m33 = magicCardFactory.CreateMagicCard(33);
             //Assert
             m1.Should().BeOfType<PayToHaron>();
             m2.Should().BeOfType<ToTheArea>();
@@ -69,20 +68,19 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.CardFactory
             m17.Should().BeOfType<ItIsTooHeavy>();
             m18.Should().BeOfType<FridayNightCurse>();
             m19.Should().BeOfType<YouHaveAccident>();
-            m20.Should().BeOfType<MagicWind>();
-            m21.Should().BeOfType<Titan>();
-            m22.Should().BeOfType<LikeAGod>();
-            m23.Should().BeOfType<Undead>();
-            m24.Should().BeOfType<SecondLifeForMonster>();
+            m20.Should().BeOfType<Titan>();
+            m21.Should().BeOfType<LikeAGod>();
+            m22.Should().BeOfType<Undead>();
+            m23.Should().BeOfType<SecondLifeForMonster>();
+            m24.Should().BeOfType<Crook>();
             m25.Should().BeOfType<Crook>();
-            m26.Should().BeOfType<Crook>();
-            m27.Should().BeOfType<ItemFairy>();
-            m28.Should().BeOfType<Gambling>();
-            m29.Should().BeOfType<DrunkCurse>();
-            m30.Should().BeOfType<WhatAMess>();
+            m26.Should().BeOfType<ItemFairy>();
+            m27.Should().BeOfType<Gambling>();
+            m28.Should().BeOfType<DrunkCurse>();
+            m29.Should().BeOfType<WhatAMess>();
+            m30.Should().BeOfType<AdditionalMonster>();
             m31.Should().BeOfType<AdditionalMonster>();
             m32.Should().BeOfType<AdditionalMonster>();
-            m33.Should().BeOfType<AdditionalMonster>();
         }
     }
 }
