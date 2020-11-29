@@ -1142,5 +1142,50 @@ namespace Munchkin.BL.GameController
                 }
             }
         }
+
+        public void ChooseNoFightAction(UserClass user, Fight fight)
+        {
+            while (true)
+            {
+                System.Console.WriteLine("Choose an action:\n" +
+                    "1. Use Magic Card\n" +
+                    "2. Use Situational Card\n" +
+                    "3. Use Skill\n" +
+                    "4. Use Monster Card\n" +
+                    "0. Don't make an Action.");
+                if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
+                {
+                    if (result < 0 || result > 4)
+                    {
+                        System.Console.WriteLine("Choose action from list brooo. Press enter to continue.");
+                        readLineOverride.GetNextString();
+                    }
+                    switch (result)
+                    {
+                        case 0:
+                            System.Console.WriteLine("You chose to don't make an action. Press enter to continue.");
+                            readLineOverride.GetNextString();
+                            return;
+                        case 1:
+                            UseMagicCard(user);
+                            return;
+                        case 2:
+                            UseSituationalCard(user, fight);
+                            return;
+                        case 3:
+                            UseSpecialPower(user, fight);
+                            return;
+                        case 4:
+                            UseMonsterCard(user, fight);
+                            return;
+                    }
+                }
+                else
+                {
+                    System.Console.WriteLine("Something gone wrong pls try again choose option from list. Press enter to continue.");
+                    readLineOverride.GetNextString();
+                }
+            }
+        }
     }
 }
