@@ -117,25 +117,29 @@ namespace Munchkin.BL.GameController
             var fight = new Fight();
             fight.Heros.Add(user);
             fight.Monsters.Add(monster);
-            System.Console.WriteLine("Would you like to make an action?\n" +
-                        "You can ask for help, use special skill or card from your deck.\n" +
-                        "Press 1 to make an action or press diffrent key to abort.");
-            if (Int32.TryParse(readLineOverride.GetNextString(), out int act))
+            while (true)
             {
-                if (act == 1)
+                System.Console.WriteLine("Would you like to make an action?\n" +
+                            "You can ask for help, use special skill or card from your deck.\n" +
+                            "Press 1 to make an action or press diffrent key to abort.");
+                if (Int32.TryParse(readLineOverride.GetNextString(), out int act))
                 {
-                    ChooseFightAction(user, fight);
+                    if (act == 1)
+                    {
+                        ChooseFightAction(user, fight);
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("You chose to do nothing. Press enter to fight with monster.");
+                        readLineOverride.GetNextString();
+                        break;
+                    }
                 }
                 else
                 {
                     System.Console.WriteLine("You chose to do nothing. Press enter to fight with monster.");
                     readLineOverride.GetNextString();
                 }
-            }
-            else
-            {
-                System.Console.WriteLine("You chose to do nothing. Press enter to fight with monster.");
-                readLineOverride.GetNextString();
             }
             if (fightController.WhoWinFight(fight))
             {
@@ -168,23 +172,23 @@ namespace Munchkin.BL.GameController
                     fight.Heros.Add(user);
                     fight.Monsters.Add((MonsterCardBase)action);
                     System.Console.WriteLine(action.Description());
-                    System.Console.WriteLine("Would you like to make an action?\n" +
-                        "You can ask for help, use special skill or card from your deck.\n" +
+                    while (true)
+                    {
+                        System.Console.WriteLine("Would you like to make an action?\n" +
+                        "You can ask for help, use special skill or use card from your deck.\n" +
                         "Press 1 to make an action or press 0 to abort.");
-                    //while(true)
-                    //{
                         if (Int32.TryParse(readLineOverride.GetNextString(), out int act))
                         {
                             if (act == 1)
                             {
                                 ChooseFightAction(user, fight);
                             }
-                            //else if (act == 0)
-                            //{
-                            //    System.Console.WriteLine("It' time let's fight. Press enter to fight with monster.");
-                            //    readLineOverride.GetNextString();
-                            //    break;
-                            //}
+                            else if (act == 0)
+                            {
+                                System.Console.WriteLine("It' time let's fight. Press enter to fight with monster.");
+                                readLineOverride.GetNextString();
+                                break;
+                            }
                             else
                             {
                                 System.Console.WriteLine("Choose option form list. Press enter to continue");
@@ -196,7 +200,8 @@ namespace Munchkin.BL.GameController
                             System.Console.WriteLine("Choose option form list. Press enter to continue.");
                             readLineOverride.GetNextString();
                         }
-                    //}
+                    }
+                    EnemyChooseAction(user, fight);
                     if (fightController.WhoWinFight(fight))
                     {
                         System.Console.WriteLine("You won a figh get some prizes!!!. Press enter to continue...");
@@ -285,6 +290,43 @@ namespace Munchkin.BL.GameController
                 {
                     game.ActionCards.Remove(action);
                     user.Deck.MagicCards.Add(action);
+                }
+            }
+        }
+
+        public void EnemyChooseAction(UserClass user, Fight fight)
+        {
+            foreach (var enemy in game.Users)
+            {
+                if (!user.Equals(enemy))
+                {
+                    while (true)
+                    {
+                        System.Console.WriteLine("Do you want to make an Action");
+                        if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
+                        {
+                            if (result == 1)
+                            {
+                                ChooseNoFightAction(enemy, fight);
+                            }
+                            else if (result == 0)
+                            {
+                                System.Console.WriteLine("You chose to pass. Press any key to continue.");
+                                readLineOverride.GetNextString();
+                                break;
+                            }
+                            else
+                            {
+                                System.Console.WriteLine("Bro input 1 or 0. Press any key to continue.");
+                                readLineOverride.GetNextString();
+                            }
+                        }
+                        else
+                        {
+                            System.Console.WriteLine("Something gone wrong Pleas try again. Press any key to continue.");
+                            readLineOverride.GetNextString();
+                        }
+                    }
                 }
             }
         }
@@ -1110,12 +1152,12 @@ namespace Munchkin.BL.GameController
                     "0. Don't make an Action.");
                 if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
                 {
-                    if(result < 0 || result > 4)
+                    if (result < 0 || result > 4)
                     {
                         System.Console.WriteLine("Choose action from list brooo. Press enter to continue.");
                         readLineOverride.GetNextString();
                     }
-                    switch(result)
+                    switch (result)
                     {
                         case 0:
                             System.Console.WriteLine("You chose to don't make an action. Press enter to continue.");

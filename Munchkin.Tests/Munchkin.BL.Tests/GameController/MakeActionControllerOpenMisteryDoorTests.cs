@@ -26,7 +26,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             //Arrange
             var random = new Random();
             var mock = new Mock<ReadLineOverride>();
-            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "2", "1", "1", "1", "1" }).Dequeue);
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] {"0", "2", "1", "1", "1", "1" }).Dequeue);
             var game = new Game();
             var userAvatar = new UserAvatar();
             var user = new UserClass()
@@ -57,7 +57,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         {
             //Arrange
             var mock = new Mock<ReadLineOverride>();
-            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "2", "1", "1", "1", "1" }).Dequeue);
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "0", "2", "1", "1", "1", "1" }).Dequeue);
             var random = new Random();
             var game = new Game();
             var userAvatar = new UserAvatar();
@@ -85,7 +85,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         {
             //Arrange
             var mock = new Mock<ReadLineOverride>();
-            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "2", "1", "1", "1", "1" }).Dequeue);
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "0", "2", "1", "1", "1", "1" }).Dequeue);
             var random = new Random();
             var game = new Game();
             var userAvatar = new UserAvatar();
@@ -123,7 +123,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         {
             //Arrange
             var mock = new Mock<ReadLineOverride>();
-            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "2", "1", "1", "1", "1" }).Dequeue);
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "0", "2", "1", "1", "1", "1" }).Dequeue);
             var random = new Random();
             var game = new Game();
             var userAvatar = new UserAvatar();
@@ -195,7 +195,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         {
             //Arrange
             var mock = new Mock<ReadLineOverride>();
-            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "2", "1", "1", "1", "1" }).Dequeue);
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] {"0", "2", "1", "1", "1", "1" }).Dequeue);
             var random = new Random();
             var game = new Game();
             var userAvatar = new UserAvatar
@@ -229,7 +229,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         {
             //Arrange
             var mock = new Mock<ReadLineOverride>();
-            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "2", "1", "1", "1", "1" }).Dequeue);
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] {"0", "2", "1", "1", "1", "1" }).Dequeue);
             var random = new Random();
             var game = new Game();
             var userAvatar = new UserAvatar
@@ -264,7 +264,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         {
             //Arrange
             var mock = new Mock<ReadLineOverride>();
-            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "2", "1", "1", "1", "1" }).Dequeue);
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] {"0", "2", "1", "1", "1", "1" }).Dequeue);
             var random = new Random();
             var game = new Game();
             var userAvatar = new UserAvatar
@@ -298,7 +298,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         {
             //Arrange
             var mock = new Mock<ReadLineOverride>();
-            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "1", "1", "1", "2", "1", "1" }).Dequeue);
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "1", "1", "1", "0", "1", "1", "1" }).Dequeue);
             var random = new Random();
             var game = new Game();
             var userAvatar = new UserAvatar
@@ -366,7 +366,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         {
             //Arrange
             var mock = new Mock<ReadLineOverride>();
-            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "1", "1", "1", "2", "1", "1" }).Dequeue);
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "1", "1", "1", "0", "1", "1" }).Dequeue);
             var random = new Random();
             var game = new Game();
             var userAvatar = new UserAvatar
@@ -406,7 +406,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         {
             //Arrange
             var mock = new Mock<ReadLineOverride>();
-            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "1", "1", "1", "2", "1", "1" }).Dequeue);
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "1", "1", "1", "0", "1", "1" }).Dequeue);
             var random = new Random();
             var game = new Game();
             var userAvatar = new UserAvatar
