@@ -172,35 +172,7 @@ namespace Munchkin.BL.GameController
                     fight.Heros.Add(user);
                     fight.Monsters.Add((MonsterCardBase)action);
                     System.Console.WriteLine(action.Description());
-                    while (true)
-                    {
-                        System.Console.WriteLine("Would you like to make an action?\n" +
-                        "You can ask for help, use special skill or use card from your deck.\n" +
-                        "Press 1 to make an action or press 0 to abort.");
-                        if (Int32.TryParse(readLineOverride.GetNextString(), out int act))
-                        {
-                            if (act == 1)
-                            {
-                                ChooseFightAction(user, fight);
-                            }
-                            else if (act == 0)
-                            {
-                                System.Console.WriteLine("It' time let's fight. Press enter to fight with monster.");
-                                readLineOverride.GetNextString();
-                                break;
-                            }
-                            else
-                            {
-                                System.Console.WriteLine("Choose option form list. Press enter to continue");
-                                readLineOverride.GetNextString();
-                            }
-                        }
-                        else
-                        {
-                            System.Console.WriteLine("Choose option form list. Press enter to continue.");
-                            readLineOverride.GetNextString();
-                        }
-                    }
+                    PlayerAction(user, fight);
                     EnemyChooseAction(user, fight);
                     if (fightController.WhoWinFight(fight))
                     {
@@ -294,6 +266,39 @@ namespace Munchkin.BL.GameController
             }
         }
 
+        public void PlayerAction(UserClass user, Fight fight)
+        {
+            while (true)
+            {
+                System.Console.WriteLine("Would you like to make an action?\n" +
+                "You can ask for help, use special skill or use card from your deck.\n" +
+                "Press 1 to make an action or press 0 to abort.");
+                if (Int32.TryParse(readLineOverride.GetNextString(), out int act))
+                {
+                    if (act == 1)
+                    {
+                        ChooseFightAction(user, fight);
+                    }
+                    else if (act == 0)
+                    {
+                        System.Console.WriteLine("It' time let's fight. Press enter to fight with monster.");
+                        readLineOverride.GetNextString();
+                        break;
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("Choose option form list. Press enter to continue");
+                        readLineOverride.GetNextString();
+                    }
+                }
+                else
+                {
+                    System.Console.WriteLine("Choose option form list. Press enter to continue.");
+                    readLineOverride.GetNextString();
+                }
+            }
+        }
+
         public void EnemyChooseAction(UserClass user, Fight fight)
         {
             foreach (var enemy in game.Users)
@@ -302,7 +307,9 @@ namespace Munchkin.BL.GameController
                 {
                     while (true)
                     {
-                        System.Console.WriteLine("Do you want to make an Action");
+                        System.Console.WriteLine("Do you want to make an Action.\n" +
+                            "1. Yes.\n" +
+                            "2. Skip.");
                         if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
                         {
                             if (result == 1)
