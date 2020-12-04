@@ -174,6 +174,7 @@ namespace Munchkin.BL.GameController
                     System.Console.WriteLine(action.Description());
                     PlayerAction(user, fight);
                     EnemyChooseAction(user, fight);
+                    PlayerAction(user, fight);
                     if (fightController.WhoWinFight(fight))
                     {
                         System.Console.WriteLine("You won a figh get some prizes!!!. Press enter to continue...");
