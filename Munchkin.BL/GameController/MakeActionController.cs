@@ -271,7 +271,7 @@ namespace Munchkin.BL.GameController
         public void GetLevels(Fight fight, UserClass user)
         {
             int levels = 0;
-            foreach(var mon in fight.Monsters)
+            foreach (var mon in fight.Monsters)
             {
                 user.UserAvatar.Level += mon.HowManyLevels;
                 levels += mon.HowManyLevels;
@@ -1249,6 +1249,30 @@ namespace Munchkin.BL.GameController
                     System.Console.WriteLine("Something gone wrong pls try again choose option from list. Press enter to continue.");
                     readLineOverride.GetNextString();
                 }
+            }
+        }
+
+        public void UseItemCard(UserClass user)
+        {
+            int i = 1;
+            deckController.LookOnItemsCard(user, ref i);
+            if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
+            {
+                if (result <= user.Deck.Items.Count)
+                {
+                    var card = user.Deck.Items[result - 1];
+                    deckController.UseItemCard(user, card);
+                }
+                else
+                {
+                    System.Console.WriteLine($"Bro please input number from 1 to {user.Deck.Items.Count}. Press enter to continue.");
+                    readLineOverride.GetNextString();
+                }
+            }
+            else
+            {
+                System.Console.WriteLine($"Bro please input number from 1 to {user.Deck.Items.Count}. Press enter to continue.");
+                readLineOverride.GetNextString();
             }
         }
     }

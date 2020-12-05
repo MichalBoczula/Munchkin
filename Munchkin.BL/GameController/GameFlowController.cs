@@ -2,6 +2,7 @@
 using Munchkin.BL.CharacterCreator;
 using Munchkin.BL.Helper;
 using Munchkin.BL.InformationModel;
+using Munchkin.Model;
 using Munchkin.Model.Character.Hero.Proficiency;
 using Munchkin.Model.User;
 using System;
@@ -114,7 +115,104 @@ namespace Munchkin.BL.GameController
         {
             foreach (var user in game.Users)
             {
-                makeActionController.OpenMisteryDoor(user);
+                if (!user.UserAvatar.IsDied)
+                {
+                    while (true)
+                    {
+                        makeActionController.OpenMisteryDoor(user);
+                        if (user.UserAvatar.ItIsOver())
+                        {
+                            System.Console.WriteLine($"{user.Name} has 10th level. Game is over. Winner is only one: {user.Name}!!!");
+                            readLineOverride.GetNextString();
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
+        public void InitializeBuild()
+        {
+            foreach (var user in game.Users)
+            {
+                while (true)
+                {
+                    System.Console.WriteLine($"{user.Name} If you want to use item card press 1 if not 0.");
+                    if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
+                    {
+                        if (result == 1)
+                        {
+                            makeActionController.UseItemCard(user);
+                            UseItem(user);
+                            UseMagicCard(user);
+                            user.UserAvatar.CountPower();
+                            user.UserAvatar.DisplayAvatarInfo();
+                        }
+                        else
+                        {
+                            System.Console.WriteLine($"{user.Name} input 1 or 0. Press any key to continue.");
+                            readLineOverride.GetNextString();
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        System.Console.WriteLine($"{user.Name} input 1 or 0. Press any key to continue.");
+                        readLineOverride.GetNextString();
+                    }
+                }
+            }
+        }
+
+        public void UseItem(UserClass user)
+        {
+            while (true)
+            {
+                System.Console.WriteLine($"{user.Name} If you want to use item card press 1 if not 0.");
+                if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
+                {
+                    if (result == 1)
+                    {
+                        makeActionController.UseItemCard(user);
+                    }
+                    else
+                    {
+                        System.Console.WriteLine($"{user.Name} input 1 or 0. Press any key to continue.");
+                        readLineOverride.GetNextString();
+                        break;
+                    }
+                }
+                else
+                {
+                    System.Console.WriteLine($"{user.Name} input 1 or 0. Press any key to continue.");
+                    readLineOverride.GetNextString();
+                }
+            }
+        }
+
+        public void UseMagicCard(UserClass user)
+        {
+            while (true)
+            {
+                System.Console.WriteLine($"{user.Name} If you want to use magic card press 1 if not 0.");
+                if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
+                {
+                    if (result == 1)
+                    {
+                        makeActionController.UseMagicCard(user);
+                    }
+                    else
+                    {
+                        System.Console.WriteLine($"{user.Name} input 1 or 0. Press any key to continue.");
+                        readLineOverride.GetNextString();
+                        break;
+                    }
+                }
+                else
+                {
+                    System.Console.WriteLine($"{user.Name} input 1 or 0. Press any key to continue.");
+                    readLineOverride.GetNextString();
+                }
             }
         }
     }

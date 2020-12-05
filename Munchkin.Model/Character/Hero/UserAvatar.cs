@@ -176,5 +176,33 @@ namespace Munchkin.Model.Character
             Proficiency.CleanAfterTurn();
             DidItemSell = false;
         }
+
+        public bool ItIsOver()
+        {
+            return Level >= 10 ? true : false;
+        }
+
+        public void DisplayAvatarInfo()
+        {
+            System.Console.WriteLine($"Proficiency: {Proficiency.Name}");
+            System.Console.WriteLine($"Race: {Race.Name}");
+            System.Console.WriteLine($"Level: {Level}");
+            System.Console.WriteLine($"Power: {Power}");
+            System.Console.WriteLine($"Helmet: {Build.Helmet.Name}");
+            System.Console.WriteLine($"Armor: {Build.Armor.Name}");
+            System.Console.WriteLine($"Boots: {Build.Boots.Name}");
+            System.Console.WriteLine($"LeftHandItem: {Build.LeftHandItem.Name}");
+            System.Console.WriteLine($"RightHandItem: {Build.RightHandItem.Name}");
+            foreach(var add in Build.AdditionalItems)
+            {
+                System.Console.WriteLine($"AdditionalItem: {add.Name}");
+            }
+            System.Console.WriteLine($"Nerfs, DamagedHead: {Nerfs.DamagedHead}");
+            System.Console.WriteLine($"Nerfs, BrokenRibs: {Nerfs.BrokenRibs}");
+            System.Console.WriteLine($"Nerfs, BrokenLegs: {Nerfs.BrokenLegs}");
+            System.Console.WriteLine($"Nerfs, TornOffArms: {Nerfs.TornOffArms.Count}");
+            System.Console.WriteLine($"Nerfs, Poisoned: {Nerfs.Poisoned.Count}");
+            System.Console.WriteLine($"Nerfs, Wounded: {Nerfs.Wounded.Count}");
+        }
     }
 }

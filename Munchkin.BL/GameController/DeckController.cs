@@ -128,7 +128,7 @@ namespace Munchkin.BL.GameController
         }
 
 #nullable enable
-        public void UseItemCard(UserClass user, ItemCard card, Fight? fight)
+        public void UseItemCard(UserClass user, ItemCard card)
         {
             if (card.ItemType == ItemType.Helmet)
             {

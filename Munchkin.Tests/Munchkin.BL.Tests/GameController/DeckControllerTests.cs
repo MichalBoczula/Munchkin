@@ -41,7 +41,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             };
             ItemCard card = new ItemCard("CyberCoat", CardType.Prize, PrizeCardType.Item, 2, cyberCoat, false, ItemType.Additional, null, 300);
             //Act
-            deckController.UseItemCard(user, card, null);
+            deckController.UseItemCard(user, card);
             //Assert
             user.UserAvatar.Build.AdditionalItems.Should().HaveCount(1);
             user.UserAvatar.Build.AdditionalItems[0].Should().BeSameAs(card);
@@ -68,7 +68,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             };
             ItemCard card = new ItemCard("CyberCoat", CardType.Prize, PrizeCardType.Item, 2, cyberCoat, false, ItemType.Additional, null, 300);
             //Act
-            deckController.UseItemCard(user, card, null);
+            deckController.UseItemCard(user, card);
             //Assert
             user.UserAvatar.Build.AdditionalItems.Should().HaveCount(0);
         }
@@ -94,7 +94,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             };
             ItemCard card = new ItemCard("CyberCoat", CardType.Prize, PrizeCardType.Item, 2, cyberCoat, false, ItemType.Additional, null, 300);
             //Act
-            deckController.UseItemCard(user, card, null);
+            deckController.UseItemCard(user, card);
             //Assert
             user.UserAvatar.Build.AdditionalItems.Should().HaveCount(0);
         }
@@ -120,7 +120,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             };
             ItemCard card = new ItemCard("CyberCoat", CardType.Prize, PrizeCardType.Item, 2, cyberCoat, false, ItemType.Additional, null, 300);
             //Act
-            deckController.UseItemCard(user, card, null);
+            deckController.UseItemCard(user, card);
             //Assert
             user.UserAvatar.Build.AdditionalItems.Should().HaveCount(1);
             user.UserAvatar.Build.AdditionalItems[0].Should().BeSameAs(card);
@@ -147,7 +147,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             };
             ItemCard card = new ItemCard("BetterDefenceSpray", CardType.Prize, PrizeCardType.Item, 4, null, false, ItemType.Additional, betterDefenceSpray, 400);
             //Act
-            deckController.UseItemCard(user, card, null);
+            deckController.UseItemCard(user, card);
             //Assert
             user.UserAvatar.Build.AdditionalItems.Should().HaveCount(1);
             user.UserAvatar.Build.AdditionalItems[0].Should().BeSameAs(card);
@@ -174,7 +174,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             };
             ItemCard card = new ItemCard("BetterDefenceSpray", CardType.Prize, PrizeCardType.Item, 4, null, false, ItemType.Additional, betterDefenceSpray, 400);
             //Act
-            deckController.UseItemCard(user, card, null);
+            deckController.UseItemCard(user, card);
             //Assert
             user.UserAvatar.Build.AdditionalItems.Should().HaveCount(0);
         }
@@ -203,7 +203,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             };
             ItemCard card = new ItemCard("BetterDefenceSpray", CardType.Prize, PrizeCardType.Item, 4, null, false, ItemType.Additional, betterDefenceSpray, 400);
             //Act
-            deckController.UseItemCard(user, card, null);
+            deckController.UseItemCard(user, card);
             //Assert
             user.UserAvatar.Build.AdditionalItems.Should().HaveCount(0);
         }
@@ -232,7 +232,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             };
             ItemCard card = new ItemCard("BetterDefenceSpray", CardType.Prize, PrizeCardType.Item, 4, null, false, ItemType.Additional, betterDefenceSpray, 400);
             //Act
-            deckController.UseItemCard(user, card, null);
+            deckController.UseItemCard(user, card);
             //Assert
             user.UserAvatar.Build.AdditionalItems.Should().HaveCount(1);
             user.UserAvatar.Build.AdditionalItems[0].Should().BeSameAs(card);
@@ -462,7 +462,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             user.Deck.Items.Add(card);
             var deckController = new DeckController(mockReadLineOverride.Object);
             //Act
-            deckController.UseItemCard(user, card, null);
+            deckController.UseItemCard(user, card);
             //Assert
             user.UserAvatar.Build.Helmet.Should().BeSameAs(card);
             user.Deck.Items.Should().BeEmpty();
@@ -489,7 +489,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             user.Deck.Items.Add(card);
             var deckController = new DeckController(mockReadLineOverride.Object);
             //Act
-            deckController.UseItemCard(user, card, null);
+            deckController.UseItemCard(user, card);
             //Assert
             user.UserAvatar.Build.Helmet.Should().BeNull();
             user.Deck.Items.Should().HaveCount(1);
@@ -520,7 +520,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             user.Deck.Items.Add(card);
             var deckController = new DeckController(mockReadLineOverride.Object);
             //Act
-            deckController.UseItemCard(user, card, null);
+            deckController.UseItemCard(user, card);
             //Assert
             user.UserAvatar.Build.Helmet.Should().BeSameAs(card);
             user.Deck.Items.Should().HaveCount(1);
@@ -551,7 +551,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             user.Deck.Items.Add(card);
             var deckController = new DeckController(mockReadLineOverride.Object);
             //Act
-            deckController.UseItemCard(user, card, null);
+            deckController.UseItemCard(user, card);
             //Assert
             user.UserAvatar.Build.Helmet.Should().BeSameAs(oldHelmet);
             user.Deck.Items.Should().HaveCount(1);
@@ -572,7 +572,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             user.Deck.Items.Add(card);
             var deckController = new DeckController(mockReadLineOverride.Object);
             //Act
-            deckController.UseItemCard(user, card, null);
+            deckController.UseItemCard(user, card);
             //Assert
             user.UserAvatar.Build.Armor.Should().BeSameAs(card);
             user.Deck.Items.Should().BeEmpty();
@@ -599,7 +599,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             user.Deck.Items.Add(card);
             var deckController = new DeckController(mockReadLineOverride.Object);
             //Act
-            deckController.UseItemCard(user, card, null);
+            deckController.UseItemCard(user, card);
             //Assert
             user.UserAvatar.Build.Armor.Should().BeNull();
             user.Deck.Items.Should().HaveCount(1);
@@ -630,7 +630,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             user.Deck.Items.Add(card);
             var deckController = new DeckController(mockReadLineOverride.Object);
             //Act
-            deckController.UseItemCard(user, card, null);
+            deckController.UseItemCard(user, card);
             //Assert
             user.UserAvatar.Build.Armor.Should().BeSameAs(card);
             user.Deck.Items.Should().HaveCount(1);
@@ -661,7 +661,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             user.Deck.Items.Add(card);
             var deckController = new DeckController(mockReadLineOverride.Object);
             //Act
-            deckController.UseItemCard(user, card, null);
+            deckController.UseItemCard(user, card);
             //Assert
             user.UserAvatar.Build.Armor.Should().BeSameAs(oldArmor);
             user.Deck.Items.Should().HaveCount(1);
@@ -682,7 +682,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             user.Deck.Items.Add(card);
             var deckController = new DeckController(mockReadLineOverride.Object);
             //Act
-            deckController.UseItemCard(user, card, null);
+            deckController.UseItemCard(user, card);
             //Assert
             user.UserAvatar.Build.Boots.Should().BeSameAs(card);
             user.Deck.Items.Should().BeEmpty();
@@ -709,7 +709,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             user.Deck.Items.Add(card);
             var deckController = new DeckController(mockReadLineOverride.Object);
             //Act
-            deckController.UseItemCard(user, card, null);
+            deckController.UseItemCard(user, card);
             //Assert
             user.UserAvatar.Build.Boots.Should().BeNull();
             user.Deck.Items.Should().HaveCount(1);
@@ -740,7 +740,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             user.Deck.Items.Add(card);
             var deckController = new DeckController(mockReadLineOverride.Object);
             //Act
-            deckController.UseItemCard(user, card, null);
+            deckController.UseItemCard(user, card);
             //Assert
             user.UserAvatar.Build.Boots.Should().BeSameAs(card);
             user.Deck.Items.Should().HaveCount(1);
@@ -771,7 +771,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             user.Deck.Items.Add(card);
             var deckController = new DeckController(mockReadLineOverride.Object);
             //Act
-            deckController.UseItemCard(user, card, null);
+            deckController.UseItemCard(user, card);
             //Assert
             user.UserAvatar.Build.Boots.Should().BeSameAs(oldBoots);
             user.Deck.Items.Should().HaveCount(1);
