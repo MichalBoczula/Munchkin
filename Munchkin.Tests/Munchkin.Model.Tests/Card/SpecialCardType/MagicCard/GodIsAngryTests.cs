@@ -17,7 +17,7 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.SpecialCardType.MagicCard
         {
             //Arrange
             var game = new Game();
-            var curse = new GodIsAngry("Unlucky", CardType.Curse);
+            var curse = new GodIsAngry("GodIsAngry", CardType.Curse);
             var userAvatar = new UserAvatar()
             {
                 Level = 2

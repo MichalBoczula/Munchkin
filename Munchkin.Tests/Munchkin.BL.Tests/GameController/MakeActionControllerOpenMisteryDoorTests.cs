@@ -8,6 +8,7 @@ using Munchkin.Model;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.MagicCards;
 using Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret;
 using Munchkin.Model.Card.PrizeCard;
+using Munchkin.Model.Card.PrizeCard.SituationalItems;
 using Munchkin.Model.Character;
 using Munchkin.Model.User;
 using System;
@@ -434,6 +435,273 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             game.DestroyedActionCards.Should().HaveCount(2);
             user.Deck.Monsters.Should().HaveCount(0);
             userAvatar.Level.Should().Be(0);
+        }
+
+        [Fact]
+        public void OpenMisteryDoorUserUseSituationalItemInFightEnemySkip()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "1", "2", "1", "0", "0", "0", "0", "0", "0", "0", "0" }).Dequeue);
+            var random = new Random();
+            var game = new Game();
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var userAvatar = new UserAvatar
+            {
+                Level = 2
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var enemyAvater = new UserAvatar
+            {
+                Level = 1
+            };
+            var enemy = new UserClass()
+            {
+                UserAvatar = enemyAvater
+            };
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 4,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2
+            };
+            var fireBall = new FireBall("FireBall", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 400);
+            var fight = new Fight();
+            user.UserAvatar.CountPower();
+            game.ActionCards.Add(antArmy);
+            user.Deck.Items.Add(fireBall);
+            game.Users.Add(user);
+            game.Users.Add(enemy);
+            //Act
+            makeActionController.OpenMisteryDoor(user);
+            //Assert
+            user.UserAvatar.Power.Should().Be(5);
+            game.DestroyedActionCards.Should().HaveCount(1);
+            user.UserAvatar.Level.Should().Be(3);
+        }
+
+        [Fact]
+        public void OpenMisteryDoorUserUseSituationalItemInFightEnemyUseMagicCard()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "1", "2", "1", "0", "0", "1", "1", "1", "1", "0", "0", "0", "0", "0", "0", "0", "0" }).Dequeue);
+            var random = new Random();
+            var game = new Game();
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var userAvatar = new UserAvatar
+            {
+                Level = 2
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var enemyAvater = new UserAvatar
+            {
+                Level = 1
+            };
+            var enemy = new UserClass()
+            {
+                UserAvatar = enemyAvater
+            };
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 3,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2
+            };
+            var fireBall = new FireBall("FireBall", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 400);
+            var curse = new BackToSchool("BackToSchool", CardType.Curse);
+            var fight = new Fight();
+            user.UserAvatar.CountPower();
+            game.ActionCards.Add(antArmy);
+            user.Deck.Items.Add(fireBall);
+            enemy.Deck.MagicCards.Add(curse);
+            game.Users.Add(user);
+            game.Users.Add(enemy);
+            //Act
+            makeActionController.OpenMisteryDoor(user);
+            //Assert
+            user.UserAvatar.Power.Should().Be(5);
+            game.DestroyedActionCards.Should().HaveCount(2);
+            user.UserAvatar.Level.Should().Be(2);
+        }
+
+        [Fact]
+        public void OpenMisteryDoorUserUseSituationalItemInFightOneEnemyUseMagicCardSecondSkip()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "1", "2", "1", "0", "0", "1", "1", "1", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0" }).Dequeue);
+            var random = new Random();
+            var game = new Game();
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var userAvatar = new UserAvatar
+            {
+                Level = 2
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar
+            };
+            var enemyAvater = new UserAvatar
+            {
+                Level = 1
+            };
+            var enemy = new UserClass()
+            {
+                UserAvatar = enemyAvater
+            };
+            var secondEnemy = new UserAvatar
+            {
+                Level = 1
+            };
+            var second = new UserClass()
+            {
+                UserAvatar = secondEnemy
+            };
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 3,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2
+            };
+            var fireBall = new FireBall("FireBall", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 400);
+            var curse = new BackToSchool("BackToSchool", CardType.Curse);
+            var curse2 = new BackToSchool("BackToSchool", CardType.Curse);
+            var fight = new Fight();
+            user.UserAvatar.CountPower();
+            game.ActionCards.Add(antArmy);
+            user.Deck.Items.Add(fireBall);
+            enemy.Deck.MagicCards.Add(curse);
+            second.Deck.MagicCards.Add(curse2);
+            game.Users.Add(user);
+            game.Users.Add(enemy);
+            game.Users.Add(second);
+            //Act
+            makeActionController.OpenMisteryDoor(user);
+            //Assert
+            user.UserAvatar.Power.Should().Be(5);
+            game.DestroyedActionCards.Should().HaveCount(2);
+            user.UserAvatar.Level.Should().Be(2);
+            second.Deck.MagicCards.Should().HaveCount(1);
+        }
+
+        [Fact]
+        public void OpenMisteryDoorUserUseSituationalItemInFightBothEnemiesUseMagicCard()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "1", "2", "1", "0", "0", "1", "1", "1", "1", "1", "1", "0", "0", "1", "1", "1", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", }).Dequeue);
+            var random = new Random();
+            var game = new Game();
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                random,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var userAvatar = new UserAvatar
+            {
+                Level = 2
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar,
+                Name = "user"
+            };
+            var enemyAvater = new UserAvatar
+            {
+                Level = 1
+            };
+            var enemy = new UserClass()
+            {
+                UserAvatar = enemyAvater,
+                Name = "enemy"
+            };
+            var secondEnemy = new UserAvatar
+            {
+                Level = 1
+            };
+            var second = new UserClass()
+            {
+                UserAvatar = secondEnemy,
+                Name = "second"
+            };
+            var antArmy = new AntArmy("Ant Army", CardType.Monster)
+            {
+                Power = 3,
+                HowManyLevels = 1,
+                NumberOfPrizes = 2
+            };
+            var fireBall = new FireBall("FireBall", CardType.Special, PrizeCardType.Sitiuational, 0, null, false, ItemType.Sitiuational, null, 400);
+            var curse = new BackToSchool("BackToSchool", CardType.Curse);
+            var secondCurse = new GodIsAngry("GodIsAngry", CardType.Curse);
+            var fight = new Fight();
+            user.UserAvatar.CountPower();
+            game.ActionCards.Add(antArmy);
+            user.Deck.Items.Add(fireBall);
+            enemy.Deck.MagicCards.Add(curse);
+            second.Deck.MagicCards.Add(secondCurse);
+            game.Users.Add(user);
+            game.Users.Add(enemy);
+            game.Users.Add(second);
+            //Act
+            makeActionController.OpenMisteryDoor(user);
+            //Assert
+            game.DestroyedActionCards.Should().HaveCount(3);
+            user.UserAvatar.Level.Should().Be(1);
         }
     }
 }

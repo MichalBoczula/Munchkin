@@ -182,6 +182,7 @@ namespace Munchkin.BL.GameController
                         game.DestroyedActionCards.AddRange(fight.Monsters);
                         game.ActionCards.Remove(action);
                         GetPrizes(fight);
+                        GetLevels(fight, user);
                     }
                     else
                     {
@@ -267,6 +268,18 @@ namespace Munchkin.BL.GameController
             }
         }
 
+        public void GetLevels(Fight fight, UserClass user)
+        {
+            int levels = 0;
+            foreach(var mon in fight.Monsters)
+            {
+                user.UserAvatar.Level += mon.HowManyLevels;
+                levels += mon.HowManyLevels;
+            }
+            System.Console.WriteLine($"You get {levels}!. Press any key to continue...");
+            readLineOverride.GetNextString();
+        }
+
         public void PlayerAction(UserClass user, Fight fight)
         {
             while (true)
@@ -310,7 +323,7 @@ namespace Munchkin.BL.GameController
                     {
                         System.Console.WriteLine("Do you want to make an Action.\n" +
                             "1. Yes.\n" +
-                            "2. Skip.");
+                            "0. Skip.");
                         if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
                         {
                             if (result == 1)
@@ -1004,8 +1017,6 @@ namespace Munchkin.BL.GameController
                         if (result <= user.Deck.MagicCards.Count && result > 0)
                         {
                             var card = user.Deck.MagicCards[result - 1];
-                            user.Deck.MagicCards.Remove(card);
-                            game.DestroyedActionCards.Add(card);
                             UseMagicCardOnUser(card, user);
                             readLineOverride.GetNextString();
                             return;
@@ -1058,8 +1069,11 @@ namespace Munchkin.BL.GameController
                     if (result <= i && result > 0)
                     {
                         card.CastSpecialSpell(game.Users[result - 1], null, game);
+                        user.Deck.MagicCards.Remove(card);
+                        game.DestroyedActionCards.Add(card);
                         System.Console.WriteLine($"You used magic card on {user.Name }. Press enter to continue");
                         readLineOverride.GetNextString();
+                        user.UserAvatar.CountPower();
                         return;
                     }
                     else if (result == 0)
