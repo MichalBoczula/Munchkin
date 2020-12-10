@@ -25,7 +25,6 @@ namespace Munchkin.APP
         static void Main(string[] args)
         {
             //Arrange
-            var filePath = @"A:\Programowanie\C#\Kurs\Apps\Munchkin\Saves\GameSaves.txt";
             var random = new Random();
             var drawCardService = new DrawCardService(random);
             var stackCardGeneratorService = new StackCardGeneratorService();
