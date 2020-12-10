@@ -437,6 +437,7 @@ namespace Munchkin.BL.GameController
             if (card.RaceRestriction == null && card.ProficiencyRestriction == null)
             {
                 user.UserAvatar.Build.AdditionalItems.Add(card);
+                user.Deck.Items.Remove(card);
                 System.Console.WriteLine("Item added succesfully. Press enter to continue...");
                 _readLineOverride.GetNextString();
             }

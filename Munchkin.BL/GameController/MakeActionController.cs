@@ -1258,10 +1258,16 @@ namespace Munchkin.BL.GameController
             Console.WriteLine(deckController.LookOnItemsCard(user, ref i));
             if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
             {
-                if (result <= user.Deck.Items.Count)
+                if (result > 0 && result <= user.Deck.Items.Count)
                 {
                     var card = user.Deck.Items[result - 1];
                     deckController.UseItemCard(user, card);
+                }
+                else if(result == 0)
+                {
+                    System.Console.WriteLine($"You chose to not use an item. Press enter to continue.");
+                    readLineOverride.GetNextString();
+                    return;
                 }
                 else
                 {

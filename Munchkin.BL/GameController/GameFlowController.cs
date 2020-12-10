@@ -119,7 +119,14 @@ namespace Munchkin.BL.GameController
                 {
                     while (true)
                     {
+                        System.Console.WriteLine("Lets open a mistery door");
                         makeActionController.OpenMisteryDoor(user);
+                        if(user.UserAvatar.IsDied)
+                        {
+                            System.Console.WriteLine("Sorry bro you died. Press any key to continue");
+                            readLineOverride.GetNextString();
+                            continue;
+                        }
                         UseItem(user);
                         UseMagicCard(user);
                         user.UserAvatar.EndTurn();
@@ -131,6 +138,11 @@ namespace Munchkin.BL.GameController
                             return;
                         }
                     }
+                }
+                else
+                {
+                    System.Console.WriteLine("No one alive GAME OVER!!!");
+                    readLineOverride.GetNextString();
                 }
             }
         }
