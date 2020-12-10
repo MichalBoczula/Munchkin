@@ -10,42 +10,31 @@ namespace Munchkin.BL.GameController
     public class FileIOController
     {
         private string filePath;
-        private StreamWriter streamWriter;
-        private JsonWriter jsonWriter;
-        private JsonSerializer jsonSerializer;
 
         public FileIOController(string filePath)
         {
-            this.filePath =  @"A:\Programowanie\C#\Kurs\Apps\Munchkin\Saves\GameSaves.txt";
-            streamWriter = new StreamWriter(filePath);
-            jsonWriter = new JsonTextWriter(streamWriter);
-            jsonSerializer = new JsonSerializer();
-            CreateFile();
+            this.filePath = filePath;
         }
 
-        private void CreateFile()
+        public Game ReadSavedGame()
         {
-            using FileStream fs = File.Create(filePath);
-        }
-
-        public List<Game> ReadSavedGame()
-        {
-            List<Game> games;
-            using (StreamReader r = new StreamReader(filePath))
-            {
-                string json = r.ReadToEnd();
-                games = JsonConvert.DeserializeObject<List<Game>>(json);
-            }
+            using var reader = new StreamReader(filePath);
+            var ele = reader.ReadToEnd();
+            Game games = JsonConvert.DeserializeObject<Game>(ele);
             return games;
         }
 
         public void SaveGame(Game game)
         {
-            using (StreamWriter file = File.CreateText(filePath))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.Serialize(file, game);
-            }
+            using StreamWriter streamWriter = File.AppendText(filePath);
+            using JsonTextWriter jsonTextWriter = new JsonTextWriter(streamWriter)
+            { 
+                Formatting = Formatting.Indented
+            };
+            JsonSerializer jsonSerializer = new JsonSerializer();
+            jsonSerializer.Serialize(jsonTextWriter, game);
+            streamWriter.WriteLine("\n&&");
         }
+
     }
 }
