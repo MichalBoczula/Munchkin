@@ -138,6 +138,7 @@ namespace Munchkin.BL.GameController
                     {
                         user.Deck.Items.Remove(card);
                         user.UserAvatar.Build.Helmet = card;
+                        System.Console.WriteLine($"You equipped new helmet: {card.Name}. Press enter to continue");
                     }
                     else
                     {
@@ -192,6 +193,7 @@ namespace Munchkin.BL.GameController
                     {
                         user.Deck.Items.Remove(card);
                         user.UserAvatar.Build.Armor = card;
+                        System.Console.WriteLine($"You equipped new armor: {card.Name}. Press enter to continue");
                     }
                     else
                     {
@@ -246,6 +248,7 @@ namespace Munchkin.BL.GameController
                     {
                         user.Deck.Items.Remove(card);
                         user.UserAvatar.Build.Boots = card;
+                        System.Console.WriteLine($"You equipped new boots: {card.Name}. Press enter to continue");
                     }
                     else
                     {

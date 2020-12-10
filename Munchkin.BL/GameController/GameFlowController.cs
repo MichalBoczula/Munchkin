@@ -120,6 +120,10 @@ namespace Munchkin.BL.GameController
                     while (true)
                     {
                         makeActionController.OpenMisteryDoor(user);
+                        UseItem(user);
+                        UseMagicCard(user);
+                        user.UserAvatar.EndTurn();
+                        user.UserAvatar.DisplayAvatarInfo();
                         if (user.UserAvatar.ItIsOver())
                         {
                             System.Console.WriteLine($"{user.Name} has 10th level. Game is over. Winner is only one: {user.Name}!!!");
@@ -148,11 +152,16 @@ namespace Munchkin.BL.GameController
                             user.UserAvatar.CountPower();
                             user.UserAvatar.DisplayAvatarInfo();
                         }
+                        else  if (result == 0)
+                        {
+                            System.Console.WriteLine($"{user.Name} You chose to stop. Press any key to continue.");
+                            readLineOverride.GetNextString();
+                            break;
+                        }
                         else
                         {
                             System.Console.WriteLine($"{user.Name} input 1 or 0. Press any key to continue.");
                             readLineOverride.GetNextString();
-                            break;
                         }
                     }
                     else

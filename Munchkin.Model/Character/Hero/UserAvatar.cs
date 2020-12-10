@@ -188,12 +188,17 @@ namespace Munchkin.Model.Character
             System.Console.WriteLine($"Race: {Race.Name}");
             System.Console.WriteLine($"Level: {Level}");
             System.Console.WriteLine($"Power: {Power}");
-            System.Console.WriteLine($"Helmet: {Build.Helmet.Name}");
-            System.Console.WriteLine($"Armor: {Build.Armor.Name}");
-            System.Console.WriteLine($"Boots: {Build.Boots.Name}");
-            System.Console.WriteLine($"LeftHandItem: {Build.LeftHandItem.Name}");
-            System.Console.WriteLine($"RightHandItem: {Build.RightHandItem.Name}");
-            foreach(var add in Build.AdditionalItems)
+            string helmet = Build.Helmet != null ? Build.Helmet.Name : "none";
+            System.Console.WriteLine($"Helmet: {helmet}");
+            string armor = Build.Armor != null ? Build.Armor.Name : "none";
+            System.Console.WriteLine($"Armor: {armor}");
+            string boots = Build.Boots != null ? Build.Boots.Name : "none";
+            System.Console.WriteLine($"Boots: {boots}");
+            string lh = Build.LeftHandItem != null ? Build.LeftHandItem.Name : "none";
+            System.Console.WriteLine($"LeftHandItem: {lh}");
+            string rh = Build.RightHandItem != null ? Build.RightHandItem.Name : "none";
+            System.Console.WriteLine($"RightHandItem: {rh}");
+            foreach (var add in Build.AdditionalItems)
             {
                 System.Console.WriteLine($"AdditionalItem: {add.Name}");
             }

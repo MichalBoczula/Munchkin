@@ -1255,7 +1255,7 @@ namespace Munchkin.BL.GameController
         public void UseItemCard(UserClass user)
         {
             int i = 1;
-            deckController.LookOnItemsCard(user, ref i);
+            Console.WriteLine(deckController.LookOnItemsCard(user, ref i));
             if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
             {
                 if (result <= user.Deck.Items.Count)
