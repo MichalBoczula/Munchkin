@@ -113,16 +113,17 @@ namespace Munchkin.BL.GameController
 
         public void PlayTheGame()
         {
-            foreach (var user in game.Users)
+            while (true)
             {
-                if (!user.UserAvatar.IsDied)
+                foreach (var user in game.Users)
                 {
-                    while (true)
+                    if (!user.UserAvatar.IsDied)
                     {
+
                         System.Console.WriteLine($"{user.Name} Lets open a mistery door\n. Press enter to open...");
                         readLineOverride.GetNextString();
                         makeActionController.OpenMisteryDoor(user);
-                        if(user.UserAvatar.IsDied)
+                        if (user.UserAvatar.IsDied)
                         {
                             System.Console.WriteLine("Sorry bro you died. Press any key to continue");
                             readLineOverride.GetNextString();
@@ -137,16 +138,16 @@ namespace Munchkin.BL.GameController
                         user.UserAvatar.DisplayAvatarInfo();
                         System.Console.WriteLine("\n");
                         makeActionController.SellItem(user);
-                        if (user.UserAvatar.ItIsOver())
-                        {
-                            System.Console.WriteLine($"{user.Name} has 5th level. Game is over. Winner is only one: {user.Name}!!! Press enter to quit...");
-                            readLineOverride.GetNextString();
-                            return;
-                        }
+                    }
+                    if (user.UserAvatar.ItIsOver())
+                    {
+                        System.Console.WriteLine($"{user.Name} has 5th level. Game is over. Winner is only one: {user.Name}!!! Press enter to quit...");
+                        readLineOverride.GetNextString();
+                        return;
                     }
                 }
             }
-            System.Console.WriteLine("No one alive GAME OVER!!! Press enter to quit...");
+            Console.WriteLine("No one alive GAME OVER!!! Press enter to quit...");
             readLineOverride.GetNextString();
         }
 
@@ -167,7 +168,7 @@ namespace Munchkin.BL.GameController
                             user.UserAvatar.CountPower();
                             user.UserAvatar.DisplayAvatarInfo();
                         }
-                        else  if (result == 0)
+                        else if (result == 0)
                         {
                             System.Console.WriteLine($"{user.Name} You chose to stop. Press any key to continue.");
                             readLineOverride.GetNextString();
