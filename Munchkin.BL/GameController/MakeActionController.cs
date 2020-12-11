@@ -93,7 +93,7 @@ namespace Munchkin.BL.GameController
             {
                 int i = 1;
                 System.Console.WriteLine(deckController.LookOnMonstersCard(user, ref i));
-                System.Console.WriteLine("Select monster to fight:");
+                System.Console.WriteLine($"{user.Name} Select monster to fight:");
                 if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
                 {
                     if (result <= user.Deck.Monsters.Count)
@@ -104,13 +104,13 @@ namespace Munchkin.BL.GameController
                     }
                     else
                     {
-                        System.Console.WriteLine($"Choose number from 1 to {user.Deck.Monsters.Count}");
+                        System.Console.WriteLine($"{user.Name} Choose number from 1 to {user.Deck.Monsters.Count}");
                         readLineOverride.GetNextString();
                     }
                 }
                 else
                 {
-                    System.Console.WriteLine($"Choose number from 1 to {user.Deck.Monsters.Count}");
+                    System.Console.WriteLine($"{user.Name} Choose number from 1 to {user.Deck.Monsters.Count}");
                     readLineOverride.GetNextString();
                 }
             }
@@ -119,7 +119,7 @@ namespace Munchkin.BL.GameController
             fight.Monsters.Add(monster);
             while (true)
             {
-                System.Console.WriteLine("Would you like to make an action?\n" +
+                System.Console.WriteLine($"{user.Name} Would you like to make an action?\n" +
                             "You can ask for help, use special skill or card from your deck.\n" +
                             "Press 1 to make an action or press diffrent key to abort.");
                 if (Int32.TryParse(readLineOverride.GetNextString(), out int act))
@@ -130,27 +130,27 @@ namespace Munchkin.BL.GameController
                     }
                     else
                     {
-                        System.Console.WriteLine("You chose to do nothing. Press enter to fight with monster.");
+                        System.Console.WriteLine($"{ user.Name} You chose to do nothing. Press enter to fight with monster.");
                         readLineOverride.GetNextString();
                         break;
                     }
                 }
                 else
                 {
-                    System.Console.WriteLine("You chose to do nothing. Press enter to fight with monster.");
+                    System.Console.WriteLine($"{user.Name} You chose to do nothing. Press enter to fight with monster.");
                     readLineOverride.GetNextString();
                 }
             }
             if (fightController.WhoWinFight(fight))
             {
-                System.Console.WriteLine("You won a figh get some prizes!!!. Press enter to continue...");
+                System.Console.WriteLine($"{user.Name} You won a figh get some prizes!!!. Press enter to continue...");
                 readLineOverride.GetNextString();
                 game.DestroyedActionCards.AddRange(fight.Monsters);
                 GetPrizes(fight);
             }
             else
             {
-                System.Console.WriteLine("You lost a fight, now wait for you dead end!!!. Press enter to continue...");
+                System.Console.WriteLine($"{user.Name} You lost a fight, now wait for you dead end!!!. Press enter to continue...");
                 readLineOverride.GetNextString();
                 game.DestroyedActionCards.AddRange(fight.Monsters);
                 DeadEnd(fight);
@@ -214,32 +214,33 @@ namespace Munchkin.BL.GameController
                     {
                         while (true)
                         {
-                            System.Console.WriteLine("You have monster in you deck, if you don't choose fight with, you have to open next door.\n" +
+                            System.Console.WriteLine($"{user.Name} You have monster in you deck, if you don't choose fight with,\n" +
+                                $"you have to open next door.\n" +
                             "Do you want fight with monster from your deck?\n1.Yes\n2.No");
                             if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
                             {
                                 if (result == 1)
                                 {
-                                    System.Console.WriteLine("You chose to fight with monster. Press enter to continue...");
+                                    System.Console.WriteLine($"{user.Name} You chose to fight with monster. Press enter to continue...");
                                     readLineOverride.GetNextString();
                                     FightWithYouMonster(user);
                                     break;
                                 }
                                 else if (result == 2)
                                 {
-                                    System.Console.WriteLine("You chose don't fight, lets open next door. Press enter to continue...");
+                                    System.Console.WriteLine($"{user.Name} chose don't fight, lets open next door. Press enter to continue...");
                                     readLineOverride.GetNextString();
                                     break;
                                 }
                                 else
                                 {
-                                    System.Console.WriteLine("Choose one option 1 or 2. Press enter to continue...");
+                                    System.Console.WriteLine($"{user.Name} Choose one option 1 or 2. Press enter to continue...");
                                     readLineOverride.GetNextString();
                                 }
                             }
                             else
                             {
-                                System.Console.WriteLine("Choose one option 1 or 2. Press enter to continue...");
+                                System.Console.WriteLine($"{user.Name} Choose one option 1 or 2. Press enter to continue...");
                                 readLineOverride.GetNextString();
                             }
                         }
@@ -270,7 +271,7 @@ namespace Munchkin.BL.GameController
         {
             if (fightController.WhoWinFight(fight))
             {
-                System.Console.WriteLine("You won a figh get some prizes!!!. Press enter to continue...");
+                System.Console.WriteLine($"{user.Name} You won a figh get some prizes!!!. Press enter to continue...");
                 readLineOverride.GetNextString();
                 game.DestroyedActionCards.AddRange(fight.Monsters);
                 game.ActionCards.Remove(action);
@@ -279,7 +280,7 @@ namespace Munchkin.BL.GameController
             }
             else
             {
-                System.Console.WriteLine("You lost a figh, now wait for you dead end!!!. Press enter to continue...");
+                System.Console.WriteLine($"{user.Name} You lost a figh, now wait for you dead end!!!. Press enter to continue...");
                 readLineOverride.GetNextString();
                 game.DestroyedActionCards.AddRange(fight.Monsters);
                 game.ActionCards.Remove(action);
@@ -295,7 +296,7 @@ namespace Munchkin.BL.GameController
                 user.UserAvatar.Level += mon.HowManyLevels;
                 levels += mon.HowManyLevels;
             }
-            System.Console.WriteLine($"You get {levels} Levels, now has {user.UserAvatar.Level}!. Press any key to continue...");
+            System.Console.WriteLine($"{user.Name} You get {levels} Levels, now has {user.UserAvatar.Level}!. Press any key to continue...");
             readLineOverride.GetNextString();
         }
 
@@ -303,7 +304,7 @@ namespace Munchkin.BL.GameController
         {
             while (true)
             {
-                System.Console.WriteLine("Would you like to make an action?\n" +
+                System.Console.WriteLine($"{user.Name} Would you like to make an action?\n" +
                 "You can ask for help, use special skill or use card from your deck.\n" +
                 "Press 1 to make an action or press 0 to abort.");
                 if (Int32.TryParse(readLineOverride.GetNextString(), out int act))
@@ -314,19 +315,19 @@ namespace Munchkin.BL.GameController
                     }
                     else if (act == 0)
                     {
-                        System.Console.WriteLine("It' time let's fight. Press enter to fight with monster.");
+                        System.Console.WriteLine($"{user.Name} It' time let's fight. Press enter to fight with monster.");
                         readLineOverride.GetNextString();
                         break;
                     }
                     else
                     {
-                        System.Console.WriteLine("Choose option form list. Press enter to continue");
+                        System.Console.WriteLine($"{user.Name} Choose option form list. Press enter to continue");
                         readLineOverride.GetNextString();
                     }
                 }
                 else
                 {
-                    System.Console.WriteLine("Choose option form list. Press enter to continue.");
+                    System.Console.WriteLine($"{user.Name} Choose option form list. Press enter to continue.");
                     readLineOverride.GetNextString();
                 }
             }
@@ -340,7 +341,7 @@ namespace Munchkin.BL.GameController
                 {
                     while (true)
                     {
-                        System.Console.WriteLine("Do you want to make an Action.\n" +
+                        System.Console.WriteLine($"{user.Name} Do you want to make an Action.\n" +
                             "1. Yes.\n" +
                             "0. Skip.");
                         if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
@@ -351,19 +352,19 @@ namespace Munchkin.BL.GameController
                             }
                             else if (result == 0)
                             {
-                                System.Console.WriteLine("You chose to pass. Press any key to continue.");
+                                System.Console.WriteLine($"{user.Name} You chose to pass. Press any key to continue.");
                                 readLineOverride.GetNextString();
                                 break;
                             }
                             else
                             {
-                                System.Console.WriteLine("Bro input 1 or 0. Press any key to continue.");
+                                System.Console.WriteLine($"{user.Name} Bro input 1 or 0. Press any key to continue.");
                                 readLineOverride.GetNextString();
                             }
                         }
                         else
                         {
-                            System.Console.WriteLine("Something gone wrong Pleas try again. Press any key to continue.");
+                            System.Console.WriteLine($"{user.Name} Something gone wrong Pleas try again. Press any key to continue.");
                             readLineOverride.GetNextString();
                         }
                     }
@@ -473,14 +474,14 @@ namespace Munchkin.BL.GameController
                 {
                     if (fight == null)
                     {
-                        System.Console.WriteLine("There is no fight use this skill during fight. Press enter to continue...");
+                        System.Console.WriteLine($"{user.Name} There is no fight use this skill during fight. Press enter to continue...");
                         readLineOverride.GetNextString();
                         break;
                     }
                     else
                     {
-                        System.Console.WriteLine("Throw card and be stronger");
-                        System.Console.WriteLine("Do you want throw card to gain strenght?\n 1.Yes\n2.No");
+                        System.Console.WriteLine($"{user.Name} Throw card and be stronger");
+                        System.Console.WriteLine($"{user.Name} Do you want throw card to gain strenght?\n 1.Yes\n2.No");
                         if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
                         {
                             if (result == 1)
@@ -489,35 +490,35 @@ namespace Munchkin.BL.GameController
                                 if (card.DestroyedPrizeCards.Count > 0)
                                 {
                                     game.DestroyedPrizeCards.Add(card.DestroyedPrizeCards[0]);
-                                    System.Console.WriteLine("Now you are stronger. Press enter to continue...");
+                                    System.Console.WriteLine($"{user.Name} Now you are stronger. Press enter to continue...");
                                     readLineOverride.GetNextString();
                                 }
                                 else
                                 {
-                                    System.Console.WriteLine("You don't have cards. Press enter to continue...");
+                                    System.Console.WriteLine($"{user.Name} You don't have cards. Press enter to continue...");
                                     readLineOverride.GetNextString();
                                 }
                                 break;
                             }
                             else if (result == 2)
                             {
-                                System.Console.WriteLine("You didn't use skill. Press enter to continue...");
+                                System.Console.WriteLine($"{user.Name} You didn't use skill. Press enter to continue...");
                                 readLineOverride.GetNextString();
                                 break;
                             }
                             else
                             {
-                                System.Console.WriteLine("Choose option 1 or 2. Press enter to continue...");
+                                System.Console.WriteLine($"{user.Name} Choose option 1 or 2. Press enter to continue...");
                                 readLineOverride.GetNextString();
                             }
                         }
                         else
                         {
-                            System.Console.WriteLine("Choose option 1 or 2. Press enter to continue...");
+                            System.Console.WriteLine($"{user.Name} Choose option 1 or 2. Press enter to continue...");
                             readLineOverride.GetNextString();
                         }
                     }
-                    System.Console.WriteLine("You are much Stronger. Press enter to continue...");
+                    System.Console.WriteLine($"{user.Name} You are much Stronger. Press enter to continue...");
                     readLineOverride.GetNextString();
                 }
             }
@@ -527,21 +528,21 @@ namespace Munchkin.BL.GameController
                 {
                     if (fight == null)
                     {
-                        System.Console.WriteLine("There is no fight use this skill during fight. Press enter to continue...");
+                        System.Console.WriteLine($"{user.Name} There is no fight use this skill during fight. Press enter to continue...");
                         readLineOverride.GetNextString();
                         break;
                     }
                     else
                     {
-                        System.Console.WriteLine("Choose which spell you want cast:\n1. Flee spell - move much faster\n2. Instant Kill monster\n3. Quit");
+                        System.Console.WriteLine($"{user.Name} Choose which spell you want cast:\n1. Flee spell - move much faster\n2. Instant Kill monster\n3. Quit");
                         if (Int32.TryParse(readLineOverride.GetNextString(), out int choice))
                         {
                             if (choice == 1)
                             {
                                 while (true)
                                 {
-                                    System.Console.WriteLine("Throw card and be faster, it is easier to flee from monster");
-                                    System.Console.WriteLine("Do you want throw card to move faster?\n 1.Yes\n2.No");
+                                    System.Console.WriteLine($"{user.Name} Throw card and be faster, it is easier to flee from monster");
+                                    System.Console.WriteLine($"{user.Name} Do you want throw card to move faster?\n 1.Yes\n2.No");
                                     if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
                                     {
                                         if (result == 1)
@@ -550,32 +551,32 @@ namespace Munchkin.BL.GameController
                                             if (card.DestroyedPrizeCards.Count > 0)
                                             {
                                                 game.DestroyedPrizeCards.Add(card.DestroyedPrizeCards[0]);
-                                                System.Console.WriteLine("Now you are faster. Press enter to continue...");
+                                                System.Console.WriteLine($"{user.Name} Now you are faster. Press enter to continue...");
                                                 readLineOverride.GetNextString();
                                                 return;
                                             }
                                             else
                                             {
-                                                System.Console.WriteLine("You don't have cards. Press enter to continue...");
+                                                System.Console.WriteLine($"{user.Name} You don't have cards. Press enter to continue...");
                                                 readLineOverride.GetNextString();
                                                 return;
                                             }
                                         }
                                         else if (result == 2)
                                         {
-                                            System.Console.WriteLine("You didn't use skill. Press enter to continue...");
+                                            System.Console.WriteLine($"{user.Name} You didn't use skill. Press enter to continue...");
                                             readLineOverride.GetNextString();
                                             return;
                                         }
                                         else
                                         {
-                                            System.Console.WriteLine("Choose option 1 or 2. Press enter to continue...");
+                                            System.Console.WriteLine($"{user.Name} Choose option 1 or 2. Press enter to continue...");
                                             readLineOverride.GetNextString();
                                         }
                                     }
                                     else
                                     {
-                                        System.Console.WriteLine("Choose option 1 or 2. Press enter to continue...");
+                                        System.Console.WriteLine($"{user.Name} Choose option 1 or 2. Press enter to continue...");
                                         readLineOverride.GetNextString();
                                     }
                                 }
@@ -603,7 +604,7 @@ namespace Munchkin.BL.GameController
                                         {
                                             while (true)
                                             {
-                                                System.Console.WriteLine("Choose which monster will be killed?");
+                                                System.Console.WriteLine($"{user.Name} Choose which monster will be killed?");
                                                 int i = 1;
                                                 foreach (var monster in fight.Monsters)
                                                 {
@@ -618,31 +619,31 @@ namespace Munchkin.BL.GameController
                                                     }
                                                     else
                                                     {
-                                                        System.Console.WriteLine($"Choose monster from 1 to {fight.Monsters.Count}. Press enter to continue...");
+                                                        System.Console.WriteLine($"{user.Name} Choose monster from 1 to {fight.Monsters.Count}. Press enter to continue...");
                                                         readLineOverride.GetNextString();
                                                     }
                                                 }
                                                 else
                                                 {
-                                                    System.Console.WriteLine($"Choose monster from 1 to {fight.Monsters.Count}. Press enter to continue...");
+                                                    System.Console.WriteLine($"{user.Name} Choose monster from 1 to {fight.Monsters.Count}. Press enter to continue...");
                                                     readLineOverride.GetNextString();
                                                 }
                                             }
 
                                         }
-                                        System.Console.WriteLine("Monster is dying. Press enter to continue");
+                                        System.Console.WriteLine($"{user.Name} Monster is dying. Press enter to continue");
                                         readLineOverride.GetNextString();
                                     }
                                     else
                                     {
-                                        System.Console.WriteLine("Spell didn't cast Press enter to continue...");
+                                        System.Console.WriteLine($"{user.Name} Spell didn't cast Press enter to continue...");
                                         readLineOverride.GetNextString();
                                     }
 
                                 }
                                 else
                                 {
-                                    System.Console.WriteLine("Use this spell when you will be fighting. Press enter to continue...");
+                                    System.Console.WriteLine($"{user.Name} Use this spell when you will be fighting. Press enter to continue...");
                                     readLineOverride.GetNextString();
                                 }
                                 return;
@@ -650,18 +651,18 @@ namespace Munchkin.BL.GameController
                             }
                             else if (choice == 3)
                             {
-                                System.Console.WriteLine("You didn't cast a spell. Press enter to continue...");
+                                System.Console.WriteLine($"{user.Name} You didn't cast a spell. Press enter to continue...");
                                 readLineOverride.GetNextString();
                             }
                             else
                             {
-                                System.Console.WriteLine("Choose option from 1 to 3. Press enter to continue...");
+                                System.Console.WriteLine($"{user.Name} Choose option from 1 to 3. Press enter to continue...");
                                 readLineOverride.GetNextString();
                             }
                         }
                         else
                         {
-                            System.Console.WriteLine("Choose first or second option. Press enter to continue...");
+                            System.Console.WriteLine($"{user.Name} Choose first or second option. Press enter to continue...");
                             readLineOverride.GetNextString();
                         }
                     }
@@ -671,7 +672,7 @@ namespace Munchkin.BL.GameController
             {
                 while (true)
                 {
-                    System.Console.WriteLine("Choose which spell you want cast:\n1. Make monster your pet- monster is going to your Deck\n" +
+                    System.Console.WriteLine($"{user.Name} Choose which spell you want cast:\n1. Make monster your pet- monster is going to your Deck\n" +
                         "2.Restore card - drop one card and get one from destroyed\n3. Quit");
                     if (Int32.TryParse(readLineOverride.GetNextString(), out int choice))
                     {
@@ -691,20 +692,20 @@ namespace Munchkin.BL.GameController
                                 }
                                 if (result.DestroyedActionCards.Count + result.DestroyedPrizeCards.Count >= 3)
                                 {
-                                    System.Console.WriteLine("You made monster a pet use it carefully. Press enter to continue");
+                                    System.Console.WriteLine($"{user.Name} You made monster a pet use it carefully. Press enter to continue");
                                     readLineOverride.GetNextString();
                                     break;
                                 }
                                 else
                                 {
-                                    System.Console.WriteLine("You didn't make monster a pet. Press enter to continue");
+                                    System.Console.WriteLine($"{user.Name} You didn't make monster a pet. Press enter to continue");
                                     readLineOverride.GetNextString();
                                     break;
                                 }
                             }
                             else
                             {
-                                System.Console.WriteLine("Currently no one is fighting, use this skill when is a fight. Press enter to continue");
+                                System.Console.WriteLine($"{user.Name} Currently no one is fighting, use this skill when is a fight. Press enter to continue");
                                 readLineOverride.GetNextString();
                                 break;
                             }
@@ -723,31 +724,31 @@ namespace Munchkin.BL.GameController
                                     game.DestroyedPrizeCards.AddRange(result.DestroyedPrizeCards);
                                 }
 
-                                System.Console.WriteLine("You restored a card. Press enter to continue");
+                                System.Console.WriteLine($"{user.Name} You restored a card. Press enter to continue");
                                 readLineOverride.GetNextString();
                             }
                             else
                             {
-                                System.Console.WriteLine("You didn't restore a card. Press enter to continue");
+                                System.Console.WriteLine($"{user.Name} You didn't restore a card. Press enter to continue");
                                 readLineOverride.GetNextString();
                             }
                             break;
                         }
                         else if (choice == 3)
                         {
-                            System.Console.WriteLine("You didn't use a skill. Press enter to continue");
+                            System.Console.WriteLine($"{user.Name} You didn't use a skill. Press enter to continue");
                             readLineOverride.GetNextString();
                             return;
                         }
                         else
                         {
-                            System.Console.WriteLine("Choose option from 1 to 3. Press enter to continue");
+                            System.Console.WriteLine($"{user.Name} Choose option from 1 to 3. Press enter to continue");
                             readLineOverride.GetNextString();
                         }
                     }
                     else
                     {
-                        System.Console.WriteLine("Choose option from 1 to 3. Press enter to continue");
+                        System.Console.WriteLine($"{user.Name} Choose option from 1 to 3. Press enter to continue");
                         readLineOverride.GetNextString();
                     }
                 }
@@ -756,7 +757,7 @@ namespace Munchkin.BL.GameController
             {
                 while (true)
                 {
-                    System.Console.WriteLine("Choose which spell you want cast:\n1. Backstab another user\n2. Try to steal an item\n3. Quit");
+                    System.Console.WriteLine($"{user.Name} Choose which spell you want cast:\n1. Backstab another user\n2. Try to steal an item\n3. Quit");
                     if (Int32.TryParse(readLineOverride.GetNextString(), out int choice))
                     {
                         while (true)
@@ -764,7 +765,7 @@ namespace Munchkin.BL.GameController
                             if (choice == 1)
                             {
                                 List<UserClass> users = new List<UserClass>();
-                                System.Console.WriteLine("Your opponents:");
+                                System.Console.WriteLine($"{user.Name} Your opponents:");
                                 int i = 1;
                                 foreach (var hero in game.Users)
                                 {
@@ -775,33 +776,33 @@ namespace Munchkin.BL.GameController
                                         i++;
                                     }
                                 }
-                                System.Console.WriteLine($"Choose one from you opponents, choose option from 1 to {game.Users.Count}");
+                                System.Console.WriteLine($"{user.Name} Choose one from you opponents, choose option from 1 to {game.Users.Count}");
                                 if (Int32.TryParse(readLineOverride.GetNextString(), out int opponent))
                                 {
                                     if (opponent <= game.Users.Count)
                                     {
                                         var victim = users[opponent - 1];
                                         user.UserAvatar.Proficiency.BackStab(victim);
-                                        System.Console.WriteLine($"You backstabbed {victim.Name}. Press enter to continue...");
+                                        System.Console.WriteLine($"{user.Name} You backstabbed {victim.Name}. Press enter to continue...");
                                         readLineOverride.GetNextString();
                                         return;
                                     }
                                     else
                                     {
-                                        System.Console.WriteLine($"Choose one from you opponents, choose option from 1 to {game.Users.Count}");
+                                        System.Console.WriteLine($"{user.Name} Choose one from you opponents, choose option from 1 to {game.Users.Count}");
                                         readLineOverride.GetNextString();
                                     }
                                 }
                                 else
                                 {
-                                    System.Console.WriteLine($"Choose one from you opponents, choose option from 1 to {game.Users.Count}");
+                                    System.Console.WriteLine($"{user.Name} Choose one from you opponents, choose option from 1 to {game.Users.Count}");
                                     readLineOverride.GetNextString();
                                 }
                             }
                             else if (choice == 2)
                             {
                                 List<UserClass> users = new List<UserClass>();
-                                System.Console.WriteLine("Your opponents:");
+                                System.Console.WriteLine($"{user.Name} Your opponents:");
                                 int i = 1;
                                 foreach (var hero in game.Users)
                                 {
@@ -812,53 +813,53 @@ namespace Munchkin.BL.GameController
                                         i++;
                                     }
                                 }
-                                System.Console.WriteLine($"Choose one from you opponents, choose option from 1 to {game.Users.Count}");
+                                System.Console.WriteLine($"{user.Name} Choose one from you opponents, choose option from 1 to {game.Users.Count}");
                                 if (Int32.TryParse(readLineOverride.GetNextString(), out int opponent))
                                 {
                                     if (opponent <= game.Users.Count)
                                     {
                                         var victim = users[opponent - 1];
                                         user.UserAvatar.Proficiency.StealCard(user, victim);
-                                        System.Console.WriteLine($"You stole item from {victim.Name}. Press enter to continue...");
+                                        System.Console.WriteLine($"{user.Name} You stole item from {victim.Name}. Press enter to continue...");
                                         readLineOverride.GetNextString();
                                         return;
                                     }
                                     else
                                     {
-                                        System.Console.WriteLine($"Choose one from you opponents, choose option from 1 to {game.Users.Count}");
+                                        System.Console.WriteLine($"{user.Name} Choose one from you opponents, choose option from 1 to {game.Users.Count}");
                                         readLineOverride.GetNextString();
                                     }
                                 }
                                 else
                                 {
-                                    System.Console.WriteLine($"Choose one from you opponents, choose option from 1 to {game.Users.Count}");
+                                    System.Console.WriteLine($"{user.Name} Choose one from you opponents, choose option from 1 to {game.Users.Count}");
                                     readLineOverride.GetNextString();
                                 }
 
                             }
                             else if (choice == 3)
                             {
-                                System.Console.WriteLine("You didn't use skill. Press enter to continue...");
+                                System.Console.WriteLine($"{user.Name} You didn't use skill. Press enter to continue...");
                                 readLineOverride.GetNextString();
                                 return;
                             }
                             else
                             {
-                                System.Console.WriteLine("Choose one option from 1 to 3. Press enter to continue...");
+                                System.Console.WriteLine($"{user.Name} Choose one option from 1 to 3. Press enter to continue...");
                                 readLineOverride.GetNextString();
                             }
                         }
                     }
                     else
                     {
-                        System.Console.WriteLine("Choose one option from 1 to 3. Press enter to continue...");
+                        System.Console.WriteLine($"{user.Name} Choose one option from 1 to 3. Press enter to continue...");
                         readLineOverride.GetNextString();
                     }
                 }
             }
             else
             {
-                System.Console.WriteLine("You don't have special power. Press enter to continue...");
+                System.Console.WriteLine($"{user.Name} You don't have special power. Press enter to continue...");
                 readLineOverride.GetNextString();
             }
         }
@@ -878,7 +879,7 @@ namespace Munchkin.BL.GameController
         {
             if (fight == null)
             {
-                System.Console.WriteLine("Use this items when you or someone fighting. Press enter to continue...");
+                System.Console.WriteLine($"{user.Name} Use this items when you or someone fighting. Press enter to continue...");
                 readLineOverride.GetNextString();
                 return;
             }
@@ -888,7 +889,7 @@ namespace Munchkin.BL.GameController
             {
                 if (string.IsNullOrEmpty(items))
                 {
-                    System.Console.WriteLine("You don't have situational items. Press enter to continue...");
+                    System.Console.WriteLine($"{user.Name} You don't have situational items. Press enter to continue...");
                     readLineOverride.GetNextString();
                     return;
                 }
@@ -896,12 +897,12 @@ namespace Munchkin.BL.GameController
                 {
                     System.Console.WriteLine(items);
                 }
-                System.Console.WriteLine("Choose option from list, or press 0 to abort");
+                System.Console.WriteLine($"{user.Name} Choose option from list, or press 0 to abort");
                 if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
                 {
                     if (result == 0)
                     {
-                        System.Console.WriteLine("You decided to not use item. Press enter to continue...");
+                        System.Console.WriteLine($"{user.Name} You decided to not use item. Press enter to continue...");
                         readLineOverride.GetNextString();
                         return;
                     }
@@ -916,13 +917,13 @@ namespace Munchkin.BL.GameController
                     }
                     else
                     {
-                        System.Console.WriteLine("Broo choose option from list. Press enter to continue...");
+                        System.Console.WriteLine($"{user.Name} Broo choose option from list. Press enter to continue...");
                         readLineOverride.GetNextString();
                     }
                 }
                 else
                 {
-                    System.Console.WriteLine("Broo choose option from list. Press enter to continue...");
+                    System.Console.WriteLine($"{user.Name} Broo choose option from list. Press enter to continue...");
                     readLineOverride.GetNextString();
                 }
             }
@@ -933,13 +934,13 @@ namespace Munchkin.BL.GameController
         {
             if (fight == null)
             {
-                System.Console.WriteLine("Bro add monster to fight, Currently noone is fighting. Press enter to continue...");
+                System.Console.WriteLine($"{user.Name} Bro add monster to fight, Currently noone is fighting. Press enter to continue...");
                 readLineOverride.GetNextString();
                 return;
             }
             if (user.Deck.Monsters.Count == 0)
             {
-                System.Console.WriteLine("Bro you don't have monsters. Press enter to continue...");
+                System.Console.WriteLine($"{user.Name} Bro you don't have monsters. Press enter to continue...");
                 readLineOverride.GetNextString();
                 return;
             }
@@ -949,7 +950,7 @@ namespace Munchkin.BL.GameController
                 var monsters = user.Deck.Monsters.Where(x => x.Undead.Equals(true)).ToList();
                 if (monsters.Count == 0)
                 {
-                    System.Console.WriteLine("You don't have undead monster in deck and AdditionalMonster magic card. " +
+                    System.Console.WriteLine($"{user.Name} You don't have undead monster in deck and AdditionalMonster magic card. " +
                         "You can't add monster to fight. Press enter to continue...");
                     readLineOverride.GetNextString();
                 }
@@ -957,7 +958,7 @@ namespace Munchkin.BL.GameController
                 {
                     while (true)
                     {
-                        System.Console.WriteLine("You can add undead monsters to fight:");
+                        System.Console.WriteLine($"{user.Name} You can add undead monsters to fight:");
                         int i = 0;
                         foreach (var mon in monsters)
                         {
@@ -965,7 +966,7 @@ namespace Munchkin.BL.GameController
                             System.Console.WriteLine($"{i}. {mon.Name}, {mon.Power}");
                             System.Console.WriteLine("______________________________________________________________________________");
                         }
-                        System.Console.WriteLine("Choose option from above list or press 0 to don't do anything");
+                        System.Console.WriteLine($"{user.Name} Choose option from above list or press 0 to don't do anything");
                         if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
                         {
                             if (result <= i)
@@ -977,18 +978,18 @@ namespace Munchkin.BL.GameController
                             }
                             else if (result == 0)
                             {
-                                System.Console.WriteLine("You decide to not add monster to fight. Press enter to continue...");
+                                System.Console.WriteLine($"{user.Name} You decide to not add monster to fight. Press enter to continue...");
                                 readLineOverride.GetNextString();
                             }
                             else
                             {
-                                System.Console.WriteLine("Choose option from above list or press 0 to don't do anything");
+                                System.Console.WriteLine($"{user.Name} Choose option from above list or press 0 to don't do anything");
                                 readLineOverride.GetNextString();
                             }
                         }
                         else
                         {
-                            System.Console.WriteLine("Choose option from above list or press 0 to don't do anything");
+                            System.Console.WriteLine($"{user.Name} Choose option from above list or press 0 to don't do anything");
                             readLineOverride.GetNextString();
                         }
                     }
@@ -998,7 +999,7 @@ namespace Munchkin.BL.GameController
             {
                 while (true)
                 {
-                    System.Console.WriteLine("You can add monsters to fight:");
+                    System.Console.WriteLine($"{user.Name} You can add monsters to fight:");
                     int i = 0;
                     foreach (var mon in user.Deck.Monsters)
                     {
@@ -1027,18 +1028,18 @@ namespace Munchkin.BL.GameController
                         }
                         else if (result == 0)
                         {
-                            System.Console.WriteLine("You decide to not add monster to fight. Press enter to continue...");
+                            System.Console.WriteLine($"{user.Name} You decide to not add monster to fight. Press enter to continue...");
                             readLineOverride.GetNextString();
                         }
                         else
                         {
-                            System.Console.WriteLine("Choose option from above list or press 0 to don't do anything");
+                            System.Console.WriteLine($"{user.Name} Choose option from above list or press 0 to don't do anything");
                             readLineOverride.GetNextString();
                         }
                     }
                     else
                     {
-                        System.Console.WriteLine("Choose option from above list or press 0 to don't do anything");
+                        System.Console.WriteLine($"{user.Name} Choose option from above list or press 0 to don't do anything");
                         readLineOverride.GetNextString();
                     }
                 }
@@ -1049,7 +1050,7 @@ namespace Munchkin.BL.GameController
         {
             if (user.Deck.MagicCards.Count == 0)
             {
-                System.Console.WriteLine("Broo you don't have magic card. Press enter to continue...");
+                System.Console.WriteLine($"{user.Name} Broo you don't have magic card. Press enter to continue...");
                 readLineOverride.GetNextString();
                 return;
             }
@@ -1065,7 +1066,7 @@ namespace Munchkin.BL.GameController
                         magic.Description();
                         System.Console.WriteLine("______________________________________________________________________________");
                     }
-                    System.Console.WriteLine($"Choose card from 1 to {i}, or press 0 to abort.");
+                    System.Console.WriteLine($"{user.Name} Choose card from 1 to {i}, or press 0 to abort.");
                     if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
                     {
                         if (result <= user.Deck.MagicCards.Count && result > 0)
@@ -1077,20 +1078,20 @@ namespace Munchkin.BL.GameController
                         }
                         else if (result == 0)
                         {
-                            System.Console.WriteLine($"You didn't use magic card. Press enter to continue");
+                            System.Console.WriteLine($"{user.Name} You didn't use magic card. Press enter to continue");
                             readLineOverride.GetNextString();
                             return;
                         }
                         else
                         {
-                            System.Console.WriteLine($"Broo it's easy!!! Choose card from 1 to {i}, " +
+                            System.Console.WriteLine($"{user.Name} Broo it's easy!!! Choose card from 1 to {i}, " +
                                 $"or press 0 to abort. Press enter to continue");
                             readLineOverride.GetNextString();
                         }
                     }
                     else
                     {
-                        System.Console.WriteLine($"Something gone wrong. Please try again. " +
+                        System.Console.WriteLine($"{user.Name} Something gone wrong. Please try again. " +
                             $"Choose card from 1 to {i}, or press 0 to abort. Press enter to continue");
                         readLineOverride.GetNextString();
                     }
@@ -1117,7 +1118,7 @@ namespace Munchkin.BL.GameController
                     }
 
                 }
-                System.Console.WriteLine("Choose her on which you would like to use magic card, or choose 0 to abort.");
+                System.Console.WriteLine($"{user.Name} Choose her on which you would like to use magic card, or choose 0 to abort.");
                 if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
                 {
                     if (result <= i && result > 0)
@@ -1125,20 +1126,20 @@ namespace Munchkin.BL.GameController
                         card.CastSpecialSpell(game.Users[result - 1], null, game);
                         user.Deck.MagicCards.Remove(card);
                         game.DestroyedActionCards.Add(card);
-                        System.Console.WriteLine($"You used magic card on {user.Name }. Press enter to continue");
+                        System.Console.WriteLine($"{user.Name} You used magic card on {user.Name }. Press enter to continue");
                         readLineOverride.GetNextString();
                         user.UserAvatar.CountPower();
                         return;
                     }
                     else if (result == 0)
                     {
-                        System.Console.WriteLine($"You didn't use magic card. Press enter to continue");
+                        System.Console.WriteLine($"{user.Name} You didn't use magic card. Press enter to continue");
                         readLineOverride.GetNextString();
                         return;
                     }
                     else
                     {
-                        System.Console.WriteLine("Bro something gone wrong...\n" +
+                        System.Console.WriteLine($"{user.Name} Bro something gone wrong...\n" +
                             "Choose her on which you would like to use magic card, or choose 0 to abort.\n" +
                             "Press enter to continue");
                         readLineOverride.GetNextString();
@@ -1146,7 +1147,7 @@ namespace Munchkin.BL.GameController
                 }
                 else
                 {
-                    System.Console.WriteLine("Bro something gone wrong...\n" +
+                    System.Console.WriteLine($"{user.Name} Bro something gone wrong...\n" +
                             "Choose her on which you would like to use magic card, or choose 0 to abort.\n" +
                             "Press enter to continue");
                     readLineOverride.GetNextString();
@@ -1167,26 +1168,26 @@ namespace Munchkin.BL.GameController
                         {
                             if (result == 1)
                             {
-                                System.Console.WriteLine("You have choosen to join!!! Press enter to continue...");
+                                System.Console.WriteLine($"{hero.Name} You have choosen to join!!! Press enter to continue...");
                                 JoinToFight(hero, fight);
                                 readLineOverride.GetNextString();
                                 break;
                             }
                             else if (result == 2)
                             {
-                                System.Console.WriteLine("You have choosen to not join to fight. Press enter to continue...");
+                                System.Console.WriteLine($"{hero.Name} You have choosen to not join to fight. Press enter to continue...");
                                 readLineOverride.GetNextString();
                                 break;
                             }
                             else
                             {
-                                System.Console.WriteLine("Choose option from list. Press enter to continue...");
+                                System.Console.WriteLine($"{hero.Name} Choose option from list. Press enter to continue...");
                                 readLineOverride.GetNextString();
                             }
                         }
                         else
                         {
-                            System.Console.WriteLine("Choose option from list. Press enter to continue...");
+                            System.Console.WriteLine($"{hero.Name} Choose option from list. Press enter to continue...");
                             readLineOverride.GetNextString();
                         }
                     }
@@ -1200,7 +1201,7 @@ namespace Munchkin.BL.GameController
         {
             if (fight == null)
             {
-                System.Console.WriteLine($"There is no fight brooo. Press enter to continue...");
+                System.Console.WriteLine($"{user.Name} There is no fight brooo. Press enter to continue...");
                 readLineOverride.GetNextString();
             }
             fight.Heros.Add(user);
@@ -1210,7 +1211,7 @@ namespace Munchkin.BL.GameController
 
         public void SellItem(UserClass user)
         {
-            System.Console.WriteLine($"Do you want to sell an item?\n1.Yes\n0.No");
+            System.Console.WriteLine($"{user.Name} Do you want to sell an item?\n1.Yes\n0.No");
             if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
             {
                 if (result == 1)
@@ -1222,18 +1223,18 @@ namespace Munchkin.BL.GameController
                 }
                 else if (result == 0)
                 {
-                    System.Console.WriteLine($"You chose to not sell. Press enter to continue...");
+                    System.Console.WriteLine($"{user.Name} You chose to not sell. Press enter to continue...");
                     readLineOverride.GetNextString();
                 }
                 else
                 {
-                    System.Console.WriteLine($"Bro chose 1 or 0 to make an action. Press enter to continue...");
+                    System.Console.WriteLine($" {user.Name} Bro chose 1 or 0 to make an action. Press enter to continue...");
                     readLineOverride.GetNextString();
                 }
             }
             else
             {
-                System.Console.WriteLine($"Bro chose 1 or 0 to make an action. Press enter to continue...");
+                System.Console.WriteLine($"{user.Name} Bro chose 1 or 0 to make an action. Press enter to continue...");
                 readLineOverride.GetNextString();
             }
         }
@@ -1242,7 +1243,7 @@ namespace Munchkin.BL.GameController
         {
             while (true)
             {
-                System.Console.WriteLine("Choose an action:\n" +
+                System.Console.WriteLine($"{user.Name} Choose an action:\n" +
                     "1. Ask for Help\n" +
                     "2. Use Situational Card\n" +
                     "3. Use Skill\n" +
@@ -1253,13 +1254,13 @@ namespace Munchkin.BL.GameController
                 {
                     if (result < 0 || result > 5)
                     {
-                        System.Console.WriteLine("Choose action from list brooo. Press enter to continue.");
+                        System.Console.WriteLine($"{user.Name} Choose action from list brooo. Press enter to continue.");
                         readLineOverride.GetNextString();
                     }
                     switch (result)
                     {
                         case 0:
-                            System.Console.WriteLine("You chose to don't make an action. Press enter to continue.");
+                            System.Console.WriteLine($"{user.Name} You chose to don't make an action. Press enter to continue.");
                             readLineOverride.GetNextString();
                             return;
                         case 1:
@@ -1280,20 +1281,20 @@ namespace Munchkin.BL.GameController
                                 var outcome = Flee(user);
                                 if (outcome)
                                 {
-                                    System.Console.WriteLine("You succesfully fled from monster. Press enter to continue...");
+                                    System.Console.WriteLine($"{user.Name} You succesfully fled from monster. Press enter to continue...");
                                     readLineOverride.GetNextString();
                                     user.UserAvatar.FleeAway = true;
                                 }
                                 else
                                 {
-                                    System.Console.WriteLine("Monster is much faster than you Bro." +
+                                    System.Console.WriteLine($"{user.Name} Monster is much faster than you Bro." +
                                         "\nThere is no option you must fight with this ugly creature. Press enter to continue...");
                                     readLineOverride.GetNextString();
                                 }
                             }
                             else
                             {
-                                System.Console.WriteLine("Bro you tried to fled but unsuccesfully.\n" +
+                                System.Console.WriteLine($"{user.Name} Bro you tried to fled but unsuccesfully.\n" +
                                     "You can't try again. Press enter to continue...");
                                 readLineOverride.GetNextString();
                             }
@@ -1302,7 +1303,7 @@ namespace Munchkin.BL.GameController
                 }
                 else
                 {
-                    System.Console.WriteLine("Something gone wrong pls try again choose option from list. Press enter to continue.");
+                    System.Console.WriteLine($"{user.Name} Something gone wrong pls try again choose option from list. Press enter to continue.");
                     readLineOverride.GetNextString();
                 }
             }
@@ -1312,7 +1313,7 @@ namespace Munchkin.BL.GameController
         {
             while (true)
             {
-                System.Console.WriteLine("Choose an action:\n" +
+                System.Console.WriteLine($"{user.Name} Choose an action:\n" +
                     "1. Use Magic Card\n" +
                     "2. Use Situational Card\n" +
                     "3. Use Skill\n" +
@@ -1322,13 +1323,13 @@ namespace Munchkin.BL.GameController
                 {
                     if (result < 0 || result > 4)
                     {
-                        System.Console.WriteLine("Choose action from list brooo. Press enter to continue.");
+                        System.Console.WriteLine($"{user.Name} Choose action from list brooo. Press enter to continue.");
                         readLineOverride.GetNextString();
                     }
                     switch (result)
                     {
                         case 0:
-                            System.Console.WriteLine("You chose to don't make an action. Press enter to continue.");
+                            System.Console.WriteLine($"{user.Name} You chose to don't make an action. Press enter to continue.");
                             readLineOverride.GetNextString();
                             return;
                         case 1:
@@ -1347,7 +1348,7 @@ namespace Munchkin.BL.GameController
                 }
                 else
                 {
-                    System.Console.WriteLine("Something gone wrong pls try again choose option from list. Press enter to continue.");
+                    System.Console.WriteLine($"{user.Name} Something gone wrong pls try again choose option from list. Press enter to continue.");
                     readLineOverride.GetNextString();
                 }
             }
@@ -1368,19 +1369,19 @@ namespace Munchkin.BL.GameController
                 }
                 else if (result == 0)
                 {
-                    System.Console.WriteLine($"You chose to not use an item. Press enter to continue.");
+                    System.Console.WriteLine($"{user.Name} You chose to not use an item. Press enter to continue.");
                     readLineOverride.GetNextString();
                     return;
                 }
                 else
                 {
-                    System.Console.WriteLine($"Bro please input number from 1 to {user.Deck.Items.Count}. Press enter to continue.");
+                    System.Console.WriteLine($"{user.Name} Bro please input number from 1 to {user.Deck.Items.Count}. Press enter to continue.");
                     readLineOverride.GetNextString();
                 }
             }
             else
             {
-                System.Console.WriteLine($"Bro please input number from 1 to {user.Deck.Items.Count}. Press enter to continue.");
+                System.Console.WriteLine($"{user.Name} Bro please input number from 1 to {user.Deck.Items.Count}. Press enter to continue.");
                 readLineOverride.GetNextString();
             }
         }

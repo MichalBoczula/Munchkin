@@ -135,6 +135,7 @@ namespace Munchkin.BL.GameController
                         makeActionController.gameAction.IsFirstTime = true;
                         makeActionController.gameAction.IsFight = false;
                         user.UserAvatar.DisplayAvatarInfo();
+                        System.Console.WriteLine("\n");
                         makeActionController.SellItem(user);
                         if (user.UserAvatar.ItIsOver())
                         {
