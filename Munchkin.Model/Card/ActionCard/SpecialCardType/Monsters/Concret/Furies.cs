@@ -35,6 +35,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         public override string Description()
         {
             return "Monster: Furies\n" +
+                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}" +
                 "SpecialPower: Monster gain 4 when player proficiency is Thief\n" +
                 "Dead End: Player Level -= 1 && Player Power Nerf += 2 && Player Flee Chances Nerf += 1";
         }

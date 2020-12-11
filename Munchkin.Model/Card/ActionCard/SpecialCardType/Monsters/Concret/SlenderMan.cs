@@ -29,6 +29,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         public override string Description()
         {
             return "Monster: SlenderMan\n" +
+                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}" +
                 "SpecialPower: Player get wound nerf.\n" +
                 "Dead End: Player lose proficiency and now is NoOne.";
         }

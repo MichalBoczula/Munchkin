@@ -47,6 +47,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         public override string Description()
         {
             return "Monster: Cerber\n" +
+                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}" +
                 "SpecialPower: Monster gain 3 power when player proficiency is Priest\n" +
                 "Dead End: Player has permanent torn off arm and can't use a weapons and lose both weapons";
         }

@@ -127,6 +127,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         public override string Description()
         {
             return "Monster: Loki\n" +
+                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}" +
                 "SpecialPower: Player lose proficiency and is NoOne.\n" +
                 "Dead End: Player lose most expensive item";
         }

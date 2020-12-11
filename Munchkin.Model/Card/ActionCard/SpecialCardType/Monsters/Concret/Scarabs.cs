@@ -32,6 +32,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         public override string Description()
         {
             return "Monster: Scarabs\n" +
+                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}" +
                 "SpecialPower: Player don't have a boot then monster gain 3 power.\n" +
                 "Dead End: Player Power Nerf += 2 && Player Flee Chances Nerf += 2.";
         }

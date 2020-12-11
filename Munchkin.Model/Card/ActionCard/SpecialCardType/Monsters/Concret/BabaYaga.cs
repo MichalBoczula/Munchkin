@@ -29,6 +29,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         public override string Description()
         {
             return "Monster: BabaYaga\n" +
+                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}" +
                 "SpecialPower: Player Wound Nerf += 1\n" +
                 "Dead End: Player Lose all cards from deck";
         }

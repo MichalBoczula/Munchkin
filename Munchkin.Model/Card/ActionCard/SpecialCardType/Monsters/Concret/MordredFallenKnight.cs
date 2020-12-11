@@ -32,6 +32,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         public override string Description()
         {
             return "Monster: MordredFallenKnight\n" +
+                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}" +
                 "SpecialPower: Monster gain 3 power when Player has diffren proficiency then Warrior.\n" +
                 "Dead End: Player get wound nerf.";
         }

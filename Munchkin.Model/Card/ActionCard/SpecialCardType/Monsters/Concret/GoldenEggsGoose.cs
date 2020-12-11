@@ -156,6 +156,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         public override string Description()
         {
             return "Monster: GoldenEggsGoose\n" +
+                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}" +
                 "SpecialPower: Player has to choose which prize prefer: Level or Items\n" +
                 "Dead End: Player lose the most expensive item";
         }

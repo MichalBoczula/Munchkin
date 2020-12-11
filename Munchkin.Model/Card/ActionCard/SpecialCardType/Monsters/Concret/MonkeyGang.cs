@@ -132,6 +132,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         public override string Description()
         {
             return "Monster: MonkeyGang\n" +
+                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}" +
                 "SpecialPower: If Player proficiency is Thief, Monsters power increase by 2.\n" +
                 "Dead End: Monkey try to steal each item from players build";
         }

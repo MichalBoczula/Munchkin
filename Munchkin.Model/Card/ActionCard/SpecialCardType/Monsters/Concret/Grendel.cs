@@ -38,6 +38,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         public override string Description()
         {
             return "Monster: Grendel\n" +
+                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}" +
                 "SpecialPower: Monster gain 5 power when Player race is Dwarf\n" +
                 "Dead End: Player has broken ribs and can't use armor and lose actual equiped armor";
         }

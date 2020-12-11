@@ -48,6 +48,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         public override string Description()
         {
             return "Monster: Creeps\n" +
+                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}" +
                 "SpecialPower: Monster gain 5 when player proficiency is diffrent then Mage or Priest, other wise lose 3 point of power\n" +
                 "Dead End: Player has permanent torn off arm and can't use a weapons and lose both weapons";
         }
