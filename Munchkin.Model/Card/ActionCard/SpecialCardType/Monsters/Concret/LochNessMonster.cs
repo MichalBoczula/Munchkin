@@ -28,7 +28,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         public override string Description()
         {
             return "Monster: LochNessMonster\n" +
-                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}" +
+                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}\n" +
                 "SpecialPower: Player is poison.\n" +
                 "Dead End: Player lose 2 levels. Player Level -= 2";
         }

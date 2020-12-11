@@ -28,7 +28,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         public override string Description()
         {
             return "Monster: Hades\n" +
-                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}" +
+                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}\n" +
                 "SpecialPower: Player get wounds nerf.\n" +
                 "Dead End: Player die. It's over of your journey...";
         }

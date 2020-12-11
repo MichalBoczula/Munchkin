@@ -32,7 +32,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         public override string Description()
         {
             return "Monster: Shaman\n" +
-                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}" +
+                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}\n" +
                 "SpecialPower: If player proficiency is Mage or Priest then monster gain 5 power.\n" +
                 "Dead End: Player poison by Shaman.";
         }

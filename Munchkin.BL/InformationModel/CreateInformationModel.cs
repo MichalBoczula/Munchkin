@@ -10,7 +10,7 @@ namespace Munchkin.BL.InformationModel
     {
         public string InputName { get => "Input your name Stranger"; }
         public string PressKeyMessage { get => "Press any Enter..."; }
-        public string BeginJourney { get => "Start to begin your journey!!!"; }
+        public string BeginJourney { get => "Start to begin your journey!!! Remember to win you need reach 5th level. Good Luck!!!"; }
         public string DrawCardRaceCard { get => "Now it's time to choose your Race"; }
         public string DrawCardProficiencyCard { get => "Next step into Munchkin world is train to be hero"; }
 

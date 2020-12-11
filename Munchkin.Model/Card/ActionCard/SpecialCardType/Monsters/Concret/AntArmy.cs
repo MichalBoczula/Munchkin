@@ -34,7 +34,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         public override string Description()
         {
             return "Monster: AntArmy\n" +
-                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}" +
+                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}\n" +
                 "SpecialPower: Player Flee Chances = -999\n" +
                 "Dead End: Player Flee Chances Nerf += 1 && Destroy Boots";
         }

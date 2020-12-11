@@ -37,7 +37,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         public override string Description()
         {
             return "Monster: Minotaur\n" +
-                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}" +
+                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}\n" +
                 "SpecialPower: If Player don't have helmet, Monsters power increase by 2.\n" +
                 "Dead End: Player lose helmet and has damaged head and can't use helmet anymore.";
         }

@@ -130,6 +130,8 @@ namespace Munchkin.BL.GameController
                         UseItem(user);
                         UseMagicCard(user);
                         user.UserAvatar.EndTurn();
+                        makeActionController.gameAction.IsFirstTime = true;
+                        makeActionController.gameAction.IsFirstTime = false;
                         user.UserAvatar.DisplayAvatarInfo();
                         if (user.UserAvatar.ItIsOver())
                         {

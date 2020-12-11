@@ -60,7 +60,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         public override string Description()
         {
             return "Monster: NonDecided\n" +
-                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}" +
+                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}\n" +
                 "SpecialPower: Player can decide fight or not.\n" +
                 "Dead End: Player Level -= 1 && Player Power Nerf += 1 && Player Flee Chances Nerf += 1.";
         }

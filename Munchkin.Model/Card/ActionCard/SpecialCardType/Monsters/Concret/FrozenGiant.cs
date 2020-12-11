@@ -41,7 +41,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         public override string Description()
         {
             return "Monster: FrozenGiant\n" +
-                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}" +
+                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}\n" +
                 "SpecialPower: Monster gain 4 when player race is Halfing but halfing get two levels when win fight\n" +
                 "Dead End: Player has permanent broke legs and can't use a boots and lose actual equipped boots";
         }

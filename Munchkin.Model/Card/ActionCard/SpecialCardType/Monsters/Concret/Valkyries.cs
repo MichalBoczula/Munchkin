@@ -132,7 +132,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         public override string Description()
         {
             return "Monster: Valkyries\n" +
-                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}" +
+                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}\n" +
                 "SpecialPower: Monster get 4 power when player has weapon and get 2 power when player proficiency is Warrior.\n" +
                 "Dead End: Player lose most powerful item.";
         }

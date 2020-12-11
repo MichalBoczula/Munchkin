@@ -42,7 +42,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         public override string Description()
         {
             return "Monster: Kraken\n" +
-                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}" +
+                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}\n" +
                 "SpecialPower: Monster gain 3 power when player race is dwarf or halfing, otherwise monsters power increased by 5\n" +
                 "Dead End: Player has broken ribs and can't use armor and lose actual equiped armor";
         }

@@ -36,7 +36,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         public override string Description()
         {
             return "Monster: BloodyMary\n" +
-                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}" +
+                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}\n" +
                 "SpecialPower: Player Power Nerf += 2 && Player Flee Chances Nerf += 1 && Player Level -= 2\n" +
                 "Dead End: Player has permanent dameged head and can use a helmet and lose actual equipped helmet";
         }

@@ -276,7 +276,7 @@ namespace Munchkin.BL.GameController
                 user.UserAvatar.Level += mon.HowManyLevels;
                 levels += mon.HowManyLevels;
             }
-            System.Console.WriteLine($"You get {levels}!. Press any key to continue...");
+            System.Console.WriteLine($"You get {levels} Levels, now has {user.UserAvatar.Level}!. Press any key to continue...");
             readLineOverride.GetNextString();
         }
 
@@ -386,6 +386,7 @@ namespace Munchkin.BL.GameController
                 while (prizes > 0)
                 {
                     var card = prizeStackController.DrawCard();
+                    System.Console.WriteLine(DisplayCardInfo(card));
                     fight.Heros[0].Deck.Items.Add(card);
                     prizes--;
                 }
@@ -409,6 +410,39 @@ namespace Munchkin.BL.GameController
                     }
                 }
             }
+        }
+
+        private string DisplayCardInfo(ItemCard card)
+        {
+            StringBuilder strBuilder = new StringBuilder();
+            strBuilder.Append($"Name: {card.Name}, Power: {card.Power} ");
+            strBuilder.Append($"ItemType: {card.ItemType}, CardType: {card.CardType}");
+            strBuilder.Append($"Price: {card.Price} ");
+            strBuilder.Append($"TwoHanded: {card.IsTwoHanded} ");
+            if (card.RaceRestriction != null)
+            {
+                if (card.RaceRestriction.TryGetValue(true, out RaceBase value))
+                {
+                    strBuilder.Append($", {value.Name}: true, ");
+                }
+                else
+                {
+                    strBuilder.Append($", {card.RaceRestriction[false].Name}: false, ");
+                }
+            }
+            if (card.ProficiencyRestriction != null)
+            {
+                if (card.ProficiencyRestriction.TryGetValue(true, out ProficiencyBase value))
+                {
+                    strBuilder.Append($", {value.Name}: true, ");
+                }
+                else
+                {
+                    strBuilder.Append($", {card.ProficiencyRestriction[false].Name}: false");
+                }
+            }
+            strBuilder.Append(";\n");
+            return strBuilder.ToString();
         }
 
 #nullable enable

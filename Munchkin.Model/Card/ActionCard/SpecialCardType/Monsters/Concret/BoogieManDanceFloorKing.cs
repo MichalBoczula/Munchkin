@@ -38,7 +38,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         public override string Description()
         {
             return "Monster: BoogieManDanceFloorKing\n" +
-                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}" +
+                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}\n" +
                 "SpecialPower: Monster gain power equal to players boots power\n" +
                 "Dead End: Player has permanent broken legs and can use a boots && Lose actual equip boots item";
         }
