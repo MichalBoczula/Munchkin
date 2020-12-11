@@ -173,24 +173,22 @@ namespace Munchkin.BL.GameController
                     fight.Monsters.Add((MonsterCardBase)action);
                     System.Console.WriteLine(action.Description());
                     PlayerAction(user, fight);
-                    EnemyChooseAction(user, fight);
-                    PlayerAction(user, fight);
-                    if (fightController.WhoWinFight(fight))
+                    if (!user.UserAvatar.FleeAway)
                     {
-                        System.Console.WriteLine("You won a figh get some prizes!!!. Press enter to continue...");
-                        readLineOverride.GetNextString();
-                        game.DestroyedActionCards.AddRange(fight.Monsters);
-                        game.ActionCards.Remove(action);
-                        GetPrizes(fight);
-                        GetLevels(fight, user);
+                        EnemyChooseAction(user, fight);
+                        PlayerAction(user, fight);
+                        if (!user.UserAvatar.FleeAway)
+                        {
+                            LetsFight(user, action, fight);
+                        }
+                        else
+                        {
+                            _drawCardService.Shuffle(game.ActionCards);
+                        }
                     }
                     else
                     {
-                        System.Console.WriteLine("You lost a figh, now wait for you dead end!!!. Press enter to continue...");
-                        readLineOverride.GetNextString();
-                        game.DestroyedActionCards.AddRange(fight.Monsters);
-                        game.ActionCards.Remove(action);
-                        DeadEnd(fight);
+                        _drawCardService.Shuffle(game.ActionCards);
                     }
                 }
                 else
@@ -265,6 +263,27 @@ namespace Munchkin.BL.GameController
                     game.ActionCards.Remove(action);
                     user.Deck.MagicCards.Add(action);
                 }
+            }
+        }
+
+        private void LetsFight(UserClass user, ActionCardBase action, Fight fight)
+        {
+            if (fightController.WhoWinFight(fight))
+            {
+                System.Console.WriteLine("You won a figh get some prizes!!!. Press enter to continue...");
+                readLineOverride.GetNextString();
+                game.DestroyedActionCards.AddRange(fight.Monsters);
+                game.ActionCards.Remove(action);
+                GetPrizes(fight);
+                GetLevels(fight, user);
+            }
+            else
+            {
+                System.Console.WriteLine("You lost a figh, now wait for you dead end!!!. Press enter to continue...");
+                readLineOverride.GetNextString();
+                game.DestroyedActionCards.AddRange(fight.Monsters);
+                game.ActionCards.Remove(action);
+                DeadEnd(fight);
             }
         }
 
@@ -849,6 +868,7 @@ namespace Munchkin.BL.GameController
             var chance = user.UserAvatar.FleeChances + random.Next(6) + 1;
             if (chance >= 6)
             {
+                user.UserAvatar.TryToFlee = true;
                 return true;
             }
             return false;
@@ -1205,10 +1225,11 @@ namespace Munchkin.BL.GameController
                     "2. Use Situational Card\n" +
                     "3. Use Skill\n" +
                     "4. Use Monster Card\n" +
+                    "5. Flee from fighting\n" +
                     "0. Don't make an Action.");
                 if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
                 {
-                    if (result < 0 || result > 4)
+                    if (result < 0 || result > 5)
                     {
                         System.Console.WriteLine("Choose action from list brooo. Press enter to continue.");
                         readLineOverride.GetNextString();
@@ -1230,6 +1251,24 @@ namespace Munchkin.BL.GameController
                             return;
                         case 4:
                             UseMonsterCard(user, fight);
+                            return;
+                        case 5:
+                            if (!user.UserAvatar.TryToFlee)
+                            {
+                                var outcome = Flee(user);
+                                if (outcome)
+                                {
+                                    System.Console.WriteLine("You succesfully fled from monster. Press enter to continue...");
+                                    readLineOverride.GetNextString();
+                                    user.UserAvatar.FleeAway = true;
+                                }
+                                else
+                                {
+                                    System.Console.WriteLine("Monster is much faster than you Bro," +
+                                        " there is no option you must fight with this ugly creature. Press enter to continue...");
+                                    readLineOverride.GetNextString();
+                                }
+                            }
                             return;
                     }
                 }

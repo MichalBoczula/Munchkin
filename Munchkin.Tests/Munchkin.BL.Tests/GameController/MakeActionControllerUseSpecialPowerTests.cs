@@ -874,7 +874,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             user.Deck.MagicCards.Count.Should().Be(0);
             game.DestroyedPrizeCards.Count.Should().Be(4);
             game.DestroyedActionCards.Count.Should().Be(1);
-            fight.Monsters.Count.Should().Be(2);
+            fight.Monsters.Count.Should().Be(1);
         }
 
         [Fact]

@@ -24,6 +24,8 @@ namespace Munchkin.Model.Character
         public Curses Curses;
         public int Wallet { get; set; }
         public bool DidItemSell { get; set; }
+        public bool TryToFlee { get; set; }
+        public bool FleeAway { get; set; }
 
         public UserAvatar()
         {
@@ -41,6 +43,8 @@ namespace Munchkin.Model.Character
             CountPower();
             Wallet = 0;
             DidItemSell = false;
+            TryToFlee = false;
+            FleeAway = false;
         }
 
         public void CountPower()
@@ -175,6 +179,8 @@ namespace Munchkin.Model.Character
             HowManyCardsThrowToUseSkill = 0;
             Proficiency.CleanAfterTurn();
             DidItemSell = false;
+            TryToFlee = false;
+            FleeAway = false;
         }
 
         public bool ItIsOver()

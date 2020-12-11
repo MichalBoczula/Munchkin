@@ -703,5 +703,94 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             game.DestroyedActionCards.Should().HaveCount(3);
             user.UserAvatar.Level.Should().Be(1);
         }
+
+        [Fact]
+        public void OpenMisteryDoorFleeSuccess()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "1", "5", "0", "0", "0", "0", "0", "0" }).Dequeue);
+            var random = new Random();
+            var randomMock = new Mock<Random>();
+            randomMock.Setup(x => x.Next(6)).Returns(4);
+            var game = new Game();
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                randomMock.Object,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var userAvatar = new UserAvatar
+            {
+                Level = 2
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar,
+                Name = "user"
+            };
+            var demonicFly = new DemonicFly("Demonic Fly", CardType.Monster);
+            var fight = new Fight();
+            user.UserAvatar.CountPower();
+            game.ActionCards.Add(demonicFly);
+            game.Users.Add(user);
+            //Act
+            makeActionController.OpenMisteryDoor(user);
+            //Assert
+            user.UserAvatar.FleeAway.Should().BeTrue();
+        }
+
+        [Fact]
+        public void OpenMisteryDoorFleeFail()
+        {
+            //Arrange
+            var mock = new Mock<ReadLineOverride>();
+            mock.Setup(x => x.GetNextString()).Returns(new Queue<string>(new[] { "1", "5", "0", "0", "0", "0", "0", "0" }).Dequeue);
+            var random = new Random();
+            var randomMock = new Mock<Random>();
+            randomMock.Setup(x => x.Next(6)).Returns(1);
+            var game = new Game();
+            var fightController = new FightController();
+            var drawCardService = new DrawCardService(random);
+            var stackCardGeneratorService = new StackCardGeneratorService();
+            var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
+            var deckController = new DeckController(mock.Object);
+            var sellItemController = new SellItemController(deckController, mock.Object);
+            var makeActionController = new MakeActionController(game,
+                                                                fightController,
+                                                                prizeStackController,
+                                                                randomMock.Object,
+                                                                deckController,
+                                                                mock.Object,
+                                                                drawCardService,
+                                                                sellItemController);
+            var userAvatar = new UserAvatar
+            {
+                Level = 2
+            };
+            var user = new UserClass()
+            {
+                UserAvatar = userAvatar,
+                Name = "user"
+            };
+            var demonicFly = new DemonicFly("Demonic Fly", CardType.Monster);
+            var fight = new Fight();
+            user.UserAvatar.CountPower();
+            game.ActionCards.Add(demonicFly);
+            game.Users.Add(user);
+            //Act
+            makeActionController.OpenMisteryDoor(user);
+            //Assert
+            user.UserAvatar.FleeAway.Should().BeFalse();
+
+        }
     }
 }
