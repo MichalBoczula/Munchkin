@@ -127,11 +127,12 @@ namespace Munchkin.BL.GameController
                             readLineOverride.GetNextString();
                             continue;
                         }
+                        makeActionController.LookOnCards(user);
                         UseItem(user);
                         UseMagicCard(user);
                         user.UserAvatar.EndTurn();
                         makeActionController.gameAction.IsFirstTime = true;
-                        makeActionController.gameAction.IsFirstTime = false;
+                        makeActionController.gameAction.IsFight = false;
                         user.UserAvatar.DisplayAvatarInfo();
                         if (user.UserAvatar.ItIsOver())
                         {

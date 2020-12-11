@@ -1317,5 +1317,9 @@ namespace Munchkin.BL.GameController
             }
         }
 
+        public void LookOnCards(UserClass user)
+        {
+            deckController.LookOnCard(user);
+        }
     }
 }

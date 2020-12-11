@@ -33,7 +33,6 @@ namespace Munchkin.Model.Character.Hero.Proficiency
                 {
                     System.Console.WriteLine("You have enough cards do you want cast spell. Remember you will lose you whole deck.\n" +
                         "Choose option:\n1.Yes\n2.No");
-                    readLineOverride.GetNextString();
                     if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
                     {
                         if (result == 1)
@@ -51,6 +50,7 @@ namespace Munchkin.Model.Character.Hero.Proficiency
                                 }
                             }
                             user.Deck.Monsters.Add(monster);
+                            fight.Monsters.Remove(monster);
                             return destroyedCards;
                         }
                         else if (result == 2)
@@ -66,7 +66,6 @@ namespace Munchkin.Model.Character.Hero.Proficiency
                         readLineOverride.GetNextString();
                     }
                 }
-
             }
             else
             {
