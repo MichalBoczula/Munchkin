@@ -36,7 +36,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
 
         public override string Description()
         {
-            return "Monster: Shiva\n" +
+            return "Monster: Sirens\n" +
                 $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}\n" +
                 "SpecialPower: Monster gain 5 power when player proficiency is Warrior.\n" +
                 "Dead End: Player lose helmet.";

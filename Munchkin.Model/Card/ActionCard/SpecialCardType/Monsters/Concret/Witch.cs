@@ -28,7 +28,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
 
         public override string Description()
         {
-            return "Monster: Valkyries\n" +
+            return "Monster: Witch\n" +
                 $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}\n" +
                 "SpecialPower: Player Level -= 1.\n" +
                 "Dead End: Player poison by monster.";
