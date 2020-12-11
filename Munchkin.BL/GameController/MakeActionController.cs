@@ -341,7 +341,7 @@ namespace Munchkin.BL.GameController
                 {
                     while (true)
                     {
-                        System.Console.WriteLine($"{user.Name} Do you want to make an Action.\n" +
+                        System.Console.WriteLine($"{enemy.Name} Do you want to make an Action.\n" +
                             "1. Yes.\n" +
                             "0. Skip.");
                         if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
@@ -352,19 +352,19 @@ namespace Munchkin.BL.GameController
                             }
                             else if (result == 0)
                             {
-                                System.Console.WriteLine($"{user.Name} You chose to pass. Press any key to continue.");
+                                System.Console.WriteLine($"{enemy.Name} You chose to pass. Press any key to continue.");
                                 readLineOverride.GetNextString();
                                 break;
                             }
                             else
                             {
-                                System.Console.WriteLine($"{user.Name} Bro input 1 or 0. Press any key to continue.");
+                                System.Console.WriteLine($"{enemy.Name} Bro input 1 or 0. Press any key to continue.");
                                 readLineOverride.GetNextString();
                             }
                         }
                         else
                         {
-                            System.Console.WriteLine($"{user.Name} Something gone wrong Pleas try again. Press any key to continue.");
+                            System.Console.WriteLine($"{enemy.Name} Something gone wrong Pleas try again. Press any key to continue.");
                             readLineOverride.GetNextString();
                         }
                     }
