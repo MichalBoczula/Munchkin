@@ -134,9 +134,10 @@ namespace Munchkin.BL.GameController
                         makeActionController.gameAction.IsFirstTime = true;
                         makeActionController.gameAction.IsFight = false;
                         user.UserAvatar.DisplayAvatarInfo();
+                        makeActionController.SellItem(user);
                         if (user.UserAvatar.ItIsOver())
                         {
-                            System.Console.WriteLine($"{user.Name} has 5th level. Game is over. Winner is only one: {user.Name}!!!");
+                            System.Console.WriteLine($"{user.Name} has 5th level. Game is over. Winner is only one: {user.Name}!!! Press enter to quit...");
                             readLineOverride.GetNextString();
                             return;
                         }

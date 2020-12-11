@@ -223,7 +223,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
         }
 
         [Fact]
-        public void FleeTestTrueEqualToSix()
+        public void FleeTestTrueEqualToSeven()
         {
             //Arrange
             var mockRandom = new Mock<Random>();
@@ -239,7 +239,7 @@ namespace Munchkin.Tests.Munchkin.BL.Tests.GameController
             var stackCardGeneratorService = new StackCardGeneratorService();
             var prizeStackController = new PrizeStackController(drawCardService, stackCardGeneratorService);
             var makeActionController = new MakeActionController(game, fightController, prizeStackController, mockRandom.Object);
-            mockRandom.Setup(x => x.Next(6)).Returns(2);
+            mockRandom.Setup(x => x.Next(6)).Returns(3);
             //Act
             var result = makeActionController.Flee(user);
             //Assert

@@ -33,8 +33,9 @@ namespace Munchkin.BL.GameController
                 System.Console.WriteLine("Choose item to sell");
                 System.Console.WriteLine(deckController.LookOnItemsCard(user, ref i));
                 System.Console.WriteLine("If you want to sell item choose one from list, otherwise press 0. " +
-                    "But remember this item will be permamently destroyed, There is not possibility to restore, because item will be not existed." +
-                    " Choose option to continue...");
+                    "But remember this item will be permamently destroyed," +
+                    "\n There is not possibility to restore, because item will be not existed." +
+                    "\nChoose option to continue...");
                 if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
                 {
                     if (result == 0)
@@ -81,8 +82,8 @@ namespace Munchkin.BL.GameController
 
         public void CheckMoneyAndAddLevel(UserClass user)
         {
-            System.Console.WriteLine("If you have more or equal 1000 money in wallet yo can bu a level." +
-                " Lets check it. Press enter to continue...");
+            System.Console.WriteLine("If you have more or equal 1000 money in wallet you get a level and lose 1000 money." +
+                "\nLets check it. Press enter to continue...");
             readLineOverride.GetNextString();
             if (user.UserAvatar.Wallet >= 1000)
             {

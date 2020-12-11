@@ -866,9 +866,9 @@ namespace Munchkin.BL.GameController
         public bool Flee(UserClass user)
         {
             var chance = user.UserAvatar.FleeChances + random.Next(6) + 1;
-            if (chance >= 6)
+            user.UserAvatar.TryToFlee = true;
+            if (chance >= 7)
             {
-                user.UserAvatar.TryToFlee = true;
                 return true;
             }
             return false;
@@ -1210,9 +1210,31 @@ namespace Munchkin.BL.GameController
 
         public void SellItem(UserClass user)
         {
-            if (sellItemController.SellItem(user))
+            System.Console.WriteLine($"Do you want to sell an item?\n1.Yes\n0.No");
+            if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
             {
-                sellItemController.CheckMoneyAndAddLevel(user);
+                if (result == 1)
+                {
+                    if (sellItemController.SellItem(user))
+                    {
+                        sellItemController.CheckMoneyAndAddLevel(user);
+                    }
+                }
+                else if (result == 0)
+                {
+                    System.Console.WriteLine($"You chose to not sell. Press enter to continue...");
+                    readLineOverride.GetNextString();
+                }
+                else
+                {
+                    System.Console.WriteLine($"Bro chose 1 or 0 to make an action. Press enter to continue...");
+                    readLineOverride.GetNextString();
+                }
+            }
+            else
+            {
+                System.Console.WriteLine($"Bro chose 1 or 0 to make an action. Press enter to continue...");
+                readLineOverride.GetNextString();
             }
         }
 
@@ -1264,10 +1286,16 @@ namespace Munchkin.BL.GameController
                                 }
                                 else
                                 {
-                                    System.Console.WriteLine("Monster is much faster than you Bro," +
-                                        " there is no option you must fight with this ugly creature. Press enter to continue...");
+                                    System.Console.WriteLine("Monster is much faster than you Bro." +
+                                        "\nThere is no option you must fight with this ugly creature. Press enter to continue...");
                                     readLineOverride.GetNextString();
                                 }
+                            }
+                            else
+                            {
+                                System.Console.WriteLine("Bro you tried to fled but unsuccesfully.\n" +
+                                    "You can't try again. Press enter to continue...");
+                                readLineOverride.GetNextString();
                             }
                             return;
                     }
@@ -1329,7 +1357,8 @@ namespace Munchkin.BL.GameController
         {
             int i = 1;
             Console.WriteLine(deckController.LookOnItemsCard(user, ref i));
-            System.Console.WriteLine($"{user.Name} If you want to use item card press 1 if not 0.");
+            System.Console.WriteLine($"{user.Name} If you want to use item card press num from 1 to {user.Deck.Items}" +
+                $"\n or press 0 to abort.");
             if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
             {
                 if (result > 0 && result <= user.Deck.Items.Count)

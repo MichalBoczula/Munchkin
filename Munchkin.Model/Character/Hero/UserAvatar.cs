@@ -214,6 +214,7 @@ namespace Munchkin.Model.Character
             System.Console.WriteLine($"Nerfs, TornOffArms: {Nerfs.TornOffArms.Count}");
             System.Console.WriteLine($"Nerfs, Poisoned: {Nerfs.Poisoned.Count}");
             System.Console.WriteLine($"Nerfs, Wounded: {Nerfs.Wounded.Count}");
+            System.Console.WriteLine($"Wallet: {Wallet}");
         }
     }
 }

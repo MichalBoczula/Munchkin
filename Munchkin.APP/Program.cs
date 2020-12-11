@@ -42,13 +42,15 @@ namespace Munchkin.APP
                                                                 stackCardGeneratorService,
                                                                 game);
             var deckController = new DeckController(readLineOverride);
+            var sellItemController = new SellItemController(deckController, readLineOverride);
             var makeActionController = new MakeActionController(game,
                                                                 fightController,
                                                                 prizeStackController,
                                                                 random,
                                                                 deckController,
                                                                 readLineOverride,
-                                                                drawCardService);
+                                                                drawCardService,
+                                                                sellItemController);
             var gameFlowController = new GameFlowController(createCharacterController,
                                                             game,
                                                             readLineOverride,
