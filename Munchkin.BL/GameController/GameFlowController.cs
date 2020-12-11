@@ -125,7 +125,7 @@ namespace Munchkin.BL.GameController
                         {
                             System.Console.WriteLine("Sorry bro you died. Press any key to continue");
                             readLineOverride.GetNextString();
-                            continue;
+                            break;
                         }
                         makeActionController.LookOnCards(user);
                         UseItem(user);
@@ -142,12 +142,9 @@ namespace Munchkin.BL.GameController
                         }
                     }
                 }
-                else
-                {
-                    System.Console.WriteLine("No one alive GAME OVER!!!");
-                    readLineOverride.GetNextString();
-                }
             }
+            System.Console.WriteLine("No one alive GAME OVER!!! Press enter to quit...");
+            readLineOverride.GetNextString();
         }
 
         public void InitializeBuild()
