@@ -17,7 +17,7 @@ namespace Munchkin.Model.Card.CardFactory
             var readLineOverride = new ReadLineOverride();
             var lambas = new Dictionary<bool, RaceBase>
             {
-                { true, new Halfling("halfling") }
+                { true, new Halfling("Halfling") }
             };
             var excalibur = new Dictionary<bool, ProficiencyBase>
             {
@@ -33,11 +33,11 @@ namespace Munchkin.Model.Card.CardFactory
             };
             var trident = new Dictionary<bool, RaceBase>
             {
-                { false, new Halfling("halfling") }
+                { false, new Halfling("Halfling") }
             };
             var sooLongBow = new Dictionary<bool, RaceBase>
             {
-                { false, new Dwarf("dwarf") }
+                { false, new Dwarf("Dwarf") }
             };
             var result = name switch
             {
@@ -66,7 +66,7 @@ namespace Munchkin.Model.Card.CardFactory
             var readLineOverride = new ReadLineOverride();
             var cyberCoat = new Dictionary<bool, RaceBase>
             {
-                { false, new Elf("elf") }
+                { false, new Elf("Elf") }
             };
             var betterDefenceSpray = new Dictionary<bool, ProficiencyBase>
             {

@@ -17,7 +17,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
 
         public override void DeadEnd(Game game, UserClass user)
         {
-            if(user.UserAvatar.Build.Helmet != null)
+            if (user.UserAvatar.Build.Helmet != null)
             {
                 var item = user.UserAvatar.Build.Helmet;
                 user.UserAvatar.Build.Helmet = null;
@@ -37,6 +37,7 @@ namespace Munchkin.Model.Card.ActionCard.SpecialCardType.Monsters.Concret
         public override string Description()
         {
             return "Monster: Minotaur\n" +
+                $"Power: {Power}, Prizes: {NumberOfPrizes}, Levels: {HowManyLevels}" +
                 "SpecialPower: If Player don't have helmet, Monsters power increase by 2.\n" +
                 "Dead End: Player lose helmet and has damaged head and can't use helmet anymore.";
         }

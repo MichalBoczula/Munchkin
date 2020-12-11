@@ -133,7 +133,7 @@ namespace Munchkin.BL.GameController
                         user.UserAvatar.DisplayAvatarInfo();
                         if (user.UserAvatar.ItIsOver())
                         {
-                            System.Console.WriteLine($"{user.Name} has 10th level. Game is over. Winner is only one: {user.Name}!!!");
+                            System.Console.WriteLine($"{user.Name} has 5th level. Game is over. Winner is only one: {user.Name}!!!");
                             readLineOverride.GetNextString();
                             return;
                         }
@@ -196,6 +196,12 @@ namespace Munchkin.BL.GameController
                     {
                         makeActionController.UseItemCard(user);
                     }
+                    else if (result == 0)
+                    {
+                        System.Console.WriteLine($"You chose to not use. Press any key to continue.");
+                        readLineOverride.GetNextString();
+                        break;
+                    }
                     else
                     {
                         System.Console.WriteLine($"{user.Name} input 1 or 0. Press any key to continue.");
@@ -221,6 +227,12 @@ namespace Munchkin.BL.GameController
                     if (result == 1)
                     {
                         makeActionController.UseMagicCard(user);
+                    }
+                    else if (result == 0)
+                    {
+                        System.Console.WriteLine($"You chose to not use. Press any key to continue.");
+                        readLineOverride.GetNextString();
+                        break;
                     }
                     else
                     {

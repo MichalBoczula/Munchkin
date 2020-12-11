@@ -1256,6 +1256,7 @@ namespace Munchkin.BL.GameController
         {
             int i = 1;
             Console.WriteLine(deckController.LookOnItemsCard(user, ref i));
+            System.Console.WriteLine($"{user.Name} If you want to use item card press 1 if not 0.");
             if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
             {
                 if (result > 0 && result <= user.Deck.Items.Count)
@@ -1263,7 +1264,7 @@ namespace Munchkin.BL.GameController
                     var card = user.Deck.Items[result - 1];
                     deckController.UseItemCard(user, card);
                 }
-                else if(result == 0)
+                else if (result == 0)
                 {
                     System.Console.WriteLine($"You chose to not use an item. Press enter to continue.");
                     readLineOverride.GetNextString();
@@ -1281,5 +1282,6 @@ namespace Munchkin.BL.GameController
                 readLineOverride.GetNextString();
             }
         }
+
     }
 }

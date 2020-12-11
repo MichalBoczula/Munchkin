@@ -36,7 +36,8 @@ namespace Munchkin.BL.GameController
                 strBuilder.Append($"{i}. ");
                 strBuilder.Append($"Name: {card.Name}, Power: {card.Power} ");
                 strBuilder.Append($"ItemType: {card.ItemType}, CardType: {card.CardType}");
-                strBuilder.Append($"Price: {card.Price}");
+                strBuilder.Append($"Price: {card.Price} ");
+                strBuilder.Append($"TwoHanded: {card.IsTwoHanded} ");
                 if (card.RaceRestriction != null)
                 {
                     if (card.RaceRestriction.TryGetValue(true, out RaceBase value))
@@ -452,6 +453,7 @@ namespace Munchkin.BL.GameController
                         {
                             System.Console.WriteLine("Item added succesfully. Press enter to continue...");
                             user.UserAvatar.Build.AdditionalItems.Add(card);
+                            user.Deck.Items.Remove(card);
                             _readLineOverride.GetNextString();
                         }
                         else
@@ -467,6 +469,7 @@ namespace Munchkin.BL.GameController
                         {
                             System.Console.WriteLine("Item added succesfully. Press enter to continue...");
                             user.UserAvatar.Build.AdditionalItems.Add(card);
+                            user.Deck.Items.Remove(card);
                             _readLineOverride.GetNextString();
                         }
                         else
@@ -485,6 +488,7 @@ namespace Munchkin.BL.GameController
                         {
                             System.Console.WriteLine("Item added succesfully. Press enter to continue...");
                             user.UserAvatar.Build.AdditionalItems.Add(card);
+                            user.Deck.Items.Remove(card);
                             _readLineOverride.GetNextString();
                         }
                         else
@@ -499,6 +503,7 @@ namespace Munchkin.BL.GameController
                         if (!prof.Name.Equals(user.UserAvatar.Proficiency.Name))
                         {
                             System.Console.WriteLine("Item added succesfully. Press enter to continue...");
+                            user.Deck.Items.Remove(card);
                             user.UserAvatar.Build.AdditionalItems.Add(card);
                             _readLineOverride.GetNextString();
                         }

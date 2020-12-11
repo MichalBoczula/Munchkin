@@ -179,7 +179,7 @@ namespace Munchkin.Model.Character
 
         public bool ItIsOver()
         {
-            return Level >= 10 ? true : false;
+            return Level >= 5 ? true : false;
         }
 
         public void DisplayAvatarInfo()

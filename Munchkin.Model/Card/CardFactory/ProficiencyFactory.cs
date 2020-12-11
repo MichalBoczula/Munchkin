@@ -9,7 +9,7 @@ namespace Munchkin.Model.Card.CardFactory
 {
     public class ProficiencyFactory 
     {
-        public ProficiencyCard MakeRaceCard(ProfiencyType cardType)
+        public ProficiencyCard MakeProficiencyCard(ProfiencyType cardType)
         {
             var readLineOverride = new ReadLineOverride();
             var random = new Random();

@@ -17,11 +17,11 @@ namespace Munchkin.Tests.Munchkin.Model.Tests.Card.CardFactory
             //Arrange
             var proficiencyFactory = new ProficiencyFactory();
             //Act
-            var shouldBeMage = proficiencyFactory.MakeRaceCard(ProfiencyType.Mage);
-            var shouldBeNoOne = proficiencyFactory.MakeRaceCard(ProfiencyType.NoOne);
-            var shouldBePriest = proficiencyFactory.MakeRaceCard(ProfiencyType.Priest);
-            var shouldBeThief = proficiencyFactory.MakeRaceCard(ProfiencyType.Thief);
-            var shouldBeWarrior = proficiencyFactory.MakeRaceCard(ProfiencyType.Warrior);
+            var shouldBeMage = proficiencyFactory.MakeProficiencyCard(ProfiencyType.Mage);
+            var shouldBeNoOne = proficiencyFactory.MakeProficiencyCard(ProfiencyType.NoOne);
+            var shouldBePriest = proficiencyFactory.MakeProficiencyCard(ProfiencyType.Priest);
+            var shouldBeThief = proficiencyFactory.MakeProficiencyCard(ProfiencyType.Thief);
+            var shouldBeWarrior = proficiencyFactory.MakeProficiencyCard(ProfiencyType.Warrior);
             //Assert
             //CardType
             shouldBeMage.Should().BeOfType<ProficiencyCard>();

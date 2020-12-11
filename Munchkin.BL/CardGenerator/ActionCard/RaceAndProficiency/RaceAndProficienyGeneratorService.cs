@@ -36,11 +36,11 @@ namespace Munchkin.BL.CardGenerator.ActionCard.RaceAndProficiency
 
         public List<ProficiencyCard> GenerateProfiecy()
         {
-            var MageProficiency = _proficiencyFactory.MakeRaceCard(ProfiencyType.Mage);
-            var PriestProficiency = _proficiencyFactory.MakeRaceCard(ProfiencyType.Priest);
-            var WarriorProficiency = _proficiencyFactory.MakeRaceCard(ProfiencyType.Warrior);
-            var ThiefProficiency = _proficiencyFactory.MakeRaceCard(ProfiencyType.Thief);
-            var NoOneProficiency = _proficiencyFactory.MakeRaceCard(ProfiencyType.NoOne);
+            var MageProficiency = _proficiencyFactory.MakeProficiencyCard(ProfiencyType.Mage);
+            var PriestProficiency = _proficiencyFactory.MakeProficiencyCard(ProfiencyType.Priest);
+            var WarriorProficiency = _proficiencyFactory.MakeProficiencyCard(ProfiencyType.Warrior);
+            var ThiefProficiency = _proficiencyFactory.MakeProficiencyCard(ProfiencyType.Thief);
+            var NoOneProficiency = _proficiencyFactory.MakeProficiencyCard(ProfiencyType.NoOne);
             Proficiencies.Add(MageProficiency);
             Proficiencies.Add(NoOneProficiency);
             Proficiencies.Add(PriestProficiency);
