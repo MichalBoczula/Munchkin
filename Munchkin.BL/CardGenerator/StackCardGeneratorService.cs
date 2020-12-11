@@ -1,4 +1,5 @@
-﻿using Munchkin.BL.CardGenerator.ActionCard.Monsters;
+﻿using Munchkin.BL.CardGenerator.ActionCard.MagicCards;
+using Munchkin.BL.CardGenerator.ActionCard.Monsters;
 using Munchkin.BL.CardGenerator.ActionCard.RaceAndProficiency;
 using Munchkin.BL.CardGenerator.CardsStack;
 using Munchkin.BL.CardGenerator.PrizeCard.ItemCards;
@@ -18,6 +19,7 @@ namespace Munchkin.BL.CardGenerator
         private readonly RaceAndProficienyGeneratorService _raceAndProficienyGenerator;
         private readonly ItemCardGenerator _itemCardGenerator;
         private readonly MonstersGenerator _monstersGenerator;
+        private readonly MagicCardGenerator _magicCardGenerator;
         private PrizeStack prizeStack; 
 
         public StackCardGeneratorService()
@@ -25,6 +27,7 @@ namespace Munchkin.BL.CardGenerator
             _raceAndProficienyGenerator = new RaceAndProficienyGeneratorService();
             _itemCardGenerator = new ItemCardGenerator();
             _monstersGenerator = new MonstersGenerator();
+            _magicCardGenerator = new MagicCardGenerator();
         }
 
         public InitialCreationStack GenerateInitialCreationStack()
@@ -50,5 +53,9 @@ namespace Munchkin.BL.CardGenerator
             return _monstersGenerator.GenerateMonsterCards().ToList();
         }
 
+        public List<ActionCardBase> GenerateMagicCards()
+        {
+            return _magicCardGenerator.GenerateMagicCards().ToList();
+        }
     }
 }

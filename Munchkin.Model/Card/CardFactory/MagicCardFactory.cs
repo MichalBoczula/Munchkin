@@ -39,15 +39,13 @@ namespace Munchkin.Model.Card.CardFactory
                 21 => new LikeAGod("Like A God", CardType.Special),
                 22 => new Undead("Undead", CardType.Special),
                 23 => new SecondLifeForMonster("Second Life For Monster", CardType.Special),
-                24 => new Crook("Crook", CardType.Special),
-                25 => new Crook("Crook", CardType.Special),
-                26 => new ItemFairy("Item Fairy", CardType.Curse, random),
-                27 => new Gambling("Gambling", CardType.Curse, random),
-                28 => new DrunkCurse("Item Fairy", CardType.Curse, random),
-                29 => new WhatAMess("Item Fairy", CardType.Curse, random),
+                24 => new ItemFairy("Item Fairy", CardType.Curse, random),
+                25 => new Gambling("Gambling", CardType.Curse, random),
+                26 => new DrunkCurse("Item Fairy", CardType.Curse, random),
+                27 => new WhatAMess("Item Fairy", CardType.Curse, random),
+                28 => new AdditionalMonster("AdditionalMonster", CardType.Special, readLine),
+                29 => new AdditionalMonster("AdditionalMonster", CardType.Special, readLine),
                 30 => new AdditionalMonster("AdditionalMonster", CardType.Special, readLine),
-                31 => new AdditionalMonster("AdditionalMonster", CardType.Special, readLine),
-                32 => new AdditionalMonster("AdditionalMonster", CardType.Special, readLine),
                 _ => null
             };
             return result;

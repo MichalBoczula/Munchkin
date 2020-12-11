@@ -32,7 +32,7 @@ namespace Munchkin.BL.GameController
             {
                 System.Console.WriteLine("Choose item to sell");
                 System.Console.WriteLine(deckController.LookOnItemsCard(user, ref i));
-                System.Console.WriteLine("If you want to sell item choose one from list, otherwise press 0. " +
+                System.Console.WriteLine("If you want to sell item choose one from list, otherwise press 0.\n" +
                     "But remember this item will be permamently destroyed," +
                     "\n There is not possibility to restore, because item will be not existed." +
                     "\nChoose option to continue...");
@@ -48,12 +48,19 @@ namespace Munchkin.BL.GameController
                     {
                         var item = user.Deck.Items[result - 1];
                         user.Deck.Items.Remove(item);
-                        user.UserAvatar.Wallet = user.UserAvatar.Race is Halfling ? item.Price * 2 : item.Price;
+                        if(user.UserAvatar.Race is Halfling)
+                        {
+                            user.UserAvatar.Wallet += item.Price * 2;
+                        }
+                        else
+                        {
+                            user.UserAvatar.Wallet += item.Price;
+                        }
                         flag = true;
                         if (user.UserAvatar.Race is Halfling)
                         {
                             System.Console.WriteLine($"You race is halfing so you have big selling skills and " +
-                                "price for item is 2 time bigger, price is: {item.Price} ." +
+                                $"price for item is 2 time bigger, price is: {item.Price} ." +
                                 " Press enter to continue");
                             readLineOverride.GetNextString();
                             break;

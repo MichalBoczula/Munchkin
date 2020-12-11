@@ -61,7 +61,7 @@ namespace Munchkin.APP
             //Act
             gameFlowController.CreateUsers();
             gameFlowController.InitializeDeckForUsers();
-            gameFlowController.InitializeMonsterCards();
+            gameFlowController.InitializeActionCards();
             gameFlowController.InitializeBuild();
             gameFlowController.PlayTheGame();
         }

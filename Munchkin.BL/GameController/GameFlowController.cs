@@ -105,9 +105,10 @@ namespace Munchkin.BL.GameController
             return true;
         }
 
-        public void InitializeMonsterCards()
+        public void InitializeActionCards()
         {
             game.ActionCards.AddRange(stackCardGeneratorService.GenerateMonsterCards());
+            game.ActionCards.AddRange(stackCardGeneratorService.GenerateMagicCards());
             drawCardService.Shuffle(game.ActionCards);
         }
 
@@ -146,9 +147,16 @@ namespace Munchkin.BL.GameController
                         return;
                     }
                 }
+                foreach(var user in game.Users)
+                {
+                    if(!user.UserAvatar.IsDied)
+                    {
+                        break;
+                    }
+                    Console.WriteLine("No one alive GAME OVER!!! Press enter to quit...");
+                    readLineOverride.GetNextString();
+                }
             }
-            Console.WriteLine("No one alive GAME OVER!!! Press enter to quit...");
-            readLineOverride.GetNextString();
         }
 
         public void InitializeBuild()
