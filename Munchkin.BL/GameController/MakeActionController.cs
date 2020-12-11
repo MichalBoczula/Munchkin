@@ -1357,7 +1357,7 @@ namespace Munchkin.BL.GameController
         {
             int i = 1;
             Console.WriteLine(deckController.LookOnItemsCard(user, ref i));
-            System.Console.WriteLine($"{user.Name} If you want to use item card press num from 1 to {user.Deck.Items}" +
+            System.Console.WriteLine($"{user.Name} If you want to use item card press num from 1 to {user.Deck.Items.Count}" +
                 $"\n or press 0 to abort.");
             if (Int32.TryParse(readLineOverride.GetNextString(), out int result))
             {

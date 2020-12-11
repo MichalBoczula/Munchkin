@@ -119,7 +119,8 @@ namespace Munchkin.BL.GameController
                 {
                     while (true)
                     {
-                        System.Console.WriteLine("Lets open a mistery door");
+                        System.Console.WriteLine($"{user.Name} Lets open a mistery door\n. Press enter to open...");
+                        readLineOverride.GetNextString();
                         makeActionController.OpenMisteryDoor(user);
                         if(user.UserAvatar.IsDied)
                         {
